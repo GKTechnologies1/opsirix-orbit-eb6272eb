@@ -25,6 +25,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlatformVaultRouteImport } from './routes/platform.vault'
 import { Route as PlatformOsRouteImport } from './routes/platform.os'
+import { Route as PlatformNexusRouteImport } from './routes/platform.nexus'
 import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
 import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
 
@@ -108,6 +109,11 @@ const PlatformOsRoute = PlatformOsRouteImport.update({
   path: '/os',
   getParentRoute: () => PlatformRoute,
 } as any)
+const PlatformNexusRoute = PlatformNexusRouteImport.update({
+  id: '/nexus',
+  path: '/nexus',
+  getParentRoute: () => PlatformRoute,
+} as any)
 const PlatformLaunchRoute = PlatformLaunchRouteImport.update({
   id: '/launch',
   path: '/launch',
@@ -136,6 +142,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
+  '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
   '/platform/vault': typeof PlatformVaultRoute
 }
@@ -156,6 +163,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
+  '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
   '/platform/vault': typeof PlatformVaultRoute
 }
@@ -177,6 +185,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
+  '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
   '/platform/vault': typeof PlatformVaultRoute
 }
@@ -199,6 +208,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/platform/flow'
     | '/platform/launch'
+    | '/platform/nexus'
     | '/platform/os'
     | '/platform/vault'
   fileRoutesByTo: FileRoutesByTo
@@ -219,6 +229,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/platform/flow'
     | '/platform/launch'
+    | '/platform/nexus'
     | '/platform/os'
     | '/platform/vault'
   id:
@@ -239,6 +250,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/platform/flow'
     | '/platform/launch'
+    | '/platform/nexus'
     | '/platform/os'
     | '/platform/vault'
   fileRoutesById: FileRoutesById
@@ -374,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformOsRouteImport
       parentRoute: typeof PlatformRoute
     }
+    '/platform/nexus': {
+      id: '/platform/nexus'
+      path: '/nexus'
+      fullPath: '/platform/nexus'
+      preLoaderRoute: typeof PlatformNexusRouteImport
+      parentRoute: typeof PlatformRoute
+    }
     '/platform/launch': {
       id: '/platform/launch'
       path: '/launch'
@@ -394,6 +413,7 @@ declare module '@tanstack/react-router' {
 interface PlatformRouteChildren {
   PlatformFlowRoute: typeof PlatformFlowRoute
   PlatformLaunchRoute: typeof PlatformLaunchRoute
+  PlatformNexusRoute: typeof PlatformNexusRoute
   PlatformOsRoute: typeof PlatformOsRoute
   PlatformVaultRoute: typeof PlatformVaultRoute
 }
@@ -401,6 +421,7 @@ interface PlatformRouteChildren {
 const PlatformRouteChildren: PlatformRouteChildren = {
   PlatformFlowRoute: PlatformFlowRoute,
   PlatformLaunchRoute: PlatformLaunchRoute,
+  PlatformNexusRoute: PlatformNexusRoute,
   PlatformOsRoute: PlatformOsRoute,
   PlatformVaultRoute: PlatformVaultRoute,
 }
@@ -428,3 +449,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
