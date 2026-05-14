@@ -124,6 +124,39 @@ export function ContactForm() {
                 </select>
               </Field>
 
+              <Field label="Visa or Immigration Status (optional)" error={errors.visaStatus?.message}>
+                <input
+                  className={inputCls(!!errors.visaStatus)}
+                  placeholder="e.g., F-1, OPT, H-1B, Green Card, U.S. Citizen, International"
+                  {...register("visaStatus")}
+                />
+              </Field>
+
+              <div className="contact-row">
+                <Field label="Do you have an attorney?*" error={errors.hasAttorney?.message}>
+                  <select className={inputCls(!!errors.hasAttorney)} defaultValue="" {...register("hasAttorney")}>
+                    <option value="" disabled>Select…</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </Field>
+                <Field label="Do you have a CPA?*" error={errors.hasCPA?.message}>
+                  <select className={inputCls(!!errors.hasCPA)} defaultValue="" {...register("hasCPA")}>
+                    <option value="" disabled>Select…</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                  </select>
+                </Field>
+              </div>
+
+              <Field label="Have you formed a U.S. business entity?*" error={errors.hasEntity?.message}>
+                <select className={inputCls(!!errors.hasEntity)} defaultValue="" {...register("hasEntity")}>
+                  <option value="" disabled>Select…</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </Field>
+
               <Field label="What do you need help with?*" error={errors.helpNeeded?.message}>
                 <textarea
                   className={inputCls(!!errors.helpNeeded) + " min-h-[100px]"}
@@ -142,6 +175,21 @@ export function ContactForm() {
                 </select>
               </Field>
 
+              <div className="contact-field" style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                <input
+                  type="checkbox"
+                  id="consent"
+                  style={{ marginTop: 4, flexShrink: 0 }}
+                  {...register("consent")}
+                />
+                <label htmlFor="consent" style={{ fontSize: 12.5, lineHeight: 1.55, color: "rgba(255,255,255,0.7)" }}>
+                  I understand that Opsirix is an operations coordination platform — not a law firm, immigration consultancy, CPA firm, or licensed professional services provider — and that nothing on this form or in any response constitutes legal, immigration, or tax advice. I agree to the{" "}
+                  <a href="/terms" style={{ color: "#2F80ED", textDecoration: "underline" }}>Terms of Service</a> and{" "}
+                  <a href="/privacy" style={{ color: "#2F80ED", textDecoration: "underline" }}>Privacy Policy</a>.
+                </label>
+              </div>
+              {errors.consent && <p className="contact-err">{errors.consent.message}</p>}
+
               <button type="submit" disabled={isSubmitting} className="contact-submit">
                 {isSubmitting ? (
                   <>
@@ -152,10 +200,6 @@ export function ContactForm() {
                   <span>Submit Intake Form →</span>
                 )}
               </button>
-
-              <p className="contact-disclaimer">
-                By submitting this form, you acknowledge that Opsirix is a Founder Infrastructure Platform — not a law firm, immigration consultancy, or CPA firm. Nothing herein constitutes legal or immigration advice.
-              </p>
             </form>
           </motion.div>
         )}
