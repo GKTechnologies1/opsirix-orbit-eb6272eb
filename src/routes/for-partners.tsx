@@ -165,7 +165,7 @@ function Page() {
         <div className="inner-wrap" style={{ textAlign: "center" }}>
           <h2 className="inner-h2">Ready to join the Nexus network?</h2>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", marginTop: 28 }}>
-            <Link to="/contact" search={{ type: "partner" }} className="btn-primary">Become a Nexus Partner →</Link>
+            <a href="/contact?type=partner" className="btn-primary">Become a Nexus Partner →</a>
           </div>
         </div>
       </section>
