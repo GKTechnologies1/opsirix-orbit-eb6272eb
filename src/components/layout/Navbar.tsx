@@ -92,17 +92,26 @@ export function Navbar() {
           )}
         </AnimatePresence>
 
-        <div
+        <motion.div
+          initial={{ y: -68, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.45, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
           className="flex items-center justify-between"
           style={{ height: 68, padding: "0 24px", maxWidth: 1240, margin: "0 auto" }}
         >
-          <Link to="/" className="flex items-center" style={{ gap: 10 }}>
-            <OpsirixLogo size={34} />
-            <OpsirixWordmark fontSize={18} />
-          </Link>
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.85 }}
+          >
+            <Link to="/" className="flex items-center" style={{ gap: 10 }}>
+              <OpsirixLogo size={34} />
+              <OpsirixWordmark fontSize={18} />
+            </Link>
+          </motion.div>
 
           <nav className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map((link) => {
+            {NAV_LINKS.map((link, idx) => {
               const active = pathname === link.to;
               return (
                 <Link
