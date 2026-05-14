@@ -23,6 +23,7 @@ import { Route as EarlyStageFoundersRouteImport } from './routes/early-stage-fou
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlatformVaultRouteImport } from './routes/platform.vault'
 import { Route as PlatformOsRouteImport } from './routes/platform.os'
 import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
 import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
@@ -97,6 +98,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlatformVaultRoute = PlatformVaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
+  getParentRoute: () => PlatformRoute,
+} as any)
 const PlatformOsRoute = PlatformOsRouteImport.update({
   id: '/os',
   path: '/os',
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
+  '/platform/vault': typeof PlatformVaultRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -150,6 +157,7 @@ export interface FileRoutesByTo {
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
+  '/platform/vault': typeof PlatformVaultRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -170,6 +178,7 @@ export interface FileRoutesById {
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
+  '/platform/vault': typeof PlatformVaultRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -191,6 +200,7 @@ export interface FileRouteTypes {
     | '/platform/flow'
     | '/platform/launch'
     | '/platform/os'
+    | '/platform/vault'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -210,6 +220,7 @@ export interface FileRouteTypes {
     | '/platform/flow'
     | '/platform/launch'
     | '/platform/os'
+    | '/platform/vault'
   id:
     | '__root__'
     | '/'
@@ -229,6 +240,7 @@ export interface FileRouteTypes {
     | '/platform/flow'
     | '/platform/launch'
     | '/platform/os'
+    | '/platform/vault'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -348,6 +360,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/platform/vault': {
+      id: '/platform/vault'
+      path: '/vault'
+      fullPath: '/platform/vault'
+      preLoaderRoute: typeof PlatformVaultRouteImport
+      parentRoute: typeof PlatformRoute
+    }
     '/platform/os': {
       id: '/platform/os'
       path: '/os'
@@ -376,12 +395,14 @@ interface PlatformRouteChildren {
   PlatformFlowRoute: typeof PlatformFlowRoute
   PlatformLaunchRoute: typeof PlatformLaunchRoute
   PlatformOsRoute: typeof PlatformOsRoute
+  PlatformVaultRoute: typeof PlatformVaultRoute
 }
 
 const PlatformRouteChildren: PlatformRouteChildren = {
   PlatformFlowRoute: PlatformFlowRoute,
   PlatformLaunchRoute: PlatformLaunchRoute,
   PlatformOsRoute: PlatformOsRoute,
+  PlatformVaultRoute: PlatformVaultRoute,
 }
 
 const PlatformRouteWithChildren = PlatformRoute._addFileChildren(
