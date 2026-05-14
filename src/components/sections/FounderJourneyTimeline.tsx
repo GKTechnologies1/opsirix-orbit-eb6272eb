@@ -180,7 +180,7 @@ function DetailCard({ step }: { step: Step }) {
           <li key={i}>{d}</li>
         ))}
       </ul>
-      <a href="#contact" className="journey-detail-cta">
+      <a href="/contact" className="journey-detail-cta">
         Start Your Journey <ArrowRight size={16} />
       </a>
     </div>
