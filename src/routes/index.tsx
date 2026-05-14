@@ -24,6 +24,7 @@ function Index() {
       <ComplianceBoundary />
       <ImmigrantFounderSection />
       <PartnerEcosystem />
+      <FounderJourneyTimeline />
     </main>
   );
 }
