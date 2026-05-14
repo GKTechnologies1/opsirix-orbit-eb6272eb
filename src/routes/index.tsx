@@ -16,6 +16,7 @@ function Index() {
       <FounderChaosSection />
       <OpsirixLayerSection />
       <BeforeAfterSection />
+      <ServicesGrid />
     </main>
   );
 }
