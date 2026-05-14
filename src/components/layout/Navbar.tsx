@@ -157,19 +157,11 @@ export function Navbar() {
           >
             <Link
               to="/contact"
-              className="rounded-lg transition-colors"
-              style={{
-                border: "1px solid rgba(255,255,255,0.14)",
-                color: "rgba(255,255,255,0.7)",
-                padding: "8px 16px",
-                fontSize: 13,
-                fontFamily: "var(--font-inter)",
-                fontWeight: 500,
-              }}
+              className="btn btn-primary"
+              style={{ padding: "8px 20px", fontSize: 13.5 }}
             >
-              Sign In
+              Book Discovery Call →
             </Link>
-            <Link
               to="/contact"
               className="btn btn-primary"
               style={{ padding: "8px 20px", fontSize: 13.5 }}
