@@ -1,5 +1,5 @@
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+
 
 type Card = {
   emoji: string;
@@ -53,19 +53,6 @@ const CARDS: Card[] = [
   },
 ];
 
-type Stat = {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  label: string;
-};
-
-const STATS: Stat[] = [
-  { value: 72, suffix: "%", label: "of startup CEOs report burnout — operational overload is the #1 driver" },
-  { value: 12, suffix: "+", label: "disconnected tools the average founder juggles with no coordination layer" },
-  { value: 6, suffix: " mo", label: "average time founders waste on avoidable operational chaos annually" },
-  { value: 0, prefix: "$", label: "platforms built for founder operational orchestration — until now" },
-];
 
 function ChaosCard({ card, index }: { card: Card; index: number }) {
   return (
@@ -179,59 +166,66 @@ export function FounderChaosSection() {
           ))}
         </div>
 
-        {/* Stat bar */}
+        {/* Proof cards */}
         <ScrollReveal delay={0.1}>
           <div
+            className="founder-chaos-proof"
             style={{
-              backgroundColor: "#071B33",
-              borderRadius: 20,
-              padding: "32px 40px",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 20,
               marginTop: 56,
             }}
           >
-            <div
-              className="founder-chaos-stats"
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                gap: 32,
-              }}
-            >
-              {STATS.map((s) => (
-                <div key={s.label} style={{ textAlign: "center", flex: "1 1 160px" }}>
-                  <AnimatedCounter
-                    value={s.value}
-                    prefix={s.prefix}
-                    suffix={s.suffix}
-                    style={{
-                      fontFamily: "var(--font-sora)",
-                      fontWeight: 900,
-                      fontSize: "clamp(36px, 4.5vw, 52px)",
-                      color: "#fff",
-                      lineHeight: 1,
-                      letterSpacing: "-0.03em",
-                      display: "block",
-                    }}
-                  />
-                  <p
-                    style={{
-                      fontFamily: "var(--font-inter)",
-                      fontSize: 13,
-                      color: "rgba(255,255,255,0.45)",
-                      marginTop: 10,
-                      maxWidth: 140,
-                      marginLeft: "auto",
-                      marginRight: "auto",
-                      lineHeight: 1.5,
-                    }}
-                  >
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+            {[
+              {
+                h: "Built for structure, not chaos",
+                b: "Designed for pre-launch and early-stage startup operations where nothing is organized yet.",
+              },
+              {
+                h: "Compliance-first by design",
+                b: "Every workflow, document, and partner coordination step is built around clear professional boundaries.",
+              },
+              {
+                h: "For founders navigating complexity",
+                b: "Created specifically for immigrant founders, first-time founders, and overwhelmed operators.",
+              },
+            ].map((c) => (
+              <div
+                key={c.h}
+                style={{
+                  backgroundColor: "#071B33",
+                  borderRadius: 16,
+                  padding: "28px 28px",
+                  border: "1px solid rgba(255,255,255,0.06)",
+                }}
+              >
+                <h4
+                  style={{
+                    fontFamily: "var(--font-sora)",
+                    fontWeight: 700,
+                    fontSize: 17,
+                    color: "#fff",
+                    lineHeight: 1.3,
+                    marginBottom: 10,
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {c.h}
+                </h4>
+                <p
+                  style={{
+                    fontFamily: "var(--font-inter)",
+                    fontSize: 13.5,
+                    color: "rgba(255,255,255,0.6)",
+                    lineHeight: 1.6,
+                    margin: 0,
+                  }}
+                >
+                  {c.b}
+                </p>
+              </div>
+            ))}
           </div>
         </ScrollReveal>
       </div>
