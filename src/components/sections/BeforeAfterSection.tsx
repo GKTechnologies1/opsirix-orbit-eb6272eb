@@ -112,8 +112,7 @@ export function BeforeAfterSection() {
               margin: 0,
             }}
           >
-            What changes when you run on{" "}
-            <span className="gradient-text">Opsirix</span>.
+            Before Opsirix. After <span className="gradient-text">Opsirix</span>.
           </h2>
         </div>
 
@@ -257,7 +256,7 @@ export function BeforeAfterSection() {
               margin: 0,
             }}
           >
-            This transformation begins within your first 30 days on Opsirix.
+            Most founders complete their operational setup within the first 30 days.
           </p>
           <Link
             to="/how-it-works"

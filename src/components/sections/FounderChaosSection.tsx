@@ -13,7 +13,7 @@ const CARDS: Card[] = [
     emoji: "📂",
     title: "Document Disorder",
     body:
-      "Visa documents, formation papers, and contractor agreements scattered across email threads, personal drives, and memory. Impossible to find when asked.",
+      "Formation papers, visa documents, contractor agreements, all in different places. When someone asks for a document, you spend an hour looking for it.",
     bar: "linear-gradient(90deg, #EF4444, #F97316)",
   },
   {
@@ -27,7 +27,7 @@ const CARDS: Card[] = [
     emoji: "😰",
     title: "Compliance Anxiety",
     body:
-      "“Am I doing this right?” That question costs founders hours every week. Decision paralysis, delayed hiring, slower building — from operational uncertainty.",
+      "Not knowing if you are set up correctly is a real cost. Founders delay decisions, hesitate on hiring, and slow down — not from lack of ambition, but from unclear structure.",
     bar: "linear-gradient(90deg, #8B5CF6, #EC4899)",
   },
   {
@@ -48,7 +48,7 @@ const CARDS: Card[] = [
     emoji: "💸",
     title: "Advisor Confusion",
     body:
-      "Attorney and CPA don't talk to each other. Neither talks to operations. Nobody sees the complete picture. Expensive, slow, and dangerous for founders.",
+      "Your attorney handles legal. Your CPA handles numbers. Nobody is coordinating between them and your daily operations. Things get missed.",
     bar: "linear-gradient(90deg, #EC4899, #F97316)",
   },
 ];
@@ -125,9 +125,9 @@ export function FounderChaosSection() {
                 margin: 0,
               }}
             >
-              Founders don't fail from lack of ambition.
+              Most founders are great at building.
               <br />
-              They get slowed down by{" "}
+              Running the{" "}
               <span
                 style={{
                   backgroundImage: "linear-gradient(135deg, #EF4444, #F97316)",
@@ -137,9 +137,9 @@ export function FounderChaosSection() {
                   color: "transparent",
                 }}
               >
-                operational chaos
-              </span>
-              .
+                business side
+              </span>{" "}
+              is a different problem.
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
@@ -152,9 +152,8 @@ export function FounderChaosSection() {
                 marginTop: 16,
               }}
             >
-              Every week, brilliant founders lose time, momentum, and confidence to problems that
-              have nothing to do with their product — and everything to do with broken operational
-              systems.
+              Documents pile up in email. Professionals work in silos. Deadlines get missed. Nobody
+              is coordinating the operational layer beneath the startup.
             </p>
           </ScrollReveal>
         </div>

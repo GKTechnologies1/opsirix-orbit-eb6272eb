@@ -83,10 +83,10 @@ const ROWS: Row[] = [
 ];
 
 const FEATURES = [
-  "Coordinates your attorney, CPA, and professional team through Opsirix Nexus — without replacing them",
-  "Organizes your documents in Opsirix Vault — encrypted, compliance-calendar-driven, audit-ready in 5 minutes",
-  "Runs your operational rhythm via Opsirix Flow — weekly project boards, escalation tracking, cadence",
-  "Scores your operational health monthly — 5 dimensions, 50 points, investor-visible readiness",
+  "Coordinates your attorney, CPA, and professional team through Opsirix Nexus without replacing them",
+  "Organizes your documents in Opsirix Vault. Audit-ready and accessible when you need them.",
+  "Runs your operational rhythm through Opsirix Flow: weekly boards, task tracking, and scheduled reviews.",
+  "Scores your operational health monthly across 5 dimensions with a 50-point readiness score.",
   "Never gives legal, immigration, or tax advice — all regulated matters route to licensed professionals immediately",
 ];
 
@@ -315,8 +315,8 @@ export function OpsirixLayerSection() {
                   margin: 0,
                 }}
               >
-                Opsirix is the layer that{" "}
-                <span className="gradient-text">connects everything</span>.
+                Opsirix sits between your startup and the{" "}
+                <span className="gradient-text">professionals it depends on</span>.
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
@@ -324,9 +324,8 @@ export function OpsirixLayerSection() {
                 className="lead"
                 style={{ marginTop: 18, marginBottom: 32, maxWidth: 460 }}
               >
-                You already have an attorney, a CPA, tools, and a bank account. What you're missing
-                is the operational layer that coordinates all of them — so nothing falls through the
-                cracks.
+                You already have professionals. You already have tools. What's missing is the
+                coordination layer that connects them to your daily operations. That's Opsirix.
               </p>
             </ScrollReveal>
 
