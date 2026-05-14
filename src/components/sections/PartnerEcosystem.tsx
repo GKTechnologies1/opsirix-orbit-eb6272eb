@@ -61,7 +61,7 @@ export function PartnerEcosystem() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="partner-sub">
-              Opsirix Nexus coordinates your licensed professional team. Every partner serves you independently — Opsirix coordinates the administrative logistics.
+              Opsirix Nexus connects founders to attorneys, CPAs, insurance, and banking partners at the right moment. Every partner serves founders independently. Opsirix handles the coordination.
             </p>
           </ScrollReveal>
         </div>
