@@ -29,6 +29,7 @@ import { Route as PlatformNexusRouteImport } from './routes/platform.nexus'
 import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
 import { Route as PlatformGridRouteImport } from './routes/platform.grid'
 import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
+import { Route as PlatformCoreRouteImport } from './routes/platform.core'
 import { Route as PlatformAiRouteImport } from './routes/platform.ai'
 
 const TermsRoute = TermsRouteImport.update({
@@ -131,6 +132,11 @@ const PlatformFlowRoute = PlatformFlowRouteImport.update({
   path: '/flow',
   getParentRoute: () => PlatformRoute,
 } as any)
+const PlatformCoreRoute = PlatformCoreRouteImport.update({
+  id: '/core',
+  path: '/core',
+  getParentRoute: () => PlatformRoute,
+} as any)
 const PlatformAiRoute = PlatformAiRouteImport.update({
   id: '/ai',
   path: '/ai',
@@ -153,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/platform/ai': typeof PlatformAiRoute
+  '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/grid': typeof PlatformGridRoute
   '/platform/launch': typeof PlatformLaunchRoute
@@ -176,6 +183,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/platform/ai': typeof PlatformAiRoute
+  '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/grid': typeof PlatformGridRoute
   '/platform/launch': typeof PlatformLaunchRoute
@@ -200,6 +208,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/platform/ai': typeof PlatformAiRoute
+  '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
   '/platform/grid': typeof PlatformGridRoute
   '/platform/launch': typeof PlatformLaunchRoute
@@ -225,6 +234,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/platform/ai'
+    | '/platform/core'
     | '/platform/flow'
     | '/platform/grid'
     | '/platform/launch'
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/platform/ai'
+    | '/platform/core'
     | '/platform/flow'
     | '/platform/grid'
     | '/platform/launch'
@@ -271,6 +282,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/platform/ai'
+    | '/platform/core'
     | '/platform/flow'
     | '/platform/grid'
     | '/platform/launch'
@@ -438,6 +450,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformFlowRouteImport
       parentRoute: typeof PlatformRoute
     }
+    '/platform/core': {
+      id: '/platform/core'
+      path: '/core'
+      fullPath: '/platform/core'
+      preLoaderRoute: typeof PlatformCoreRouteImport
+      parentRoute: typeof PlatformRoute
+    }
     '/platform/ai': {
       id: '/platform/ai'
       path: '/ai'
@@ -450,6 +469,7 @@ declare module '@tanstack/react-router' {
 
 interface PlatformRouteChildren {
   PlatformAiRoute: typeof PlatformAiRoute
+  PlatformCoreRoute: typeof PlatformCoreRoute
   PlatformFlowRoute: typeof PlatformFlowRoute
   PlatformGridRoute: typeof PlatformGridRoute
   PlatformLaunchRoute: typeof PlatformLaunchRoute
@@ -460,6 +480,7 @@ interface PlatformRouteChildren {
 
 const PlatformRouteChildren: PlatformRouteChildren = {
   PlatformAiRoute: PlatformAiRoute,
+  PlatformCoreRoute: PlatformCoreRoute,
   PlatformFlowRoute: PlatformFlowRoute,
   PlatformGridRoute: PlatformGridRoute,
   PlatformLaunchRoute: PlatformLaunchRoute,
@@ -491,3 +512,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
