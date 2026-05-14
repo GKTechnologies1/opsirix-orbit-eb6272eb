@@ -201,6 +201,7 @@ export function MeshOrchestrationVisual() {
                 {n.emoji}
               </div>
               <div
+                className="mesh-node-label"
                 style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: 10,
