@@ -1,6 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "@/components/shared/PageHeader";
-import { CTASection } from "@/components/shared/CTASection";
 
 export const Route = createFileRoute("/immigrant-founders")({
   head: () => ({
@@ -17,53 +16,82 @@ export const Route = createFileRoute("/immigrant-founders")({
 });
 
 const FOUNDER_TYPES = [
-  { tag: "F-1 / OPT", t: "Student & OPT founders", d: "Documentation depth and timing matter. Opsirix organizes records and coordinates with your independently retained immigration attorney." },
-  { tag: "STEM OPT", t: "STEM OPT founders", d: "Reporting cadences create operational pressure. Opsirix runs the administrative rhythm so nothing slips between your team and your attorney." },
-  { tag: "H-1B", t: "H-1B professional founders", d: "Side-venture documentation and clean record-keeping matter. Opsirix keeps the operational paper trail organized." },
-  { tag: "H-4 EAD", t: "H-4 EAD founders", d: "Coordination across spouse status, EAD timing, and company formation requires structure. Opsirix handles the logistics." },
-  { tag: "International", t: "International entrepreneurs", d: "Forming a U.S. entity from abroad is paperwork-heavy. Opsirix coordinates the moving pieces with your attorney and CPA." },
-  { tag: "Green Card", t: "Green card holder founders", d: "You move faster — Opsirix gives you the same operational backbone the rest of your team gets." },
+  { tag: "F-1 / OPT / STEM OPT", t: "F-1, OPT & STEM OPT", d: "Documentation depth and timing matter. Opsirix organizes records and coordinates with your independently retained immigration attorney." },
+  { tag: "H-1B", t: "H-1B Professionals", d: "Side-venture documentation and clean record-keeping matter. Opsirix keeps the operational paper trail organized." },
+  { tag: "Green Card", t: "Green Card Holders", d: "You move faster — Opsirix gives you the same operational backbone the rest of your team gets." },
+  { tag: "International", t: "International Entrepreneurs", d: "Forming a U.S. entity from abroad is paperwork-heavy. Opsirix coordinates the moving pieces with your attorney and CPA." },
+  { tag: "Early-Stage", t: "Early-Stage Founders", d: "Build the operational backbone from day one. Opsirix keeps documents, workflows, and partner coordination organized as you grow." },
 ];
 
-const FAQS = [
-  { q: "Does Opsirix give immigration advice?", a: "No. Opsirix is a Founder Infrastructure & Operations Platform. Every immigration question is routed to a licensed immigration attorney through Opsirix Nexus. We handle administrative coordination only." },
-  { q: "Will Opsirix tell me which visa to use?", a: "Never. Visa strategy is a legal opinion that only a licensed immigration attorney can provide. Opsirix coordinates the logistical layer around your attorney's work." },
-  { q: "Does Opsirix help with USCIS filings?", a: "Filings are prepared and submitted by your independently retained licensed immigration attorney. Opsirix organizes and stores the documentation that supports their work." },
-  { q: "What does Opsirix actually do for me?", a: "Vault keeps every operational document organized and audit-ready. Flow runs your weekly project board. Nexus coordinates the administrative logistics with your attorney, CPA, and banker. Grid scores your readiness every month." },
-  { q: "What if I don't have an immigration attorney yet?", a: "Opsirix Nexus introduces you to vetted licensed immigration attorneys in the partner network. The attorney engages you under their own engagement letter; Opsirix coordinates logistics." },
+const FEATURES = [
+  { icon: "📁", t: "Documents organized and accessible", d: "Formation papers, banking documents, attorney correspondence, and operating records organized in Opsirix Vault. Available when you need them." },
+  { icon: "🗓️", t: "Deadlines tracked in advance", d: "Important dates, renewal timelines, filing deadlines, and review schedules maintained as part of your operational calendar — never discovered after the fact." },
+  { icon: "🔗", t: "Attorneys and CPAs coordinated", d: "Opsirix Nexus coordinates scheduling, document delivery, and communication between founders and their licensed professionals. Opsirix does not provide legal or immigration advice." },
+  { icon: "📊", t: "Monthly operational health check", d: "The Opsirix Grid scores your operational readiness across five areas each month. You know exactly where you stand and what needs attention." },
+];
+
+const HANDLES = [
+  "Operational document organization",
+  "Workflow and task coordination",
+  "Partner scheduling and logistics",
+  "Business readiness checklists",
+  "Monthly operational reviews",
+  "Founder status reports",
+  "Calendar and deadline tracking",
+  "Professional coordination (not advice)",
+];
+
+const PROFESSIONALS = [
+  "Immigration legal advice",
+  "Visa strategy and applications",
+  "Work authorization opinions",
+  "Tax advice and filings",
+  "CPA services and accounting",
+  "Legal document drafting",
+  "USCIS filings and correspondence",
+  "Regulated compliance decisions",
 ];
 
 function Page() {
   return (
     <div className="inner-page">
-      <PageHeader pageName="Immigrant Founders" label="For Immigrant Founders" title="Operational support for immigrant founders building U.S. companies." subtitle="Documentation organized. Professional coordination handled. Compliance calendar running. Zero immigration advice — that's what your attorney is for." />
+      <PageHeader
+        pageName="Immigrant Founders"
+        label="For Immigrant Founders"
+        title="Operational support for immigrant founders building U.S. companies."
+        subtitle="Managing a startup and a visa status at the same time creates real operational complexity. Opsirix organizes the non-legal operational layer so you can focus on building."
+      />
 
       <section className="inner-section">
         <div className="inner-wrap">
-          <p className="inner-eyebrow">Why It Matters More</p>
-          <h2 className="inner-h2">Operational infrastructure matters more for immigrant founders.</h2>
-          <p className="inner-lead">When your status, your company, and your professional team all generate independent documentation requirements, the operational load compounds. Records must be organized. Coordination across attorney, CPA, banker, and university must be tight. Timing matters. Opsirix runs that operational layer — so your attorney can do legal work, your CPA can do tax work, and you can build the company.</p>
+          <p className="inner-eyebrow">Why It's Operationally Complex</p>
+          <h2 className="inner-h2">Why immigrant founders face a different operational reality.</h2>
+          <p className="inner-lead">Running a startup means managing entity formation, banking, bookkeeping, payroll, contracts, and partner relationships. Every founder faces this. Immigrant founders face all of this plus documentation requirements, professional coordination timelines, and the discipline of keeping organized records for multiple purposes.</p>
+          <p className="inner-lead">This creates operational pressure that compounds. When documents are disorganized and professionals are uncoordinated, small gaps become bigger problems. Opsirix exists to close those gaps on the operational side.</p>
+          <p className="inner-lead">Opsirix does not provide immigration advice, visa strategy, or legal guidance. Those matters belong with licensed attorneys. Opsirix handles the operational layer — documents, workflows, coordination, and readiness.</p>
         </div>
       </section>
 
       <section className="inner-section alt">
         <div className="inner-wrap">
           <p className="inner-eyebrow">What Opsirix Organizes</p>
-          <h2 className="inner-h2">The administrative layer your team has been missing.</h2>
+          <h2 className="inner-h2">What Opsirix organizes for immigrant founders.</h2>
           <div className="inner-grid-3">
-            {[
-              { t: "Vault", d: "Every operational document — formation, EIN, banking, contracts, employment paperwork — organized, versioned, and audit-ready." },
-              { t: "Compliance Calendar", d: "Every recurring deadline tracked. Renewals, filing windows, and reporting cadences surfaced before they become urgent." },
-              { t: "Nexus Coordination", d: "Administrative logistics with your independently retained attorney, CPA, banker, and insurer — handled, scheduled, and recorded." },
-            ].map((c) => <div key={c.t} className="inner-card"><h3>{c.t}</h3><p>{c.d}</p></div>)}
+            {FEATURES.map((c) => (
+              <div key={c.t} className="inner-card">
+                <div style={{ fontSize: 28, marginBottom: 12 }}>{c.icon}</div>
+                <h3>{c.t}</h3>
+                <p>{c.d}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="inner-section">
         <div className="inner-wrap">
-          <p className="inner-eyebrow">Founder Types We Serve</p>
-          <h2 className="inner-h2">Built for the operational reality of every founder background.</h2>
+          <p className="inner-eyebrow">Who Opsirix Serves</p>
+          <h2 className="inner-h2">Founder types on Opsirix.</h2>
           <div className="inner-grid-3">
             {FOUNDER_TYPES.map((f) => (
               <div key={f.t} className="inner-card">
@@ -78,34 +106,45 @@ function Page() {
 
       <section className="inner-section alt">
         <div className="inner-wrap">
-          <p className="inner-eyebrow">The Compliance Architecture</p>
-          <h2 className="inner-h2">Structure is protection.</h2>
-          <p className="inner-lead">Opsirix protects founders through structure, not advice. The Attorney Gate routes every regulated question to a licensed professional. The Stop-Work Protocol pauses any task that approaches a regulated boundary. The Audit Evidence Trail preserves a timestamped record of every action. Nexus Independence guarantees that your attorney's advice is theirs alone — Opsirix never controls the substance.</p>
-          <ul className="inner-list">
-            <li><strong>Attorney Gate</strong> — every immigration, legal, or tax question routes to a licensed professional automatically.</li>
-            <li><strong>Stop-Work Protocol</strong> — work pauses at any regulated boundary until a licensed professional confirms the path forward.</li>
-            <li><strong>Audit Evidence Trail</strong> — every action is timestamped and preserved in the Vault for as long as you need it.</li>
-            <li><strong>Nexus Independence</strong> — your attorney works under their own engagement letter; Opsirix coordinates logistics only.</li>
-          </ul>
+          <p className="inner-eyebrow">Scope Boundary</p>
+          <h2 className="inner-h2">What Opsirix does not do.</h2>
+          <div className="inner-grid-2" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, marginTop: 28 }}>
+            <div className="inner-card">
+              <h3>Opsirix handles:</h3>
+              <ul className="inner-list">
+                {HANDLES.map((i) => <li key={i}>{i}</li>)}
+              </ul>
+            </div>
+            <div className="inner-card">
+              <h3>Handled by licensed professionals:</h3>
+              <ul className="inner-list">
+                {PROFESSIONALS.map((i) => <li key={i}>{i}</li>)}
+              </ul>
+            </div>
+          </div>
+          <p className="inner-lead" style={{ marginTop: 28, fontSize: 14, opacity: 0.8 }}>
+            Opsirix is an operations coordination platform. It is not a law firm, immigration consultancy, CPA firm, or licensed professional services provider. All regulated matters are handled by independently retained licensed professionals.
+          </p>
         </div>
       </section>
 
       <section className="inner-section">
         <div className="inner-wrap">
-          <p className="inner-eyebrow">Common Questions</p>
-          <h2 className="inner-h2">5 questions immigrant founders ask.</h2>
-          <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14 }}>
-            {FAQS.map((f) => (
-              <div key={f.q} className="inner-card">
-                <h3>{f.q}</h3>
-                <p>{f.a}</p>
-              </div>
-            ))}
-          </div>
+          <p className="inner-eyebrow">Licensed Professionals</p>
+          <h2 className="inner-h2">When to work with a licensed professional.</h2>
+          <p className="inner-lead">Any question about immigration status, work authorization, visa eligibility, tax obligations, accounting, or legal structure requires a licensed professional. Opsirix can help coordinate your access to the right professional through Opsirix Nexus, but cannot advise on those matters directly.</p>
         </div>
       </section>
 
-      <CTASection />
+      <section className="inner-section alt">
+        <div className="inner-wrap" style={{ textAlign: "center" }}>
+          <h2 className="inner-h2">Ready to get your operations organized?</h2>
+          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", marginTop: 28 }}>
+            <Link to="/contact" className="btn-primary">Start Founder Intake</Link>
+            <Link to="/how-it-works" className="btn-secondary">Learn how Opsirix works →</Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
