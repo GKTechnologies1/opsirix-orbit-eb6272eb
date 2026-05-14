@@ -8,6 +8,7 @@ import { ComplianceBoundary } from "@/components/sections/ComplianceBoundary";
 import { ImmigrantFounderSection } from "@/components/sections/ImmigrantFounderSection";
 import { PartnerEcosystem } from "@/components/sections/PartnerEcosystem";
 import { FounderJourneyTimeline } from "@/components/sections/FounderJourneyTimeline";
+import { OpsirixOSPreview } from "@/components/sections/OpsirixOSPreview";
 
 export const Route = createFileRoute("/")({
   component: Index,
