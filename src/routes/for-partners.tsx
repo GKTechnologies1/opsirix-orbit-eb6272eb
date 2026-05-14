@@ -1,7 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader } from "@/components/shared/PageHeader";
-import { CTASection } from "@/components/shared/CTASection";
 
 export const Route = createFileRoute("/for-partners")({
   head: () => ({
@@ -17,71 +16,99 @@ export const Route = createFileRoute("/for-partners")({
   component: Page,
 });
 
+const BENEFITS = [
+  { t: "Prepared founders", d: "Founders who come through Opsirix have organized documents, completed intake forms, and a clear picture of their operational situation before the first conversation." },
+  { t: "Clear referral scope", d: "Opsirix routes founders to the right professional based on their specific operational situation. No cold referrals. Context is provided upfront." },
+  { t: "Less back-and-forth", d: "Because Opsirix organizes documents and operational context before the professional introduction, less time is spent on basic administrative setup." },
+  { t: "Clear professional boundaries", d: "Opsirix handles operations coordination. Partners provide licensed professional advice. The separation is clear in every engagement." },
+];
+
 const TYPES = [
-  { t: "Immigration Attorneys", d: "Receive warm intros to founders whose documentation is already organized in Opsirix Vault." },
-  { t: "CPA Firms", d: "Engage founders whose books and operational records are coordinated through monthly Grid reviews." },
-  { t: "Banks & Fintech", d: "Connect with founders who arrive with clean formation documents and an organized treasury operation." },
-  { t: "Insurance Brokers", d: "Founders pre-organized for underwriting — formation, headcount, contracts, all in one place." },
-  { t: "Universities & Programs", d: "Provide alumni and student founders with operational infrastructure that complements your programming." },
-  { t: "Technology Partners", d: "Integrate with the Vault and Dashboard to deliver tools where founders already operate." },
+  { icon: "⚖️", t: "Immigration Attorneys", d: "Founders with organized documentation and clear context." },
+  { icon: "📊", t: "CPAs and Bookkeepers", d: "Financial coordination handled. Accounting work ready to begin." },
+  { icon: "🏦", t: "Banking Partners", d: "Startup-ready founders who need business banking setup." },
+  { icon: "🛡️", t: "Insurance Brokers", d: "Founders who need GL, E&O, or Cyber Liability coverage." },
+  { icon: "💻", t: "Technology Partners", d: "Founders who need software development, AI, or MVP builds." },
+  { icon: "🏛️", t: "University Partners", d: "Campus programs seeking operational resources for student founders." },
+];
+
+const STEPS = [
+  "Founder completes intake — operational situation documented.",
+  "Opsirix identifies the right professional based on founder's needs.",
+  "Warm introduction made with context — documents prepared.",
+  "Professional engagement begins. Opsirix coordinates logistics.",
+  "Ongoing coordination continues. Clear scope maintained.",
 ];
 
 function Page() {
   const [submitted, setSubmitted] = useState(false);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // === CRM INTEGRATION POINT ===
-    // Route to HubSpot pipeline: "Nexus Partner Applications"
     setSubmitted(true);
   };
 
   return (
     <div className="inner-page">
-      <PageHeader pageName="For Partners" label="Nexus Partner Network" title="Join the Opsirix Nexus partner network." subtitle="Receive warm referrals from organized, audit-ready founders who are ready to work with you." />
+      <PageHeader
+        pageName="For Partners"
+        label="Nexus Partner Network"
+        title="Join the Opsirix Nexus partner network."
+        subtitle="Opsirix connects founders to attorneys, CPAs, insurance, banking, and technology partners at the right moment in their operational journey. Every partner serves founders independently. Opsirix handles the coordination."
+      />
 
       <section className="inner-section">
         <div className="inner-wrap">
-          <p className="inner-eyebrow">Why Partners Work With Opsirix</p>
-          <h2 className="inner-h2">Warm referrals. Organized clients. Clear scope.</h2>
+          <p className="inner-eyebrow">Why Partners Join Nexus</p>
+          <h2 className="inner-h2">What partners gain from Nexus.</h2>
           <div className="inner-grid-3">
-            {[
-              { t: "Warm referrals", d: "Founders are introduced to you with context, not as cold inquiries. They already understand your scope and yours alone." },
-              { t: "Organized clients", d: "Every referred founder arrives with documents, formation records, and operational history already structured in Opsirix Vault." },
-              { t: "Clear scope", d: "Opsirix handles administrative coordination. You provide licensed professional advice. The boundary is documented and enforced." },
-            ].map((c) => <div key={c.t} className="inner-card"><h3>{c.t}</h3><p>{c.d}</p></div>)}
+            {BENEFITS.map((c) => <div key={c.t} className="inner-card"><h3>{c.t}</h3><p>{c.d}</p></div>)}
           </div>
         </div>
       </section>
 
       <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">What Nexus Partners Receive</p>
-          <h2 className="inner-h2">Everything you need to onboard a referred founder fast.</h2>
-          <ul className="inner-list">
-            <li>Warm introduction with founder context, company stage, and the specific reason for the referral.</li>
-            <li>Document-ready clients — formation, EIN, banking, and operational records already organized.</li>
-            <li>Coordination logistics handled — scheduling, document delivery, follow-through, and recurring touchpoints.</li>
-            <li>A clear engagement boundary — you engage the founder under your own engagement letter, on your own terms.</li>
-            <li>Visibility into operational milestones via the Opsirix Founder Status Report.</li>
-          </ul>
-        </div>
-      </section>
-
-      <section className="inner-section">
         <div className="inner-wrap">
           <p className="inner-eyebrow">Partner Types</p>
-          <h2 className="inner-h2">Built for the professional team your founders depend on.</h2>
+          <h2 className="inner-h2">Who joins the Nexus network.</h2>
           <div className="inner-grid-3">
-            {TYPES.map((t) => <div key={t.t} className="inner-card"><h3>{t.t}</h3><p>{t.d}</p></div>)}
+            {TYPES.map((t) => (
+              <div key={t.t} className="inner-card">
+                <div style={{ fontSize: 28, marginBottom: 12 }}>{t.icon}</div>
+                <h3>{t.t}</h3>
+                <p>{t.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="inner-section">
+        <div className="inner-wrap">
+          <p className="inner-eyebrow">How Nexus Works</p>
+          <h2 className="inner-h2">How Opsirix Nexus works.</h2>
+          <div style={{ marginTop: 28, display: "flex", flexDirection: "column", gap: 14 }}>
+            {STEPS.map((s, i) => (
+              <div key={i} className="inner-card" style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+                <div className="num-badge" style={{ flexShrink: 0 }}>{i + 1}</div>
+                <p style={{ margin: 0 }}>{s}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="inner-section alt">
         <div className="inner-wrap">
+          <p className="inner-eyebrow">Scope Boundary</p>
+          <h2 className="inner-h2">Clear scope — what Opsirix does not provide.</h2>
+          <p className="inner-lead">Opsirix does not provide legal advice, immigration advice, tax advice, accounting services, or any licensed professional services. Partners provide the professional advice. Opsirix provides the operational coordination layer. This boundary is maintained in every founder engagement.</p>
+        </div>
+      </section>
+
+      <section className="inner-section">
+        <div className="inner-wrap">
           <p className="inner-eyebrow">Apply</p>
-          <h2 className="inner-h2">Partner Application</h2>
-          <p className="inner-lead">Tell us about your firm. We'll respond within 2 business days.</p>
+          <h2 className="inner-h2">Apply to join the Nexus network.</h2>
 
           <div style={{ maxWidth: 640, marginTop: 32 }} className="contact-card">
             {submitted ? (
@@ -93,51 +120,55 @@ function Page() {
             ) : (
               <form onSubmit={onSubmit} className="contact-form">
                 <div className="contact-field">
-                  <label className="contact-label">Your Name*</label>
-                  <input className="contact-input" required placeholder="Full name" />
+                  <label className="contact-label">Full Name*</label>
+                  <input className="contact-input" required maxLength={100} placeholder="Full name" />
                 </div>
                 <div className="contact-field">
-                  <label className="contact-label">Organization*</label>
-                  <input className="contact-input" required placeholder="Firm or organization" />
+                  <label className="contact-label">Organization Name*</label>
+                  <input className="contact-input" required maxLength={150} placeholder="Firm or organization" />
                 </div>
                 <div className="contact-field">
-                  <label className="contact-label">Partner Type*</label>
+                  <label className="contact-label">Professional Type*</label>
                   <select className="contact-input" required defaultValue="">
                     <option value="" disabled>Select…</option>
-                    <option>Immigration attorney</option>
-                    <option>CPA / accounting firm</option>
-                    <option>Bank / fintech</option>
-                    <option>Insurance broker</option>
-                    <option>University / program</option>
-                    <option>Technology partner</option>
+                    <option>Attorney</option>
+                    <option>Immigration Attorney</option>
+                    <option>CPA</option>
+                    <option>Bookkeeper</option>
+                    <option>Insurance Broker</option>
+                    <option>Banker</option>
+                    <option>Technology Partner</option>
+                    <option>University Partner</option>
                     <option>Other</option>
                   </select>
                 </div>
                 <div className="contact-field">
-                  <label className="contact-label">Why you want to partner*</label>
-                  <textarea className="contact-input" required style={{ minHeight: 100 }} placeholder="Tell us about your practice and why this network is a fit." />
+                  <label className="contact-label">Email Address*</label>
+                  <input type="email" className="contact-input" required maxLength={255} placeholder="you@firm.com" />
                 </div>
-                <button type="submit" className="contact-submit">Submit Application →</button>
+                <div className="contact-field">
+                  <label className="contact-label">Phone</label>
+                  <input type="tel" className="contact-input" maxLength={30} placeholder="+1 555 555 5555" />
+                </div>
+                <div className="contact-field">
+                  <label className="contact-label">Why you want to partner with Opsirix*</label>
+                  <textarea className="contact-input" required maxLength={1000} style={{ minHeight: 120 }} placeholder="Tell us about your practice and why this network is a fit." />
+                </div>
+                <button type="submit" className="contact-submit">Submit Partner Application</button>
               </form>
             )}
           </div>
         </div>
       </section>
 
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">Agreement Overview</p>
-          <h2 className="inner-h2">Nexus Partner Agreement — the four key principles.</h2>
-          <ul className="inner-list">
-            <li><strong>Independence.</strong> Every partner serves the founder under their own engagement letter. Opsirix never controls the substance of professional advice.</li>
-            <li><strong>Coordination only.</strong> Opsirix handles administrative logistics — scheduling, document delivery, follow-through. No referral fees on regulated work.</li>
-            <li><strong>Confidentiality.</strong> Founder information is handled per the Opsirix Privacy Policy and the partner's own confidentiality obligations.</li>
-            <li><strong>Quality bar.</strong> Partners maintain responsiveness, professionalism, and the boundary that Opsirix is not a law firm, CPA firm, or licensed professional services organization.</li>
-          </ul>
+      <section className="inner-section alt">
+        <div className="inner-wrap" style={{ textAlign: "center" }}>
+          <h2 className="inner-h2">Ready to join the Nexus network?</h2>
+          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", marginTop: 28 }}>
+            <Link to="/contact" search={{ type: "partner" }} className="btn-primary">Become a Nexus Partner →</Link>
+          </div>
         </div>
       </section>
-
-      <CTASection />
     </div>
   );
 }
