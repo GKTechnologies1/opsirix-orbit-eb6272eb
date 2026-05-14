@@ -96,10 +96,10 @@ export function PartnerEcosystem() {
                 Join the Opsirix Nexus partner network. Receive warm referrals from organized, audit-ready founders who are ready to work with you.
               </p>
             </div>
-            <a href="#partner-apply" className="partner-banner-cta">
+            <Link to="/for-partners" className="partner-banner-cta">
               Become a Nexus Partner
               <ArrowRight size={16} />
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
       </div>
