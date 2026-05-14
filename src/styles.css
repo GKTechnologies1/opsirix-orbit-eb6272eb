@@ -1958,3 +1958,99 @@
 
 .inline-link { color: #0057D9; text-decoration: underline; text-underline-offset: 2px; transition: color 180ms; }
 .inline-link:hover { color: #2F80ED; }
+
+/* =====================================================================
+   FINAL MOBILE POLISH PASS — gap fixes from full responsive audit
+   ===================================================================== */
+
+@media (max-width: 640px) {
+  /* ---- Navbar height 60px on mobile, logo + hamburger only ---- */
+  header > div[style*="height: 68px"],
+  header > div.flex.items-center.justify-between {
+    height: 60px !important;
+    padding: 0 16px !important;
+  }
+  header [aria-label="Open menu"],
+  header [aria-label="Close menu"] {
+    width: 44px !important; height: 44px !important;
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0 !important;
+  }
+
+  /* Mobile drawer: full-screen, links min 44px, dividers subtle */
+  nav.flex.flex-col > a,
+  nav.flex.flex-col > div > button {
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ---- Hero H1 per spec ---- */
+  section h1 { font-size: clamp(34px, 8.5vw, 52px) !important; }
+  /* Hero mesh stays hidden on small mobile (per earlier rule); shown 400-640 via wrap */
+
+  /* ---- Chaos cards: padding 20px 18px, emoji 26px ---- */
+  .founder-chaos-card { padding: 20px 18px !important; }
+  .founder-chaos-card > div:first-child,
+  .founder-chaos-card span[role="img"],
+  .founder-chaos-card .emoji { font-size: 26px !important; }
+
+  /* ---- Service cards: padding 22px 18px ---- */
+  .service-card { padding: 22px 18px !important; }
+
+  /* ---- Partner cards padding ---- */
+  .partner-card { padding: 22px 18px !important; }
+
+  /* ---- Before/After cards 24px 20px ---- */
+  .before-after-grid > div:not(.before-after-vs) { padding: 24px 20px !important; }
+
+  /* ---- Compliance visual card ---- */
+  .compliance-grid > div:last-child > div,
+  .compliance-grid .card-base { padding: 20px !important; }
+
+  /* ---- Immigrant visual card compact ---- */
+  .immigrant-visual { padding: 24px 18px !important; }
+  .immigrant-type-card { padding: 12px 14px !important; }
+
+  /* ---- OS Preview: show only first 4 features (2x2) ---- */
+  .os-features { grid-template-columns: 1fr 1fr !important; }
+  .os-features > *:nth-child(n+5) { display: none !important; }
+
+  /* ---- Contact form: input/submit touch-friendly ---- */
+  .contact-card { padding: 28px 20px !important; }
+  .contact-input { min-height: 48px !important; padding: 12px 16px !important; font-size: 15px; }
+  .contact-submit { min-height: 52px !important; width: 100% !important; }
+
+  /* ---- Touch target audit: ensure interactive elements ≥ 44px ---- */
+  .partner-link, .immigrant-cta, .compliance-link,
+  .journey-detail-cta, .module-card-link a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* ---- Sticky CTA mobile: ensure safe-area padding (already present, reinforced) ---- */
+  .sticky-cta-mobile {
+    padding: 16px 24px calc(16px + env(safe-area-inset-bottom)) !important;
+    min-height: calc(56px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ---- Tablet 641-1024 explicit grid for content sections ---- */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .os-features { grid-template-columns: 1fr 1fr; }
+  .contact-input { min-height: 46px; }
+}
+
+/* ---- Container side padding spec: 0 20px on mobile ---- */
+@media (max-width: 640px) {
+  .opsirix-container,
+  .opsirix-container-wide,
+  .partner-container,
+  .immigrant-container,
+  .os-container,
+  .journey-container,
+  .faq-container,
+  .cta-container { padding-left: 20px !important; padding-right: 20px !important; }
+}
+
