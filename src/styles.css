@@ -1721,3 +1721,13 @@
 
 .faq-cat { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 18px; color: #0057D9; margin-top: 40px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid #E2E8F0; }
 .faq-cat:first-of-type { margin-top: 12px; }
+
+/* Global animation safety: respect user reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
