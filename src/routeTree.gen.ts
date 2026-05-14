@@ -9,8 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ImmigrantFoundersRouteImport } from './routes/immigrant-founders'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as ForUniversitiesRouteImport } from './routes/for-universities'
@@ -21,6 +23,11 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -29,6 +36,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImmigrantFoundersRoute = ImmigrantFoundersRouteImport.update({
@@ -87,8 +99,10 @@ export interface FileRoutesByFullPath {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -100,8 +114,10 @@ export interface FileRoutesByTo {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -114,8 +130,10 @@ export interface FileRoutesById {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -129,8 +147,10 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
+    | '/privacy'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -142,8 +162,10 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
+    | '/privacy'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
   id:
     | '__root__'
     | '/'
@@ -155,8 +177,10 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
+    | '/privacy'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -169,12 +193,21 @@ export interface RootRouteChildren {
   ForUniversitiesRoute: typeof ForUniversitiesRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ImmigrantFoundersRoute: typeof ImmigrantFoundersRoute
+  PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -187,6 +220,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/immigrant-founders': {
@@ -265,9 +305,21 @@ const rootRouteChildren: RootRouteChildren = {
   ForUniversitiesRoute: ForUniversitiesRoute,
   HowItWorksRoute: HowItWorksRoute,
   ImmigrantFoundersRoute: ImmigrantFoundersRoute,
+  PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
