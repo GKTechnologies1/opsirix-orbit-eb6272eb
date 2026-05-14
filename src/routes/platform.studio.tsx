@@ -210,7 +210,6 @@ function StudioPage() {
         </p>
         <Link
           to="/contact"
-          search={{ subject: "Studio Evaluation" } as never}
           style={{
             display: "inline-block",
             background: "#F5B544",
