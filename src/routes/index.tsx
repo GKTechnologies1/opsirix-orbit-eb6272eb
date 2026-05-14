@@ -11,6 +11,7 @@ import { FounderJourneyTimeline } from "@/components/sections/FounderJourneyTime
 import { OpsirixOSPreview } from "@/components/sections/OpsirixOSPreview";
 import { StatsBar } from "@/components/sections/StatsBar";
 import { FAQSection } from "@/components/sections/FAQSection";
+import { FinalCTA } from "@/components/sections/FinalCTA";
 
 export const Route = createFileRoute("/")({
   component: Index,
