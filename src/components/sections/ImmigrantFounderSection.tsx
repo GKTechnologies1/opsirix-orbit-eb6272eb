@@ -52,7 +52,7 @@ export function ImmigrantFounderSection() {
             </ScrollReveal>
             <ScrollReveal delay={0.05}>
               <h2 className="immigrant-h2">
-                Building a U.S. company while navigating a U.S. visa deserves operational infrastructure built for that reality.
+                Running a startup and managing visa requirements at the same time is genuinely hard. Opsirix handles the operational side.
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
