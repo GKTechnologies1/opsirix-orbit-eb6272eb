@@ -13,7 +13,7 @@ const CARDS: Card[] = [
     emoji: "📂",
     title: "Document Disorder",
     body:
-      "Visa documents, formation papers, and contractor agreements scattered across email threads, personal drives, and memory. Impossible to find when asked.",
+      "Formation papers, visa documents, contractor agreements, all in different places. When someone asks for a document, you spend an hour looking for it.",
     bar: "linear-gradient(90deg, #EF4444, #F97316)",
   },
   {
