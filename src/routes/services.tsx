@@ -77,11 +77,11 @@ function Page() {
           <h2 className="inner-h2">All nine platform modules.</h2>
           <div className="inner-grid-2">
             {MODULES.map((m) => (
-              <Link key={m.t} to={m.href} className="inner-card module-card-link">
+              <a key={m.t} href={m.href} className="inner-card module-card-link">
                 <h3>{m.t}</h3>
                 <p>{m.d}</p>
                 <span className="module-card-cta">Explore Module →</span>
-              </Link>
+              </a>
             ))}
           </div>
         </div>
