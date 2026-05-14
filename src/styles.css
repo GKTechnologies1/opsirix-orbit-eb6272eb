@@ -491,3 +491,27 @@
   border-color: rgba(0,87,217,0.18);
 }
 .service-card--featured::after { transform: scaleX(1); }
+
+/* Compliance Boundary */
+.compliance-grid {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 64px;
+  align-items: center;
+}
+@media (max-width: 1024px) {
+  .compliance-grid { grid-template-columns: 1fr; gap: 48px; }
+}
+.compliance-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  transition: all 200ms var(--ease-smooth);
+}
+.compliance-row:hover {
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(7,27,51,0.06);
+}
+.compliance-link:hover { gap: 10px !important; }
