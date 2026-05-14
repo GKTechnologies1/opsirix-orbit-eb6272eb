@@ -5,11 +5,11 @@ import { OpsirixLogo, OpsirixWordmark } from "./OpsirixLogo";
 type FooterLink = { label: string; to?: string; href?: string; soon?: boolean };
 
 const PLATFORM_LINKS: FooterLink[] = [
-  { label: "Opsirix Launch", href: "/services#launch" },
-  { label: "Opsirix Flow", href: "/services#flow" },
-  { label: "Opsirix Vault", href: "/services#vault" },
-  { label: "Opsirix Nexus", href: "/services#nexus" },
-  { label: "Opsirix Grid", href: "/services#grid" },
+  { label: "Opsirix Launch", to: "/services" },
+  { label: "Opsirix Flow", to: "/services" },
+  { label: "Opsirix Vault", to: "/services" },
+  { label: "Opsirix Nexus", to: "/services" },
+  { label: "Opsirix Grid", to: "/services" },
   { label: "Opsirix OS", soon: true },
 ];
 
