@@ -27,6 +27,7 @@ import { Route as PlatformVaultRouteImport } from './routes/platform.vault'
 import { Route as PlatformOsRouteImport } from './routes/platform.os'
 import { Route as PlatformNexusRouteImport } from './routes/platform.nexus'
 import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
+import { Route as PlatformGridRouteImport } from './routes/platform.grid'
 import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
 
 const TermsRoute = TermsRouteImport.update({
@@ -119,6 +120,11 @@ const PlatformLaunchRoute = PlatformLaunchRouteImport.update({
   path: '/launch',
   getParentRoute: () => PlatformRoute,
 } as any)
+const PlatformGridRoute = PlatformGridRouteImport.update({
+  id: '/grid',
+  path: '/grid',
+  getParentRoute: () => PlatformRoute,
+} as any)
 const PlatformFlowRoute = PlatformFlowRouteImport.update({
   id: '/flow',
   path: '/flow',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/platform/flow': typeof PlatformFlowRoute
+  '/platform/grid': typeof PlatformGridRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/platform/flow': typeof PlatformFlowRoute
+  '/platform/grid': typeof PlatformGridRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/platform/flow': typeof PlatformFlowRoute
+  '/platform/grid': typeof PlatformGridRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/platform/flow'
+    | '/platform/grid'
     | '/platform/launch'
     | '/platform/nexus'
     | '/platform/os'
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/platform/flow'
+    | '/platform/grid'
     | '/platform/launch'
     | '/platform/nexus'
     | '/platform/os'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/platform/flow'
+    | '/platform/grid'
     | '/platform/launch'
     | '/platform/nexus'
     | '/platform/os'
@@ -400,6 +412,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformLaunchRouteImport
       parentRoute: typeof PlatformRoute
     }
+    '/platform/grid': {
+      id: '/platform/grid'
+      path: '/grid'
+      fullPath: '/platform/grid'
+      preLoaderRoute: typeof PlatformGridRouteImport
+      parentRoute: typeof PlatformRoute
+    }
     '/platform/flow': {
       id: '/platform/flow'
       path: '/flow'
@@ -412,6 +431,7 @@ declare module '@tanstack/react-router' {
 
 interface PlatformRouteChildren {
   PlatformFlowRoute: typeof PlatformFlowRoute
+  PlatformGridRoute: typeof PlatformGridRoute
   PlatformLaunchRoute: typeof PlatformLaunchRoute
   PlatformNexusRoute: typeof PlatformNexusRoute
   PlatformOsRoute: typeof PlatformOsRoute
@@ -420,6 +440,7 @@ interface PlatformRouteChildren {
 
 const PlatformRouteChildren: PlatformRouteChildren = {
   PlatformFlowRoute: PlatformFlowRoute,
+  PlatformGridRoute: PlatformGridRoute,
   PlatformLaunchRoute: PlatformLaunchRoute,
   PlatformNexusRoute: PlatformNexusRoute,
   PlatformOsRoute: PlatformOsRoute,
