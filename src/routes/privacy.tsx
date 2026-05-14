@@ -15,7 +15,7 @@ export const Route = createFileRoute("/privacy")({
 function PrivacyPage() {
   return (
     <>
-      <PageHeader label="Legal" title="Privacy Policy" subtitle="How Opsirix handles your information." breadcrumb="Privacy" />
+      <PageHeader label="Legal" title="Privacy Policy" subtitle="How Opsirix handles your information." pageName="Privacy" />
       <section style={{ padding: "96px 0", backgroundColor: "#fff" }}>
         <div className="opsirix-container" style={{ maxWidth: 760 }}>
           <p style={{ fontFamily: "var(--font-inter)", fontSize: 15, color: "#475569", lineHeight: 1.8 }}>

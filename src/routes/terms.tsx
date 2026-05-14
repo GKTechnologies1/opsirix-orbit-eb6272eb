@@ -15,7 +15,7 @@ export const Route = createFileRoute("/terms")({
 function TermsPage() {
   return (
     <>
-      <PageHeader label="Legal" title="Terms of Service" subtitle="The terms governing use of Opsirix." breadcrumb="Terms" />
+      <PageHeader label="Legal" title="Terms of Service" subtitle="The terms governing use of Opsirix." pageName="Terms" />
       <section style={{ padding: "96px 0", backgroundColor: "#fff" }}>
         <div className="opsirix-container" style={{ maxWidth: 760 }}>
           <p style={{ fontFamily: "var(--font-inter)", fontSize: 15, color: "#475569", lineHeight: 1.8 }}>
