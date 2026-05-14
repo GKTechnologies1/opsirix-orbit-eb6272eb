@@ -112,8 +112,7 @@ export function BeforeAfterSection() {
               margin: 0,
             }}
           >
-            What changes when you run on{" "}
-            <span className="gradient-text">Opsirix</span>.
+            Before Opsirix. After <span className="gradient-text">Opsirix</span>.
           </h2>
         </div>
 
