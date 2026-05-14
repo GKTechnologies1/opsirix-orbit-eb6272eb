@@ -180,9 +180,9 @@ export function ComplianceBoundary() {
                   maxWidth: 420,
                 }}
               >
-                Opsirix is an operations coordination platform — not a law firm, not an immigration
-                consultancy, not a CPA firm. Every regulated matter routes to independently retained
-                licensed professionals.
+                Opsirix is an operations coordination platform. We help founders organize documents,
+                workflows, timelines, and partner communication. When regulated guidance is needed,
+                founders work directly with independently retained licensed professionals.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
