@@ -9,6 +9,8 @@ import { ImmigrantFounderSection } from "@/components/sections/ImmigrantFounderS
 import { PartnerEcosystem } from "@/components/sections/PartnerEcosystem";
 import { FounderJourneyTimeline } from "@/components/sections/FounderJourneyTimeline";
 import { OpsirixOSPreview } from "@/components/sections/OpsirixOSPreview";
+import { StatsBar } from "@/components/sections/StatsBar";
+import { FAQSection } from "@/components/sections/FAQSection";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -27,6 +29,8 @@ function Index() {
       <PartnerEcosystem />
       <FounderJourneyTimeline />
       <OpsirixOSPreview />
+      <StatsBar />
+      <FAQSection />
     </main>
   );
 }
