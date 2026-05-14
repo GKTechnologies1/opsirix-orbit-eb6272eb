@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, ArrowRight } from "lucide-react";
-import { RelatedModules } from "@/components/shared/RelatedModules";
 
 type ModulePageLayoutProps = {
   moduleName: string;
@@ -73,14 +72,6 @@ export function ModulePageLayout({
       <main className="module-content">
         <div className="module-container">{children}</div>
       </main>
-
-      {/* ============ RELATED MODULES ============ */}
-      <section className="module-related">
-        <div className="module-container">
-          <h2 className="module-section-h2">Explore other modules.</h2>
-          <RelatedModules currentSlug={relatedSlug ?? ""} />
-        </div>
-      </section>
 
       {/* ============ FINAL CTA ============ */}
       <section className="module-final-cta">
