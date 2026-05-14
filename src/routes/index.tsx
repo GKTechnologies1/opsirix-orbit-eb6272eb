@@ -32,6 +32,7 @@ function Index() {
       <OpsirixOSPreview />
       <StatsBar />
       <FAQSection />
+      <FinalCTA />
     </main>
   );
 }
