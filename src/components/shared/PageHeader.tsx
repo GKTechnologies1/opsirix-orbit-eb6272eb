@@ -21,8 +21,23 @@ export function PageHeader({ label, title, subtitle, pageName }: Props) {
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
           <Link to="/" className="page-crumb-link">Home</Link>
-          <span className="page-crumb-sep">→</span>
-          <span className="page-crumb-current">{pageName}</span>
+          {pageName.split("→").map((part, i, arr) => {
+            const trimmed = part.trim();
+            const isLast = i === arr.length - 1;
+            const isPlatform = trimmed.toLowerCase() === "platform";
+            return (
+              <span key={i} style={{ display: "inline-flex", alignItems: "center" }}>
+                <span className="page-crumb-sep">→</span>
+                {isPlatform && !isLast ? (
+                  <Link to="/platform" className="page-crumb-link">{trimmed}</Link>
+                ) : (
+                  <span className={isLast ? "page-crumb-current" : "page-crumb-link"}>
+                    {trimmed}
+                  </span>
+                )}
+              </span>
+            );
+          })}
         </motion.nav>
 
         <motion.span
