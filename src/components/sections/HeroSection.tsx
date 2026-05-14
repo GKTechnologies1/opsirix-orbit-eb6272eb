@@ -119,7 +119,7 @@ export function HeroSection() {
                 letterSpacing: "0.14em",
               }}
             >
-              Founder Infrastructure Platform
+              Founder Operations Platform
             </span>
           </motion.div>
 
