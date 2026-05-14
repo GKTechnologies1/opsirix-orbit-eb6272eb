@@ -69,7 +69,17 @@ function Section({ title, items }: { title: string; items: QA[] }) {
               </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content className="faq-content">
-              <div className="faq-answer">{item.a}</div>
+              <div className="faq-answer">
+                {item.a}
+                {item.link && (
+                  <>
+                    {" "}
+                    <Link to={item.link.to} className="inline-link">
+                      {item.link.label} →
+                    </Link>
+                  </>
+                )}
+              </div>
             </Accordion.Content>
           </Accordion.Item>
         ))}
