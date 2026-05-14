@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 type FeaturePoint = {
@@ -75,10 +76,10 @@ export function ImmigrantFounderSection() {
             </div>
 
             <ScrollReveal delay={0.4}>
-              <a href="#immigrant-support" className="immigrant-cta">
+              <Link to="/immigrant-founders" className="immigrant-cta">
                 Learn More About Immigrant Founder Support
                 <ArrowRight size={16} />
-              </a>
+              </Link>
             </ScrollReveal>
           </div>
 

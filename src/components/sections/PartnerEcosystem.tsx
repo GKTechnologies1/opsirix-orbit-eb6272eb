@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 type Partner = {
@@ -72,10 +73,13 @@ export function PartnerEcosystem() {
                 <span className="partner-emoji">{p.icon}</span>
                 <h4 className="partner-card-title">{p.title}</h4>
                 <p className="partner-card-body">{p.body}</p>
-                <a href="#partner" className="partner-link">
+                <Link
+                  to={p.cta === "Partner with Your University" ? "/for-universities" : "/for-partners"}
+                  className="partner-link"
+                >
                   {p.cta}
                   <ArrowRight size={14} />
-                </a>
+                </Link>
               </div>
             </ScrollReveal>
           ))}
@@ -92,10 +96,10 @@ export function PartnerEcosystem() {
                 Join the Opsirix Nexus partner network. Receive warm referrals from organized, audit-ready founders who are ready to work with you.
               </p>
             </div>
-            <a href="#partner-apply" className="partner-banner-cta">
+            <Link to="/for-partners" className="partner-banner-cta">
               Become a Nexus Partner
               <ArrowRight size={16} />
-            </a>
+            </Link>
           </div>
         </ScrollReveal>
       </div>
