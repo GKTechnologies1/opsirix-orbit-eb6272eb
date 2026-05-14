@@ -29,6 +29,8 @@ function Index() {
       <PartnerEcosystem />
       <FounderJourneyTimeline />
       <OpsirixOSPreview />
+      <StatsBar />
+      <FAQSection />
     </main>
   );
 }
