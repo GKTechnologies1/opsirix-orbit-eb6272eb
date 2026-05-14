@@ -102,8 +102,7 @@ export function ImmigrantFounderSection() {
               <div className="immigrant-disclaimer">
                 <span className="immigrant-disclaimer-icon">⚠️</span>
                 <p className="immigrant-disclaimer-text">
-                  <strong style={{ color: "rgba(255,255,255,0.72)", fontWeight: 600 }}>Important:</strong>{" "}
-                  Opsirix is not an immigration consultancy and does not provide visa advice, work authorization opinions, or immigration legal advice of any kind. All immigration matters route to independently retained licensed immigration attorneys through Opsirix Nexus.
+                  Opsirix is an operations platform. It does not provide immigration advice, visa strategy, or work authorization guidance. All immigration matters are handled by independently retained licensed immigration attorneys.
                 </p>
               </div>
             </div>
