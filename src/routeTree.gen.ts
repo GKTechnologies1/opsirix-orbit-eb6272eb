@@ -9,12 +9,60 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ImmigrantFoundersRouteImport } from './routes/immigrant-founders'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as ForUniversitiesRouteImport } from './routes/for-universities'
+import { Route as ForPartnersRouteImport } from './routes/for-partners'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as EarlyStageFoundersRouteImport } from './routes/early-stage-founders'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImmigrantFoundersRoute = ImmigrantFoundersRouteImport.update({
+  id: '/immigrant-founders',
+  path: '/immigrant-founders',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
   id: '/how-it-works',
   path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForUniversitiesRoute = ForUniversitiesRouteImport.update({
+  id: '/for-universities',
+  path: '/for-universities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForPartnersRoute = ForPartnersRouteImport.update({
+  id: '/for-partners',
+  path: '/for-partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EarlyStageFoundersRoute = EarlyStageFoundersRouteImport.update({
+  id: '/early-stage-founders',
+  path: '/early-stage-founders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,37 +73,156 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/early-stage-founders': typeof EarlyStageFoundersRoute
+  '/faq': typeof FaqRoute
+  '/for-partners': typeof ForPartnersRoute
+  '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/services': typeof ServicesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/early-stage-founders': typeof EarlyStageFoundersRoute
+  '/faq': typeof FaqRoute
+  '/for-partners': typeof ForPartnersRoute
+  '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/services': typeof ServicesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/early-stage-founders': typeof EarlyStageFoundersRoute
+  '/faq': typeof FaqRoute
+  '/for-partners': typeof ForPartnersRoute
+  '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/services': typeof ServicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/how-it-works'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/early-stage-founders'
+    | '/faq'
+    | '/for-partners'
+    | '/for-universities'
+    | '/how-it-works'
+    | '/immigrant-founders'
+    | '/services'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/how-it-works'
-  id: '__root__' | '/' | '/how-it-works'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/early-stage-founders'
+    | '/faq'
+    | '/for-partners'
+    | '/for-universities'
+    | '/how-it-works'
+    | '/immigrant-founders'
+    | '/services'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/early-stage-founders'
+    | '/faq'
+    | '/for-partners'
+    | '/for-universities'
+    | '/how-it-works'
+    | '/immigrant-founders'
+    | '/services'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  EarlyStageFoundersRoute: typeof EarlyStageFoundersRoute
+  FaqRoute: typeof FaqRoute
+  ForPartnersRoute: typeof ForPartnersRoute
+  ForUniversitiesRoute: typeof ForUniversitiesRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  ImmigrantFoundersRoute: typeof ImmigrantFoundersRoute
+  ServicesRoute: typeof ServicesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/immigrant-founders': {
+      id: '/immigrant-founders'
+      path: '/immigrant-founders'
+      fullPath: '/immigrant-founders'
+      preLoaderRoute: typeof ImmigrantFoundersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-it-works': {
       id: '/how-it-works'
       path: '/how-it-works'
       fullPath: '/how-it-works'
       preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-universities': {
+      id: '/for-universities'
+      path: '/for-universities'
+      fullPath: '/for-universities'
+      preLoaderRoute: typeof ForUniversitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-partners': {
+      id: '/for-partners'
+      path: '/for-partners'
+      fullPath: '/for-partners'
+      preLoaderRoute: typeof ForPartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/early-stage-founders': {
+      id: '/early-stage-founders'
+      path: '/early-stage-founders'
+      fullPath: '/early-stage-founders'
+      preLoaderRoute: typeof EarlyStageFoundersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,7 +237,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  EarlyStageFoundersRoute: EarlyStageFoundersRoute,
+  FaqRoute: FaqRoute,
+  ForPartnersRoute: ForPartnersRoute,
+  ForUniversitiesRoute: ForUniversitiesRoute,
   HowItWorksRoute: HowItWorksRoute,
+  ImmigrantFoundersRoute: ImmigrantFoundersRoute,
+  ServicesRoute: ServicesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
