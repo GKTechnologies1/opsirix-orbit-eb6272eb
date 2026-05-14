@@ -162,12 +162,6 @@ export function Navbar() {
             >
               Book Discovery Call →
             </Link>
-              to="/contact"
-              className="btn btn-primary"
-              style={{ padding: "8px 20px", fontSize: 13.5 }}
-            >
-              Book Discovery Call →
-            </Link>
           </motion.div>
 
           <button
