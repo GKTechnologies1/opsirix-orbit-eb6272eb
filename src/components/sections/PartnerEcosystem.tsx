@@ -73,10 +73,13 @@ export function PartnerEcosystem() {
                 <span className="partner-emoji">{p.icon}</span>
                 <h4 className="partner-card-title">{p.title}</h4>
                 <p className="partner-card-body">{p.body}</p>
-                <a href="#partner" className="partner-link">
+                <Link
+                  to={p.cta === "Partner with Your University" ? "/for-universities" : "/for-partners"}
+                  className="partner-link"
+                >
                   {p.cta}
                   <ArrowRight size={14} />
-                </a>
+                </Link>
               </div>
             </ScrollReveal>
           ))}
