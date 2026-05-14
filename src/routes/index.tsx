@@ -5,6 +5,7 @@ import { OpsirixLayerSection } from "@/components/sections/OpsirixLayerSection";
 import { BeforeAfterSection } from "@/components/sections/BeforeAfterSection";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { ComplianceBoundary } from "@/components/sections/ComplianceBoundary";
+import { ImmigrantFounderSection } from "@/components/sections/ImmigrantFounderSection";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -19,6 +20,7 @@ function Index() {
       <BeforeAfterSection />
       <ServicesGrid />
       <ComplianceBoundary />
+      <ImmigrantFounderSection />
     </main>
   );
 }
