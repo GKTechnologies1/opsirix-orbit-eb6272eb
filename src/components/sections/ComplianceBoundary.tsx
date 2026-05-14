@@ -196,9 +196,9 @@ export function ComplianceBoundary() {
                   maxWidth: 440,
                 }}
               >
-                This is not a limitation. It is a deliberate design decision. The compliance-first
-                architecture is what makes Opsirix trustworthy to attorneys, universities, banks, and
-                government agencies.
+                This separation is intentional. It keeps professional advice where it belongs — with
+                licensed professionals — while giving founders a clean operational system to manage
+                everything else.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.22}>
