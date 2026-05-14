@@ -48,7 +48,7 @@ const CARDS: Card[] = [
     emoji: "💸",
     title: "Advisor Confusion",
     body:
-      "Attorney and CPA don't talk to each other. Neither talks to operations. Nobody sees the complete picture. Expensive, slow, and dangerous for founders.",
+      "Your attorney handles legal. Your CPA handles numbers. Nobody is coordinating between them and your daily operations. Things get missed.",
     bar: "linear-gradient(90deg, #EC4899, #F97316)",
   },
 ];
