@@ -1,25 +1,25 @@
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Twitter } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import { OpsirixLogo, OpsirixWordmark } from "./OpsirixLogo";
 
 type FooterLink = { label: string; to?: string; href?: string; soon?: boolean };
 
 const PLATFORM_LINKS: FooterLink[] = [
-  { label: "Opsirix Launch", href: "#" },
-  { label: "Opsirix Flow", href: "#" },
-  { label: "Opsirix Vault", href: "#" },
-  { label: "Opsirix Nexus", href: "#" },
-  { label: "Opsirix Grid", href: "#" },
-  { label: "Opsirix OS", href: "#", soon: true },
+  { label: "Opsirix Launch", href: "/services#launch" },
+  { label: "Opsirix Flow", href: "/services#flow" },
+  { label: "Opsirix Vault", href: "/services#vault" },
+  { label: "Opsirix Nexus", href: "/services#nexus" },
+  { label: "Opsirix Grid", href: "/services#grid" },
+  { label: "Opsirix OS", soon: true },
 ];
 
 const FOUNDER_LINKS: FooterLink[] = [
-  { label: "F-1 Founders", href: "#" },
-  { label: "OPT Founders", href: "#" },
-  { label: "H-1B Professionals", href: "#" },
+  { label: "F-1 Founders", to: "/immigrant-founders" },
+  { label: "OPT Founders", to: "/immigrant-founders" },
+  { label: "H-1B Professionals", to: "/immigrant-founders" },
   { label: "International Founders", to: "/immigrant-founders" },
   { label: "Early-Stage Founders", to: "/early-stage-founders" },
-  { label: "Founder Journey", href: "#" },
+  { label: "Founder Journey", to: "/how-it-works" },
   { label: "Book Discovery Call", to: "/contact" },
 ];
 
@@ -27,10 +27,10 @@ const COMPANY_LINKS: FooterLink[] = [
   { label: "Partners", to: "/for-partners" },
   { label: "Universities", to: "/for-universities" },
   { label: "About", to: "/about" },
-  { label: "Blog", href: "#" },
+  { label: "Blog", soon: true },
   { label: "FAQ", to: "/faq" },
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms of Service", href: "#" },
+  { label: "Privacy Policy", to: "/privacy" },
+  { label: "Terms of Service", to: "/terms" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -85,11 +85,14 @@ function FooterLinkEl({ link }: { link: FooterLink }) {
       </Link>
     );
   }
-  return (
-    <a href={link.href} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
-      {content}
-    </a>
-  );
+  if (link.href) {
+    return (
+      <a href={link.href} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
+        {content}
+      </a>
+    );
+  }
+  return <span style={{ ...linkStyle, cursor: "default" }}>{content}</span>;
 }
 
 function ColumnHeader({ children }: { children: React.ReactNode }) {
@@ -142,22 +145,15 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4" style={{ marginTop: 24 }}>
               <a
-                href="#"
+                href="https://linkedin.com/company/opsirix"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 style={{ color: "rgba(255,255,255,0.45)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
               >
                 <Linkedin size={18} />
-              </a>
-              <a
-                href="#"
-                aria-label="Twitter / X"
-                style={{ color: "rgba(255,255,255,0.45)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
-              >
-                <Twitter size={18} />
               </a>
             </div>
           </div>
@@ -222,7 +218,7 @@ export function Footer() {
               flexShrink: 0,
             }}
           >
-            © 2025 Opsirix
+            © 2026 Opsirix
           </p>
         </div>
       </div>
