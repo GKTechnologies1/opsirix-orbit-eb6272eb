@@ -29,7 +29,7 @@ function Page() {
       <PageHeader
         pageName="For Universities"
         label="For Universities & Programs"
-        title="Operational infrastructure for your founder community."
+        title="Founder operations support for university entrepreneurship programs."
         subtitle="Give your alumni and student founders the operational backbone that complements your programming."
       />
       <section className="inner-section">

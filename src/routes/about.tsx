@@ -29,7 +29,7 @@ function Page() {
       <PageHeader
         pageName="About"
         label="About Opsirix"
-        title="The operational backbone for founders."
+        title="About Opsirix."
         subtitle="Opsirix is a Founder Infrastructure & Operations Platform — built to run the coordination layer between founders and licensed professionals."
       />
       <section className="inner-section">

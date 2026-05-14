@@ -91,7 +91,7 @@ function Section({ title, items }: { title: string; items: QA[] }) {
 function Page() {
   return (
     <div className="inner-page">
-      <PageHeader pageName="FAQ" label="Frequently Asked" title="Answers to everything founders and partners ask." subtitle="25+ questions across four categories. Zero legal, immigration, or tax advice — that's what your attorney and CPA are for." />
+      <PageHeader pageName="FAQ" label="Frequently Asked" title="Common questions about Opsirix." subtitle="25+ questions across four categories. Zero legal, immigration, or tax advice — that's what your attorney and CPA are for." />
 
       <section className="inner-section alt">
         <div className="inner-wrap" style={{ maxWidth: 820 }}>

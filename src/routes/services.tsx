@@ -48,7 +48,7 @@ const FAQS = [
 function Page() {
   return (
     <div className="inner-page">
-      <PageHeader pageName="Services" label="Platform Services" title="Everything your operational infrastructure needs." subtitle="Eight modules. Four tiers. One coordinated platform that runs the operational layer of your company." />
+      <PageHeader pageName="Services" label="Platform Services" title="Every layer of your operational infrastructure, coordinated." subtitle="Eight modules. Four tiers. One coordinated platform that runs the operational layer of your company." />
 
       <section className="inner-section">
         <div className="inner-wrap">

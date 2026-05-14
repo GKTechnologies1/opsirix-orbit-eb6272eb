@@ -36,7 +36,7 @@ const FAQS = [
 function Page() {
   return (
     <div className="inner-page">
-      <PageHeader pageName="Immigrant Founders" label="For Immigrant Founders" title="Operational infrastructure built for founders navigating the U.S. system." subtitle="Documentation organized. Professional coordination handled. Compliance calendar running. Zero immigration advice — that's what your attorney is for." />
+      <PageHeader pageName="Immigrant Founders" label="For Immigrant Founders" title="Operational support for immigrant founders building U.S. companies." subtitle="Documentation organized. Professional coordination handled. Compliance calendar running. Zero immigration advice — that's what your attorney is for." />
 
       <section className="inner-section">
         <div className="inner-wrap">
