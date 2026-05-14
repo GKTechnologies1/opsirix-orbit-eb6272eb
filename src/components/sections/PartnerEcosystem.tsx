@@ -93,7 +93,7 @@ export function PartnerEcosystem() {
                 Work with founders? Join the Opsirix Nexus network.
               </h3>
               <p className="partner-banner-body">
-                Join the Opsirix Nexus partner network. Receive warm referrals from organized, audit-ready founders who are ready to work with you.
+                Get referrals to organized, prepared founders. Less back-and-forth on documents. Clear scope from day one.
               </p>
             </div>
             <Link to="/for-partners" className="partner-banner-cta">
