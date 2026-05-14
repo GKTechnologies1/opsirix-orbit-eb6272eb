@@ -53,7 +53,7 @@ export function HeroSection() {
           height: 700,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(0,87,217,0.2) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(0,87,217,0.14) 0%, transparent 65%)",
           top: -200,
           right: -150,
           animation: "glowPulse 7s ease-in-out infinite",
