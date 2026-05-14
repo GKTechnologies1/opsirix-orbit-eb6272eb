@@ -85,11 +85,14 @@ function FooterLinkEl({ link }: { link: FooterLink }) {
       </Link>
     );
   }
-  return (
-    <a href={link.href} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
-      {content}
-    </a>
-  );
+  if (link.href) {
+    return (
+      <a href={link.href} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
+        {content}
+      </a>
+    );
+  }
+  return <span style={{ ...linkStyle, cursor: "default" }}>{content}</span>;
 }
 
 function ColumnHeader({ children }: { children: React.ReactNode }) {
