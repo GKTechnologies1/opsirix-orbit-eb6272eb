@@ -68,7 +68,7 @@ export function HeroSection() {
           height: 500,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(102,199,244,0.1) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(102,199,244,0.07) 0%, transparent 65%)",
           bottom: -100,
           left: -80,
           animation: "glowPulse 9s ease-in-out infinite reverse",
