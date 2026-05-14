@@ -129,7 +129,7 @@ export function Navbar() {
             </Link>
           </motion.div>
 
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map((link, idx) => {
               const active = link.dropdown
                 ? pathname === link.to || pathname.startsWith(link.to + "/")
@@ -312,7 +312,7 @@ export function Navbar() {
             initial={{ y: -8, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.4, delay: 1.25 }}
-            className="hidden md:flex items-center gap-3"
+            className="hidden lg:flex items-center gap-3"
           >
             <Link
               to="/contact"
@@ -324,7 +324,7 @@ export function Navbar() {
           </motion.div>
 
           <button
-            className="md:hidden p-2 text-white"
+            className="lg:hidden p-2 text-white"
             aria-label="Open menu"
             onClick={() => setMobileOpen(true)}
           >
@@ -340,7 +340,7 @@ export function Navbar() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -300, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed top-0 left-0 right-0 z-[99] md:hidden"
+            className="fixed top-0 left-0 right-0 z-[99] lg:hidden"
             style={{ backgroundColor: "#071B33", minHeight: "100vh" }}
           >
             <div
