@@ -5,10 +5,10 @@ import { CTASection } from "@/components/shared/CTASection";
 export const Route = createFileRoute("/immigrant-founders")({
   head: () => ({
     meta: [
-      { title: "Opsirix for Immigrant Founders | Operational Infrastructure" },
-      { name: "description", content: "Operational infrastructure built for founders navigating the U.S. system — Vault, compliance calendar, and Nexus coordination with independently retained licensed professionals." },
-      { property: "og:title", content: "Opsirix for Immigrant Founders | Operational Infrastructure" },
-      { property: "og:description", content: "Operational infrastructure built for founders navigating the U.S. system." },
+      { title: "Opsirix for Immigrant Founders | F-1, H-1B, OPT Operations Support" },
+      { name: "description", content: "Opsirix helps F-1, OPT, H-1B, and international founders organize their startup operations. Documentation, workflow clarity, and partner coordination — not immigration advice." },
+      { property: "og:title", content: "Opsirix for Immigrant Founders | F-1, H-1B, OPT Operations Support" },
+      { property: "og:description", content: "Opsirix helps F-1, OPT, H-1B, and international founders organize their startup operations. Documentation, workflow clarity, and partner coordination — not immigration advice." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/immigrant-founders" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/immigrant-founders" }],
@@ -36,7 +36,7 @@ const FAQS = [
 function Page() {
   return (
     <div className="inner-page">
-      <PageHeader pageName="Immigrant Founders" label="For Immigrant Founders" title="Operational infrastructure built for founders navigating the U.S. system." subtitle="Documentation organized. Professional coordination handled. Compliance calendar running. Zero immigration advice — that's what your attorney is for." />
+      <PageHeader pageName="Immigrant Founders" label="For Immigrant Founders" title="Operational support for immigrant founders building U.S. companies." subtitle="Documentation organized. Professional coordination handled. Compliance calendar running. Zero immigration advice — that's what your attorney is for." />
 
       <section className="inner-section">
         <div className="inner-wrap">

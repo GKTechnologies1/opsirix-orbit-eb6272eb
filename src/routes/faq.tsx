@@ -8,9 +8,9 @@ export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
       { title: "FAQ | Opsirix Founder Operations Platform" },
-      { name: "description", content: "Answers to everything founders and partners ask about Opsirix — the platform, immigrant founders, services, and getting started." },
+      { name: "description", content: "Common questions about Opsirix, our platform, immigrant founder support, compliance architecture, and how founders get started." },
       { property: "og:title", content: "FAQ | Opsirix Founder Operations Platform" },
-      { property: "og:description", content: "Answers to everything founders and partners ask." },
+      { property: "og:description", content: "Common questions about Opsirix, our platform, immigrant founder support, compliance architecture, and how founders get started." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/faq" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/faq" }],
@@ -91,7 +91,7 @@ function Section({ title, items }: { title: string; items: QA[] }) {
 function Page() {
   return (
     <div className="inner-page">
-      <PageHeader pageName="FAQ" label="Frequently Asked" title="Answers to everything founders and partners ask." subtitle="25+ questions across four categories. Zero legal, immigration, or tax advice — that's what your attorney and CPA are for." />
+      <PageHeader pageName="FAQ" label="Frequently Asked" title="Common questions about Opsirix." subtitle="25+ questions across four categories. Zero legal, immigration, or tax advice — that's what your attorney and CPA are for." />
 
       <section className="inner-section alt">
         <div className="inner-wrap" style={{ maxWidth: 820 }}>
