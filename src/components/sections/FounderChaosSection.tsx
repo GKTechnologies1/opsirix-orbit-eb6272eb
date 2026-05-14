@@ -53,19 +53,6 @@ const CARDS: Card[] = [
   },
 ];
 
-type Stat = {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  label: string;
-};
-
-const STATS: Stat[] = [
-  { value: 72, suffix: "%", label: "of startup CEOs report burnout — operational overload is the #1 driver" },
-  { value: 12, suffix: "+", label: "disconnected tools the average founder juggles with no coordination layer" },
-  { value: 6, suffix: " mo", label: "average time founders waste on avoidable operational chaos annually" },
-  { value: 0, prefix: "$", label: "platforms built for founder operational orchestration — until now" },
-];
 
 function ChaosCard({ card, index }: { card: Card; index: number }) {
   return (
