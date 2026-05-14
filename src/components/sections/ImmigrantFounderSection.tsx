@@ -57,7 +57,7 @@ export function ImmigrantFounderSection() {
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
               <p className="immigrant-lead">
-                Immigrant founders face the same operational challenges as every founder — plus documentation complexity, professional coordination requirements, and the operational discipline that comes with running a compliant, audit-ready company.
+                Immigrant founders juggle everything other founders do, plus documentation complexity, professional coordination, and the discipline that comes with running an organized, audit-ready operation. Opsirix organizes that operational layer.
               </p>
             </ScrollReveal>
 
