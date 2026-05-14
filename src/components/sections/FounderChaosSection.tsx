@@ -152,9 +152,8 @@ export function FounderChaosSection() {
                 marginTop: 16,
               }}
             >
-              Every week, brilliant founders lose time, momentum, and confidence to problems that
-              have nothing to do with their product — and everything to do with broken operational
-              systems.
+              Documents pile up in email. Professionals work in silos. Deadlines get missed. Nobody
+              is coordinating the operational layer beneath the startup.
             </p>
           </ScrollReveal>
         </div>
