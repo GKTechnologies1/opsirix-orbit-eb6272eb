@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/vault")({
   head: () => ({
     meta: [
       { title: "Opsirix Vault | Founder Document Organization System" },
-      { name: "description", content: "Organize company documents, formation records, partner handoff packets, and business files in one structured document vault built for early-stage and immigrant founders." },
+      { name: "description", content: "Organize company documents, formation records, partner handoff packets, and business files in one structured document vault for early-stage founders." },
       { property: "og:title", content: "Opsirix Vault | Founder Document Organization System" },
-      { property: "og:description", content: "Organize company documents, formation records, partner handoff packets, and business files in one structured document vault built for early-stage and immigrant founders." },
+      { property: "og:description", content: "Organize company documents, formation records, partner handoff packets, and business files in one structured document vault for early-stage founders." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/vault" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/vault" }],

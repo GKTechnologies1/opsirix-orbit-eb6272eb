@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/nexus")({
   head: () => ({
     meta: [
       { title: "Opsirix Nexus | Professional Partner Coordination Network" },
-      { name: "description", content: "Opsirix Nexus connects founders to attorneys, CPAs, insurance partners, and banking contacts at the right moment. Organized intake, warm introductions, and clear professional boundaries." },
+      { name: "description", content: "Opsirix Nexus connects founders to attorneys, CPAs, insurance, and banking partners with organized intake, warm introductions, and clear professional boundaries." },
       { property: "og:title", content: "Opsirix Nexus | Professional Partner Coordination Network" },
-      { property: "og:description", content: "Opsirix Nexus connects founders to attorneys, CPAs, insurance partners, and banking contacts at the right moment. Organized intake, warm introductions, and clear professional boundaries." },
+      { property: "og:description", content: "Opsirix Nexus connects founders to attorneys, CPAs, insurance, and banking partners with organized intake, warm introductions, and clear professional boundaries." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/nexus" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/nexus" }],

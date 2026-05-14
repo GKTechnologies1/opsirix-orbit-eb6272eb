@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/studio")({
   head: () => ({
     meta: [
       { title: "Opsirix Studio | Venture Readiness Layer for Founders" },
-      { name: "description", content: "Opsirix Studio is a selective venture readiness layer for operationally mature founders. Investor documentation, business refinement, strategic coordination, and growth preparation — for companies that have already built operational foundations." },
+      { name: "description", content: "Selective venture readiness support for operationally mature founders. Investor documentation, strategic coordination, and growth preparation." },
       { property: "og:title", content: "Opsirix Studio | Venture Readiness Layer for Founders" },
-      { property: "og:description", content: "Opsirix Studio is a selective venture readiness layer for operationally mature founders. Investor documentation, business refinement, strategic coordination, and growth preparation — for companies that have already built operational foundations." },
+      { property: "og:description", content: "Selective venture readiness support for operationally mature founders. Investor documentation, strategic coordination, and growth preparation." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/studio" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/studio" }],

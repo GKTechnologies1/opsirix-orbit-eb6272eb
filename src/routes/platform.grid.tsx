@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/grid")({
   head: () => ({
     meta: [
       { title: "Opsirix Grid | Operational Readiness Score for Founders" },
-      { name: "description", content: "Opsirix Grid gives founders a monthly operational readiness score across ten categories. Know where your company is strong, where it needs attention, and what to prioritize next." },
+      { name: "description", content: "Monthly operational readiness score across ten categories. Know where your company is strong, where it needs attention, and what to prioritize next." },
       { property: "og:title", content: "Opsirix Grid | Operational Readiness Score for Founders" },
-      { property: "og:description", content: "Opsirix Grid gives founders a monthly operational readiness score across ten categories. Know where your company is strong, where it needs attention, and what to prioritize next." },
+      { property: "og:description", content: "Monthly operational readiness score across ten categories. Know where your company is strong, where it needs attention, and what to prioritize next." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/grid" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/grid" }],

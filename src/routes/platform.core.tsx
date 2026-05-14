@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/core")({
   head: () => ({
     meta: [
       { title: "Opsirix Core | Managed Founder Operations Support" },
-      { name: "description", content: "Opsirix Core provides managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management — actively handled." },
+      { name: "description", content: "Managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management." },
       { property: "og:title", content: "Opsirix Core | Managed Founder Operations Support" },
-      { property: "og:description", content: "Opsirix Core provides managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management — actively handled." },
+      { property: "og:description", content: "Managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/core" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/core" }],

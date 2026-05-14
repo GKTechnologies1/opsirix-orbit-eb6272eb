@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/os")({
   head: () => ({
     meta: [
       { title: "Opsirix OS | Founder Operations Dashboard" },
-      { name: "description", content: "Opsirix OS is the central founder operations dashboard. See document status, workflow activity, partner coordination, readiness score, and company health in one view." },
+      { name: "description", content: "Opsirix OS is the central founder operations dashboard. Document status, workflow activity, partner coordination, and company health in one view." },
       { property: "og:title", content: "Opsirix OS | Founder Operations Dashboard" },
-      { property: "og:description", content: "Opsirix OS is the central founder operations dashboard. See document status, workflow activity, partner coordination, readiness score, and company health in one view." },
+      { property: "og:description", content: "Opsirix OS is the central founder operations dashboard. Document status, workflow activity, partner coordination, and company health in one view." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/os" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/os" }],
