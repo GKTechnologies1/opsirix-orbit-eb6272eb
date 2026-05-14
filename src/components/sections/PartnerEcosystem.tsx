@@ -57,11 +57,11 @@ export function PartnerEcosystem() {
             <span className="partner-label">Partner Ecosystem</span>
           </ScrollReveal>
           <ScrollReveal delay={0.05}>
-            <h2 className="partner-h2">Built with the professionals your startup depends on.</h2>
+            <h2 className="partner-h2">The professionals your startup needs, coordinated through one platform.</h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="partner-sub">
-              Opsirix Nexus coordinates your licensed professional team. Every partner serves you independently — Opsirix coordinates the administrative logistics.
+              Opsirix Nexus connects founders to attorneys, CPAs, insurance, and banking partners at the right moment. Every partner serves founders independently. Opsirix handles the coordination.
             </p>
           </ScrollReveal>
         </div>
@@ -90,10 +90,10 @@ export function PartnerEcosystem() {
             <div>
               <div className="partner-banner-label">JOIN THE NETWORK</div>
               <h3 className="partner-banner-h3">
-                Are you an attorney, CPA, university, or bank that works with founders?
+                Work with founders? Join the Opsirix Nexus network.
               </h3>
               <p className="partner-banner-body">
-                Join the Opsirix Nexus partner network. Receive warm referrals from organized, audit-ready founders who are ready to work with you.
+                Get referrals to organized, prepared founders. Less back-and-forth on documents. Clear scope from day one.
               </p>
             </div>
             <Link to="/for-partners" className="partner-banner-cta">

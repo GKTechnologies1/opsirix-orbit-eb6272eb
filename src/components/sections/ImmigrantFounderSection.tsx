@@ -16,8 +16,8 @@ const POINTS: FeaturePoint[] = [
   },
   {
     icon: "🔗",
-    title: "Attorney coordination, not advice",
-    body: "We coordinate your access to licensed immigration attorneys through Nexus. They provide the legal advice. We handle the administrative logistics.",
+    title: "Attorney coordination",
+    body: "Opsirix coordinates access to licensed immigration attorneys. The attorney provides legal advice. Opsirix handles the scheduling, document preparation, and administrative follow-through.",
   },
   {
     icon: "📊",
@@ -52,12 +52,12 @@ export function ImmigrantFounderSection() {
             </ScrollReveal>
             <ScrollReveal delay={0.05}>
               <h2 className="immigrant-h2">
-                Building a U.S. company while navigating a U.S. visa deserves operational infrastructure built for that reality.
+                Running a startup and managing visa requirements at the same time is genuinely hard. Opsirix handles the operational side.
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
               <p className="immigrant-lead">
-                Immigrant founders face the same operational challenges as every founder — plus documentation complexity, professional coordination requirements, and the operational discipline that comes with running a compliant, audit-ready company.
+                Immigrant founders juggle everything other founders do, plus documentation complexity, professional coordination, and the discipline that comes with running an organized, audit-ready operation. Opsirix organizes that operational layer.
               </p>
             </ScrollReveal>
 
@@ -102,8 +102,7 @@ export function ImmigrantFounderSection() {
               <div className="immigrant-disclaimer">
                 <span className="immigrant-disclaimer-icon">⚠️</span>
                 <p className="immigrant-disclaimer-text">
-                  <strong style={{ color: "rgba(255,255,255,0.72)", fontWeight: 600 }}>Important:</strong>{" "}
-                  Opsirix is not an immigration consultancy and does not provide visa advice, work authorization opinions, or immigration legal advice of any kind. All immigration matters route to independently retained licensed immigration attorneys through Opsirix Nexus.
+                  Opsirix is an operations platform. It does not provide immigration advice, visa strategy, or work authorization guidance. All immigration matters are handled by independently retained licensed immigration attorneys.
                 </p>
               </div>
             </div>

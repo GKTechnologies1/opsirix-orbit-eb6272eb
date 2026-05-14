@@ -165,8 +165,8 @@ export function ComplianceBoundary() {
                   margin: 0,
                 }}
               >
-                We coordinate.{" "}
-                <span className="gradient-text">Licensed professionals</span> advise.
+                What Opsirix does.{" "}
+                <span className="gradient-text">What licensed professionals</span> handle.
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
@@ -180,9 +180,9 @@ export function ComplianceBoundary() {
                   maxWidth: 420,
                 }}
               >
-                Opsirix is an operations coordination platform — not a law firm, not an immigration
-                consultancy, not a CPA firm. Every regulated matter routes to independently retained
-                licensed professionals.
+                Opsirix is an operations coordination platform. We help founders organize documents,
+                workflows, timelines, and partner communication. When regulated guidance is needed,
+                founders work directly with independently retained licensed professionals.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
@@ -196,9 +196,9 @@ export function ComplianceBoundary() {
                   maxWidth: 440,
                 }}
               >
-                This is not a limitation. It is a deliberate design decision. The compliance-first
-                architecture is what makes Opsirix trustworthy to attorneys, universities, banks, and
-                government agencies.
+                This separation is intentional. It keeps professional advice where it belongs — with
+                licensed professionals — while giving founders a clean operational system to manage
+                everything else.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={0.22}>
@@ -293,9 +293,9 @@ export function ComplianceBoundary() {
                     lineHeight: 1.65,
                   }}
                 >
-                  Opsirix coordinates access to licensed professionals through Opsirix Nexus. It does
-                  not replace them. All regulated matters are handled by independently retained
-                  licensed professionals.
+                  Opsirix coordinates the operational layer. It does not provide legal, immigration,
+                  tax, or accounting advice. Licensed matters are handled by independently retained
+                  attorneys, CPAs, and other licensed professionals.
                 </p>
               </div>
             </div>
