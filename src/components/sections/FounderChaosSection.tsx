@@ -125,9 +125,9 @@ export function FounderChaosSection() {
                 margin: 0,
               }}
             >
-              Founders don't fail from lack of ambition.
+              Most founders are great at building.
               <br />
-              They get slowed down by{" "}
+              Running the{" "}
               <span
                 style={{
                   backgroundImage: "linear-gradient(135deg, #EF4444, #F97316)",
@@ -137,9 +137,9 @@ export function FounderChaosSection() {
                   color: "transparent",
                 }}
               >
-                operational chaos
-              </span>
-              .
+                business side
+              </span>{" "}
+              is a different problem.
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
