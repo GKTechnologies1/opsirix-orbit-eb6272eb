@@ -8,13 +8,13 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Schedule your free 30-minute Opsirix Discovery Call. Complete the founder intake form and we will match you to the right operational support within one business day.",
+          "Schedule your free 30-minute Opsirix Discovery Call. Complete the founder intake form and we will recommend the right Opsirix path within one business day.",
       },
       { property: "og:title", content: "Book a Discovery Call | Opsirix Founder Operations" },
       {
         property: "og:description",
         content:
-          "Schedule your free 30-minute Opsirix Discovery Call. Complete the founder intake form and we will match you to the right operational support within one business day.",
+          "Schedule your free 30-minute Opsirix Discovery Call. Complete the founder intake form and we will recommend the right Opsirix path within one business day.",
       },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/contact" },
     ],
@@ -25,7 +25,7 @@ export const Route = createFileRoute("/contact")({
 
 const INFO_ROWS = [
   { icon: "🕐", label: "RESPONSE TIME", value: "Within 1 business day of submission" },
-  { icon: "📞", label: "DISCOVERY CALL", value: "30-min call to match your platform tier" },
+  { icon: "📞", label: "DISCOVERY CALL", value: "30-minute call to understand your needs and recommend the right Opsirix path." },
   { icon: "🔒", label: "CONFIDENTIAL", value: "Strictly confidential per Opsirix Privacy Policy" },
 ];
 

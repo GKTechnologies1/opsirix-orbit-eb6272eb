@@ -210,7 +210,7 @@ export function Footer() {
             law firm, immigration consultancy, CPA firm, or licensed professional services
             organization of any kind. Nothing on this website constitutes legal, immigration, tax, or
             professional advice. All regulated matters are handled by independently retained licensed
-            professionals. Opsirix coordinates access to those professionals — it does not replace them.
+            professionals. Opsirix coordinates access to those professionals. It does not replace them.
           </p>
           <p
             style={{
