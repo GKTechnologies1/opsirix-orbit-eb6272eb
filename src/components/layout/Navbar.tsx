@@ -1,12 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { OpsirixLogo, OpsirixWordmark } from "./OpsirixLogo";
+import { MODULES } from "@/lib/modules";
 
-const NAV_LINKS: { label: string; to: string }[] = [
+type NavLink = {
+  label: string;
+  to: string;
+  dropdown?: boolean;
+};
+
+const NAV_LINKS: NavLink[] = [
   { label: "How It Works", to: "/how-it-works" },
-  { label: "Services", to: "/services" },
+  { label: "Platform", to: "/platform", dropdown: true },
   { label: "Immigrant Founders", to: "/immigrant-founders" },
   { label: "Partners", to: "/for-partners" },
   { label: "Universities", to: "/for-universities" },
