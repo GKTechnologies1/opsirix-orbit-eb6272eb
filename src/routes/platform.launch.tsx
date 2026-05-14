@@ -1,172 +1,197 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PageHeader } from "@/components/shared/PageHeader";
-import { CTASection } from "@/components/shared/CTASection";
-import { RelatedModules } from "@/components/shared/RelatedModules";
+import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
 export const Route = createFileRoute("/platform/launch")({
   head: () => ({
     meta: [
       { title: "Opsirix Launch | Startup Formation Workflow Coordination" },
-      { name: "description", content: "Opsirix Launch organizes the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions." },
+      {
+        name: "description",
+        content:
+          "Opsirix Launch helps founders coordinate the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions.",
+      },
       { property: "og:title", content: "Opsirix Launch | Startup Formation Workflow Coordination" },
-      { property: "og:description", content: "Opsirix Launch organizes the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions." },
+      {
+        property: "og:description",
+        content:
+          "Opsirix Launch helps founders coordinate the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions.",
+      },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/launch" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/launch" }],
   }),
-  component: Page,
+  component: LaunchPage,
 });
 
 const FEATURES = [
   { t: "Founder intake and profile setup", d: "Your company details, founder background, and operational goals are documented at the start, not figured out later." },
-  { t: "Entity setup checklist", d: "Formation steps are organized into a tracked checklist. Opsirix does not provide formation services, it coordinates the documentation and professional handoff." },
-  { t: "EIN and banking readiness", d: "Checklists for EIN application and business banking setup are organized and tracked. Next steps are clear." },
-  { t: "Attorney and CPA handoff preparation", d: "Documents prepared for your first attorney and CPA engagement. Opsirix coordinates the introduction through Nexus, professionals serve you independently." },
-  { t: "Initial document collection", d: "Formation documents, operating agreements, founder agreements, and initial contracts collected and organized in Vault." },
-  { t: "Business profile in Opsirix OS", d: "Company details, contact list, and setup status available in the central dashboard from day one." },
-  { t: "Launch timeline", d: "A structured timeline for the first 30 days of operational setup. Each task has a status and an owner." },
-  { t: "Vendor and account setup tracker", d: "Business software, tools, accounts, and service providers tracked as they are set up." },
-];
-
-const AUDIENCE = [
-  "Pre-launch founders with an idea but no entity yet",
-  "Founders who recently formed their company and have not organized the follow-up steps",
-  "Immigrant founders who need structured setup before connecting with attorneys or CPAs",
-  "Student founders with limited startup operations experience",
-  "Solo founders with no operations support",
+  { t: "Entity setup checklist", d: "Formation steps organized into a tracked checklist. Opsirix coordinates the documentation and professional handoff. It does not provide formation services." },
+  { t: "EIN and banking readiness", d: "Checklists for EIN application and business banking setup organized and tracked. Next steps are clear." },
+  { t: "Attorney and CPA handoff preparation", d: "Documents prepared for your first attorney and CPA engagement. Opsirix coordinates the introduction through Nexus. Professionals serve you independently." },
+  { t: "Initial document collection", d: "Formation documents, operating agreements, and initial contracts collected and organized in Vault." },
+  { t: "Launch timeline", d: "A structured timeline for the first 30 days of operational setup. Each task has a status and an owner in Flow." },
+  { t: "Vendor and account setup tracker", d: "Business tools, software, accounts, and service providers tracked as they are set up." },
 ];
 
 const STEPS = [
-  { t: "Complete founder intake", d: "Company details, founder background, current setup status." },
-  { t: "Receive your launch checklist", d: "Organized operational checklist based on your company stage and type." },
-  { t: "Begin document collection", d: "Formation documents, agreements, and important records added to Vault." },
-  { t: "Professional introductions", d: "Attorney and CPA introductions made through Opsirix Nexus." },
-  { t: "Launch timeline activated", d: "30-day operational setup timeline begins in Flow." },
-  { t: "Baseline Grid score", d: "First Opsirix Grid review establishes your operational baseline." },
+  { n: "01", t: "Complete founder intake" },
+  { n: "02", t: "Receive your launch checklist" },
+  { n: "03", t: "Begin document collection in Vault" },
+  { n: "04", t: "Professional introductions via Nexus" },
+  { n: "05", t: "Launch timeline activated in Flow" },
+  { n: "06", t: "Baseline Grid score established" },
 ];
 
-function Page() {
+const CONNECTED = [
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Launch documents go straight into Vault." },
+  { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Attorney and CPA introductions happen during Launch." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Grid baseline established at the end of Launch." },
+] as const;
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inner-page">
-      <PageHeader
-        pageName="Platform → Opsirix Launch"
-        label="Platform Module"
-        title="Get your startup structured from the beginning."
-        subtitle="Opsirix Launch organizes the operational side of going from idea to running company. Formation checklists, document collection, professional handoffs, and operational baseline, coordinated so nothing is missed."
-      />
+    <p
+      style={{
+        fontFamily: "var(--font-mono), 'JetBrains Mono', monospace",
+        fontSize: 11,
+        color: "#66C7F4",
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        margin: "0 0 12px",
+      }}
+    >
+      {children}
+    </p>
+  );
+}
 
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <Link to="/contact" className="btn-primary">Book a Discovery Call</Link>
-            <Link to="/platform" className="btn-secondary">See All Modules</Link>
-          </div>
+function LaunchPage() {
+  return (
+    <ModulePageLayout
+      moduleName="Opsirix Launch"
+      moduleTag="Formation Layer"
+      moduleIcon="🚀"
+      headline="Get your startup structured from the beginning."
+      subtext="Opsirix Launch organizes the operational side of going from idea to running company. Formation checklists, document collection, professional handoffs, and operational baseline: coordinated so nothing is missed."
+    >
+      {/* Section 1 — Problem */}
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>The Problem</Eyebrow>
+        <h2 className="module-section-h2">What happens without a structured launch.</h2>
+        <p style={{ maxWidth: 760, marginTop: 16 }}>
+          Most founders set up their company by figuring it out as they go. Entity filed. Bank
+          account opened. Attorney contacted once. And then a pile of follow-up items nobody
+          tracks. Six months later, documents are missing, accounts are not set up correctly, and
+          the operational foundation has gaps.
+        </p>
+      </div>
+
+      {/* Section 2 — Features */}
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>Capabilities</Eyebrow>
+        <h2 className="module-section-h2">What Opsirix Launch covers.</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 18,
+            marginTop: 24,
+          }}
+        >
+          {FEATURES.map((f) => (
+            <div key={f.t} className="module-feature-card">
+              <h3>{f.t}</h3>
+              <p>{f.d}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">The Problem</p>
-          <h2 className="inner-h2">What happens without a structured launch.</h2>
-          <p className="inner-lead">
-            Most founders set up their company by figuring it out as they go. Entity filed.
-            Bank account opened. Attorney contacted once. And then a pile of follow-up items that
-            nobody tracks. Six months later, documents are missing, accounts aren't properly set up,
-            and the operational foundation has gaps.
-          </p>
+      {/* Section 3 — Steps */}
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>How It Works</Eyebrow>
+        <h2 className="module-section-h2">How Opsirix Launch works.</h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 24 }}>
+          {STEPS.map((s) => (
+            <div
+              key={s.n}
+              className="module-feature-card"
+              style={{ display: "flex", gap: 18, alignItems: "center" }}
+            >
+              <span
+                aria-hidden
+                style={{
+                  fontFamily: "var(--font-mono), 'JetBrains Mono', monospace",
+                  fontSize: 13,
+                  color: "#66C7F4",
+                  fontWeight: 700,
+                  minWidth: 32,
+                }}
+              >
+                {s.n}
+              </span>
+              <h3 style={{ margin: 0 }}>{s.t}</h3>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">What It Does</p>
-          <h2 className="inner-h2">What Opsirix Launch coordinates.</h2>
-          <div className="inner-grid-2" style={{ marginTop: 36 }}>
-            {FEATURES.map((f) => (
-              <div key={f.t} className="inner-card">
-                <h3>{f.t}</h3>
-                <p>{f.d}</p>
+      {/* Compliance note */}
+      <div
+        style={{
+          background: "rgba(255,255,255,0.03)",
+          border: "1px solid rgba(255,255,255,0.08)",
+          borderRadius: 12,
+          padding: 22,
+          marginBottom: 64,
+        }}
+      >
+        <p style={{ fontSize: 13.5, color: "#94A3B8", margin: 0, lineHeight: 1.7 }}>
+          Opsirix Launch organizes the operational and documentation side of starting a company.
+          It does not provide legal advice, tax advice, immigration advice, or formation services.
+          Entity formation, legal opinions, and tax filings are handled by independently retained
+          licensed professionals.
+        </p>
+      </div>
+
+      {/* Connected modules */}
+      <div style={{ marginTop: 16 }}>
+        <h2 className="module-section-h2">Connects to.</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 18,
+            marginTop: 24,
+          }}
+        >
+          {CONNECTED.map((m) => (
+            <Link
+              key={m.name}
+              to={m.to}
+              className="module-feature-card"
+              style={{ display: "flex", flexDirection: "column", gap: 10, textDecoration: "none" }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
-            ))}
-          </div>
+              <p>{m.desc}</p>
+              <span
+                style={{
+                  marginTop: "auto",
+                  color: "#66C7F4",
+                  fontWeight: 600,
+                  fontSize: 13.5,
+                  fontFamily: "Inter, sans-serif",
+                }}
+              >
+                Explore →
+              </span>
+            </Link>
+          ))}
         </div>
-      </section>
-
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">Who It's For</p>
-          <h2 className="inner-h2">Who Opsirix Launch is built for.</h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: 18,
-              marginTop: 36,
-            }}
-          >
-            {AUDIENCE.map((a) => (
-              <div key={a} className="inner-card">
-                <p style={{ margin: 0 }}>{a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">Step by Step</p>
-          <h2 className="inner-h2">How Opsirix Launch works.</h2>
-          <ol style={{ marginTop: 32, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
-            {STEPS.map((s, i) => (
-              <li key={s.t} className="inner-card" style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                <span
-                  style={{
-                    width: 36, height: 36, borderRadius: "50%",
-                    background: "rgba(0,87,217,0.08)", color: "#0057D9",
-                    display: "inline-flex", alignItems: "center", justifyContent: "center",
-                    fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: 13, flexShrink: 0,
-                  }}
-                >
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 style={{ margin: "0 0 4px" }}>{s.t}</h3>
-                  <p style={{ margin: 0 }}>{s.d}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-lead" style={{ fontSize: 14, color: "#64748B" }}>
-            Opsirix Launch organizes the operational and documentation side of starting a company.
-            It does not provide legal advice, tax advice, immigration advice, or formation services.
-            Entity formation, legal opinions, tax filings, and immigration guidance are handled by
-            independently retained licensed professionals.
-          </p>
-          <p className="inner-lead" style={{ marginTop: 20 }}>
-            <strong>Connects to:</strong> Vault (documents), Flow (tasks), Nexus (professional
-            introductions), OS (dashboard), and Grid (readiness baseline).
-          </p>
-        </div>
-      </section>
-
-      <section className="inner-section">
-        <div className="inner-wrap" style={{ textAlign: "center" }}>
-          <h2 className="inner-h2">Start with a structured foundation.</h2>
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
-            <Link to="/contact" className="btn-primary">Book a Discovery Call</Link>
-            <Link to="/contact" className="btn-secondary">Start Founder Intake</Link>
-          </div>
-        </div>
-      </section>
-
-      <RelatedModules currentSlug="launch" />
-      <CTASection />
-    </div>
+      </div>
+    </ModulePageLayout>
   );
 }
