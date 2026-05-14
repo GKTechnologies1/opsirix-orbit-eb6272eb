@@ -26,6 +26,7 @@ function Index() {
       <ImmigrantFounderSection />
       <PartnerEcosystem />
       <FounderJourneyTimeline />
+      <OpsirixOSPreview />
     </main>
   );
 }
