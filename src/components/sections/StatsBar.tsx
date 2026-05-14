@@ -1,8 +1,8 @@
 const BADGES = [
-  "55% of U.S. unicorn founders were immigrants (NFAP)",
+  "55% of U.S. unicorn founders were immigrants*",
   "35+ operational documents in the Opsirix library",
   "6 platform modules covering the full ops layer",
-  "First founder operations OS built for this market",
+  "Built specifically for founders who need operational structure before scale.",
 ];
 
 export function StatsBar() {
@@ -35,6 +35,18 @@ export function StatsBar() {
             {b}
           </span>
         ))}
+      </div>
+      <div
+        className="opsirix-container"
+        style={{
+          marginTop: 16,
+          textAlign: "center",
+          fontFamily: "var(--font-mono)",
+          fontSize: 10,
+          color: "rgba(255,255,255,0.35)",
+        }}
+      >
+        *Source: National Foundation for American Policy (NFAP), 2023
       </div>
     </section>
   );
