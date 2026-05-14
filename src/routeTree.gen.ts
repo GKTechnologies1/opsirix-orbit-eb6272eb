@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as ImmigrantFoundersRouteImport } from './routes/immigrant-founders'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as ForUniversitiesRouteImport } from './routes/for-universities'
@@ -41,6 +42,11 @@ const ServicesRoute = ServicesRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlatformRoute = PlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImmigrantFoundersRoute = ImmigrantFoundersRouteImport.update({
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/platform': typeof PlatformRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByTo {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/platform': typeof PlatformRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -130,6 +138,7 @@ export interface FileRoutesById {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
+  '/platform': typeof PlatformRoute
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
+    | '/platform'
     | '/privacy'
     | '/services'
     | '/sitemap.xml'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
+    | '/platform'
     | '/privacy'
     | '/services'
     | '/sitemap.xml'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
+    | '/platform'
     | '/privacy'
     | '/services'
     | '/sitemap.xml'
@@ -193,6 +205,7 @@ export interface RootRouteChildren {
   ForUniversitiesRoute: typeof ForUniversitiesRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ImmigrantFoundersRoute: typeof ImmigrantFoundersRoute
+  PlatformRoute: typeof PlatformRoute
   PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -227,6 +240,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/platform': {
+      id: '/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof PlatformRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/immigrant-founders': {
@@ -305,6 +325,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForUniversitiesRoute: ForUniversitiesRoute,
   HowItWorksRoute: HowItWorksRoute,
   ImmigrantFoundersRoute: ImmigrantFoundersRoute,
+  PlatformRoute: PlatformRoute,
   PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
