@@ -92,49 +92,69 @@ export function Navbar() {
           )}
         </AnimatePresence>
 
-        <div
+        <motion.div
+          initial={{ y: -68, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.45, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
           className="flex items-center justify-between"
           style={{ height: 68, padding: "0 24px", maxWidth: 1240, margin: "0 auto" }}
         >
-          <Link to="/" className="flex items-center" style={{ gap: 10 }}>
-            <OpsirixLogo size={34} />
-            <OpsirixWordmark fontSize={18} />
-          </Link>
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.85 }}
+          >
+            <Link to="/" className="flex items-center" style={{ gap: 10 }}>
+              <OpsirixLogo size={34} />
+              <OpsirixWordmark fontSize={18} />
+            </Link>
+          </motion.div>
 
           <nav className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map((link) => {
+            {NAV_LINKS.map((link, idx) => {
               const active = pathname === link.to;
               return (
-                <Link
+                <motion.div
                   key={link.to}
-                  to={link.to}
-                  className="rounded-lg transition-colors"
-                  style={{
-                    fontFamily: "var(--font-inter)",
-                    fontSize: 13.5,
-                    fontWeight: 500,
-                    padding: "7px 13px",
-                    color: active ? "#2F80ED" : "#94A3B8",
-                    backgroundColor: active ? "rgba(0,87,217,0.1)" : "transparent",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (active) return;
-                    (e.currentTarget as HTMLAnchorElement).style.color = "#fff";
-                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "rgba(255,255,255,0.07)";
-                  }}
-                  onMouseLeave={(e) => {
-                    if (active) return;
-                    (e.currentTarget as HTMLAnchorElement).style.color = "#94A3B8";
-                    (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "transparent";
-                  }}
+                  initial={{ y: -8, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.35, delay: 0.9 + idx * 0.05 }}
                 >
-                  {link.label}
-                </Link>
+                  <Link
+                    to={link.to}
+                    className="rounded-lg transition-colors"
+                    style={{
+                      fontFamily: "var(--font-inter)",
+                      fontSize: 13.5,
+                      fontWeight: 500,
+                      padding: "7px 13px",
+                      color: active ? "#2F80ED" : "#94A3B8",
+                      backgroundColor: active ? "rgba(0,87,217,0.1)" : "transparent",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (active) return;
+                      (e.currentTarget as HTMLAnchorElement).style.color = "#fff";
+                      (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "rgba(255,255,255,0.07)";
+                    }}
+                    onMouseLeave={(e) => {
+                      if (active) return;
+                      (e.currentTarget as HTMLAnchorElement).style.color = "#94A3B8";
+                      (e.currentTarget as HTMLAnchorElement).style.backgroundColor = "transparent";
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               );
             })}
           </nav>
 
-          <div className="hidden md:flex items-center gap-3">
+          <motion.div
+            initial={{ y: -8, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.4, delay: 1.25 }}
+            className="hidden md:flex items-center gap-3"
+          >
             <Link
               to="/contact"
               className="rounded-lg transition-colors"
@@ -156,7 +176,7 @@ export function Navbar() {
             >
               Book Discovery Call →
             </Link>
-          </div>
+          </motion.div>
 
           <button
             className="md:hidden p-2 text-white"
@@ -165,7 +185,7 @@ export function Navbar() {
           >
             <Menu size={22} />
           </button>
-        </div>
+        </motion.div>
       </header>
 
       <AnimatePresence>
