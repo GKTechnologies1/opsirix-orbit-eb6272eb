@@ -381,3 +381,27 @@
   box-shadow: 0 20px 52px rgba(7,27,51,0.12);
   border-color: rgba(0,87,217,0.15);
 }
+
+/* Opsirix Layer */
+.opsirix-layer-grid {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 1024px) {
+  .opsirix-layer-grid { grid-template-columns: 1fr; gap: 56px; }
+  .opsirix-layer-grid > div:last-child { order: -1; }
+}
+.layer-row:hover {
+  background: rgba(255,255,255,0.07) !important;
+  transform: translateX(4px);
+}
+.layer-opsirix {
+  background: linear-gradient(135deg, rgba(0,87,217,0.4), rgba(47,128,237,0.25));
+  animation: opsirixBreath 3s ease-in-out infinite;
+}
+@keyframes opsirixBreath {
+  0%, 100% { background: linear-gradient(135deg, rgba(0,87,217,0.4), rgba(47,128,237,0.25)); }
+  50% { background: linear-gradient(135deg, rgba(0,87,217,0.55), rgba(47,128,237,0.35)); }
+}
