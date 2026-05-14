@@ -364,24 +364,110 @@ export function Navbar() {
             </div>
 
             <nav className="flex flex-col">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setMobileOpen(false)}
-                  className="block"
-                  style={{
-                    padding: "16px 24px",
-                    fontSize: 16,
-                    fontFamily: "var(--font-inter)",
-                    fontWeight: 500,
-                    color: "#fff",
-                    borderBottom: "1px solid rgba(255,255,255,0.06)",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                if (link.dropdown) {
+                  return (
+                    <div key={link.to} style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+                      <button
+                        type="button"
+                        onClick={() => setMobilePlatformOpen((v) => !v)}
+                        aria-expanded={mobilePlatformOpen}
+                        className="w-full flex items-center justify-between"
+                        style={{
+                          padding: "16px 24px",
+                          fontSize: 16,
+                          fontFamily: "var(--font-inter)",
+                          fontWeight: 500,
+                          color: "#fff",
+                          background: "transparent",
+                          border: "none",
+                          textAlign: "left",
+                        }}
+                      >
+                        {link.label}
+                        <ChevronDown
+                          size={18}
+                          style={{
+                            transform: mobilePlatformOpen ? "rotate(180deg)" : "rotate(0deg)",
+                            transition: "transform 200ms",
+                          }}
+                        />
+                      </button>
+                      {mobilePlatformOpen && (
+                        <div style={{ padding: "4px 0 12px", backgroundColor: "rgba(0,0,0,0.18)" }}>
+                          <Link
+                            to="/platform"
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: "block",
+                              padding: "12px 36px",
+                              fontSize: 14,
+                              color: "#fff",
+                              fontWeight: 600,
+                              fontFamily: "var(--font-inter)",
+                            }}
+                          >
+                            Platform Overview
+                          </Link>
+                          {MODULES.map((m) => (
+                            <Link
+                              key={m.slug}
+                              to={m.to}
+                              onClick={() => setMobileOpen(false)}
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                padding: "10px 36px",
+                                fontSize: 14,
+                                color: "#94A3B8",
+                                fontFamily: "var(--font-inter)",
+                              }}
+                            >
+                              <span>{m.name}</span>
+                              {m.soon && (
+                                <span
+                                  style={{
+                                    backgroundColor: "rgba(245,158,11,0.15)",
+                                    color: "#F59E0B",
+                                    padding: "1px 6px",
+                                    borderRadius: 3,
+                                    fontSize: 9,
+                                    fontFamily: "var(--font-mono)",
+                                    fontWeight: 700,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                  }}
+                                >
+                                  Soon
+                                </span>
+                              )}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setMobileOpen(false)}
+                    className="block"
+                    style={{
+                      padding: "16px 24px",
+                      fontSize: 16,
+                      fontFamily: "var(--font-inter)",
+                      fontWeight: 500,
+                      color: "#fff",
+                      borderBottom: "1px solid rgba(255,255,255,0.06)",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div style={{ padding: "24px" }}>
