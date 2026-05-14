@@ -6,6 +6,7 @@ import { BeforeAfterSection } from "@/components/sections/BeforeAfterSection";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { ComplianceBoundary } from "@/components/sections/ComplianceBoundary";
 import { ImmigrantFounderSection } from "@/components/sections/ImmigrantFounderSection";
+import { PartnerEcosystem } from "@/components/sections/PartnerEcosystem";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -21,6 +22,7 @@ function Index() {
       <ServicesGrid />
       <ComplianceBoundary />
       <ImmigrantFounderSection />
+      <PartnerEcosystem />
     </main>
   );
 }
