@@ -1,4 +1,4 @@
-import * as Accordion from "@radix-ui/react-accordion";
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
@@ -11,31 +11,33 @@ const FAQS: QA[] = [
   },
   {
     q: "Do you provide immigration advice or visa strategy?",
-    a: "Never. Opsirix provides zero immigration advice, visa opinions, or work authorization determinations. Any question touching immigration law is immediately routed to a licensed immigration attorney through Opsirix Nexus. We handle the administrative coordination; licensed attorneys handle the legal substance. This boundary is non-negotiable and built into every layer of the platform.",
+    a: "Never. Opsirix provides zero immigration advice, visa opinions, or work authorization determinations. Any question touching immigration law is immediately routed to a licensed immigration attorney through Opsirix Nexus. We handle administrative coordination — licensed attorneys handle the legal substance.",
   },
   {
     q: "Can you help coordinate my attorney and CPA?",
-    a: "Yes — administrative coordination is one of Opsirix's core functions. We handle scheduling, document delivery, logistical follow-through, and the ongoing administrative relationship between you and your licensed professionals. They provide advice; we make working with them seamless. If you don't have an attorney or CPA yet, Opsirix Nexus will introduce you to the right partner.",
+    a: "Yes — administrative coordination is one of Opsirix's core functions. We handle scheduling, document delivery, and the ongoing logistics between you and your licensed professionals. They provide advice. We make working with them seamless. If you don't have an attorney or CPA yet, Opsirix Nexus will introduce you to the right partner.",
   },
   {
     q: "Who is Opsirix for?",
-    a: "Opsirix serves early-stage founders, immigrant founders (F-1, OPT, H-1B, and international entrepreneurs), technical founders who are operationally overwhelmed, and any founder who needs their startup's operational layer organized, coordinated, and running properly. If you're building a U.S. company and your documentation, workflows, and professional team are not organized — Opsirix is built for you.",
+    a: "Opsirix serves early-stage founders, immigrant founders (F-1, OPT, H-1B, and international entrepreneurs), technical founders who are operationally overwhelmed, and any founder who needs their startup's operational layer organized and running properly. If you're building a U.S. company and your documentation, workflows, and professional team aren't organized — Opsirix is built for you.",
   },
   {
     q: "How do founders get started?",
-    a: "Complete the Opsirix Intake Flow (15 minutes). We review within 1 business day and schedule your 30-minute Discovery Call. After that, four onboarding documents to sign, and your Opsirix Launch onboarding session happens within 5 business days. From there: Vault created, Flow activated, Nexus introductions made, Grid baseline set.",
+    a: "Complete the Opsirix Intake Form (about 10 minutes). We review within one business day and schedule your 30-minute Discovery Call. After that, you sign four onboarding documents and your Opsirix Launch session is scheduled within five business days. Vault created, Flow activated, Nexus introductions made, Grid baseline set.",
   },
   {
     q: "What is the Opsirix Grid score?",
-    a: "The Opsirix Grid is your monthly Operational Readiness Score out of 50 points — measured across 5 dimensions: Documentation Completeness (10), Compliance Status (10), Financial Coordination (10), Operational Workflow (10), and Startup Readiness (10). A score of 40+ means investor-ready operations. Your score is tracked monthly and delivered in your Founder Status Report.",
+    a: "The Opsirix Grid is your monthly Operational Readiness Score out of 50 points, measured across five areas: Documentation, Compliance Status, Financial Coordination, Workflow Operations, and Startup Readiness. A score of 40 or above means investor-ready operations. Your score is tracked every month and delivered in your Founder Status Report.",
   },
   {
     q: "How is Opsirix different from an accelerator?",
-    a: "Accelerators teach and connect. Opsirix runs. We are the operational infrastructure running beneath your startup every week — coordinating your attorney, organizing your documents, running your project board, scoring your readiness. The cohort ends; Opsirix continues. Think of it as having an operational backbone for your company, not a 12-week program.",
+    a: "Accelerators teach and connect. Opsirix runs. We are the operational infrastructure running beneath your startup every week — coordinating your attorney, organizing your documents, running your project board, scoring your readiness. The cohort ends. Opsirix continues.",
   },
 ];
 
 export function FAQSection() {
+  const [open, setOpen] = useState<number | null>(0);
+
   return (
     <section className="faq-section">
       <div className="faq-container">
@@ -46,28 +48,32 @@ export function FAQSection() {
           </div>
         </ScrollReveal>
 
-        <Accordion.Root
-          type="single"
-          collapsible
-          defaultValue="item-1"
-          className="faq-list"
-        >
-          {FAQS.map((item, i) => (
-            <Accordion.Item key={i} value={`item-${i + 1}`} className="faq-item">
-              <Accordion.Header>
-                <Accordion.Trigger className="faq-trigger">
+        <div className="faq-list">
+          {FAQS.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i} className="faq-item">
+                <button
+                  type="button"
+                  className="faq-trigger"
+                  data-state={isOpen ? "open" : "closed"}
+                  aria-expanded={isOpen}
+                  onClick={() => setOpen(isOpen ? null : i)}
+                >
                   <span className="faq-question">{item.q}</span>
                   <span className="faq-chevron" aria-hidden>
                     <ChevronDown size={11} />
                   </span>
-                </Accordion.Trigger>
-              </Accordion.Header>
-              <Accordion.Content className="faq-content">
-                <div className="faq-answer">{item.a}</div>
-              </Accordion.Content>
-            </Accordion.Item>
-          ))}
-        </Accordion.Root>
+                </button>
+                {isOpen && (
+                  <div className="faq-content" data-state="open">
+                    <div className="faq-answer">{item.a}</div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
