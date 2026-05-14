@@ -25,6 +25,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlatformOsRouteImport } from './routes/platform.os'
 import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
+import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -106,6 +107,11 @@ const PlatformLaunchRoute = PlatformLaunchRouteImport.update({
   path: '/launch',
   getParentRoute: () => PlatformRoute,
 } as any)
+const PlatformFlowRoute = PlatformFlowRouteImport.update({
+  id: '/flow',
+  path: '/flow',
+  getParentRoute: () => PlatformRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
 }
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
 }
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/flow': typeof PlatformFlowRoute
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
 }
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/flow'
     | '/platform/launch'
     | '/platform/os'
   fileRoutesByTo: FileRoutesByTo
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/flow'
     | '/platform/launch'
     | '/platform/os'
   id:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/flow'
     | '/platform/launch'
     | '/platform/os'
   fileRoutesById: FileRoutesById
@@ -350,15 +362,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformLaunchRouteImport
       parentRoute: typeof PlatformRoute
     }
+    '/platform/flow': {
+      id: '/platform/flow'
+      path: '/flow'
+      fullPath: '/platform/flow'
+      preLoaderRoute: typeof PlatformFlowRouteImport
+      parentRoute: typeof PlatformRoute
+    }
   }
 }
 
 interface PlatformRouteChildren {
+  PlatformFlowRoute: typeof PlatformFlowRoute
   PlatformLaunchRoute: typeof PlatformLaunchRoute
   PlatformOsRoute: typeof PlatformOsRoute
 }
 
 const PlatformRouteChildren: PlatformRouteChildren = {
+  PlatformFlowRoute: PlatformFlowRoute,
   PlatformLaunchRoute: PlatformLaunchRoute,
   PlatformOsRoute: PlatformOsRoute,
 }
