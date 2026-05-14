@@ -26,7 +26,7 @@ function Page() {
           <p className="inner-lead">By accessing or using the Opsirix website or platform, you agree to be bound by these Terms of Service. If you do not agree, do not use the services.</p>
 
           <h2 className="inner-h2" style={{ marginTop: 48 }}>2. Not Legal or Professional Advice</h2>
-          <p className="inner-lead"><strong>Opsirix is an operations coordination platform. Opsirix is NOT a law firm, immigration advisor, CPA firm, accounting firm, or licensed professional services provider of any kind.</strong> Nothing on this website or in the platform constitutes legal, immigration, tax, accounting, or other professional advice. All regulated matters are handled by independently retained licensed professionals. Opsirix coordinates access to those professionals — it does not replace them.</p>
+          <p className="inner-lead"><strong>Opsirix is an operations coordination platform. Opsirix is NOT a law firm, immigration advisor, CPA firm, accounting firm, or licensed professional services provider of any kind.</strong> Nothing on this website or in the platform constitutes legal, immigration, tax, accounting, or other professional advice. All regulated matters are handled by independently retained licensed professionals. Opsirix coordinates access to those professionals, it does not replace them.</p>
 
           <h2 className="inner-h2" style={{ marginTop: 48 }}>3. Use of Services</h2>
           <p className="inner-lead">You agree to use the services only for lawful purposes and in accordance with these terms. You are responsible for the accuracy of information you provide and for maintaining the confidentiality of any account credentials.</p>

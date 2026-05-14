@@ -9,7 +9,7 @@ export const Route = createFileRoute("/early-stage-founders")({
       {
         name: "description",
         content:
-          "Opsirix gives pre-seed and seed founders the operational backbone funded companies take for granted — Vault, Flow, Nexus coordination, and a monthly Grid review.",
+          "Opsirix gives pre-seed and seed founders the operational backbone funded companies take for granted, Vault, Flow, Nexus coordination, and a monthly Grid review.",
       },
       { property: "og:title", content: "For Early-Stage Founders | Opsirix" },
       {
@@ -39,7 +39,7 @@ function Page() {
           <p className="inner-lead">
             From the day you incorporate, Opsirix organizes your formation documents, runs your weekly project board,
             coordinates the administrative logistics with your independently retained attorney and CPA, and scores your
-            operational readiness every month — so you stop being the human integration layer between disconnected tools
+            operational readiness every month, so you stop being the human integration layer between disconnected tools
             and people.
           </p>
         </div>

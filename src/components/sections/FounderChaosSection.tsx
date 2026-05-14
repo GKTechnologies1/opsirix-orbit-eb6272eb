@@ -27,7 +27,7 @@ const CARDS: Card[] = [
     emoji: "😰",
     title: "Compliance Anxiety",
     body:
-      "Not knowing if you are set up correctly is a real cost. Founders delay decisions, hesitate on hiring, and slow down — not from lack of ambition, but from unclear structure.",
+      "Not knowing if you are set up correctly is a real cost. Founders delay decisions, hesitate on hiring, and slow down, not from lack of ambition, but from unclear structure.",
     bar: "linear-gradient(90deg, #8B5CF6, #EC4899)",
   },
   {

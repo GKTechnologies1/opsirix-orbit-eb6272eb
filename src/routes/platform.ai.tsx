@@ -23,7 +23,7 @@ const CAPABILITIES = [
   { t: "Pattern recognition", d: "Recurring delays or gaps across months are identified so underlying issues can be addressed, not just individual tasks." },
   { t: "Next action suggestions", d: "Based on current document status, workflow activity, and Grid score, AI surfaces a short list of high-priority next actions." },
   { t: "Meeting preparation summaries", d: "Before a Grid review, attorney meeting, or CPA engagement, AI summarizes open items and relevant document status." },
-  { t: "Status summaries", d: "Founder status summaries generated from Flow activity, Vault status, and Nexus updates — reducing the time spent pulling information together." },
+  { t: "Status summaries", d: "Founder status summaries generated from Flow activity, Vault status, and Nexus updates, reducing the time spent pulling information together." },
 ];
 
 const NOT_DOES = [
@@ -63,7 +63,7 @@ function Page() {
         pageName="Platform → Opsirix AI"
         label="Platform Module"
         title="Smarter visibility into what needs attention."
-        subtitle="Opsirix AI works across the platform to surface patterns, flag gaps, and suggest next actions. It does not replace professional judgment — it makes the operational picture clearer so founders and professionals can act on it faster."
+        subtitle="Opsirix AI works across the platform to surface patterns, flag gaps, and suggest next actions. It does not replace professional judgment, it makes the operational picture clearer so founders and professionals can act on it faster."
       />
 
       <section className="inner-section">
@@ -81,8 +81,8 @@ function Page() {
           <p className="inner-eyebrow">The Problem</p>
           <h2 className="inner-h2">What gets missed when there is too much to track.</h2>
           <p className="inner-lead">
-            Founders miss document renewals not because they don't care — but because there is
-            no system watching for them. Tasks stay open not from lack of intention — but because
+            Founders miss document renewals not because they don't care, but because there is
+            no system watching for them. Tasks stay open not from lack of intention, but because
             the priority isn't visible. Opsirix AI is built to catch what falls through the cracks.
           </p>
         </div>

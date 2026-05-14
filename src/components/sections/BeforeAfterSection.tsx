@@ -4,21 +4,21 @@ import { motion } from "framer-motion";
 const ease = [0.4, 0, 0.2, 1] as const;
 
 const BEFORE = [
-  "Documents scattered across email, drives, and memory — impossible to find when asked",
+  "Documents scattered across email, drives, and memory, impossible to find when asked",
   "Attorney, CPA, and payroll operating in disconnected silos with zero coordination",
-  "No compliance calendar — deadlines discovered only when missed",
-  "Reactive execution — every week starts from zero because nothing was tracked",
-  "No operational readiness score — no way to know what investors or USCIS will find",
+  "No compliance calendar. Deadlines discovered only when they are missed.",
+  "Reactive execution: every week starts from zero because nothing was tracked.",
+  "No operational readiness score. No way to know what investors or auditors will find.",
   "Constant background anxiety about whether everything is structured correctly",
 ];
 
 const AFTER = [
-  "All critical documents organized in Opsirix Vault — encrypted, current, audit-ready in minutes",
-  "Attorney, CPA, and partner team coordinated through Opsirix Nexus — right timing, full preparation",
-  "Live compliance calendar — every deadline tracked, 90-day advance alerts, nothing missed",
-  "Monthly Opsirix Grid review — priorities set, progress tracked, score improving every quarter",
-  "Grid score 40+/50 — investor-ready operations with a complete evidence trail",
-  "Operational calmness — your systems are running. You focus entirely on building.",
+  "All critical documents organized in Opsirix Vault, encrypted, current, audit-ready in minutes",
+  "Attorney, CPA, and partner team coordinated through Opsirix Nexus, right timing, full preparation",
+  "Live compliance calendar, every deadline tracked, 90-day advance alerts, nothing missed",
+  "Monthly Opsirix Grid review, priorities set, progress tracked, score improving every quarter",
+  "Grid score of 40 or above means investor-ready operations with a complete evidence trail.",
+  "Operational calmness. Your systems are running. You focus entirely on building.",
 ];
 
 function CheckIcon({ delay }: { delay: number }) {

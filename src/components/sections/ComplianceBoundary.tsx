@@ -196,8 +196,8 @@ export function ComplianceBoundary() {
                   maxWidth: 440,
                 }}
               >
-                This separation is intentional. It keeps professional advice where it belongs — with
-                licensed professionals — while giving founders a clean operational system to manage
+                This separation is intentional. It keeps professional advice where it belongs, with
+                licensed professionals, while giving founders a clean operational system to manage
                 everything else.
               </p>
             </ScrollReveal>

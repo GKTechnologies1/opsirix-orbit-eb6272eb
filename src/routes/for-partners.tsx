@@ -33,9 +33,9 @@ const TYPES = [
 ];
 
 const STEPS = [
-  "Founder completes intake — operational situation documented.",
+  "Founder completes intake, operational situation documented.",
   "Opsirix identifies the right professional based on founder's needs.",
-  "Warm introduction made with context — documents prepared.",
+  "Warm introduction made with context, documents prepared.",
   "Professional engagement begins. Opsirix coordinates logistics.",
   "Ongoing coordination continues. Clear scope maintained.",
 ];
@@ -100,7 +100,7 @@ function Page() {
       <section className="inner-section alt">
         <div className="inner-wrap">
           <p className="inner-eyebrow">Scope Boundary</p>
-          <h2 className="inner-h2">Clear scope — what Opsirix does not provide.</h2>
+          <h2 className="inner-h2">Clear scope, what Opsirix does not provide.</h2>
           <p className="inner-lead">Opsirix does not provide legal advice, immigration advice, tax advice, accounting services, or any licensed professional services. Partners provide the professional advice. Opsirix provides the operational coordination layer. This boundary is maintained in every founder engagement.</p>
         </div>
       </section>

@@ -18,10 +18,10 @@ export const Route = createFileRoute("/platform/os")({
 });
 
 const FEATURES = [
-  { t: "Company profile overview", d: "Your entity details, founding date, key contacts, and company stage — visible from the main dashboard." },
-  { t: "Document status summary", d: "Vault readiness at a glance. Which documents are current, which need renewal, and what's missing — without opening folders." },
-  { t: "Workflow and task overview", d: "Active tasks, overdue items, and upcoming deadlines from Opsirix Flow — summarized on the dashboard." },
-  { t: "Partner coordination view", d: "Scheduled attorney and CPA interactions, pending handoffs, and Nexus activity — visible without logging into separate systems." },
+  { t: "Company profile overview", d: "Your entity details, founding date, key contacts, and company stage, visible from the main dashboard." },
+  { t: "Document status summary", d: "Vault readiness at a glance. Which documents are current, which need renewal, and what's missing, without opening folders." },
+  { t: "Workflow and task overview", d: "Active tasks, overdue items, and upcoming deadlines from Opsirix Flow, summarized on the dashboard." },
+  { t: "Partner coordination view", d: "Scheduled attorney and CPA interactions, pending handoffs, and Nexus activity, visible without logging into separate systems." },
   { t: "Compliance calendar", d: "Important dates, filing windows, and renewal reminders organized in one timeline." },
   { t: "Monthly operating snapshot", d: "Grid score, status report highlights, and the top priorities for the current month." },
 ];
@@ -70,7 +70,7 @@ function Page() {
         pageName="Platform → Opsirix OS"
         label="Platform Module"
         title="One dashboard for your entire operation."
-        subtitle="Opsirix OS gives founders a single, organized view of company documents, workflows, partner activity, compliance calendar, and operational health — without switching between scattered tools."
+        subtitle="Opsirix OS gives founders a single, organized view of company documents, workflows, partner activity, compliance calendar, and operational health, without switching between scattered tools."
       />
 
       <section className="inner-section">
@@ -155,7 +155,7 @@ function Page() {
           <p className="inner-lead" style={{ fontSize: 14, color: "#64748B" }}>
             Opsirix OS is an operational visibility tool. It does not provide legal, immigration,
             tax, or accounting advice. Information shown in the dashboard reflects operational
-            status only — not legal compliance certification.
+            status only, not legal compliance certification.
           </p>
         </div>
       </section>

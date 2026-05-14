@@ -63,7 +63,7 @@ const STEPS: Step[] = [
       "Attorney introduced through Nexus",
       "CPA/bookkeeper introduced",
       "Insurance partner introduced",
-      "All coordination is administrative — no legal advice",
+      "All coordination is administrative, no legal advice",
     ],
   },
   {

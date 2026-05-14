@@ -87,7 +87,7 @@ const FEATURES = [
   "Organizes your documents in Opsirix Vault. Audit-ready and accessible when you need them.",
   "Runs your operational rhythm through Opsirix Flow: weekly boards, task tracking, and scheduled reviews.",
   "Scores your operational health monthly across 5 dimensions with a 50-point readiness score.",
-  "Never gives legal, immigration, or tax advice — all regulated matters route to licensed professionals immediately",
+  "Never gives legal, immigration, or tax advice, all regulated matters route to licensed professionals immediately",
 ];
 
 const ease = [0.4, 0, 0.2, 1] as const;

@@ -27,7 +27,7 @@ const AUDIENCE = [
 const OFFERINGS = [
   { t: "Founder Readiness Workshops", d: "Practical sessions on startup documentation, workflow setup, and professional coordination for student founders. No legal advice. Operational foundations only." },
   { t: "Student Founder Documentation Checklists", d: "Custom checklists for student founders organizing their first startup: what to document, when to do it, and who needs to be involved." },
-  { t: "Operational Awareness Sessions", d: "Educational sessions helping student founders understand the difference between legal advice, tax advice, and operational coordination — and why it matters." },
+  { t: "Operational Awareness Sessions", d: "Educational sessions helping student founders understand the difference between legal advice, tax advice, and operational coordination, and why it matters." },
   { t: "Campus Partner Program", d: "Universities that partner with Opsirix gain access to branded founder resources, workshop materials, and a referral channel for their student founders." },
 ];
 

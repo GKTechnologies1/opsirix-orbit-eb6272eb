@@ -18,10 +18,10 @@ export const Route = createFileRoute("/platform/launch")({
 });
 
 const FEATURES = [
-  { t: "Founder intake and profile setup", d: "Your company details, founder background, and operational goals are documented at the start — not figured out later." },
-  { t: "Entity setup checklist", d: "Formation steps are organized into a tracked checklist. Opsirix does not provide formation services — it coordinates the documentation and professional handoff." },
+  { t: "Founder intake and profile setup", d: "Your company details, founder background, and operational goals are documented at the start, not figured out later." },
+  { t: "Entity setup checklist", d: "Formation steps are organized into a tracked checklist. Opsirix does not provide formation services, it coordinates the documentation and professional handoff." },
   { t: "EIN and banking readiness", d: "Checklists for EIN application and business banking setup are organized and tracked. Next steps are clear." },
-  { t: "Attorney and CPA handoff preparation", d: "Documents prepared for your first attorney and CPA engagement. Opsirix coordinates the introduction through Nexus — professionals serve you independently." },
+  { t: "Attorney and CPA handoff preparation", d: "Documents prepared for your first attorney and CPA engagement. Opsirix coordinates the introduction through Nexus, professionals serve you independently." },
   { t: "Initial document collection", d: "Formation documents, operating agreements, founder agreements, and initial contracts collected and organized in Vault." },
   { t: "Business profile in Opsirix OS", d: "Company details, contact list, and setup status available in the central dashboard from day one." },
   { t: "Launch timeline", d: "A structured timeline for the first 30 days of operational setup. Each task has a status and an owner." },
@@ -52,7 +52,7 @@ function Page() {
         pageName="Platform → Opsirix Launch"
         label="Platform Module"
         title="Get your startup structured from the beginning."
-        subtitle="Opsirix Launch organizes the operational side of going from idea to running company. Formation checklists, document collection, professional handoffs, and operational baseline — coordinated so nothing is missed."
+        subtitle="Opsirix Launch organizes the operational side of going from idea to running company. Formation checklists, document collection, professional handoffs, and operational baseline, coordinated so nothing is missed."
       />
 
       <section className="inner-section">
