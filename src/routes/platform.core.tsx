@@ -1,165 +1,201 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PageHeader } from "@/components/shared/PageHeader";
-import { CTASection } from "@/components/shared/CTASection";
-import { RelatedModules } from "@/components/shared/RelatedModules";
+import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
 export const Route = createFileRoute("/platform/core")({
   head: () => ({
     meta: [
       { title: "Opsirix Core | Managed Founder Operations Support" },
-      { name: "description", content: "Managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management." },
+      {
+        name: "description",
+        content:
+          "Opsirix Core provides managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management.",
+      },
       { property: "og:title", content: "Opsirix Core | Managed Founder Operations Support" },
-      { property: "og:description", content: "Managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management." },
+      {
+        property: "og:description",
+        content:
+          "Opsirix Core provides managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management.",
+      },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/core" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/core" }],
   }),
-  component: Page,
+  component: CorePage,
 });
 
 const FEATURES = [
-  { t: "Monthly founder operations review", d: "A dedicated monthly session covering all operational areas, documents, workflows, partner coordination, and readiness score." },
-  { t: "Task follow-up management", d: "Open tasks are actively followed up by the Opsirix team, not just tracked." },
-  { t: "Document follow-up", d: "Missing, expiring, or outdated documents are identified and founders are guided through collection." },
-  { t: "Partner coordination support", d: "Attorney, CPA, and partner scheduling and follow-up handled by the Opsirix team through Nexus." },
-  { t: "Operating checklist management", d: "Formation, financial, and ongoing operating checklists are managed and updated based on company progress." },
-  { t: "Founder Status Report", d: "Written monthly report covering operational score, key activities, open items, and priorities for the coming month." },
-  { t: "Meeting preparation", d: "Before attorney, CPA, or investor meetings, relevant documents and context are organized and a preparation summary is prepared." },
-  { t: "Communication coordination", d: "Professional correspondence tracked and followed up so nothing is missed." },
-  { t: "Business process organization", d: "Core business processes documented in Flow so the founder isn't the only system holding things together." },
+  { t: "Monthly founder operations review", d: "Dedicated monthly session covering all operational areas." },
+  { t: "Task follow-up management", d: "Open tasks actively followed up, not just tracked." },
+  { t: "Document follow-up", d: "Missing, expiring, or outdated documents identified and addressed." },
+  { t: "Partner coordination support", d: "Attorney, CPA, and partner scheduling handled through Nexus." },
+  { t: "Operating checklist management", d: "Formation and ongoing checklists managed and updated." },
+  { t: "Founder Status Report", d: "Written monthly report covering score, activities, and priorities." },
+  { t: "Meeting preparation", d: "Documents and context organized before attorney, CPA, or investor meetings." },
+  { t: "Communication coordination", d: "Professional correspondence tracked and followed up." },
+  { t: "Business process organization", d: "Core processes documented in Flow." },
 ];
 
-const AUDIENCE = [
-  "Active founders who don't have time to self-manage an operational platform",
-  "Immigrant founders with complex documentation and coordination needs",
-  "Companies in active growth, hiring, or fundraising that need operational support running continuously",
-  "Founders transitioning from unstructured to structured operations",
-  "Companies preparing for investor due diligence or regulatory review",
+const NOT_INCLUDES = [
+  "Legal advice, immigration advice, or legal document preparation.",
+  "Tax advice, accounting services, or CPA work.",
+  "USCIS filings or immigration case management.",
+  "Executive or strategic decision-making.",
+  "All regulated matters handled by independently retained licensed professionals through Nexus.",
 ];
 
-const NOT_INCLUDED = [
-  "Legal advice, immigration advice, or legal document preparation",
-  "Tax advice, accounting services, or CPA work",
-  "USCIS filings or immigration case management",
-  "Executive or strategic decision-making",
-  "Equity, investment, or venture services",
-];
+const CONNECTED = [
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Document follow-up runs through Vault." },
+  { icon: "⚡", name: "Opsirix Flow", to: "/platform/flow", desc: "Tasks actively managed in Flow." },
+  { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Partner scheduling handled via Nexus." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Monthly Grid review delivered as part of Core." },
+  { icon: "🖥️", name: "Opsirix OS", to: "/platform/os", desc: "Operations visible in the OS dashboard." },
+] as const;
 
-function Page() {
+function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inner-page">
-      <PageHeader
-        pageName="Platform → Opsirix Core"
-        label="Platform Module"
-        title="Operational support that actually runs alongside your startup."
-        subtitle="Opsirix Core is the managed operations layer. Instead of tools to manage yourself, you get a dedicated operational support structure: task follow-up, document coordination, partner management, and monthly reporting, actively handled."
-      />
+    <p
+      style={{
+        fontFamily: "var(--font-mono), 'JetBrains Mono', monospace",
+        fontSize: 11,
+        color: "#66C7F4",
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        margin: "0 0 12px",
+      }}
+    >
+      {children}
+    </p>
+  );
+}
 
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-            <Link to="/contact" className="btn-primary">Book a Discovery Call</Link>
-            <Link to="/platform" className="btn-secondary">See All Modules</Link>
-          </div>
+function CorePage() {
+  return (
+    <ModulePageLayout
+      moduleName="Opsirix Core"
+      moduleTag="Managed Operations"
+      moduleIcon="⚙️"
+      headline="Operational support that runs alongside your startup."
+      subtext="Opsirix Core is the managed operations layer. Instead of tools to manage yourself, you get a dedicated operational support structure: task follow-up, document coordination, partner management, and monthly reporting actively handled."
+    >
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>The Problem</Eyebrow>
+        <h2 className="module-section-h2">When self-managed tools are not enough.</h2>
+        <p style={{ maxWidth: 760, marginTop: 16 }}>
+          Some founders have the discipline to use a workflow system. Others are building a
+          company, managing a team, talking to investors, and handling customers, and there is
+          simply no time to self-manage an operational platform. Opsirix Core runs the operational
+          layer so you do not have to.
+        </p>
+      </div>
+
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>Capabilities</Eyebrow>
+        <h2 className="module-section-h2">What Opsirix Core provides.</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 18,
+            marginTop: 24,
+          }}
+        >
+          {FEATURES.map((f) => (
+            <div key={f.t} className="module-feature-card">
+              <h3>{f.t}</h3>
+              <p>{f.d}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">The Problem</p>
-          <h2 className="inner-h2">When self-managed tools aren't enough.</h2>
-          <p className="inner-lead">
-            Some founders have the discipline to use a workflow system. Others are building a
-            company, managing a team, talking to investors, and handling customers, and there is
-            simply no time to self-manage an operational platform. Opsirix Core is built for those
-            founders. It runs the operational layer so you don't have to.
-          </p>
-        </div>
-      </section>
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>Boundaries</Eyebrow>
+        <h2 className="module-section-h2">What Opsirix Core does not provide.</h2>
+        <ul style={{ listStyle: "none", padding: 0, margin: "24px 0 0", display: "flex", flexDirection: "column", gap: 10 }}>
+          {NOT_INCLUDES.map((s) => (
+            <li
+              key={s}
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 10,
+                padding: "14px 18px",
+                color: "#94A3B8",
+                fontSize: 14,
+                lineHeight: 1.65,
+              }}
+            >
+              {s}
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">What's Included</p>
-          <h2 className="inner-h2">What Opsirix Core provides.</h2>
-          <div className="inner-grid-2" style={{ marginTop: 36 }}>
-            {FEATURES.map((f) => (
-              <div key={f.t} className="inner-card">
-                <h3>{f.t}</h3>
-                <p>{f.d}</p>
+      <div
+        style={{
+          background: "rgba(102,199,244,0.06)",
+          border: "1px solid rgba(102,199,244,0.18)",
+          borderRadius: 16,
+          padding: 28,
+          marginBottom: 64,
+          textAlign: "center",
+        }}
+      >
+        <Link
+          to="/contact"
+          style={{
+            display: "inline-block",
+            background: "#66C7F4",
+            color: "#0B1220",
+            fontWeight: 700,
+            fontFamily: "Inter, sans-serif",
+            fontSize: 15,
+            padding: "14px 28px",
+            borderRadius: 10,
+            textDecoration: "none",
+          }}
+        >
+          Book a Discovery Call
+        </Link>
+      </div>
+
+      <div style={{ marginTop: 16 }}>
+        <h2 className="module-section-h2">Connects to.</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 18,
+            marginTop: 24,
+          }}
+        >
+          {CONNECTED.map((m) => (
+            <Link
+              key={m.name}
+              to={m.to}
+              className="module-feature-card"
+              style={{ display: "flex", flexDirection: "column", gap: 10, textDecoration: "none" }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">Who It's For</p>
-          <h2 className="inner-h2">Who Opsirix Core is built for.</h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gap: 18,
-              marginTop: 36,
-            }}
-          >
-            {AUDIENCE.map((a) => (
-              <div key={a} className="inner-card">
-                <p style={{ margin: 0 }}>{a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">Boundaries</p>
-          <h2 className="inner-h2">What Opsirix Core does not provide.</h2>
-          <div style={{ marginTop: 32, display: "flex", flexDirection: "column", gap: 10 }}>
-            {NOT_INCLUDED.map((n) => (
-              <div
-                key={n}
-                className="inner-card"
-                style={{ display: "flex", gap: 12, alignItems: "flex-start" }}
+              <p>{m.desc}</p>
+              <span
+                style={{
+                  marginTop: "auto",
+                  color: "#66C7F4",
+                  fontWeight: 600,
+                  fontSize: 13.5,
+                  fontFamily: "Inter, sans-serif",
+                }}
               >
-                <span style={{ color: "#0057D9", fontFamily: "var(--font-mono)", fontWeight: 700, flexShrink: 0 }}>
-                  ×
-                </span>
-                <p style={{ margin: 0 }}>{n}</p>
-              </div>
-            ))}
-          </div>
-          <p className="inner-lead" style={{ marginTop: 24, fontSize: 14, color: "#64748B" }}>
-            All regulated matters are handled by independently retained licensed professionals
-            through Opsirix Nexus.
-          </p>
+                Explore →
+              </span>
+            </Link>
+          ))}
         </div>
-      </section>
-
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-lead">
-            <strong>Connects to:</strong> Vault (document management), Flow (task management),
-            Nexus (partner coordination), Grid (monthly review), OS (dashboard and status), AI
-            (alerts and detection).
-          </p>
-        </div>
-      </section>
-
-      <section className="inner-section">
-        <div className="inner-wrap" style={{ textAlign: "center" }}>
-          <h2 className="inner-h2">Get operational support running alongside your startup.</h2>
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
-            <Link to="/contact" className="btn-primary">Book a Discovery Call</Link>
-            <Link to="/contact" className="btn-secondary">Start Founder Intake</Link>
-          </div>
-        </div>
-      </section>
-
-      <RelatedModules currentSlug="core" />
-      <CTASection />
-    </div>
+      </div>
+    </ModulePageLayout>
   );
 }

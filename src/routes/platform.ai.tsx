@@ -1,171 +1,203 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { PageHeader } from "@/components/shared/PageHeader";
-import { CTASection } from "@/components/shared/CTASection";
-import { RelatedModules } from "@/components/shared/RelatedModules";
+import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
 export const Route = createFileRoute("/platform/ai")({
   head: () => ({
     meta: [
-      { title: "Opsirix AI | Operational Intelligence for Founders" },
-      { name: "description", content: "Opsirix AI surfaces missing documents, workflow delays, and suggested next actions. Operational awareness without replacing professional judgment." },
-      { property: "og:title", content: "Opsirix AI | Operational Intelligence for Founders" },
-      { property: "og:description", content: "Opsirix AI surfaces missing documents, workflow delays, and suggested next actions. Operational awareness without replacing professional judgment." },
+      { title: "Opsirix AI | Operational Intelligence for Founder Operations" },
+      {
+        name: "description",
+        content:
+          "Opsirix AI surfaces missing documents, workflow delays, and suggested next actions for founders. Operational visibility without replacing professional judgment.",
+      },
+      { property: "og:title", content: "Opsirix AI | Operational Intelligence for Founder Operations" },
+      {
+        property: "og:description",
+        content:
+          "Opsirix AI surfaces missing documents, workflow delays, and suggested next actions for founders. Operational visibility without replacing professional judgment.",
+      },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/ai" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/ai" }],
   }),
-  component: Page,
+  component: AIPage,
 });
 
-const CAPABILITIES = [
-  { t: "Missing document detection", d: "When expected documents are absent from Vault, AI surfaces the gap with context about what is missing and why it matters." },
-  { t: "Workflow delay alerts", d: "Tasks that have been open longer than expected are flagged so they can be reviewed or reassigned." },
-  { t: "Pattern recognition", d: "Recurring delays or gaps across months are identified so underlying issues can be addressed, not just individual tasks." },
-  { t: "Next action suggestions", d: "Based on current document status, workflow activity, and Grid score, AI surfaces a short list of high-priority next actions." },
-  { t: "Meeting preparation summaries", d: "Before a Grid review, attorney meeting, or CPA engagement, AI summarizes open items and relevant document status." },
-  { t: "Status summaries", d: "Founder status summaries generated from Flow activity, Vault status, and Nexus updates, reducing the time spent pulling information together." },
+const FEATURES = [
+  { t: "Missing document detection", d: "When expected documents are absent, AI surfaces the gap." },
+  { t: "Workflow delay alerts", d: "Tasks open longer than expected are flagged for review." },
+  { t: "Pattern recognition", d: "Recurring delays or gaps across months identified." },
+  { t: "Next action suggestions", d: "Based on document status, workflow activity, and Grid score." },
+  { t: "Meeting preparation summaries", d: "Open items summarized before Grid reviews or partner meetings." },
+  { t: "Status summaries", d: "Founder status summaries generated from Flow, Vault, and Nexus updates." },
 ];
 
 const NOT_DOES = [
   "Opsirix AI does not provide legal advice.",
   "It does not provide immigration advice or visa guidance.",
-  "It does not provide tax advice or financial advice.",
-  "It does not provide accounting guidance.",
+  "It does not provide tax or financial advice.",
   "It does not replace attorney review of legal documents.",
   "It does not replace CPA review of financial or tax matters.",
   "AI output is for operational awareness only. All regulated matters require a licensed professional.",
 ];
 
-const AmberPill = () => (
-  <span
-    style={{
-      display: "inline-block",
-      background: "rgba(245,158,11,0.12)",
-      color: "#B45309",
-      padding: "4px 12px",
-      borderRadius: 100,
-      fontSize: 11,
-      fontFamily: "var(--font-mono)",
-      fontWeight: 600,
-      letterSpacing: "0.08em",
-      textTransform: "uppercase",
-      marginLeft: 10,
-    }}
-  >
-    Coming Soon
-  </span>
-);
+const CONNECTED = [
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "AI surfaces missing or expiring Vault documents." },
+  { icon: "⚡", name: "Opsirix Flow", to: "/platform/flow", desc: "AI flags workflow delays and overdue tasks." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "AI suggests priorities based on Grid score." },
+] as const;
 
-function Page() {
+function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="inner-page">
-      <PageHeader
-        pageName="Platform → Opsirix AI"
-        label="Platform Module"
-        title="Smarter visibility into what needs attention."
-        subtitle="Opsirix AI works across the platform to surface patterns, flag gaps, and suggest next actions. It does not replace professional judgment, it makes the operational picture clearer so founders and professionals can act on it faster."
-      />
+    <p
+      style={{
+        fontFamily: "var(--font-mono), 'JetBrains Mono', monospace",
+        fontSize: 11,
+        color: "#66C7F4",
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        margin: "0 0 12px",
+      }}
+    >
+      {children}
+    </p>
+  );
+}
 
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", alignItems: "center" }}>
-            <Link to="/contact" className="btn-primary">Book a Discovery Call</Link>
-            <Link to="/platform" className="btn-secondary">See All Modules</Link>
-            <AmberPill />
-          </div>
+function AIPage() {
+  return (
+    <ModulePageLayout
+      moduleName="Opsirix AI"
+      moduleTag="Intelligence Layer"
+      moduleIcon="🧠"
+      statusBadge="Coming Soon"
+      headline="Smarter visibility into what needs attention."
+      subtext="Opsirix AI surfaces patterns, flags gaps, and suggests next actions across the platform. It does not replace professional judgment. It makes the operational picture clearer so founders and professionals can act faster."
+    >
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>The Problem</Eyebrow>
+        <h2 className="module-section-h2">What gets missed when there is too much to track.</h2>
+        <p style={{ maxWidth: 760, marginTop: 16 }}>
+          Founders miss document renewals because there is no system watching for them. Tasks stay
+          open not from lack of intention but because the priority is not visible. Opsirix AI is
+          built to catch what falls through the cracks.
+        </p>
+      </div>
+
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>Capabilities</Eyebrow>
+        <h2 className="module-section-h2">What Opsirix AI does.</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 18,
+            marginTop: 24,
+          }}
+        >
+          {FEATURES.map((f) => (
+            <div key={f.t} className="module-feature-card">
+              <h3>{f.t}</h3>
+              <p>{f.d}</p>
+            </div>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">The Problem</p>
-          <h2 className="inner-h2">What gets missed when there is too much to track.</h2>
-          <p className="inner-lead">
-            Founders miss document renewals not because they don't care, but because there is
-            no system watching for them. Tasks stay open not from lack of intention, but because
-            the priority isn't visible. Opsirix AI is built to catch what falls through the cracks.
-          </p>
-        </div>
-      </section>
+      <div style={{ marginBottom: 64 }}>
+        <Eyebrow>Boundaries</Eyebrow>
+        <h2 className="module-section-h2">What Opsirix AI does not do.</h2>
+        <ul style={{ listStyle: "none", padding: 0, margin: "24px 0 0", display: "flex", flexDirection: "column", gap: 10 }}>
+          {NOT_DOES.map((s) => (
+            <li
+              key={s}
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: 10,
+                padding: "14px 18px",
+                color: "#94A3B8",
+                fontSize: 14,
+                lineHeight: 1.65,
+              }}
+            >
+              {s}
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">Capabilities</p>
-          <h2 className="inner-h2">What Opsirix AI does.</h2>
-          <div className="inner-grid-2" style={{ marginTop: 36 }}>
-            {CAPABILITIES.map((c) => (
-              <div key={c.t} className="inner-card">
-                <h3>{c.t}</h3>
-                <p>{c.d}</p>
+      <div
+        style={{
+          background: "rgba(102,199,244,0.06)",
+          border: "1px solid rgba(102,199,244,0.18)",
+          borderRadius: 16,
+          padding: 28,
+          marginBottom: 64,
+        }}
+      >
+        <h2 className="module-section-h2" style={{ marginTop: 0 }}>Human review is always required.</h2>
+        <p style={{ marginTop: 12, maxWidth: 760 }}>
+          Every AI output is a starting point, not a conclusion. Founders review AI-surfaced items.
+          Professionals review AI-prepared summaries. Nothing goes to a partner without human
+          review first.
+        </p>
+        <Link
+          to="/contact"
+          style={{
+            display: "inline-block",
+            marginTop: 18,
+            background: "#66C7F4",
+            color: "#0B1220",
+            fontWeight: 700,
+            fontFamily: "Inter, sans-serif",
+            fontSize: 15,
+            padding: "12px 24px",
+            borderRadius: 10,
+            textDecoration: "none",
+          }}
+        >
+          Book a Discovery Call
+        </Link>
+      </div>
+
+      <div style={{ marginTop: 16 }}>
+        <h2 className="module-section-h2">Connects to.</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 18,
+            marginTop: 24,
+          }}
+        >
+          {CONNECTED.map((m) => (
+            <Link
+              key={m.name}
+              to={m.to}
+              className="module-feature-card"
+              style={{ display: "flex", flexDirection: "column", gap: 10, textDecoration: "none" }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">Boundaries</p>
-          <h2 className="inner-h2">What Opsirix AI does not do.</h2>
-          <div style={{ marginTop: 32, display: "flex", flexDirection: "column", gap: 10 }}>
-            {NOT_DOES.map((n) => (
-              <div
-                key={n}
-                className="inner-card"
-                style={{ display: "flex", gap: 12, alignItems: "flex-start" }}
+              <p>{m.desc}</p>
+              <span
+                style={{
+                  marginTop: "auto",
+                  color: "#66C7F4",
+                  fontWeight: 600,
+                  fontSize: 13.5,
+                  fontFamily: "Inter, sans-serif",
+                }}
               >
-                <span style={{ color: "#0057D9", fontFamily: "var(--font-mono)", fontWeight: 700, flexShrink: 0 }}>
-                  ×
-                </span>
-                <p style={{ margin: 0 }}>{n}</p>
-              </div>
-            ))}
-          </div>
+                Explore →
+              </span>
+            </Link>
+          ))}
         </div>
-      </section>
-
-      <section className="inner-section">
-        <div className="inner-wrap">
-          <p className="inner-eyebrow">Human Review</p>
-          <h2 className="inner-h2">Human review is always required.</h2>
-          <p className="inner-lead">
-            Every AI-generated output in the Opsirix platform is a starting point, not a
-            conclusion. Founders review AI-surfaced items. Professionals review AI-prepared
-            summaries. Nothing goes to a partner or outside party without human review.
-          </p>
-        </div>
-      </section>
-
-      <section className="inner-section alt">
-        <div className="inner-wrap">
-          <p className="inner-lead" style={{ fontSize: 14, color: "#64748B" }}>
-            Opsirix AI is an operational intelligence tool. It is not a legal AI, immigration AI,
-            tax AI, or financial advice system. All AI outputs are operational in nature and must
-            be reviewed by the founder and relevant licensed professionals before action.
-          </p>
-          <p className="inner-lead" style={{ marginTop: 20 }}>
-            <strong>Connects to:</strong> Vault (document detection), Flow (task pattern
-            recognition), Grid (readiness trend analysis), Nexus (partner prep summaries), OS
-            (surfaced alerts in dashboard).
-          </p>
-        </div>
-      </section>
-
-      <section className="inner-section">
-        <div className="inner-wrap" style={{ textAlign: "center" }}>
-          <h2 className="inner-h2">Get early access to Opsirix AI.</h2>
-          <p className="inner-lead">
-            Opsirix AI is currently in development. Book a discovery call to learn about current
-            platform capabilities and the AI roadmap.
-          </p>
-          <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
-            <Link to="/contact" className="btn-primary">Book a Discovery Call</Link>
-          </div>
-        </div>
-      </section>
-
-      <RelatedModules currentSlug="ai" />
-      <CTASection />
-    </div>
+      </div>
+    </ModulePageLayout>
   );
 }
