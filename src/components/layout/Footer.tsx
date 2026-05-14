@@ -145,22 +145,15 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4" style={{ marginTop: 24 }}>
               <a
-                href="#"
+                href="https://linkedin.com/company/opsirix"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 style={{ color: "rgba(255,255,255,0.45)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
               >
                 <Linkedin size={18} />
-              </a>
-              <a
-                href="#"
-                aria-label="Twitter / X"
-                style={{ color: "rgba(255,255,255,0.45)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#fff")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.45)")}
-              >
-                <Twitter size={18} />
               </a>
             </div>
           </div>
