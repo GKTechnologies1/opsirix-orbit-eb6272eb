@@ -26,7 +26,7 @@ export const Route = createFileRoute("/faq")({
   component: Page,
 });
 
-type QA = { q: string; a: string };
+type QA = { q: string; a: string; link?: { to: string; label: string } };
 
 const ABOUT: QA[] = [
   { q: "What is Opsirix?", a: "Opsirix is a founder operations platform that helps early-stage and immigrant founders organize documents, manage workflows, coordinate professional partners, and track operational readiness. Opsirix is not a law firm, CPA firm, immigration consultancy, or licensed professional services provider." },
