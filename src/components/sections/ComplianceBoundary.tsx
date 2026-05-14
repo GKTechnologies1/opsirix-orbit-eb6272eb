@@ -165,8 +165,8 @@ export function ComplianceBoundary() {
                   margin: 0,
                 }}
               >
-                We coordinate.{" "}
-                <span className="gradient-text">Licensed professionals</span> advise.
+                What Opsirix does.{" "}
+                <span className="gradient-text">What licensed professionals</span> handle.
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.1}>
