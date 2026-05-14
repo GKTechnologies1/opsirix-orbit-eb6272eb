@@ -72,7 +72,7 @@ function Page() {
             </span>
           </div>
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 24 }}>
-            <Link to="/contact" search={{ type: "studio" }} className="btn-primary">
+            <a href="/contact?type=studio" className="btn-primary">
               Apply for Studio Evaluation
             </Link>
             <Link to="/platform" className="btn-secondary">See All Modules</Link>
@@ -174,7 +174,7 @@ function Page() {
             interested in Studio evaluation.
           </p>
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
-            <Link to="/contact" search={{ type: "studio" }} className="btn-primary">
+            <a href="/contact?type=studio" className="btn-primary">
               Apply for Studio Evaluation
             </Link>
             <Link to="/contact" className="btn-secondary">Book a Discovery Call</Link>
