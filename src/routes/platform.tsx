@@ -163,7 +163,7 @@ function Page() {
                 <span style={{ fontFamily: "var(--font-sora)", fontWeight: 700, color: "#071B33" }}>
                   Opsirix {c.to}
                 </span>
-                <span style={{ color: "#64748B", fontSize: 14 }}>— {c.note}</span>
+                <span style={{ color: "#64748B", fontSize: 14 }}>{c.note}</span>
               </div>
             ))}
           </div>
