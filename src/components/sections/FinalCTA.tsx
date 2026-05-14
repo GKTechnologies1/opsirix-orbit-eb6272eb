@@ -35,10 +35,10 @@ export function FinalCTA() {
           ))}
         </div>
 
-        <h2 className="cta-h2">Build with structure. Move with clarity.</h2>
+        <h2 className="cta-h2">Get your operations organized. Start today.</h2>
         <p className="cta-sub">
-          Your startup deserves an operational backbone from Day 1. Opsirix is the infrastructure
-          layer that makes it possible.
+          Document organization, workflow clarity, partner coordination. One platform, built for
+          serious founders.
         </p>
 
         <div className="cta-buttons">
@@ -50,7 +50,7 @@ export function FinalCTA() {
           </a>
         </div>
 
-        <div className="cta-fineprint">No commitment required. Discovery call is free.</div>
+        <div className="cta-fineprint">Free 30-minute discovery call. No commitment.</div>
       </div>
     </section>
   );
