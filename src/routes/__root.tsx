@@ -142,7 +142,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
                 url: "https://opsirix-orbit.lovable.app/contact",
               },
               sameAs: [
-                "https://linkedin.com/company/opsirix",
+                "https://www.linkedin.com/company/opsirix/",
                 "https://twitter.com/opsirix",
               ],
             },

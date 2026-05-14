@@ -145,7 +145,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4" style={{ marginTop: 24 }}>
               <a
-                href="https://linkedin.com/company/opsirix"
+                href="https://www.linkedin.com/company/opsirix/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
