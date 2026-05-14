@@ -18,6 +18,7 @@ function Index() {
       <OpsirixLayerSection />
       <BeforeAfterSection />
       <ServicesGrid />
+      <ComplianceBoundary />
     </main>
   );
 }
