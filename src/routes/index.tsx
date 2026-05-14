@@ -7,6 +7,7 @@ import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { ComplianceBoundary } from "@/components/sections/ComplianceBoundary";
 import { ImmigrantFounderSection } from "@/components/sections/ImmigrantFounderSection";
 import { PartnerEcosystem } from "@/components/sections/PartnerEcosystem";
+import { FounderJourneyTimeline } from "@/components/sections/FounderJourneyTimeline";
 
 export const Route = createFileRoute("/")({
   component: Index,
