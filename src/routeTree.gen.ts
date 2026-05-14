@@ -24,6 +24,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlatformOsRouteImport } from './routes/platform.os'
+import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -100,6 +101,11 @@ const PlatformOsRoute = PlatformOsRouteImport.update({
   path: '/os',
   getParentRoute: () => PlatformRoute,
 } as any)
+const PlatformLaunchRoute = PlatformLaunchRouteImport.update({
+  id: '/launch',
+  path: '/launch',
+  getParentRoute: () => PlatformRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
 }
 export interface FileRoutesByTo {
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
 }
 export interface FileRoutesById {
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/launch': typeof PlatformLaunchRoute
   '/platform/os': typeof PlatformOsRoute
 }
 export interface FileRouteTypes {
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/launch'
     | '/platform/os'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/launch'
     | '/platform/os'
   id:
     | '__root__'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/launch'
     | '/platform/os'
   fileRoutesById: FileRoutesById
 }
@@ -331,14 +343,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformOsRouteImport
       parentRoute: typeof PlatformRoute
     }
+    '/platform/launch': {
+      id: '/platform/launch'
+      path: '/launch'
+      fullPath: '/platform/launch'
+      preLoaderRoute: typeof PlatformLaunchRouteImport
+      parentRoute: typeof PlatformRoute
+    }
   }
 }
 
 interface PlatformRouteChildren {
+  PlatformLaunchRoute: typeof PlatformLaunchRoute
   PlatformOsRoute: typeof PlatformOsRoute
 }
 
 const PlatformRouteChildren: PlatformRouteChildren = {
+  PlatformLaunchRoute: PlatformLaunchRoute,
   PlatformOsRoute: PlatformOsRoute,
 }
 
