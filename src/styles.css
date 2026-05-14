@@ -1867,3 +1867,47 @@
   .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .partner-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
+
+/* ============================================================
+   Polish pass: tablet padding, FAQ hover, dashboard activity,
+   hero mesh on mobile, body min size, footer mobile alignment
+   ============================================================ */
+
+/* Body text min 15px on mobile */
+@media (max-width: 640px) {
+  body, p { font-size: 15px; }
+  .lead { font-size: 16px !important; line-height: 1.6 !important; }
+
+  /* Hero mesh: cap and re-flow below text */
+  .hero-mesh-wrap { max-width: 320px; margin: 24px auto 0; }
+  .hero-mesh-wrap > div { max-width: 320px !important; }
+}
+
+/* Hide mesh node labels on very small screens */
+@media (max-width: 480px) {
+  .mesh-node-label { display: none !important; }
+  .dash-activity, .dash-activity-label { display: none !important; }
+}
+
+/* Tablet section padding 80px */
+@media (min-width: 641px) and (max-width: 1024px) {
+  section { padding-top: 80px; padding-bottom: 80px; }
+  .dash-card { transform: scale(0.95); transform-origin: top center; }
+}
+
+/* FAQ subtle hover on trigger */
+.faq-trigger { transition: background-color 180ms ease; }
+.faq-trigger:hover { background: rgba(0,87,217,0.03); }
+.faq-trigger:focus-visible { outline: 2px solid #2F80ED; outline-offset: -2px; }
+
+/* macOS dots size */
+.dash-dot { width: 10px !important; height: 10px !important; border-radius: 50%; display: inline-block; }
+
+/* Footer mobile centering + spacing */
+@media (max-width: 640px) {
+  footer .grid > div { text-align: center; }
+  footer .grid > div + div { margin-top: 8px; }
+  footer h4 { margin-top: 16px; }
+  footer p { font-size: 11.5px !important; text-align: center !important; }
+  footer .flex.items-center.gap-4 { justify-content: center; }
+}

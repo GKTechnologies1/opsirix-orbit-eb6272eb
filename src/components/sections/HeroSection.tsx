@@ -20,7 +20,7 @@ export function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,87,217,0.22) 0%, transparent 65%)",
+            "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,87,217,0.14) 0%, transparent 65%)",
         }}
       />
       {/* Layer 3: fade to next section */}
@@ -53,7 +53,7 @@ export function HeroSection() {
           height: 700,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(0,87,217,0.2) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(0,87,217,0.14) 0%, transparent 65%)",
           top: -200,
           right: -150,
           animation: "glowPulse 7s ease-in-out infinite",
@@ -68,7 +68,7 @@ export function HeroSection() {
           height: 500,
           borderRadius: "50%",
           background:
-            "radial-gradient(circle, rgba(102,199,244,0.1) 0%, transparent 65%)",
+            "radial-gradient(circle, rgba(102,199,244,0.07) 0%, transparent 65%)",
           bottom: -100,
           left: -80,
           animation: "glowPulse 9s ease-in-out infinite reverse",
@@ -227,7 +227,7 @@ export function HeroSection() {
         </div>
 
         {/* RIGHT */}
-        <div className="hidden md:flex items-center justify-center hero-mesh-wrap">
+        <div className="flex items-center justify-center hero-mesh-wrap">
           <MeshOrchestrationVisual />
         </div>
       </div>
