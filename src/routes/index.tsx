@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { FounderChaosSection } from "@/components/sections/FounderChaosSection";
+import { OpsirixLayerSection } from "@/components/sections/OpsirixLayerSection";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -11,7 +12,9 @@ function Index() {
     <main style={{ backgroundColor: "var(--bg-primary)" }}>
       <HeroSection />
       <FounderChaosSection />
+      <OpsirixLayerSection />
     </main>
   );
 }
+
 
