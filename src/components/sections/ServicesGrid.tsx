@@ -192,7 +192,7 @@ export function ServicesGrid() {
                 marginTop: 12,
               }}
             >
-              Eight modules. One operating system. Start with what you need — expand as you grow.
+              Nine modules. One operating system. Start with what you need — expand as you grow.
             </p>
           </ScrollReveal>
         </div>
