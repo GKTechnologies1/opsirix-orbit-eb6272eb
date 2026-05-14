@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { CTASection } from "@/components/shared/CTASection";
+import { RelatedModules } from "@/components/shared/RelatedModules";
 
 export const Route = createFileRoute("/platform/vault")({
   head: () => ({
@@ -150,6 +151,7 @@ function Page() {
         </div>
       </section>
 
+      <RelatedModules currentSlug="vault" />
       <CTASection />
     </div>
   );
