@@ -26,8 +26,20 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showAnnouncement, setShowAnnouncement] = useState(false);
+  const [platformOpen, setPlatformOpen] = useState(false);
+  const [mobilePlatformOpen, setMobilePlatformOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  const openPlatform = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setPlatformOpen(true);
+  };
+  const scheduleClosePlatform = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setPlatformOpen(false), 120);
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
