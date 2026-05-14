@@ -20,7 +20,7 @@ export function HeroSection() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,87,217,0.22) 0%, transparent 65%)",
+            "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(0,87,217,0.14) 0%, transparent 65%)",
         }}
       />
       {/* Layer 3: fade to next section */}
