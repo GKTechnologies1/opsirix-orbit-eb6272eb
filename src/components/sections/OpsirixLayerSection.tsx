@@ -83,10 +83,10 @@ const ROWS: Row[] = [
 ];
 
 const FEATURES = [
-  "Coordinates your attorney, CPA, and professional team through Opsirix Nexus — without replacing them",
-  "Organizes your documents in Opsirix Vault — encrypted, compliance-calendar-driven, audit-ready in 5 minutes",
-  "Runs your operational rhythm via Opsirix Flow — weekly project boards, escalation tracking, cadence",
-  "Scores your operational health monthly — 5 dimensions, 50 points, investor-visible readiness",
+  "Coordinates your attorney, CPA, and professional team through Opsirix Nexus without replacing them",
+  "Organizes your documents in Opsirix Vault. Audit-ready and accessible when you need them.",
+  "Runs your operational rhythm through Opsirix Flow: weekly boards, task tracking, and scheduled reviews.",
+  "Scores your operational health monthly across 5 dimensions with a 50-point readiness score.",
   "Never gives legal, immigration, or tax advice — all regulated matters route to licensed professionals immediately",
 ];
 
