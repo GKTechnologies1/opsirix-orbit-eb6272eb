@@ -5,16 +5,16 @@ import { CTASection } from "@/components/shared/CTASection";
 export const Route = createFileRoute("/for-universities")({
   head: () => ({
     meta: [
-      { title: "For Universities | Opsirix Founder Infrastructure" },
+      { title: "University Partnerships | Opsirix Founder Operations Programs" },
       {
         name: "description",
         content:
-          "Bring operational infrastructure to your alumni and student founders. Opsirix complements university entrepreneurship programs with Vault, Flow, Nexus, and Grid.",
+          "Opsirix partners with universities, entrepreneurship centers, and international student offices. Operational workshops, founder readiness programs, and campus resources.",
       },
-      { property: "og:title", content: "For Universities | Opsirix Founder Infrastructure" },
+      { property: "og:title", content: "University Partnerships | Opsirix Founder Operations Programs" },
       {
         property: "og:description",
-        content: "Operational infrastructure for university and program founders.",
+        content: "Opsirix partners with universities, entrepreneurship centers, and international student offices. Operational workshops, founder readiness programs, and campus resources.",
       },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/for-universities" },
     ],

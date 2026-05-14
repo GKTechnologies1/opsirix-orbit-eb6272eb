@@ -16,17 +16,17 @@ import { FinalCTA } from "@/components/sections/FinalCTA";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Opsirix — The Operational Backbone for Founders" },
+      { title: "Opsirix — Founder Operations Platform for Startups" },
       {
         name: "description",
         content:
-          "Opsirix is the Founder Operations OS. Workflow orchestration, document intelligence, and partner coordination for early-stage, immigrant, and technical founders.",
+          "Opsirix organizes documents, workflows, and partner coordination for early-stage and immigrant founders. Structure your startup operations from day one.",
       },
-      { property: "og:title", content: "Opsirix — The Operational Backbone for Founders" },
+      { property: "og:title", content: "Opsirix — Founder Operations Platform for Startups" },
       {
         property: "og:description",
         content:
-          "Turn founder chaos into structured execution. Workflow orchestration, document intelligence, and partner coordination for founders.",
+          "Opsirix organizes documents, workflows, and partner coordination for early-stage and immigrant founders. Structure your startup operations from day one.",
       },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/" },
     ],

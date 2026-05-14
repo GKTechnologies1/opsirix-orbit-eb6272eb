@@ -4,17 +4,17 @@ import { ContactForm } from "@/components/sections/ContactForm";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Book a Discovery Call | Opsirix Founder Infrastructure" },
+      { title: "Book a Discovery Call | Opsirix Founder Operations" },
       {
         name: "description",
         content:
-          "Schedule your 30-minute Opsirix Discovery Call. Complete the 15-minute intake form and we'll match you to the right platform tier within 1 business day.",
+          "Schedule your free 30-minute Opsirix Discovery Call. Complete the founder intake form and we will match you to the right operational support within one business day.",
       },
-      { property: "og:title", content: "Book a Discovery Call | Opsirix Founder Infrastructure" },
+      { property: "og:title", content: "Book a Discovery Call | Opsirix Founder Operations" },
       {
         property: "og:description",
         content:
-          "Schedule your 30-minute Opsirix Discovery Call. Complete the 15-minute intake form and we'll match you to the right platform tier within 1 business day.",
+          "Schedule your free 30-minute Opsirix Discovery Call. Complete the founder intake form and we will match you to the right operational support within one business day.",
       },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/contact" },
     ],

@@ -6,10 +6,10 @@ import { CTASection } from "@/components/shared/CTASection";
 export const Route = createFileRoute("/for-partners")({
   head: () => ({
     meta: [
-      { title: "Partner With Opsirix | Nexus Partner Network" },
-      { name: "description", content: "Join the Opsirix Nexus partner network — receive warm referrals from organized, audit-ready founders. Built for attorneys, CPAs, banks, insurers, universities, and technology partners." },
-      { property: "og:title", content: "Partner With Opsirix | Nexus Partner Network" },
-      { property: "og:description", content: "Join the Opsirix Nexus partner network." },
+      { title: "Partner With Opsirix | Nexus Partner Network for Attorneys and CPAs" },
+      { name: "description", content: "Join the Opsirix Nexus partner network. Get referrals to organized, prepared founders. Work with clients who have their operational documents ready." },
+      { property: "og:title", content: "Partner With Opsirix | Nexus Partner Network for Attorneys and CPAs" },
+      { property: "og:description", content: "Join the Opsirix Nexus partner network. Get referrals to organized, prepared founders. Work with clients who have their operational documents ready." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/for-partners" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/for-partners" }],

@@ -5,10 +5,10 @@ import { CTASection } from "@/components/shared/CTASection";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Platform Services | Opsirix Founder Infrastructure" },
-      { name: "description", content: "Everything in the Opsirix platform — Vault, Flow, Nexus, Grid, Founder Status Report, Compliance Calendar, Onboarding, and the Founder Dashboard." },
-      { property: "og:title", content: "Platform Services | Opsirix Founder Infrastructure" },
-      { property: "og:description", content: "Everything in the Opsirix platform — eight modules and four tiers." },
+      { title: "Opsirix Platform Services | Founder Operations Modules" },
+      { name: "description", content: "Opsirix Launch, Flow, Vault, Nexus, Grid, Core, and AI — the full suite of founder operations tools built for early-stage and immigrant startups." },
+      { property: "og:title", content: "Opsirix Platform Services | Founder Operations Modules" },
+      { property: "og:description", content: "Opsirix Launch, Flow, Vault, Nexus, Grid, Core, and AI — the full suite of founder operations tools built for early-stage and immigrant startups." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/services" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/services" }],
