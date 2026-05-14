@@ -172,8 +172,8 @@ export function HeroSection() {
               margin: "0 0 36px",
             }}
           >
-            Opsirix connects workflows, documentation, partners, and operational systems into one
-            structured execution layer — so founders can build with clarity.
+            Opsirix gives founders one organized place to manage documents, workflows, partner
+            communication, and operating decisions. Build with structure from day one.
           </motion.p>
 
           {/* CTAs */}
