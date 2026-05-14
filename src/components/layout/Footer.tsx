@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Linkedin, Twitter } from "lucide-react";
+import { Linkedin } from "lucide-react";
 import { OpsirixLogo, OpsirixWordmark } from "./OpsirixLogo";
 
 type FooterLink = { label: string; to?: string; href?: string; soon?: boolean };
@@ -218,7 +218,7 @@ export function Footer() {
               flexShrink: 0,
             }}
           >
-            © 2025 Opsirix
+            © 2026 Opsirix
           </p>
         </div>
       </div>
