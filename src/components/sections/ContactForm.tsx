@@ -6,14 +6,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
 
 const schema = z.object({
-  name: z.string().min(2, "Name required"),
-  email: z.string().email("Valid email required"),
-  phone: z.string().optional(),
-  company: z.string().optional(),
+  name: z.string().min(2, "Name required").max(120),
+  email: z.string().email("Valid email required").max(255),
+  phone: z.string().max(40).optional(),
+  company: z.string().max(150).optional(),
   founderType: z.string().min(1, "Please select your founder type"),
   companyStage: z.string().min(1, "Please select your company stage"),
-  helpNeeded: z.string().min(20, "Please describe your situation (20 chars min)"),
+  visaStatus: z.string().max(120).optional(),
+  hasAttorney: z.enum(["yes", "no"], { required_error: "Required" }),
+  hasCPA: z.enum(["yes", "no"], { required_error: "Required" }),
+  hasEntity: z.enum(["yes", "no"], { required_error: "Required" }),
+  helpNeeded: z.string().min(20, "Please describe your situation (20 chars min)").max(2000),
   meetingTime: z.string().optional(),
+  consent: z.literal(true, { errorMap: () => ({ message: "You must agree to continue" }) }),
 });
 
 type FormData = z.infer<typeof schema>;
