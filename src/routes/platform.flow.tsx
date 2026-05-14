@@ -8,13 +8,13 @@ export const Route = createFileRoute("/platform/flow")({
       {
         name: "description",
         content:
-          "Opsirix Flow organizes tasks, reminders, partner handoffs, and recurring workflows for founders. Know what needs to happen, who owns it, and what is overdue.",
+          "Organize tasks, reminders, partner handoffs, and recurring workflows. Know what needs to happen, who owns it, and what is overdue.",
       },
       { property: "og:title", content: "Opsirix Flow | Founder Workflow Engine" },
       {
         property: "og:description",
         content:
-          "Opsirix Flow organizes tasks, reminders, partner handoffs, and recurring workflows for founders. Know what needs to happen, who owns it, and what is overdue.",
+          "Organize tasks, reminders, partner handoffs, and recurring workflows. Know what needs to happen, who owns it, and what is overdue.",
       },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/flow" },
     ],

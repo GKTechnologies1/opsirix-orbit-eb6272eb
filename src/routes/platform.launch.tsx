@@ -8,13 +8,13 @@ export const Route = createFileRoute("/platform/launch")({
       {
         name: "description",
         content:
-          "Opsirix Launch helps founders coordinate the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions.",
+          "Coordinate the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions.",
       },
       { property: "og:title", content: "Opsirix Launch | Startup Formation Workflow Coordination" },
       {
         property: "og:description",
         content:
-          "Opsirix Launch helps founders coordinate the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions.",
+          "Coordinate the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions.",
       },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/launch" },
     ],

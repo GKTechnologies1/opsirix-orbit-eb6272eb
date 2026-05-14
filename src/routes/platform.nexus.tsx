@@ -8,13 +8,13 @@ export const Route = createFileRoute("/platform/nexus")({
       {
         name: "description",
         content:
-          "Opsirix Nexus connects founders to attorneys, CPAs, insurance partners, and banking contacts with organized intake, warm introductions, and clear boundaries.",
+          "Connect to attorneys, CPAs, insurance, and banking partners with organized intake, warm introductions, and clear professional boundaries.",
       },
       { property: "og:title", content: "Opsirix Nexus | Professional Partner Coordination Network" },
       {
         property: "og:description",
         content:
-          "Opsirix Nexus connects founders to attorneys, CPAs, insurance partners, and banking contacts with organized intake, warm introductions, and clear boundaries.",
+          "Connect to attorneys, CPAs, insurance, and banking partners with organized intake, warm introductions, and clear professional boundaries.",
       },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/nexus" },
     ],

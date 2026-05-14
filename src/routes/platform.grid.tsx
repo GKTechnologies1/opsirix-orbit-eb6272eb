@@ -8,13 +8,13 @@ export const Route = createFileRoute("/platform/grid")({
       {
         name: "description",
         content:
-          "Monthly operational readiness score across ten categories for early-stage founders. Know where your company is strong, what needs attention, and what to do next.",
+          "Monthly operational readiness score across ten categories. Know where your company is strong and what needs attention next.",
       },
       { property: "og:title", content: "Opsirix Grid | Operational Readiness Score for Founders" },
       {
         property: "og:description",
         content:
-          "Monthly operational readiness score across ten categories for early-stage founders. Know where your company is strong, what needs attention, and what to do next.",
+          "Monthly operational readiness score across ten categories. Know where your company is strong and what needs attention next.",
       },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/grid" },
     ],
