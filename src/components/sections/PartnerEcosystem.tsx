@@ -90,7 +90,7 @@ export function PartnerEcosystem() {
             <div>
               <div className="partner-banner-label">JOIN THE NETWORK</div>
               <h3 className="partner-banner-h3">
-                Are you an attorney, CPA, university, or bank that works with founders?
+                Work with founders? Join the Opsirix Nexus network.
               </h3>
               <p className="partner-banner-body">
                 Join the Opsirix Nexus partner network. Receive warm referrals from organized, audit-ready founders who are ready to work with you.
