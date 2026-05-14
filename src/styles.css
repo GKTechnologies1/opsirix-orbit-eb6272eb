@@ -1955,3 +1955,6 @@
   transition: background 180ms ease, border-color 180ms ease;
 }
 .btn-secondary:hover { background: rgba(0,87,217,0.06); border-color: #0057D9; }
+
+.inline-link { color: #0057D9; text-decoration: underline; text-underline-offset: 2px; transition: color 180ms; }
+.inline-link:hover { color: #2F80ED; }
