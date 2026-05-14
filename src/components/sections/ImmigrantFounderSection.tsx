@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 type FeaturePoint = {
