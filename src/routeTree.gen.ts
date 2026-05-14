@@ -23,6 +23,7 @@ import { Route as EarlyStageFoundersRouteImport } from './routes/early-stage-fou
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlatformOsRouteImport } from './routes/platform.os'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -94,6 +95,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlatformOsRoute = PlatformOsRouteImport.update({
+  id: '/os',
+  path: '/os',
+  getParentRoute: () => PlatformRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -105,11 +111,12 @@ export interface FileRoutesByFullPath {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
-  '/platform': typeof PlatformRoute
+  '/platform': typeof PlatformRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/os': typeof PlatformOsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -121,11 +128,12 @@ export interface FileRoutesByTo {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
-  '/platform': typeof PlatformRoute
+  '/platform': typeof PlatformRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/os': typeof PlatformOsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -138,11 +146,12 @@ export interface FileRoutesById {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
-  '/platform': typeof PlatformRoute
+  '/platform': typeof PlatformRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/platform/os': typeof PlatformOsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -161,6 +170,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/os'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -177,6 +187,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/os'
   id:
     | '__root__'
     | '/'
@@ -193,6 +204,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/platform/os'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -205,7 +217,7 @@ export interface RootRouteChildren {
   ForUniversitiesRoute: typeof ForUniversitiesRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ImmigrantFoundersRoute: typeof ImmigrantFoundersRoute
-  PlatformRoute: typeof PlatformRoute
+  PlatformRoute: typeof PlatformRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -312,8 +324,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/platform/os': {
+      id: '/platform/os'
+      path: '/os'
+      fullPath: '/platform/os'
+      preLoaderRoute: typeof PlatformOsRouteImport
+      parentRoute: typeof PlatformRoute
+    }
   }
 }
+
+interface PlatformRouteChildren {
+  PlatformOsRoute: typeof PlatformOsRoute
+}
+
+const PlatformRouteChildren: PlatformRouteChildren = {
+  PlatformOsRoute: PlatformOsRoute,
+}
+
+const PlatformRouteWithChildren = PlatformRoute._addFileChildren(
+  PlatformRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -325,7 +356,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForUniversitiesRoute: ForUniversitiesRoute,
   HowItWorksRoute: HowItWorksRoute,
   ImmigrantFoundersRoute: ImmigrantFoundersRoute,
-  PlatformRoute: PlatformRoute,
+  PlatformRoute: PlatformRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
