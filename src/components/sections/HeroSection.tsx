@@ -227,7 +227,7 @@ export function HeroSection() {
         </div>
 
         {/* RIGHT */}
-        <div className="hidden lg:flex items-center justify-center">
+        <div className="hidden md:flex items-center justify-center hero-mesh-wrap">
           <MeshOrchestrationVisual />
         </div>
       </div>
