@@ -176,7 +176,7 @@ function Page() {
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", marginTop: 28 }}>
             <a href="/contact?type=studio" className="btn-primary">
               Apply for Studio Evaluation
-            </Link>
+            </a>
             <Link to="/contact" className="btn-secondary">Book a Discovery Call</Link>
           </div>
         </div>
