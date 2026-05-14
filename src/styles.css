@@ -1985,25 +1985,9 @@
     align-items: center;
   }
 
-  /* ---- Hero: show mesh visual scaled down (override earlier display:none) ---- */
-  .hero-mesh-wrap {
-    display: flex !important;
-    max-width: 340px;
-    margin: 24px auto 0 !important;
-  }
-  .hero-mesh-wrap > div { max-width: 340px !important; transform: scale(0.92); transform-origin: center; }
-
-  /* Hero H1 per spec */
-  section h1.opsirix h1, section h1 {
-    font-size: clamp(34px, 8.5vw, 52px) !important;
-  }
-
-  /* Floating orbs: shrink ~40% on mobile (target hero glow orbs) */
-  section[style*="100svh"] > div[aria-hidden][style*="border-radius: 50%"],
-  section[style*="100svh"] > div[aria-hidden][style*="borderRadius"] {
-    transform: scale(0.6);
-    transform-origin: center;
-  }
+  /* ---- Hero H1 per spec ---- */
+  section h1 { font-size: clamp(34px, 8.5vw, 52px) !important; }
+  /* Hero mesh stays hidden on small mobile (per earlier rule); shown 400-640 via wrap */
 
   /* ---- Chaos cards: padding 20px 18px, emoji 26px ---- */
   .founder-chaos-card { padding: 20px 18px !important; }
