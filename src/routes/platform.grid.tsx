@@ -27,7 +27,7 @@ const CATEGORIES = [
   { t: "Founder role clarity", d: "Is the founder's operational role documented and clear?" },
   { t: "Vendor and account setup", d: "Are business software, vendors, and service accounts set up and documented?" },
   { t: "Insurance and risk readiness", d: "Does the company have appropriate business insurance for its stage?" },
-  { t: "Growth readiness", d: "Is the company operationally ready for the next phase — hiring, fundraising, or expansion?" },
+  { t: "Growth readiness", d: "Is the company operationally ready for the next phase, hiring, fundraising, or expansion?" },
 ];
 
 const STEPS = [
@@ -73,7 +73,7 @@ function Page() {
             Ask a founder how their operations are doing. Most will say "fine" or "pretty good."
             Ask them to show you their document readiness, compliance calendar, vendor setup, or
             insurance status. Most won't have a clear answer. Without structure, founders have
-            opinions about their operational health — not data.
+            opinions about their operational health, not data.
           </p>
         </div>
       </section>

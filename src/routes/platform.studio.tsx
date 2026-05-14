@@ -19,7 +19,7 @@ export const Route = createFileRoute("/platform/studio")({
 
 const FEATURES = [
   { t: "Venture readiness review", d: "A structured review of the company's operational, financial, and business maturity against venture-stage requirements." },
-  { t: "Investor documentation preparation", d: "Data room organization, founder narrative support, and investor-ready document preparation — coordinated through Vault." },
+  { t: "Investor documentation preparation", d: "Data room organization, founder narrative support, and investor-ready document preparation, coordinated through Vault." },
   { t: "Business model review", d: "Structured review of the business model, unit economics, and growth assumptions with the Opsirix team and relevant advisors." },
   { t: "Strategic partner coordination", d: "Introductions and coordination with strategic advisors, potential investors, and ecosystem partners through Nexus." },
   { t: "Operational maturity review", d: "A deep Grid review assessing readiness across all operational categories with recommendations for investor-readiness gaps." },
@@ -38,8 +38,8 @@ const NOT_DOES = [
   "Opsirix Studio does not guarantee investment or funding.",
   "Opsirix does not invest in every company that applies.",
   "Studio is not an accelerator with guaranteed program placement.",
-  "Legal, immigration, tax, and financial advice are handled by independent licensed professionals — not Opsirix Studio.",
-  "Studio is a selective operational and strategic support engagement — not a commitment of capital or resources beyond the scope agreed in engagement.",
+  "Legal, immigration, tax, and financial advice are handled by independent licensed professionals, not Opsirix Studio.",
+  "Studio is a selective operational and strategic support engagement, not a commitment of capital or resources beyond the scope agreed in engagement.",
 ];
 
 function Page() {
@@ -88,7 +88,7 @@ function Page() {
           <p className="inner-lead">
             Opsirix Studio is selective. Not every founder qualifies. Founders who enter Studio
             already have organized operations, clear documentation, demonstrated execution, and a
-            serious business. Studio helps them prepare for the next level — not build the
+            serious business. Studio helps them prepare for the next level, not build the
             foundation they should already have.
           </p>
         </div>
@@ -114,7 +114,7 @@ function Page() {
           <p className="inner-eyebrow">Qualification Criteria</p>
           <h2 className="inner-h2">Who qualifies for Opsirix Studio.</h2>
           <p className="inner-lead">
-            Founders must demonstrate operational maturity — organized documents, active workflows,
+            Founders must demonstrate operational maturity, organized documents, active workflows,
             professional relationships in place, and a serious business with real traction or clear
             growth potential.
           </p>

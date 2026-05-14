@@ -20,10 +20,10 @@ export const Route = createFileRoute("/platform/vault")({
 const CATEGORIES = [
   { t: "Company Formation Records", d: "Articles of incorporation, operating agreement, founder agreements, EIN letter, state registration documents." },
   { t: "Financial and Banking Documents", d: "Business bank account records, bookkeeping setup, tax identification documents, financial statements when available." },
-  { t: "Attorney and Legal Correspondence", d: "Engagement letters, correspondence, legal opinions (held by founder — not provided by Opsirix), contracts and agreements." },
+  { t: "Attorney and Legal Correspondence", d: "Engagement letters, correspondence, legal opinions (held by founder, not provided by Opsirix), contracts and agreements." },
   { t: "Compliance-Related Documentation", d: "Compliance calendar events, important notices, renewal documents, filing confirmations. No legal advice provided." },
   { t: "Vendor and Service Provider Records", d: "Software subscriptions, service agreements, vendor contracts, insurance certificates." },
-  { t: "Partner Handoff Packets", d: "Document sets prepared for attorney or CPA engagements — organized by Opsirix, reviewed by the relevant licensed professional." },
+  { t: "Partner Handoff Packets", d: "Document sets prepared for attorney or CPA engagements, organized by Opsirix, reviewed by the relevant licensed professional." },
   { t: "Employment and People Documents", d: "Offer letters, contractor agreements, non-disclosure agreements, HR records when applicable." },
 ];
 
@@ -49,7 +49,7 @@ function Page() {
         pageName="Platform → Opsirix Vault"
         label="Platform Module"
         title="Stop losing documents across email and random folders."
-        subtitle="Opsirix Vault is the document organization layer of the platform. Formation papers, attorney correspondence, financial records, and operational documents — organized, labeled, and ready when you need them."
+        subtitle="Opsirix Vault is the document organization layer of the platform. Formation papers, attorney correspondence, financial records, and operational documents, organized, labeled, and ready when you need them."
       />
 
       <section className="inner-section">

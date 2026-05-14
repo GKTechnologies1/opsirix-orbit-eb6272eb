@@ -75,7 +75,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Opsirix — The Operational Backbone for Founders" },
+      { title: "Opsirix - The Operational Backbone for Founders" },
       {
         name: "description",
         content:
@@ -91,7 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       // Open Graph defaults
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Opsirix" },
-      { property: "og:title", content: "Opsirix — The Operational Backbone for Founders" },
+      { property: "og:title", content: "Opsirix - The Operational Backbone for Founders" },
       {
         property: "og:description",
         content:
@@ -101,12 +101,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://opsirix-orbit.lovable.app/og-default.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Opsirix — Founder Infrastructure Platform" },
+      { property: "og:image:alt", content: "Opsirix - Founder Infrastructure Platform" },
       // Twitter
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@opsirix" },
       { name: "twitter:creator", content: "@opsirix" },
-      { name: "twitter:title", content: "Opsirix — Founder Operations OS" },
+      { name: "twitter:title", content: "Opsirix - Founder Operations OS" },
       { name: "twitter:description", content: "Turn founder chaos into structured execution." },
       { name: "twitter:image", content: "https://opsirix-orbit.lovable.app/og-default.png" },
     ],

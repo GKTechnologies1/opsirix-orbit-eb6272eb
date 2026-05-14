@@ -49,7 +49,7 @@ function Page() {
         pageName="Platform → Opsirix Nexus"
         label="Platform Module"
         title="The right professional, at the right time, with the right information."
-        subtitle="Opsirix Nexus coordinates the relationship between founders and their licensed professional partners. Scheduling, document preparation, and follow-through — so founders arrive prepared and professionals receive organized clients."
+        subtitle="Opsirix Nexus coordinates the relationship between founders and their licensed professional partners. Scheduling, document preparation, and follow-through, so founders arrive prepared and professionals receive organized clients."
       />
 
       <section className="inner-section">

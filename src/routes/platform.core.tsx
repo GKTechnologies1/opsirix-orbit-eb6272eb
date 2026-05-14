@@ -18,8 +18,8 @@ export const Route = createFileRoute("/platform/core")({
 });
 
 const FEATURES = [
-  { t: "Monthly founder operations review", d: "A dedicated monthly session covering all operational areas — documents, workflows, partner coordination, and readiness score." },
-  { t: "Task follow-up management", d: "Open tasks are actively followed up by the Opsirix team — not just tracked." },
+  { t: "Monthly founder operations review", d: "A dedicated monthly session covering all operational areas, documents, workflows, partner coordination, and readiness score." },
+  { t: "Task follow-up management", d: "Open tasks are actively followed up by the Opsirix team, not just tracked." },
   { t: "Document follow-up", d: "Missing, expiring, or outdated documents are identified and founders are guided through collection." },
   { t: "Partner coordination support", d: "Attorney, CPA, and partner scheduling and follow-up handled by the Opsirix team through Nexus." },
   { t: "Operating checklist management", d: "Formation, financial, and ongoing operating checklists are managed and updated based on company progress." },
@@ -52,7 +52,7 @@ function Page() {
         pageName="Platform → Opsirix Core"
         label="Platform Module"
         title="Operational support that actually runs alongside your startup."
-        subtitle="Opsirix Core is the managed operations layer. Instead of tools to manage yourself, you get a dedicated operational support structure: task follow-up, document coordination, partner management, and monthly reporting — actively handled."
+        subtitle="Opsirix Core is the managed operations layer. Instead of tools to manage yourself, you get a dedicated operational support structure: task follow-up, document coordination, partner management, and monthly reporting, actively handled."
       />
 
       <section className="inner-section">
@@ -70,7 +70,7 @@ function Page() {
           <h2 className="inner-h2">When self-managed tools aren't enough.</h2>
           <p className="inner-lead">
             Some founders have the discipline to use a workflow system. Others are building a
-            company, managing a team, talking to investors, and handling customers — and there is
+            company, managing a team, talking to investors, and handling customers, and there is
             simply no time to self-manage an operational platform. Opsirix Core is built for those
             founders. It runs the operational layer so you don't have to.
           </p>

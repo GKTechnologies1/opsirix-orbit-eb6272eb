@@ -12,7 +12,7 @@ const POINTS: FeaturePoint[] = [
   {
     icon: "📁",
     title: "Document organization that matters",
-    body: "Your Opsirix Vault organizes visa documents, formation records, attorney letters, and compliance evidence — all current, all accessible, all protected.",
+    body: "Your Opsirix Vault organizes visa documents, formation records, attorney letters, and compliance evidence, all current, all accessible, all protected.",
   },
   {
     icon: "🔗",
@@ -22,7 +22,7 @@ const POINTS: FeaturePoint[] = [
   {
     icon: "📊",
     title: "Operational calmness in high-stakes environments",
-    body: "When every decision may touch documentation, timing, and professional guidance — an organized operational system is not optional. It is the foundation.",
+    body: "When every decision may touch documentation, timing, and professional guidance, an organized operational system is not optional. It is the foundation.",
   },
 ];
 

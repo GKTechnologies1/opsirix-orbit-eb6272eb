@@ -47,14 +47,14 @@ const CONNECTIONS = [
 ];
 
 const JOURNEY = [
-  "Intake and setup — Opsirix Launch",
-  "Document organization — Opsirix Vault",
-  "Workflow management — Opsirix Flow",
-  "Partner coordination — Opsirix Nexus",
-  "Monthly readiness review — Opsirix Grid",
-  "Operational dashboard — Opsirix OS",
-  "Managed support if needed — Opsirix Core",
-  "Venture readiness when ready — Opsirix Studio",
+  "Intake and setup, Opsirix Launch",
+  "Document organization, Opsirix Vault",
+  "Workflow management, Opsirix Flow",
+  "Partner coordination, Opsirix Nexus",
+  "Monthly readiness review, Opsirix Grid",
+  "Operational dashboard, Opsirix OS",
+  "Managed support if needed, Opsirix Core",
+  "Venture readiness when ready, Opsirix Studio",
 ];
 
 const COORDINATES = [

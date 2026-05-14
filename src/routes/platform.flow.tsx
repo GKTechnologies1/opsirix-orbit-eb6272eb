@@ -20,7 +20,7 @@ export const Route = createFileRoute("/platform/flow")({
 const FEATURES = [
   { t: "Task routing", d: "Each operational task has an owner, a due date, and a status. Nothing is tracked by memory." },
   { t: "Workflow boards", d: "Operational work is organized into boards by category: formation, compliance, financial, partner coordination, and ongoing operations." },
-  { t: "Partner handoff tracking", d: "When a document or task needs to go to an attorney, CPA, or other partner, the handoff is tracked — including what was sent, when, and what's pending." },
+  { t: "Partner handoff tracking", d: "When a document or task needs to go to an attorney, CPA, or other partner, the handoff is tracked, including what was sent, when, and what's pending." },
   { t: "Deadline reminders", d: "Filing deadlines, renewal dates, and review appointments tracked in advance with reminders before they arrive." },
   { t: "Escalation management", d: "Tasks that are overdue or require founder decision are flagged. Nothing sits unresolved without visibility." },
   { t: "Monthly operating cadence", d: "Every month follows a structured rhythm: task review, Vault check, Grid review, partner coordination check. Flow runs the cadence." },
@@ -37,7 +37,7 @@ const AUDIENCE = [
 
 const STEPS = [
   { t: "Weekly task list generated", d: "Active tasks for the week are surfaced based on current workflows and upcoming deadlines." },
-  { t: "Tasks assigned to owners", d: "Every task has an assigned person — founder, Opsirix team, or partner — with a clear due date." },
+  { t: "Tasks assigned to owners", d: "Every task has an assigned person, founder, Opsirix team, or partner, with a clear due date." },
   { t: "Partner handoffs tracked", d: "Documents going to attorneys or CPAs are logged. Status updated when received or reviewed." },
   { t: "Escalation triggered when needed", d: "Tasks overdue by more than a threshold are flagged for attention." },
   { t: "Monthly review closes the loop", d: "Flow activity is reviewed during the monthly Grid session. Completed, pending, and upcoming tasks summarized." },

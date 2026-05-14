@@ -160,7 +160,7 @@ export function ContactForm() {
               <Field label="What do you need help with?*" error={errors.helpNeeded?.message}>
                 <textarea
                   className={inputCls(!!errors.helpNeeded) + " min-h-[100px]"}
-                  placeholder="Describe your current operational situation and what you're trying to solve. Be specific — the more we understand, the better we can help."
+                  placeholder="Describe your current operational situation and what you're trying to solve. Be specific, the more we understand, the better we can help."
                   {...register("helpNeeded")}
                 />
               </Field>
@@ -171,7 +171,7 @@ export function ContactForm() {
                   <option>Morning (8am–12pm EST)</option>
                   <option>Afternoon (12pm–4pm EST)</option>
                   <option>Evening (4pm–7pm EST)</option>
-                  <option>Flexible — any time works</option>
+                  <option>Flexible, any time works</option>
                 </select>
               </Field>
 
@@ -183,7 +183,7 @@ export function ContactForm() {
                   {...register("consent")}
                 />
                 <label htmlFor="consent" style={{ fontSize: 12.5, lineHeight: 1.55, color: "rgba(255,255,255,0.7)" }}>
-                  I understand that Opsirix is an operations coordination platform — not a law firm, immigration consultancy, CPA firm, or licensed professional services provider — and that nothing on this form or in any response constitutes legal, immigration, or tax advice. I agree to the{" "}
+                  I understand that Opsirix is an operations coordination platform, not a law firm, immigration consultancy, CPA firm, or licensed professional services provider, and that nothing on this form or in any response constitutes legal, immigration, or tax advice. I agree to the{" "}
                   <a href="/terms" style={{ color: "#2F80ED", textDecoration: "underline" }}>Terms of Service</a> and{" "}
                   <a href="/privacy" style={{ color: "#2F80ED", textDecoration: "underline" }}>Privacy Policy</a>.
                 </label>

@@ -17,9 +17,9 @@ const SERVICES: Service[] = [
   { icon: "⚡", title: "Opsirix Flow", tag: "Workflow Engine", body: "Weekly workflow orchestration. Task routing, escalation management, project boards, and operational cadence.", gradient: "linear-gradient(90deg, #7C3AED, #A78BFA)", to: "/platform/flow" },
   { icon: "🔒", title: "Opsirix Vault", tag: "Document Intelligence", body: "Encrypted document management. Compliance-calendar-driven. Audit-ready. Every critical document protected.", gradient: "linear-gradient(90deg, #0D9E8F, #0057D9)", to: "/platform/vault" },
   { icon: "🔗", title: "Opsirix Nexus", tag: "Partner Network", body: "Warm routing to licensed attorneys, CPAs, insurance, and tech partners at exactly the right moment.", gradient: "linear-gradient(90deg, #0057D9, #66C7F4)", to: "/platform/nexus" },
-  { icon: "📊", title: "Opsirix Grid", tag: "Readiness Scoring", body: "Monthly Operational Readiness Score — 5 dimensions, 50 points. Measurable, trackable, investor-visible.", gradient: "linear-gradient(90deg, #F59E0B, #FCD34D)", to: "/platform/grid" },
+  { icon: "📊", title: "Opsirix Grid", tag: "Readiness Scoring", body: "Monthly Operational Readiness Score, 5 dimensions, 50 points. Measurable, trackable, investor-visible.", gradient: "linear-gradient(90deg, #F59E0B, #FCD34D)", to: "/platform/grid" },
   { icon: "🖥️", title: "Opsirix OS", tag: "Founder Dashboard", body: "Central founder operations dashboard. Document status, workflow activity, and company health in one view.", gradient: "linear-gradient(90deg, #0057D9, #2F80ED)", to: "/platform/os", comingSoon: true },
-  { icon: "⚙️", title: "Opsirix Core", tag: "Managed Ops", body: "High-touch managed operations for complex situations — H-1B governance, pre-fundraise, audit-readiness.", gradient: "linear-gradient(90deg, #1E2A3A, #334155)", to: "/platform/core" },
+  { icon: "⚙️", title: "Opsirix Core", tag: "Managed Ops", body: "High-touch managed operations for complex situations, H-1B governance, pre-fundraise, audit-readiness.", gradient: "linear-gradient(90deg, #1E2A3A, #334155)", to: "/platform/core" },
   { icon: "🧠", title: "Opsirix AI", tag: "Intelligence Layer", body: "AI-powered operational intelligence. Pattern recognition, risk surfacing, intelligent routing, and proactive startup copilot.", gradient: "linear-gradient(90deg, #0057D9, #2F80ED, #66C7F4)", to: "/platform/ai", featured: true, comingSoon: true },
   { icon: "🎯", title: "Opsirix Studio", tag: "Venture Readiness", body: "Selective venture readiness layer for operationally mature founders. Investor documentation and growth preparation.", gradient: "linear-gradient(90deg, #92400E, #F59E0B)", to: "/platform/studio" },
 ];
@@ -141,7 +141,7 @@ export function ServicesGrid() {
                 marginTop: 12,
               }}
             >
-              Nine modules. One operating system. Start with what you need — expand as you grow.
+              Nine modules. One operating system. Start with what you need, expand as you grow.
             </p>
           </ScrollReveal>
         </div>

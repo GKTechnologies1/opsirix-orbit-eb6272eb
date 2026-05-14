@@ -19,11 +19,11 @@ export const Route = createFileRoute("/services")({
 const MODULES: { t: string; d: string; href: string }[] = [
   { t: "Opsirix OS", d: "The connective layer. Founder dashboard, compliance calendar, and unified view of every module in one place.", href: "/platform/os" },
   { t: "Opsirix Launch", d: "Onboarding and formation coordination. Stand up a company, organize the first documents, and meet your professional partners.", href: "/platform/launch" },
-  { t: "Opsirix Flow", d: "Weekly operational project board. Every task has an owner, a due date, and a status — your week, run on rails.", href: "/platform/flow" },
-  { t: "Opsirix Vault", d: "Centralized operational document repository. Formation docs, contracts, employment paperwork — versioned, tagged, audit-ready.", href: "/platform/vault" },
-  { t: "Opsirix Nexus", d: "Coordination layer for your independently retained licensed professionals — attorneys, CPAs, bankers, insurers.", href: "/platform/nexus" },
+  { t: "Opsirix Flow", d: "Weekly operational project board. Every task has an owner, a due date, and a status, your week, run on rails.", href: "/platform/flow" },
+  { t: "Opsirix Vault", d: "Centralized operational document repository. Formation docs, contracts, employment paperwork, versioned, tagged, audit-ready.", href: "/platform/vault" },
+  { t: "Opsirix Nexus", d: "Coordination layer for your independently retained licensed professionals, attorneys, CPAs, bankers, insurers.", href: "/platform/nexus" },
   { t: "Opsirix Grid", d: "Monthly Operational Readiness Score across documentation, compliance, financial coordination, workflow, and startup readiness.", href: "/platform/grid" },
-  { t: "Opsirix AI", d: "Intelligent support across the platform — pattern recognition, risk surfacing, and proactive operational guidance.", href: "/platform/ai" },
+  { t: "Opsirix AI", d: "Intelligent support across the platform, pattern recognition, risk surfacing, and proactive operational guidance.", href: "/platform/ai" },
   { t: "Opsirix Core", d: "Embedded operational backbone for funded or scaling companies. Higher coordination volume, dedicated weekly cadence.", href: "/platform/core" },
   { t: "Opsirix Studio", d: "Founder-facing workspace for templates, playbooks, and operational artifacts you build alongside the Opsirix team.", href: "/platform/studio" },
 ];
@@ -68,7 +68,7 @@ function Page() {
         pageName="Services"
         label="Platform Services"
         title="Nine modules. One connected platform."
-        subtitle="The Opsirix platform covers the full operational layer of an early-stage company. Documents, workflows, partner coordination, readiness scoring, and intelligent support — organized into nine connected modules."
+        subtitle="The Opsirix platform covers the full operational layer of an early-stage company. Documents, workflows, partner coordination, readiness scoring, and intelligent support, organized into nine connected modules."
       />
 
       <section className="inner-section">
@@ -110,7 +110,7 @@ function Page() {
           <h2 className="inner-h2">Choose your Opsirix path.</h2>
           <p className="inner-lead">
             Pricing is customized after a discovery call. We review your founder stage,
-            documentation needs, operational complexity, and support level — then recommend the
+            documentation needs, operational complexity, and support level, then recommend the
             right Opsirix path.
           </p>
           <div className="tier-grid" style={{ marginTop: 36 }}>

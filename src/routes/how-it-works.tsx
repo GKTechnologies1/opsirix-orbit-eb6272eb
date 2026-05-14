@@ -21,12 +21,12 @@ const PILLARS = [
   { n: "02", t: "Stop-Work Protocol", d: "If any matter approaches a regulated boundary, work pauses until a licensed professional confirms the path forward in writing." },
   { n: "03", t: "Risk Classification", d: "Every workflow is classified as administrative, coordination, or licensed-professional. Each tier has its own routing rule." },
   { n: "04", t: "7-Day SLA", d: "Founder requests receive an action or routing decision within 7 calendar days. The audit log records every step." },
-  { n: "05", t: "Audit Evidence Trail", d: "Each task generates a timestamped record — request, classification, action, professional sign-off — preserved in the Vault." },
+  { n: "05", t: "Audit Evidence Trail", d: "Each task generates a timestamped record, request, classification, action, professional sign-off, preserved in the Vault." },
   { n: "06", t: "Nexus Independence", d: "Every Nexus partner serves you under their own engagement letter. Opsirix never controls the substance of their advice." },
 ];
 
 const ONBOARDING = [
-  ["01", "Platform Service Agreement", "Defines what Opsirix is and is not — administrative coordination only.", "Day 1 of onboarding"],
+  ["01", "Platform Service Agreement", "Defines what Opsirix is and is not, administrative coordination only.", "Day 1 of onboarding"],
   ["02", "Scope & Boundary Acknowledgment", "Founder confirms understanding that Opsirix provides no legal, immigration, or tax advice.", "Day 1 of onboarding"],
   ["03", "Nexus Coordination Authorization", "Authorizes Opsirix to coordinate logistics with your independently retained professionals.", "Before first Nexus intro"],
   ["04", "Vault & Data Handling Consent", "Defines how documents are stored, who can access them, and your rights to export.", "Before Vault activation"],
@@ -50,7 +50,7 @@ function Page() {
               <div key={p.t} className="inner-card"><h3>{p.t}</h3><p>{p.d}</p></div>
             ))}
           </div>
-          <p className="inner-lead" style={{ marginTop: 28 }}><strong style={{ color: "#071B33" }}>The solution:</strong> a coordination layer that runs the operational rhythm of your company every week — so you can run the business.</p>
+          <p className="inner-lead" style={{ marginTop: 28 }}><strong style={{ color: "#071B33" }}>The solution:</strong> a coordination layer that runs the operational rhythm of your company every week, so you can run the business.</p>
         </div>
       </section>
 
@@ -62,7 +62,7 @@ function Page() {
             <div className="layer-row pro">
               <div className="layer-label">Layer 1</div>
               <div className="layer-name">Professional Layer</div>
-              <div className="layer-desc">Licensed attorneys, CPAs, bankers — independently retained, providing all substantive advice.</div>
+              <div className="layer-desc">Licensed attorneys, CPAs, bankers, independently retained, providing all substantive advice.</div>
             </div>
             <div className="layer-connector" />
             <div className="layer-row ops">
@@ -73,14 +73,14 @@ function Page() {
                 <Link to="/platform/flow" className="inline-link">Flow</Link>,{" "}
                 <Link to="/platform/nexus" className="inline-link">Nexus</Link>,{" "}
                 <Link to="/platform/grid" className="inline-link">Grid</Link>{" "}
-                — the coordination layer that organizes documents, runs workflows, and routes requests.
+               , the coordination layer that organizes documents, runs workflows, and routes requests.
               </div>
             </div>
             <div className="layer-connector" />
             <div className="layer-row fnd">
               <div className="layer-label">Layer 3</div>
               <div className="layer-name">Founder</div>
-              <div className="layer-desc">You — building the company, with one operational backbone instead of ten disconnected tools.</div>
+              <div className="layer-desc">You, building the company, with one operational backbone instead of ten disconnected tools.</div>
             </div>
           </div>
         </div>
@@ -118,13 +118,13 @@ function Page() {
           <p className="inner-eyebrow">Monthly Rhythm</p>
           <h2 className="inner-h2">Every month, the same seven-part Grid review.</h2>
           <ul className="inner-list">
-            <li>Documentation completeness — what's in the <Link to="/platform/vault" className="inline-link">Vault</Link>, what's missing.</li>
-            <li>Compliance status — every recurring deadline, filing window, and renewal.</li>
-            <li>Financial coordination — bookkeeping cadence, CPA touchpoints, payroll status.</li>
-            <li>Operational workflow — <Link to="/platform/flow" className="inline-link">Flow</Link> board health, blockers, owner accountability.</li>
-            <li><Link to="/platform/nexus" className="inline-link">Nexus</Link> coordination — open threads with your attorney, CPA, banker, insurer.</li>
-            <li>Startup readiness — investor-grade documentation and data-room status.</li>
-            <li>Founder Status Report — a written summary delivered to you within 48 hours of the <Link to="/platform/grid" className="inline-link">Grid</Link> review.</li>
+            <li>Documentation completeness, what's in the <Link to="/platform/vault" className="inline-link">Vault</Link>, what's missing.</li>
+            <li>Compliance status, every recurring deadline, filing window, and renewal.</li>
+            <li>Financial coordination, bookkeeping cadence, CPA touchpoints, payroll status.</li>
+            <li>Operational workflow, <Link to="/platform/flow" className="inline-link">Flow</Link> board health, blockers, owner accountability.</li>
+            <li><Link to="/platform/nexus" className="inline-link">Nexus</Link> coordination, open threads with your attorney, CPA, banker, insurer.</li>
+            <li>Startup readiness, investor-grade documentation and data-room status.</li>
+            <li>Founder Status Report, a written summary delivered to you within 48 hours of the <Link to="/platform/grid" className="inline-link">Grid</Link> review.</li>
           </ul>
         </div>
       </section>

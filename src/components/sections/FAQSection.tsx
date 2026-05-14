@@ -11,15 +11,15 @@ const FAQS: QA[] = [
   },
   {
     q: "Do you provide immigration advice or visa strategy?",
-    a: "Never. Opsirix provides zero immigration advice, visa opinions, or work authorization determinations. Any question touching immigration law is immediately routed to a licensed immigration attorney through Opsirix Nexus. We handle administrative coordination — licensed attorneys handle the legal substance.",
+    a: "Never. Opsirix provides zero immigration advice, visa opinions, or work authorization determinations. Any question touching immigration law is immediately routed to a licensed immigration attorney through Opsirix Nexus. We handle administrative coordination, licensed attorneys handle the legal substance.",
   },
   {
     q: "Can you help coordinate my attorney and CPA?",
-    a: "Yes — administrative coordination is one of Opsirix's core functions. We handle scheduling, document delivery, and the ongoing logistics between you and your licensed professionals. They provide advice. We make working with them seamless. If you don't have an attorney or CPA yet, Opsirix Nexus will introduce you to the right partner.",
+    a: "Yes, administrative coordination is one of Opsirix's core functions. We handle scheduling, document delivery, and the ongoing logistics between you and your licensed professionals. They provide advice. We make working with them seamless. If you don't have an attorney or CPA yet, Opsirix Nexus will introduce you to the right partner.",
   },
   {
     q: "Who is Opsirix for?",
-    a: "Opsirix serves early-stage founders, immigrant founders (F-1, OPT, H-1B, and international entrepreneurs), technical founders who are operationally overwhelmed, and any founder who needs their startup's operational layer organized and running properly. If you're building a U.S. company and your documentation, workflows, and professional team aren't organized — Opsirix is built for you.",
+    a: "Opsirix serves early-stage founders, immigrant founders (F-1, OPT, H-1B, and international entrepreneurs), technical founders who are operationally overwhelmed, and any founder who needs their startup's operational layer organized and running properly. If you're building a U.S. company and your documentation, workflows, and professional team aren't organized, Opsirix is built for you.",
   },
   {
     q: "How do founders get started?",
@@ -31,7 +31,7 @@ const FAQS: QA[] = [
   },
   {
     q: "How is Opsirix different from an accelerator?",
-    a: "Accelerators teach and connect. Opsirix runs. We are the operational infrastructure running beneath your startup every week — coordinating your attorney, organizing your documents, running your project board, scoring your readiness. The cohort ends. Opsirix continues.",
+    a: "Accelerators teach and connect. Opsirix runs. We are the operational infrastructure running beneath your startup every week, coordinating your attorney, organizing your documents, running your project board, scoring your readiness. The cohort ends. Opsirix continues.",
   },
 ];
 
