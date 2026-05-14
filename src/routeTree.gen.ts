@@ -24,6 +24,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlatformVaultRouteImport } from './routes/platform.vault'
+import { Route as PlatformStudioRouteImport } from './routes/platform.studio'
 import { Route as PlatformOsRouteImport } from './routes/platform.os'
 import { Route as PlatformNexusRouteImport } from './routes/platform.nexus'
 import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
@@ -107,6 +108,11 @@ const PlatformVaultRoute = PlatformVaultRouteImport.update({
   path: '/vault',
   getParentRoute: () => PlatformRoute,
 } as any)
+const PlatformStudioRoute = PlatformStudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => PlatformRoute,
+} as any)
 const PlatformOsRoute = PlatformOsRouteImport.update({
   id: '/os',
   path: '/os',
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
+  '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
 }
 export interface FileRoutesByTo {
@@ -189,6 +196,7 @@ export interface FileRoutesByTo {
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
+  '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
 }
 export interface FileRoutesById {
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/platform/launch': typeof PlatformLaunchRoute
   '/platform/nexus': typeof PlatformNexusRoute
   '/platform/os': typeof PlatformOsRoute
+  '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
 }
 export interface FileRouteTypes {
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/platform/launch'
     | '/platform/nexus'
     | '/platform/os'
+    | '/platform/studio'
     | '/platform/vault'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -264,6 +274,7 @@ export interface FileRouteTypes {
     | '/platform/launch'
     | '/platform/nexus'
     | '/platform/os'
+    | '/platform/studio'
     | '/platform/vault'
   id:
     | '__root__'
@@ -288,6 +299,7 @@ export interface FileRouteTypes {
     | '/platform/launch'
     | '/platform/nexus'
     | '/platform/os'
+    | '/platform/studio'
     | '/platform/vault'
   fileRoutesById: FileRoutesById
 }
@@ -415,6 +427,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformVaultRouteImport
       parentRoute: typeof PlatformRoute
     }
+    '/platform/studio': {
+      id: '/platform/studio'
+      path: '/studio'
+      fullPath: '/platform/studio'
+      preLoaderRoute: typeof PlatformStudioRouteImport
+      parentRoute: typeof PlatformRoute
+    }
     '/platform/os': {
       id: '/platform/os'
       path: '/os'
@@ -475,6 +494,7 @@ interface PlatformRouteChildren {
   PlatformLaunchRoute: typeof PlatformLaunchRoute
   PlatformNexusRoute: typeof PlatformNexusRoute
   PlatformOsRoute: typeof PlatformOsRoute
+  PlatformStudioRoute: typeof PlatformStudioRoute
   PlatformVaultRoute: typeof PlatformVaultRoute
 }
 
@@ -486,6 +506,7 @@ const PlatformRouteChildren: PlatformRouteChildren = {
   PlatformLaunchRoute: PlatformLaunchRoute,
   PlatformNexusRoute: PlatformNexusRoute,
   PlatformOsRoute: PlatformOsRoute,
+  PlatformStudioRoute: PlatformStudioRoute,
   PlatformVaultRoute: PlatformVaultRoute,
 }
 
