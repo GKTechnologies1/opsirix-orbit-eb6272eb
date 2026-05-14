@@ -1,14 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { PageHeader } from "@/components/shared/PageHeader";
+import { CTASection } from "@/components/shared/CTASection";
 
 export const Route = createFileRoute("/about")({
+  head: () => ({
+    meta: [
+      { title: "About Opsirix | Founder Operations OS" },
+      {
+        name: "description",
+        content:
+          "Opsirix is the Founder Operations OS — built to give early-stage and immigrant founders the operational backbone that funded companies take for granted.",
+      },
+      { property: "og:title", content: "About Opsirix | Founder Operations OS" },
+      {
+        property: "og:description",
+        content: "The operational backbone for founders. Coordination, not advice.",
+      },
+      { property: "og:url", content: "https://opsirix-orbit.lovable.app/about" },
+    ],
+    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/about" }],
+  }),
   component: Page,
 });
 
 function Page() {
   return (
-    <div className="min-h-screen pt-32 px-6 text-white opsirix-container">
-      <h1 className="text-4xl font-bold mb-4">About</h1>
-      <p className="text-white/60">Coming soon.</p>
+    <div className="inner-page">
+      <PageHeader
+        pageName="About"
+        label="About Opsirix"
+        title="The operational backbone for founders."
+        subtitle="Opsirix is a Founder Infrastructure & Operations Platform — built to run the coordination layer between founders and licensed professionals."
+      />
+      <section className="inner-section">
+        <div className="inner-wrap" style={{ maxWidth: 760 }}>
+          <p className="inner-eyebrow">Our Mission</p>
+          <h2 className="inner-h2">Coordination, not advice.</h2>
+          <p className="inner-lead">
+            Founders don't fail from bad ideas. They fail from operational chaos — scattered documents, disconnected
+            professionals, no monthly rhythm. Opsirix runs the operational layer: organizing the Vault, running the
+            weekly Flow, coordinating Nexus partners, and scoring readiness with the monthly Grid.
+          </p>
+          <p className="inner-lead">
+            Every regulated question routes to an independently retained licensed professional through Opsirix Nexus.
+            Opsirix is not a law firm, immigration consultancy, or CPA firm — and that boundary is structural, not
+            cosmetic.
+          </p>
+        </div>
+      </section>
+      <CTASection />
     </div>
   );
 }
