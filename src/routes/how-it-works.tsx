@@ -68,7 +68,13 @@ function Page() {
             <div className="layer-row ops">
               <div className="layer-label">Layer 2</div>
               <div className="layer-name">Opsirix Orchestration</div>
-              <div className="layer-desc">Vault, Flow, Nexus, Grid — the coordination layer that organizes documents, runs workflows, and routes requests.</div>
+              <div className="layer-desc">
+                <Link to="/platform/vault" className="inline-link">Vault</Link>,{" "}
+                <Link to="/platform/flow" className="inline-link">Flow</Link>,{" "}
+                <Link to="/platform/nexus" className="inline-link">Nexus</Link>,{" "}
+                <Link to="/platform/grid" className="inline-link">Grid</Link>{" "}
+                — the coordination layer that organizes documents, runs workflows, and routes requests.
+              </div>
             </div>
             <div className="layer-connector" />
             <div className="layer-row fnd">
