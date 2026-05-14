@@ -57,7 +57,7 @@ export function PartnerEcosystem() {
             <span className="partner-label">Partner Ecosystem</span>
           </ScrollReveal>
           <ScrollReveal delay={0.05}>
-            <h2 className="partner-h2">Built with the professionals your startup depends on.</h2>
+            <h2 className="partner-h2">The professionals your startup needs, coordinated through one platform.</h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="partner-sub">
