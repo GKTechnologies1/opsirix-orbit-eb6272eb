@@ -16,8 +16,8 @@ const POINTS: FeaturePoint[] = [
   },
   {
     icon: "🔗",
-    title: "Attorney coordination, not advice",
-    body: "We coordinate your access to licensed immigration attorneys through Nexus. They provide the legal advice. We handle the administrative logistics.",
+    title: "Attorney coordination",
+    body: "Opsirix coordinates access to licensed immigration attorneys. The attorney provides legal advice. Opsirix handles the scheduling, document preparation, and administrative follow-through.",
   },
   {
     icon: "📊",
