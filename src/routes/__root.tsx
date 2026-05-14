@@ -126,6 +126,7 @@ function RootComponent() {
       <Navbar />
       <Outlet />
       <Footer />
+      <StickyCta />
     </QueryClientProvider>
   );
 }
