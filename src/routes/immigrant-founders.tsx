@@ -132,7 +132,13 @@ function Page() {
         <div className="inner-wrap">
           <p className="inner-eyebrow">Licensed Professionals</p>
           <h2 className="inner-h2">When to work with a licensed professional.</h2>
-          <p className="inner-lead">Any question about immigration status, work authorization, visa eligibility, tax obligations, accounting, or legal structure requires a licensed professional. Opsirix can help coordinate your access to the right professional through Opsirix Nexus, but cannot advise on those matters directly.</p>
+          <p className="inner-lead">
+            Any question about immigration status, work authorization, visa eligibility, tax
+            obligations, accounting, or legal structure requires a licensed professional. Your
+            documents stay organized in <Link to="/platform/vault" className="inline-link">Opsirix Vault</Link>,
+            and Opsirix can help coordinate your access to the right professional through{" "}
+            <Link to="/platform/nexus" className="inline-link">Opsirix Nexus</Link> — but cannot advise on those matters directly.
+          </p>
         </div>
       </section>
 

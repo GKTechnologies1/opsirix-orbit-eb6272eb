@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/flow")({
   head: () => ({
     meta: [
       { title: "Opsirix Flow | Founder Workflow Engine" },
-      { name: "description", content: "Opsirix Flow organizes tasks, reminders, partner handoffs, escalations, and recurring workflows for early-stage founders. Know what needs to happen and who owns it." },
+      { name: "description", content: "Opsirix Flow organizes tasks, reminders, partner handoffs, and recurring workflows. Know what needs to happen, who owns it, and what's overdue." },
       { property: "og:title", content: "Opsirix Flow | Founder Workflow Engine" },
-      { property: "og:description", content: "Opsirix Flow organizes tasks, reminders, partner handoffs, escalations, and recurring workflows for early-stage founders. Know what needs to happen and who owns it." },
+      { property: "og:description", content: "Opsirix Flow organizes tasks, reminders, partner handoffs, and recurring workflows. Know what needs to happen, who owns it, and what's overdue." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/flow" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/flow" }],

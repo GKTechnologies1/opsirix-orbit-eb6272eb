@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import * as Accordion from "@radix-ui/react-accordion";
 import { ChevronDown } from "lucide-react";
 import { PageHeader } from "@/components/shared/PageHeader";
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/faq")({
   component: Page,
 });
 
-type QA = { q: string; a: string };
+type QA = { q: string; a: string; link?: { to: string; label: string } };
 
 const ABOUT: QA[] = [
   { q: "What is Opsirix?", a: "Opsirix is a founder operations platform that helps early-stage and immigrant founders organize documents, manage workflows, coordinate professional partners, and track operational readiness. Opsirix is not a law firm, CPA firm, immigration consultancy, or licensed professional services provider." },
@@ -42,10 +42,10 @@ const IMMIGRANT: QA[] = [
 ];
 
 const SERVICES: QA[] = [
-  { q: "What is Opsirix Vault?", a: "Opsirix Vault is the document organization system within the Opsirix platform. It helps founders store, organize, and access formation documents, operating agreements, attorney correspondence, financial records, and other business documents in one structured location." },
-  { q: "What is Opsirix Flow?", a: "Opsirix Flow is the workflow management component of the platform. It organizes tasks, tracks deadlines, manages escalations, and maintains the operational cadence of your startup week to week." },
-  { q: "What is Opsirix Nexus?", a: "Opsirix Nexus is the professional coordination network within the platform. It connects founders to attorneys, CPAs, insurance providers, and banking partners at the right moment in their operational journey. Opsirix coordinates the introduction and logistics — each professional serves founders independently." },
-  { q: "What is Opsirix Grid?", a: "Opsirix Grid is the monthly operational readiness scoring system. It measures your startup's operational health across five areas — documentation, compliance tracking, financial coordination, workflow operations, and startup readiness — on a 50-point scale. Your Grid score is delivered in your monthly Founder Status Report." },
+  { q: "What is Opsirix Vault?", a: "Opsirix Vault is the document organization system within the Opsirix platform. It helps founders store, organize, and access formation documents, operating agreements, attorney correspondence, financial records, and other business documents in one structured location.", link: { to: "/platform/vault", label: "Learn more about Opsirix Vault" } },
+  { q: "What is Opsirix Flow?", a: "Opsirix Flow is the workflow management component of the platform. It organizes tasks, tracks deadlines, manages escalations, and maintains the operational cadence of your startup week to week.", link: { to: "/platform/flow", label: "Learn more about Opsirix Flow" } },
+  { q: "What is Opsirix Nexus?", a: "Opsirix Nexus is the professional coordination network within the platform. It connects founders to attorneys, CPAs, insurance providers, and banking partners at the right moment in their operational journey. Opsirix coordinates the introduction and logistics — each professional serves founders independently.", link: { to: "/platform/nexus", label: "Learn more about Opsirix Nexus" } },
+  { q: "What is Opsirix Grid?", a: "Opsirix Grid is the monthly operational readiness scoring system. It measures your startup's operational health across five areas — documentation, compliance tracking, financial coordination, workflow operations, and startup readiness — on a 50-point scale. Your Grid score is delivered in your monthly Founder Status Report.", link: { to: "/platform/grid", label: "Learn more about Opsirix Grid" } },
   { q: "What is the Founder Status Report?", a: "The Founder Status Report is a monthly summary delivered to every Opsirix founder. It includes your current Grid score, what was completed this month, what is coming up next month, and any open action items. It gives you a clear operational picture every 30 days." },
 ];
 
@@ -69,7 +69,17 @@ function Section({ title, items }: { title: string; items: QA[] }) {
               </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content className="faq-content">
-              <div className="faq-answer">{item.a}</div>
+              <div className="faq-answer">
+                {item.a}
+                {item.link && (
+                  <>
+                    {" "}
+                    <Link to={item.link.to} className="inline-link">
+                      {item.link.label} →
+                    </Link>
+                  </>
+                )}
+              </div>
             </Accordion.Content>
           </Accordion.Item>
         ))}

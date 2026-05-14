@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { CTASection } from "@/components/shared/CTASection";
 
@@ -68,7 +68,13 @@ function Page() {
             <div className="layer-row ops">
               <div className="layer-label">Layer 2</div>
               <div className="layer-name">Opsirix Orchestration</div>
-              <div className="layer-desc">Vault, Flow, Nexus, Grid — the coordination layer that organizes documents, runs workflows, and routes requests.</div>
+              <div className="layer-desc">
+                <Link to="/platform/vault" className="inline-link">Vault</Link>,{" "}
+                <Link to="/platform/flow" className="inline-link">Flow</Link>,{" "}
+                <Link to="/platform/nexus" className="inline-link">Nexus</Link>,{" "}
+                <Link to="/platform/grid" className="inline-link">Grid</Link>{" "}
+                — the coordination layer that organizes documents, runs workflows, and routes requests.
+              </div>
             </div>
             <div className="layer-connector" />
             <div className="layer-row fnd">
@@ -112,13 +118,13 @@ function Page() {
           <p className="inner-eyebrow">Monthly Rhythm</p>
           <h2 className="inner-h2">Every month, the same seven-part Grid review.</h2>
           <ul className="inner-list">
-            <li>Documentation completeness — what's in the Vault, what's missing.</li>
+            <li>Documentation completeness — what's in the <Link to="/platform/vault" className="inline-link">Vault</Link>, what's missing.</li>
             <li>Compliance status — every recurring deadline, filing window, and renewal.</li>
             <li>Financial coordination — bookkeeping cadence, CPA touchpoints, payroll status.</li>
-            <li>Operational workflow — Flow board health, blockers, owner accountability.</li>
-            <li>Nexus coordination — open threads with your attorney, CPA, banker, insurer.</li>
+            <li>Operational workflow — <Link to="/platform/flow" className="inline-link">Flow</Link> board health, blockers, owner accountability.</li>
+            <li><Link to="/platform/nexus" className="inline-link">Nexus</Link> coordination — open threads with your attorney, CPA, banker, insurer.</li>
             <li>Startup readiness — investor-grade documentation and data-room status.</li>
-            <li>Founder Status Report — a written summary delivered to you within 48 hours of the review.</li>
+            <li>Founder Status Report — a written summary delivered to you within 48 hours of the <Link to="/platform/grid" className="inline-link">Grid</Link> review.</li>
           </ul>
         </div>
       </section>

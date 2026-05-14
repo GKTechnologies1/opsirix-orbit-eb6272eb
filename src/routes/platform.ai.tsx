@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/ai")({
   head: () => ({
     meta: [
       { title: "Opsirix AI | Operational Intelligence for Founders" },
-      { name: "description", content: "Opsirix AI surfaces missing documents, workflow delays, task patterns, and suggested next actions — without replacing professional judgment." },
+      { name: "description", content: "Opsirix AI surfaces missing documents, workflow delays, and suggested next actions. Operational awareness without replacing professional judgment." },
       { property: "og:title", content: "Opsirix AI | Operational Intelligence for Founders" },
-      { property: "og:description", content: "Opsirix AI surfaces missing documents, workflow delays, task patterns, and suggested next actions — without replacing professional judgment." },
+      { property: "og:description", content: "Opsirix AI surfaces missing documents, workflow delays, and suggested next actions. Operational awareness without replacing professional judgment." },
       { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/ai" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/ai" }],
