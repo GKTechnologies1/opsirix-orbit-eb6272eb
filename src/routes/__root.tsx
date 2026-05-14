@@ -132,7 +132,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               url: "https://opsirix-orbit.lovable.app",
               logo: "https://opsirix-orbit.lovable.app/logo.svg",
               description:
-                "Founder Infrastructure Platform for workflow orchestration, documentation management, and partner coordination.",
+                "Founder operations platform for documents, workflows, and partner coordination.",
               foundingDate: "2025",
               contactPoint: {
                 "@type": "ContactPoint",
