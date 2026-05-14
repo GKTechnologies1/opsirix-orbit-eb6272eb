@@ -29,46 +29,36 @@ export const Route = createFileRoute("/faq")({
 type QA = { q: string; a: string };
 
 const ABOUT: QA[] = [
-  { q: "What is Opsirix?", a: "Opsirix is a Founder Infrastructure & Operations Platform. We run the operational layer of early-stage and immigrant-founder companies — Vault, Flow, Nexus coordination, and a monthly Grid readiness review." },
-  { q: "Is Opsirix a law firm or immigration consultancy?", a: "No. Opsirix is not a law firm, immigration consultancy, CPA firm, or licensed professional services organization of any kind. Every regulated question routes to an independently retained licensed professional through Opsirix Nexus." },
-  { q: "Who founded Opsirix and why?", a: "Opsirix was founded to give early-stage and immigrant founders the operational backbone that funded companies take for granted — without crossing into regulated professional advice." },
-  { q: "Where is Opsirix based?", a: "Opsirix operates as a U.S.-based platform. Founders we serve operate U.S. entities; coordination is delivered remotely with Nexus partners across the country." },
-  { q: "How does Opsirix make money?", a: "Founders pay a platform tier fee for the Opsirix system and coordination service. Opsirix does not take referral fees on regulated professional work performed by Nexus partners." },
+  { q: "What is Opsirix?", a: "Opsirix is a founder operations platform that helps early-stage and immigrant founders organize documents, manage workflows, coordinate professional partners, and track operational readiness. Opsirix is not a law firm, CPA firm, immigration consultancy, or licensed professional services provider." },
+  { q: "Who is Opsirix for?", a: "Opsirix serves first-time founders, immigrant founders, F-1 and OPT students building companies, H-1B professionals exploring business ownership, green card holders, international entrepreneurs, solo founders, and small business operators who need operational structure. If you are building a U.S. company and your documents, workflows, and professional coordination are disorganized — Opsirix is built for you." },
+  { q: "Is Opsirix a law firm?", a: "No. Opsirix is not a law firm, immigration consultancy, CPA firm, accounting firm, tax advisor, or licensed professional services provider. Opsirix provides operational coordination services only. All legal, immigration, tax, and accounting matters are handled by independently retained licensed professionals." },
+  { q: "How is Opsirix different from an accelerator or incubator?", a: "Accelerators provide education, community, and sometimes funding. Opsirix provides ongoing operational infrastructure — document organization, workflow management, professional coordination, and monthly readiness reviews. Accelerator cohorts end. Opsirix works alongside your startup continuously." },
 ];
 
 const IMMIGRANT: QA[] = [
-  { q: "Does Opsirix give immigration advice?", a: "Never. Opsirix provides zero immigration advice, visa opinions, or work authorization determinations. Every immigration question routes to a licensed immigration attorney through Nexus." },
-  { q: "Will Opsirix help me pick a visa?", a: "No. Visa selection is a legal opinion that only a licensed immigration attorney can provide. Opsirix coordinates the logistical layer around your attorney's work." },
-  { q: "Can Opsirix help with USCIS filings?", a: "Filings are prepared and submitted by your independently retained immigration attorney. Opsirix organizes and stores the supporting documentation." },
-  { q: "What does Opsirix actually do for immigrant founders?", a: "We organize your documentation in Vault, run your weekly operational board in Flow, coordinate the administrative logistics with your attorney, CPA, and banker through Nexus, and score your operational readiness every month with Grid." },
-  { q: "I don't have an immigration attorney yet — can Opsirix help?", a: "Yes. Opsirix Nexus introduces you to vetted licensed immigration attorneys in the partner network. The attorney engages you under their own engagement letter; Opsirix coordinates logistics." },
-  { q: "Is Opsirix safe for F-1, OPT, H-1B, or H-4 founders?", a: "Opsirix is an operational platform, not a legal product. It does not affect your status. Whether and how to operate a company on any given visa is a question only your immigration attorney can answer." },
-  { q: "Is anything Opsirix says or stores considered legal advice?", a: "No. Nothing in Opsirix — including documents, dashboards, reports, or communications — constitutes legal, immigration, or tax advice. All advice comes from independently retained licensed professionals." },
+  { q: "Does Opsirix provide immigration advice?", a: "No. Opsirix does not provide immigration advice, visa strategy, work authorization guidance, or immigration legal opinions of any kind. If you have immigration questions, you need a licensed immigration attorney. Opsirix can coordinate your access to a licensed attorney through Opsirix Nexus, but cannot advise on immigration matters directly." },
+  { q: "Can Opsirix help H-1B or F-1 founders?", a: "Opsirix can help H-1B and F-1 founders with operational organization — document management, workflow setup, professional coordination, and operational readiness tracking. Opsirix does not advise on H-1B or F-1 status, work authorization, or immigration compliance. Those matters require a licensed immigration attorney." },
+  { q: "Can Opsirix replace my immigration attorney?", a: "No. Opsirix coordinates operational workflows and document organization. It does not and cannot replace an immigration attorney. If you need immigration advice, visa strategy, or work authorization guidance, you need a licensed immigration attorney. Opsirix can coordinate your introduction to one through Opsirix Nexus." },
 ];
 
 const SERVICES: QA[] = [
-  { q: "What is the Opsirix Vault?", a: "A centralized operational document repository — formation, EIN, banking, contracts, employment paperwork — versioned, tagged, and audit-ready." },
-  { q: "What is Opsirix Flow?", a: "Your weekly operational project board. Every task has an owner, a due date, and a status. Flow runs your operational rhythm between meetings." },
-  { q: "What is Opsirix Nexus?", a: "The coordination layer for your independently retained licensed professionals — attorneys, CPAs, bankers, insurers. Opsirix handles scheduling, document delivery, and follow-through." },
-  { q: "What is the Opsirix Grid?", a: "A monthly Operational Readiness Score (out of 50) across 5 dimensions: documentation, compliance, financial coordination, workflow, and startup readiness. 40+ means investor-ready operations." },
-  { q: "How often is the Grid review?", a: "Every month. A 45–60 minute session, followed by a written Founder Status Report delivered within 48 hours." },
-  { q: "What's in the Founder Status Report?", a: "Your current Grid score, deltas from last month, priorities for the next 30 days, and a clear action list owned by you, Opsirix, and any Nexus partners." },
-  { q: "What are the platform tiers?", a: "Four tiers — Launch, Flow, Grid+, and Core. They differ in coordination volume, monthly cadence, and depth of readiness work, but every tier shares the same coordination engine." },
-  { q: "Can I export my data?", a: "Yes. Your Vault contents, Flow history, and Grid records are yours. Export rights are documented in the Vault & Data Handling Consent signed during onboarding." },
+  { q: "What is Opsirix Vault?", a: "Opsirix Vault is the document organization system within the Opsirix platform. It helps founders store, organize, and access formation documents, operating agreements, attorney correspondence, financial records, and other business documents in one structured location." },
+  { q: "What is Opsirix Flow?", a: "Opsirix Flow is the workflow management component of the platform. It organizes tasks, tracks deadlines, manages escalations, and maintains the operational cadence of your startup week to week." },
+  { q: "What is Opsirix Nexus?", a: "Opsirix Nexus is the professional coordination network within the platform. It connects founders to attorneys, CPAs, insurance providers, and banking partners at the right moment in their operational journey. Opsirix coordinates the introduction and logistics — each professional serves founders independently." },
+  { q: "What is Opsirix Grid?", a: "Opsirix Grid is the monthly operational readiness scoring system. It measures your startup's operational health across five areas — documentation, compliance tracking, financial coordination, workflow operations, and startup readiness — on a 50-point scale. Your Grid score is delivered in your monthly Founder Status Report." },
+  { q: "What is the Founder Status Report?", a: "The Founder Status Report is a monthly summary delivered to every Opsirix founder. It includes your current Grid score, what was completed this month, what is coming up next month, and any open action items. It gives you a clear operational picture every 30 days." },
 ];
 
 const GETTING_STARTED: QA[] = [
-  { q: "How do I get started?", a: "Complete the 15-minute Founder Intake Form. We review within 1 business day and schedule your 30-minute Discovery Call. From there, four onboarding documents and a Launch session within 5 business days." },
-  { q: "How long does onboarding take?", a: "From intake to a fully active platform: typically 1–2 weeks. The four onboarding documents take under 30 minutes. The Launch session is 60–90 minutes." },
-  { q: "Do I need to bring my own attorney and CPA?", a: "If you have them, Opsirix coordinates with them through Nexus. If you don't, Nexus introduces you to vetted licensed professionals who engage you directly." },
-  { q: "What if I'm not ready for a paid tier yet?", a: "Start with the Discovery Call. We'll tell you honestly whether Opsirix fits your stage — and if it doesn't, we'll point you to resources that do." },
-  { q: "What happens after the Discovery Call?", a: "If we're a fit, you receive the four onboarding documents to sign, a Launch session is scheduled within 5 business days, and your Vault is created. From there, the platform turns on." },
+  { q: "How does Opsirix work with licensed professionals?", a: "Opsirix coordinates the administrative and logistical relationship between founders and their licensed professionals — scheduling, document preparation, follow-up. Opsirix does not supervise, direct, or provide the professional advice itself. Attorneys, CPAs, and other licensed professionals serve founders independently." },
+  { q: "How do I get started with Opsirix?", a: "Complete the founder intake form at opsirix.com/contact. We review your intake within one business day and schedule a free 30-minute Discovery Call to understand your operational situation and match you to the right platform tier." },
+  { q: "What happens after I book a discovery call?", a: "After the Discovery Call, you receive four onboarding documents to review and sign. Once signed, your Opsirix Launch session is scheduled within five business days. During Launch: Vault is created, Flow is activated, Nexus introductions are made, and your Grid baseline is established." },
 ];
 
 function Section({ title, items }: { title: string; items: QA[] }) {
   return (
     <>
-      <h2 className="faq-cat">{title}</h2>
+      <h3 className="faq-cat">{title}</h3>
       <Accordion.Root type="single" collapsible className="faq-list">
         {items.map((item, i) => (
           <Accordion.Item key={item.q} value={`${title}-${i}`} className="faq-item">
@@ -89,20 +79,36 @@ function Section({ title, items }: { title: string; items: QA[] }) {
 }
 
 function Page() {
+  const allFaqs = [...ABOUT, ...IMMIGRANT, ...SERVICES, ...GETTING_STARTED];
   return (
     <div className="inner-page">
-      <PageHeader pageName="FAQ" label="Frequently Asked" title="Common questions about Opsirix." subtitle="25+ questions across four categories. Zero legal, immigration, or tax advice — that's what your attorney and CPA are for." />
+      <PageHeader pageName="FAQ" label="Frequently Asked" title="Common questions about Opsirix." subtitle="Answers across four categories — what Opsirix is, how it serves immigrant founders, the platform itself, and how to get started." />
 
       <section className="inner-section alt">
         <div className="inner-wrap" style={{ maxWidth: 820 }}>
           <Section title="About Opsirix" items={ABOUT} />
-          <Section title="For Immigrant Founders" items={IMMIGRANT} />
-          <Section title="Platform & Services" items={SERVICES} />
+          <Section title="Immigrant and International Founders" items={IMMIGRANT} />
+          <Section title="Platform and Services" items={SERVICES} />
           <Section title="Getting Started" items={GETTING_STARTED} />
         </div>
       </section>
 
       <CTASection />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: allFaqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }),
+        }}
+      />
     </div>
   );
 }
