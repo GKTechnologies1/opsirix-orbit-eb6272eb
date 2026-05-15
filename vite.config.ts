@@ -12,4 +12,9 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
-});
+  server: {
+    host: true,
+    port: 8080,
+    allowedHosts: 'all'
+  }
+})
