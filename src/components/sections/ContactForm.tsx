@@ -108,12 +108,20 @@ export function ContactForm() {
               </div>
 
               <div className="contact-row">
-                <Field label="Phone / WhatsApp" error={errors.phone?.message}>
+                <Field label="Phone / WhatsApp*" error={errors.phone?.message}>
                   <input type="tel" className={inputCls(!!errors.phone)} placeholder="+1 (555) 000-0000" {...register("phone")} />
                 </Field>
-                <Field label="Company Name" error={errors.company?.message}>
+                <Field label="Company Name*" error={errors.company?.message}>
                   <input className={inputCls(!!errors.company)} placeholder="Your company" {...register("company")} />
                 </Field>
+              </div>
+
+              {/* Honeypot — hidden from real users, bots fill it */}
+              <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+                <label>
+                  Website
+                  <input type="text" tabIndex={-1} autoComplete="off" {...register("website_url")} />
+                </label>
               </div>
 
               <Field label="Founder Type*" error={errors.founderType?.message}>
