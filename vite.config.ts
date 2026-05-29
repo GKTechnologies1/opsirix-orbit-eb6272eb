@@ -4,6 +4,7 @@ export default defineConfig((config) => {
   return {
     ...config,
     server: {
+      // @ts-expect-error ConfigEnv type does not include server, but it merges correctly at runtime
       ...config.server,
       host: true,
       port: 8080,
