@@ -234,6 +234,22 @@ export function ContactForm() {
               </div>
               {errors.consent && <p className="contact-err">{errors.consent.message}</p>}
 
+              {submitError && (
+                <div
+                  role="alert"
+                  style={{
+                    padding: "12px 14px",
+                    borderRadius: 8,
+                    background: "rgba(239,68,68,0.1)",
+                    border: "1px solid rgba(239,68,68,0.4)",
+                    color: "#fecaca",
+                    fontSize: 13,
+                  }}
+                >
+                  {submitError}
+                </div>
+              )}
+
               <button type="submit" disabled={isSubmitting} className="contact-submit">
                 {isSubmitting ? (
                   <>
@@ -241,7 +257,7 @@ export function ContactForm() {
                     <span>Submitting…</span>
                   </>
                 ) : (
-                  <span>Submit Intake Form →</span>
+                  <span>Submit Discovery Call Request →</span>
                 )}
               </button>
             </form>
