@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://opsirix-orbit.lovable.app/sitemap.xml
+Sitemap: https://opsirix.com/sitemap.xml

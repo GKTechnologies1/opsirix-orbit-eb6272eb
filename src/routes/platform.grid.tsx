@@ -16,9 +16,9 @@ export const Route = createFileRoute("/platform/grid")({
         content:
           "Monthly operational readiness score across ten categories. Know where your company is strong and what needs attention next.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/grid" },
+      { property: "og:url", content: "https://opsirix.com/platform/grid" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/grid" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/platform/grid" }],
   }),
   component: GridPage,
 });

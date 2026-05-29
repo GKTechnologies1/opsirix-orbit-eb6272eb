@@ -16,9 +16,9 @@ export const Route = createFileRoute("/platform/os")({
         content:
           "Central founder operations dashboard. Document status, workflow activity, partner coordination, and company health in one view.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/os" },
+      { property: "og:url", content: "https://opsirix.com/platform/os" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/os" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/platform/os" }],
   }),
   component: OSPage,
 });

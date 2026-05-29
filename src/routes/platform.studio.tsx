@@ -16,9 +16,9 @@ export const Route = createFileRoute("/platform/studio")({
         content:
           "Selective venture readiness support for operationally mature founders. Investor documentation, strategic coordination, and growth preparation.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/studio" },
+      { property: "og:url", content: "https://opsirix.com/platform/studio" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/studio" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/platform/studio" }],
   }),
   component: StudioPage,
 });

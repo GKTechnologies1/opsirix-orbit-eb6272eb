@@ -11,9 +11,9 @@ export const Route = createFileRoute("/faq")({
       { name: "description", content: "Common questions about Opsirix, our platform, immigrant founder support, compliance architecture, and how founders get started." },
       { property: "og:title", content: "FAQ | Opsirix Founder Operations Platform" },
       { property: "og:description", content: "Common questions about Opsirix, our platform, immigrant founder support, compliance architecture, and how founders get started." },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/faq" },
+      { property: "og:url", content: "https://opsirix.com/faq" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/faq" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/faq" }],
   }),
   component: Page,
 });

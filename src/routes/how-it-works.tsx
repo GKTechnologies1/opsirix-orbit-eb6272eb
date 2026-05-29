@@ -9,9 +9,9 @@ export const Route = createFileRoute("/how-it-works")({
       { name: "description", content: "See how Opsirix coordinates documents, workflows, and professional partners for early-stage founders. From intake to operational readiness." },
       { property: "og:title", content: "How Opsirix Works | Founder Operations Platform" },
       { property: "og:description", content: "See how Opsirix coordinates documents, workflows, and professional partners for early-stage founders. From intake to operational readiness." },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/how-it-works" },
+      { property: "og:url", content: "https://opsirix.com/how-it-works" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/how-it-works" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/how-it-works" }],
   }),
   component: Page,
 });

@@ -16,9 +16,9 @@ export const Route = createFileRoute("/platform/vault")({
         content:
           "Organize company documents, formation records, and partner handoff packets in one structured document vault for early-stage founders.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/vault" },
+      { property: "og:url", content: "https://opsirix.com/platform/vault" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/vault" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/platform/vault" }],
   }),
   component: VaultPage,
 });

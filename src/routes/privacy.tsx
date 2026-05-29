@@ -8,9 +8,9 @@ export const Route = createFileRoute("/privacy")({
       { name: "description", content: "How Opsirix collects, uses, and protects information from founders, partners, and visitors." },
       { property: "og:title", content: "Privacy Policy | Opsirix" },
       { property: "og:description", content: "How Opsirix collects, uses, and protects information from founders, partners, and visitors." },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/privacy" },
+      { property: "og:url", content: "https://opsirix.com/privacy" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/privacy" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/privacy" }],
   }),
   component: Page,
 });

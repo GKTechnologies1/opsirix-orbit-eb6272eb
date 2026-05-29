@@ -16,9 +16,9 @@ export const Route = createFileRoute("/about")({
         property: "og:description",
         content: "Opsirix is a founder operations platform that helps startups organize documents, workflows, and professional coordination. Built for serious founders from day one.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/about" },
+      { property: "og:url", content: "https://opsirix.com/about" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/about" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/about" }],
   }),
   component: Page,
 });

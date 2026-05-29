@@ -16,9 +16,9 @@ export const Route = createFileRoute("/platform/launch")({
         content:
           "Coordinate the operational side of starting a company. Formation checklists, document collection, banking setup, and professional introductions.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/launch" },
+      { property: "og:url", content: "https://opsirix.com/platform/launch" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/launch" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/platform/launch" }],
   }),
   component: LaunchPage,
 });

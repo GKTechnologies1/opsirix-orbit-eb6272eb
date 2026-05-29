@@ -8,9 +8,9 @@ export const Route = createFileRoute("/for-universities")({
       { name: "description", content: "Opsirix partners with universities, entrepreneurship centers, and international student offices. Operational workshops, founder readiness programs, and campus resources." },
       { property: "og:title", content: "University Partnerships | Opsirix Founder Operations Programs" },
       { property: "og:description", content: "Opsirix partners with universities, entrepreneurship centers, and international student offices. Operational workshops, founder readiness programs, and campus resources." },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/for-universities" },
+      { property: "og:url", content: "https://opsirix.com/for-universities" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/for-universities" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/for-universities" }],
   }),
   component: Page,
 });

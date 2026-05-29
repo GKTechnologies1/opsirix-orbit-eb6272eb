@@ -16,9 +16,9 @@ export const Route = createFileRoute("/platform/flow")({
         content:
           "Organize tasks, reminders, partner handoffs, and recurring workflows. Know what needs to happen, who owns it, and what is overdue.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/flow" },
+      { property: "og:url", content: "https://opsirix.com/platform/flow" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/flow" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/platform/flow" }],
   }),
   component: FlowPage,
 });

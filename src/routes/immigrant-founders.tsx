@@ -8,9 +8,9 @@ export const Route = createFileRoute("/immigrant-founders")({
       { name: "description", content: "Opsirix helps F-1, OPT, H-1B, and international founders organize their startup operations. Documentation, workflow clarity, and partner coordination, not immigration advice." },
       { property: "og:title", content: "Opsirix for Immigrant Founders | F-1, H-1B, OPT Operations Support" },
       { property: "og:description", content: "Opsirix helps F-1, OPT, H-1B, and international founders organize their startup operations. Documentation, workflow clarity, and partner coordination, not immigration advice." },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/immigrant-founders" },
+      { property: "og:url", content: "https://opsirix.com/immigrant-founders" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/immigrant-founders" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/immigrant-founders" }],
   }),
   component: Page,
 });

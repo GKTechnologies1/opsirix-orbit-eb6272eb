@@ -16,9 +16,9 @@ export const Route = createFileRoute("/contact")({
         content:
           "Schedule your free 30-minute Opsirix Discovery Call. Complete the founder intake form and we will recommend the right Opsirix path within one business day.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/contact" },
+      { property: "og:url", content: "https://opsirix.com/contact" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/contact" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/contact" }],
   }),
   component: ContactPage,
 });
