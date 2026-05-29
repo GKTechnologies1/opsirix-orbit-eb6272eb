@@ -13,6 +13,7 @@ type NavLink = {
 
 const NAV_LINKS: NavLink[] = [
   { label: "How It Works", to: "/how-it-works" },
+  { label: "About", to: "/about" },
   { label: "Platform", to: "/platform", dropdown: true },
   { label: "Immigrant Founders", to: "/immigrant-founders" },
   { label: "Partners", to: "/for-partners" },

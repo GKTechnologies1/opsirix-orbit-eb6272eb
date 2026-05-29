@@ -27,9 +27,10 @@ const FOUNDER_LINKS: FooterLink[] = [
 ];
 
 const COMPANY_LINKS: FooterLink[] = [
+  { label: "About", to: "/about" },
+  { label: "Services", to: "/services" },
   { label: "Partners", to: "/for-partners" },
   { label: "Universities", to: "/for-universities" },
-  { label: "About", to: "/about" },
   { label: "Blog", soon: true },
   { label: "FAQ", to: "/faq" },
   { label: "Privacy Policy", to: "/privacy" },
