@@ -84,9 +84,9 @@ export function ContactForm() {
             className="contact-success"
           >
             <div className="contact-check">✅</div>
-            <h3>Intake received!</h3>
+            <h3>Request received!</h3>
             <p>
-              We'll review your intake and be in touch within 1 business day to schedule your Discovery Call.
+              Thank you. Your discovery call request has been received. The Opsirix team will contact you shortly.
             </p>
             <a href="/how-it-works" className="contact-success-link">
               In the meantime, read How Opsirix Works →
