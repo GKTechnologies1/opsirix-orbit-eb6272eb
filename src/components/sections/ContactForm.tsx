@@ -199,6 +199,16 @@ export function ContactForm() {
                 />
               </Field>
 
+              <Field label="Preferred Contact Method*" error={errors.preferredContact?.message}>
+                <select className={inputCls(!!errors.preferredContact)} defaultValue="" {...register("preferredContact")}>
+                  <option value="" disabled>Select…</option>
+                  <option>Email</option>
+                  <option>Phone</option>
+                  <option>WhatsApp</option>
+                  <option>Video call</option>
+                </select>
+              </Field>
+
               <Field label="Preferred Meeting Time" error={errors.meetingTime?.message}>
                 <select className={inputCls(false)} defaultValue="" {...register("meetingTime")}>
                   <option value="">Select a preferred time…</option>
