@@ -14,7 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      discovery_call_submissions: {
+        Row: {
+          business_stage: string | null
+          company_name: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string
+          phone: string | null
+          preferred_contact_method: string | null
+          preferred_meeting_time: string | null
+          service_interest: string | null
+          source_page: string
+          status: string
+          updated_at: string | null
+          user_agent: string | null
+          website: string | null
+        }
+        Insert: {
+          business_stage?: string | null
+          company_name?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message: string
+          phone?: string | null
+          preferred_contact_method?: string | null
+          preferred_meeting_time?: string | null
+          service_interest?: string | null
+          source_page?: string
+          status?: string
+          updated_at?: string | null
+          user_agent?: string | null
+          website?: string | null
+        }
+        Update: {
+          business_stage?: string | null
+          company_name?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string
+          phone?: string | null
+          preferred_contact_method?: string | null
+          preferred_meeting_time?: string | null
+          service_interest?: string | null
+          source_page?: string
+          status?: string
+          updated_at?: string | null
+          user_agent?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
