@@ -16,9 +16,9 @@ export const Route = createFileRoute("/platform/core")({
         content:
           "Managed operational support for founders who need more than tools. Monthly reviews, task follow-up, document coordination, and partner management.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/core" },
+      { property: "og:url", content: "https://opsirix.com/platform/core" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/core" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/platform/core" }],
   }),
   component: CorePage,
 });

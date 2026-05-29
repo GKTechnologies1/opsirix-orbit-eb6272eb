@@ -16,9 +16,9 @@ export const Route = createFileRoute("/platform/ai")({
         content:
           "Surface missing documents, workflow delays, and suggested next actions. Operational visibility without replacing professional judgment.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/platform/ai" },
+      { property: "og:url", content: "https://opsirix.com/platform/ai" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/platform/ai" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/platform/ai" }],
   }),
   component: AIPage,
 });

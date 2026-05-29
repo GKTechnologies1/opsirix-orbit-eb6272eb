@@ -9,9 +9,9 @@ export const Route = createFileRoute("/for-partners")({
       { name: "description", content: "Join the Opsirix Nexus partner network. Get referrals to organized, prepared founders. Work with clients who have their operational documents ready." },
       { property: "og:title", content: "Partner With Opsirix | Nexus Partner Network for Attorneys and CPAs" },
       { property: "og:description", content: "Join the Opsirix Nexus partner network. Get referrals to organized, prepared founders. Work with clients who have their operational documents ready." },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/for-partners" },
+      { property: "og:url", content: "https://opsirix.com/for-partners" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/for-partners" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/for-partners" }],
   }),
   component: Page,
 });

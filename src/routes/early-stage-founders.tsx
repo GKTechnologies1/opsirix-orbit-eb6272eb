@@ -16,9 +16,9 @@ export const Route = createFileRoute("/early-stage-founders")({
         property: "og:description",
         content: "Operational infrastructure for pre-seed and seed founders.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/early-stage-founders" },
+      { property: "og:url", content: "https://opsirix.com/early-stage-founders" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/early-stage-founders" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/early-stage-founders" }],
   }),
   component: Page,
 });

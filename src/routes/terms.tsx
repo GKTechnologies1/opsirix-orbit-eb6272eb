@@ -8,9 +8,9 @@ export const Route = createFileRoute("/terms")({
       { name: "description", content: "Terms governing use of the Opsirix platform and operational coordination services." },
       { property: "og:title", content: "Terms of Service | Opsirix" },
       { property: "og:description", content: "Terms governing use of the Opsirix platform and operational coordination services." },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/terms" },
+      { property: "og:url", content: "https://opsirix.com/terms" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/terms" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/terms" }],
   }),
   component: Page,
 });

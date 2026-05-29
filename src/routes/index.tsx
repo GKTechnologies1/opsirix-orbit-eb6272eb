@@ -28,9 +28,9 @@ export const Route = createFileRoute("/")({
         content:
           "Opsirix organizes documents, workflows, and partner coordination for early-stage and immigrant founders. Structure your startup operations from day one.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app/" },
+      { property: "og:url", content: "https://opsirix.com/" },
     ],
-    links: [{ rel: "canonical", href: "https://opsirix-orbit.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://opsirix.com/" }],
   }),
   component: Index,
 });

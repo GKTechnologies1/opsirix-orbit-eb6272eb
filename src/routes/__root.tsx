@@ -97,8 +97,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Turn founder chaos into structured execution. Workflow orchestration, document intelligence, and partner coordination for founders.",
       },
-      { property: "og:url", content: "https://opsirix-orbit.lovable.app" },
-      { property: "og:image", content: "https://opsirix-orbit.lovable.app/og-default.png" },
+      { property: "og:url", content: "https://opsirix.com" },
+      { property: "og:image", content: "https://opsirix.com/og-default.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "Opsirix - Founder Infrastructure Platform" },
@@ -108,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:creator", content: "@opsirix" },
       { name: "twitter:title", content: "Opsirix - Founder Operations OS" },
       { name: "twitter:description", content: "Turn founder chaos into structured execution." },
-      { name: "twitter:image", content: "https://opsirix-orbit.lovable.app/og-default.png" },
+      { name: "twitter:image", content: "https://opsirix.com/og-default.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -129,17 +129,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@graph": [
             {
               "@type": "Organization",
-              "@id": "https://opsirix-orbit.lovable.app/#org",
+              "@id": "https://opsirix.com/#org",
               name: "Opsirix",
-              url: "https://opsirix-orbit.lovable.app",
-              logo: "https://opsirix-orbit.lovable.app/logo.svg",
+              url: "https://opsirix.com",
+              logo: "https://opsirix.com/logo.svg",
               description:
                 "Founder operations platform for documents, workflows, and partner coordination.",
               foundingDate: "2025",
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "sales",
-                url: "https://opsirix-orbit.lovable.app/contact",
+                url: "https://opsirix.com/contact",
               },
               sameAs: [
                 "https://www.linkedin.com/company/opsirix/",
@@ -148,7 +148,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             },
             {
               "@type": "SoftwareApplication",
-              "@id": "https://opsirix-orbit.lovable.app/#software",
+              "@id": "https://opsirix.com/#software",
               name: "Opsirix OS",
               applicationCategory: "BusinessApplication",
               operatingSystem: "Web",
@@ -157,14 +157,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             },
             {
               "@type": "WebSite",
-              "@id": "https://opsirix-orbit.lovable.app/#site",
-              url: "https://opsirix-orbit.lovable.app",
+              "@id": "https://opsirix.com/#site",
+              url: "https://opsirix.com",
               name: "Opsirix",
-              publisher: { "@id": "https://opsirix-orbit.lovable.app/#org" },
+              publisher: { "@id": "https://opsirix.com/#org" },
               potentialAction: {
                 "@type": "SearchAction",
                 target:
-                  "https://opsirix-orbit.lovable.app/faq?q={search_term_string}",
+                  "https://opsirix.com/faq?q={search_term_string}",
                 "query-input": "required name=search_term_string",
               },
             },
