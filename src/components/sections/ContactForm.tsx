@@ -4,12 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { submitDiscoveryCall } from "@/lib/discovery-call.functions";
 
 const schema = z.object({
   name: z.string().min(2, "Name required").max(120),
   email: z.string().email("Valid email required").max(255),
-  phone: z.string().max(40).optional(),
-  company: z.string().max(150).optional(),
+  phone: z.string().min(6, "Phone required").max(40),
+  company: z.string().min(1, "Company name required").max(150),
   founderType: z.string().min(1, "Please select your founder type"),
   companyStage: z.string().min(1, "Please select your company stage"),
   visaStatus: z.string().max(120).optional(),
@@ -18,6 +20,8 @@ const schema = z.object({
   hasEntity: z.enum(["yes", "no"], { required_error: "Required" }),
   helpNeeded: z.string().min(20, "Please describe your situation (20 chars min)").max(2000),
   meetingTime: z.string().optional(),
+  preferredContact: z.string().min(1, "Please select a preferred contact method"),
+  website_url: z.string().max(0).optional(), // honeypot
   consent: z.literal(true, { errorMap: () => ({ message: "You must agree to continue" }) }),
 });
 
@@ -25,6 +29,8 @@ type FormData = z.infer<typeof schema>;
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const submitFn = useServerFn(submitDiscoveryCall);
   const {
     register,
     handleSubmit,
@@ -32,18 +38,38 @@ export function ContactForm() {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    // === CRM INTEGRATION POINT ===
-    // Route to HubSpot: POST /api/contact (server function)
-    // Fields map: email → contact.email, founderType → custom property "founder_type"
-    // companyStage → custom property "company_stage"
-    // helpNeeded → contact.description
-    // Trigger HubSpot workflow: "New Founder Intake Received"
-    // Slack notification: POST to webhook, channel #new-founder-intakes
-    // Google Sheets: append row via Sheets API for manual review
-    // Salesforce: Create Lead, Source = "Opsirix Website - Intake Form"
-    console.log("Intake submission:", data);
-    await new Promise((r) => setTimeout(r, 900));
-    setSubmitted(true);
+    setSubmitError(null);
+    try {
+      await submitFn({
+        data: {
+          full_name: data.name,
+          email: data.email,
+          phone: data.phone,
+          company_name: data.company,
+          business_stage: `${data.founderType} / ${data.companyStage}`,
+          service_interest: [
+            data.visaStatus ? `Visa: ${data.visaStatus}` : null,
+            `Attorney: ${data.hasAttorney}`,
+            `CPA: ${data.hasCPA}`,
+            `Entity formed: ${data.hasEntity}`,
+          ]
+            .filter(Boolean)
+            .join(" | "),
+          preferred_contact_method: data.preferredContact,
+          preferred_meeting_time: data.meetingTime || "",
+          message: data.helpNeeded,
+          source_page: typeof window !== "undefined" ? window.location.pathname : "/contact",
+          website_url: data.website_url || "",
+          user_agent: typeof navigator !== "undefined" ? navigator.userAgent.slice(0, 500) : "",
+        },
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Submit failed:", err);
+      setSubmitError(
+        "Something went wrong while submitting your request. Please try again or email us directly at Operations@opsirix.com.",
+      );
+    }
   };
 
   return (
@@ -58,9 +84,9 @@ export function ContactForm() {
             className="contact-success"
           >
             <div className="contact-check">✅</div>
-            <h3>Intake received!</h3>
+            <h3>Request received!</h3>
             <p>
-              We'll review your intake and be in touch within 1 business day to schedule your Discovery Call.
+              Thank you. Your discovery call request has been received. The Opsirix team will contact you shortly.
             </p>
             <a href="/how-it-works" className="contact-success-link">
               In the meantime, read How Opsirix Works →
@@ -82,12 +108,20 @@ export function ContactForm() {
               </div>
 
               <div className="contact-row">
-                <Field label="Phone / WhatsApp" error={errors.phone?.message}>
+                <Field label="Phone / WhatsApp*" error={errors.phone?.message}>
                   <input type="tel" className={inputCls(!!errors.phone)} placeholder="+1 (555) 000-0000" {...register("phone")} />
                 </Field>
-                <Field label="Company Name" error={errors.company?.message}>
+                <Field label="Company Name*" error={errors.company?.message}>
                   <input className={inputCls(!!errors.company)} placeholder="Your company" {...register("company")} />
                 </Field>
+              </div>
+
+              {/* Honeypot — hidden from real users, bots fill it */}
+              <div aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, overflow: "hidden" }}>
+                <label>
+                  Website
+                  <input type="text" tabIndex={-1} autoComplete="off" {...register("website_url")} />
+                </label>
               </div>
 
               <Field label="Founder Type*" error={errors.founderType?.message}>
@@ -165,6 +199,16 @@ export function ContactForm() {
                 />
               </Field>
 
+              <Field label="Preferred Contact Method*" error={errors.preferredContact?.message}>
+                <select className={inputCls(!!errors.preferredContact)} defaultValue="" {...register("preferredContact")}>
+                  <option value="" disabled>Select…</option>
+                  <option>Email</option>
+                  <option>Phone</option>
+                  <option>WhatsApp</option>
+                  <option>Video call</option>
+                </select>
+              </Field>
+
               <Field label="Preferred Meeting Time" error={errors.meetingTime?.message}>
                 <select className={inputCls(false)} defaultValue="" {...register("meetingTime")}>
                   <option value="">Select a preferred time…</option>
@@ -190,6 +234,22 @@ export function ContactForm() {
               </div>
               {errors.consent && <p className="contact-err">{errors.consent.message}</p>}
 
+              {submitError && (
+                <div
+                  role="alert"
+                  style={{
+                    padding: "12px 14px",
+                    borderRadius: 8,
+                    background: "rgba(239,68,68,0.1)",
+                    border: "1px solid rgba(239,68,68,0.4)",
+                    color: "#fecaca",
+                    fontSize: 13,
+                  }}
+                >
+                  {submitError}
+                </div>
+              )}
+
               <button type="submit" disabled={isSubmitting} className="contact-submit">
                 {isSubmitting ? (
                   <>
@@ -197,7 +257,7 @@ export function ContactForm() {
                     <span>Submitting…</span>
                   </>
                 ) : (
-                  <span>Submit Intake Form →</span>
+                  <span>Submit Discovery Call Request →</span>
                 )}
               </button>
             </form>
