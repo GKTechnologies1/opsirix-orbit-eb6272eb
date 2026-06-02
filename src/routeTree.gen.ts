@@ -32,7 +32,6 @@ import { Route as PlatformGridRouteImport } from './routes/platform.grid'
 import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
 import { Route as PlatformCoreRouteImport } from './routes/platform.core'
 import { Route as PlatformAiRouteImport } from './routes/platform.ai'
-import { Route as ApiPublicTestEmailRouteImport } from './routes/api/public/test-email'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -149,11 +148,6 @@ const PlatformAiRoute = PlatformAiRouteImport.update({
   path: '/ai',
   getParentRoute: () => PlatformRoute,
 } as any)
-const ApiPublicTestEmailRoute = ApiPublicTestEmailRouteImport.update({
-  id: '/api/public/test-email',
-  path: '/api/public/test-email',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -179,7 +173,6 @@ export interface FileRoutesByFullPath {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
-  '/api/public/test-email': typeof ApiPublicTestEmailRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -205,7 +198,6 @@ export interface FileRoutesByTo {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
-  '/api/public/test-email': typeof ApiPublicTestEmailRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -232,7 +224,6 @@ export interface FileRoutesById {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
-  '/api/public/test-email': typeof ApiPublicTestEmailRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -260,7 +251,6 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
-    | '/api/public/test-email'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -286,7 +276,6 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
-    | '/api/public/test-email'
   id:
     | '__root__'
     | '/'
@@ -312,7 +301,6 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
-    | '/api/public/test-email'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -330,7 +318,6 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
-  ApiPublicTestEmailRoute: typeof ApiPublicTestEmailRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -496,13 +483,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformAiRouteImport
       parentRoute: typeof PlatformRoute
     }
-    '/api/public/test-email': {
-      id: '/api/public/test-email'
-      path: '/api/public/test-email'
-      fullPath: '/api/public/test-email'
-      preLoaderRoute: typeof ApiPublicTestEmailRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -549,8 +529,17 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
-  ApiPublicTestEmailRoute: ApiPublicTestEmailRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
