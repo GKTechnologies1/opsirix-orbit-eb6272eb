@@ -88,6 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Opsirix" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { name: "google-site-verification", content: "CQSpCOWPxfh8sc8YmyupwQV-fEIn5A3c8NHQ_sPptMw" },
       // Open Graph defaults
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Opsirix" },
