@@ -103,7 +103,7 @@ export const submitDiscoveryCall = createServerFn({ method: "POST" })
 
         const { error: emailError } = await resend.emails.send({
           from: "Opsirix Intake <noreply@opsirix.com>",
-          to: "Operations@opsirix.com",
+          to: "Opsirix@gmail.com",
           replyTo: row.email,
           subject: `New Discovery Call Request — ${row.full_name}`,
           html,
