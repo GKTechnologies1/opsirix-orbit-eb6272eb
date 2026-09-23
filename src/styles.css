@@ -2277,3 +2277,8 @@
 @media (max-width: 1100px) { .svc-layout { grid-template-columns: 1fr; }.svc-summary { position: sticky; top: auto; bottom: 0; z-index: 5; order: 2; }.svc-summary .nexus-work-card { padding: 16px 20px; max-height: 45vh; overflow: auto; } }
 @media (max-width: 640px) { .svc-type-grid, .svc-details, .svc-suggest { grid-template-columns: 1fr; }.svc-details { margin-left: 0; }.svc-details-toggle { margin-left: 32px; }.svc-panel-head { flex-direction: column; } }
 @media (prefers-reduced-motion: reduce) { .svc-group > summary svg, .svc-type { transition: none; } }
+.nexus-sidebar nav { align-content: start; }
+.svc-layout input:not([type=checkbox]), .svc-layout select, .svc-layout textarea { min-height: 44px; width: 100%; border: 1px solid var(--border-subtle); background: var(--bg-primary); color: var(--color-ice); padding: 10px 12px; outline: none; font-size: 14px; }
+.svc-layout .svc-search input { padding-left: 42px; min-height: 48px; }
+.svc-layout input:not([type=checkbox]):focus, .svc-layout select:focus, .svc-layout textarea:focus { border-color: var(--color-cyan); box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-cyan) 18%, transparent); }
+.svc-actions button:disabled { opacity: .45; }
