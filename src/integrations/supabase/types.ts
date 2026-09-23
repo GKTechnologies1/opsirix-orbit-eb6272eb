@@ -244,6 +244,56 @@ export type Database = {
           },
         ]
       }
+      partner_licenses: {
+        Row: {
+          application_id: string
+          created_at: string
+          id: string
+          license_number: string
+          line_of_authority: string
+          producer_id: string | null
+          review_status: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          state_code: string
+          user_id: string
+        }
+        Insert: {
+          application_id: string
+          created_at?: string
+          id?: string
+          license_number: string
+          line_of_authority: string
+          producer_id?: string | null
+          review_status?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state_code: string
+          user_id: string
+        }
+        Update: {
+          application_id?: string
+          created_at?: string
+          id?: string
+          license_number?: string
+          line_of_authority?: string
+          producer_id?: string | null
+          review_status?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state_code?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_licenses_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       partner_profiles: {
         Row: {
           city: string | null
@@ -496,6 +546,74 @@ export type Database = {
             columns: ["resulting_service_id"]
             isOneToOne: false
             referencedRelation: "service_catalog"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_track_details: {
+        Row: {
+          application_id: string
+          audiences: string[]
+          authority_verified: boolean
+          campus_or_program: string | null
+          carriers_markets: string | null
+          created_at: string
+          geographic_reach: string | null
+          introduction_method: string | null
+          languages: string[]
+          representative_authorized: boolean
+          representative_email: string | null
+          representative_name: string
+          representative_title: string | null
+          segments_served: string[]
+          track: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          application_id: string
+          audiences?: string[]
+          authority_verified?: boolean
+          campus_or_program?: string | null
+          carriers_markets?: string | null
+          created_at?: string
+          geographic_reach?: string | null
+          introduction_method?: string | null
+          languages?: string[]
+          representative_authorized?: boolean
+          representative_email?: string | null
+          representative_name: string
+          representative_title?: string | null
+          segments_served?: string[]
+          track: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          application_id?: string
+          audiences?: string[]
+          authority_verified?: boolean
+          campus_or_program?: string | null
+          carriers_markets?: string | null
+          created_at?: string
+          geographic_reach?: string | null
+          introduction_method?: string | null
+          languages?: string[]
+          representative_authorized?: boolean
+          representative_email?: string | null
+          representative_name?: string
+          representative_title?: string | null
+          segments_served?: string[]
+          track?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_track_details_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: true
+            referencedRelation: "partner_applications"
             referencedColumns: ["id"]
           },
         ]

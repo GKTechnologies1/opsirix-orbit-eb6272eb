@@ -29,6 +29,13 @@
       "when": 1790199373789,
       "tag": "0003_extensible_partner_types",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790200428810,
+      "tag": "0004_partner_track_details_and_licenses",
+      "breakpoints": true
     }
   ]
 }
