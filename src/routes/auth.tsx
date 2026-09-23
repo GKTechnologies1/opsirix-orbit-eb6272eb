@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 const searchSchema = z.object({ next: z.string().optional().catch(undefined) });
 
 export const Route = createFileRoute("/auth")({
+  ssr: false,
   validateSearch: searchSchema,
   head: () => ({
     meta: [

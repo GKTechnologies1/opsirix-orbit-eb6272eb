@@ -6,4 +6,4 @@
 - [x] Add persisted partner application and QR attribution flow
 - [x] Add partner dashboard and admin review
 - [x] Add approved-only directory shell
-- [ ] Verify existing discovery records, security, build, and responsive flows
+- [x] Verify existing discovery records, security, build, and responsive flows
