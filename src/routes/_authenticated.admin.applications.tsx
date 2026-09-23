@@ -28,7 +28,7 @@ function AdminApplications() {
   useEffect(() => { void load(); }, []);
   async function review(status: "under_review" | "changes_requested" | "approved" | "declined") {
     if (!selected) return; setMessage(""); const note = (document.getElementById("review-note") as HTMLTextAreaElement | null)?.value;
-    try { await reviewPartnerApplication({ data: { applicationId: selected.id, status, note } }); setMessage("Review saved."); await load(); setSelected(null); } catch (error) { setMessage(error instanceof Error ? error.message : "Review could not be saved."); }
+    try { const result = await reviewPartnerApplication({ data: { applicationId: selected.id, status, note } }); if (!result.success) { setMessage(result.error); return; } setMessage("Review saved."); await load(); setSelected(null); } catch (error) { setMessage(error instanceof Error ? error.message : "Review could not be saved."); }
   }
   async function openApplication(item: Application) {
     setSelected(item);
