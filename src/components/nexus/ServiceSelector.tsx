@@ -32,7 +32,7 @@ export function ServiceSelector({ userId, applicationId, readOnly = false }: { u
   useEffect(() => {
     (async () => {
       const [t, c, s, sel, sug] = await Promise.all([
-        supabase.from("service_partner_types").select("*").eq("is_active", true).order("display_order"),
+        supabase.from("service_partner_types").select("*").eq("is_active", true).eq("is_open_for_registration", true).eq("track", "professional_service").order("display_order"),
         supabase.from("service_categories").select("*").order("display_order"),
         supabase.from("service_catalog").select("*").order("display_order"),
         supabase.from("partner_service_selections").select("*").eq("user_id", userId),
@@ -128,8 +128,8 @@ export function ServiceSelector({ userId, applicationId, readOnly = false }: { u
     <div className="svc-layout">
       <div className="svc-main">
         <fieldset className="nexus-work-card svc-types" disabled={readOnly}>
-          <legend><h2>What kind of firm are you?</h2></legend>
-          <p>Choose every type your organization genuinely offers. Each type keeps its own service list. Choosing a type is a self-reported description, not a license check.</p>
+          <legend><h2>Which of these describe your firm?</h2></legend>
+          <p>Choose every type your organization genuinely offers. Each type keeps its own service list. Choosing a type is a self-reported description, not a license check. These are the professional service types open now. More Nexus partner types will open separately.</p>
           <div className="svc-type-grid">
             {types.map((t) => (
               <label key={t.id} className={`svc-type ${state.types.includes(t.id) ? "is-on" : ""}`}>
