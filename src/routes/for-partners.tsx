@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import { PageHeader } from "@/components/shared/PageHeader";
 
 export const Route = createFileRoute("/for-partners")({
@@ -41,12 +40,6 @@ const STEPS = [
 ];
 
 function Page() {
-  const [submitted, setSubmitted] = useState(false);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
     <div className="inner-page">
       <PageHeader
@@ -111,52 +104,11 @@ function Page() {
           <h2 className="inner-h2">Apply to join the Nexus network.</h2>
 
           <div style={{ maxWidth: 640, marginTop: 32 }} className="contact-card">
-            {submitted ? (
-              <div className="contact-success">
-                <div className="contact-check">✅</div>
-                <h3>Application received</h3>
-                <p>We'll review and respond within 2 business days.</p>
-              </div>
-            ) : (
-              <form onSubmit={onSubmit} className="contact-form">
-                <div className="contact-field">
-                  <label className="contact-label">Full Name*</label>
-                  <input className="contact-input" required maxLength={100} placeholder="Full name" />
-                </div>
-                <div className="contact-field">
-                  <label className="contact-label">Organization Name*</label>
-                  <input className="contact-input" required maxLength={150} placeholder="Firm or organization" />
-                </div>
-                <div className="contact-field">
-                  <label className="contact-label">Professional Type*</label>
-                  <select className="contact-input" required defaultValue="">
-                    <option value="" disabled>Select…</option>
-                    <option>Attorney</option>
-                    <option>Immigration Attorney</option>
-                    <option>CPA</option>
-                    <option>Bookkeeper</option>
-                    <option>Insurance Broker</option>
-                    <option>Banker</option>
-                    <option>Technology Partner</option>
-                    <option>University Partner</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-                <div className="contact-field">
-                  <label className="contact-label">Email Address*</label>
-                  <input type="email" className="contact-input" required maxLength={255} placeholder="you@firm.com" />
-                </div>
-                <div className="contact-field">
-                  <label className="contact-label">Phone</label>
-                  <input type="tel" className="contact-input" maxLength={30} placeholder="+1 555 555 5555" />
-                </div>
-                <div className="contact-field">
-                  <label className="contact-label">Why you want to partner with Opsirix*</label>
-                  <textarea className="contact-input" required maxLength={1000} style={{ minHeight: 120 }} placeholder="Tell us about your practice and why this network is a fit." />
-                </div>
-                <button type="submit" className="contact-submit">Submit Partner Application</button>
-              </form>
-            )}
+            <h3 className="contact-h3">Tell us what you do best.</h3>
+            <p className="contact-sub">We'll review your details and help you set up a profile that makes it easier for the right people to find you.</p>
+            <Link to="/auth" search={{ next: "/partner/apply" }} className="contact-submit">
+              Start Partner Registration
+            </Link>
           </div>
         </div>
       </section>
@@ -165,7 +117,7 @@ function Page() {
         <div className="inner-wrap" style={{ textAlign: "center" }}>
           <h2 className="inner-h2">Ready to join the Nexus network?</h2>
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap", marginTop: 28 }}>
-            <a href="/contact?type=partner" className="btn-primary">Become a Nexus Partner →</a>
+            <Link to="/auth" search={{ next: "/partner/apply" }} className="btn-primary">Become a Nexus Partner →</Link>
           </div>
         </div>
       </section>
