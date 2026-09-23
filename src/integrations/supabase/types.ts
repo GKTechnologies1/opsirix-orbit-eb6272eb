@@ -674,19 +674,28 @@ export type Database = {
           display_order: number
           id: string
           is_active: boolean
+          is_open_for_registration: boolean
           label: string
+          short_description: string | null
+          track: string
         }
         Insert: {
           display_order?: number
           id: string
           is_active?: boolean
+          is_open_for_registration?: boolean
           label: string
+          short_description?: string | null
+          track?: string
         }
         Update: {
           display_order?: number
           id?: string
           is_active?: boolean
+          is_open_for_registration?: boolean
           label?: string
+          short_description?: string | null
+          track?: string
         }
         Relationships: []
       }
