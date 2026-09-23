@@ -29,7 +29,7 @@ export const submitDiscoveryCall = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => SubmissionSchema.parse(input))
   .handler(async ({ data }) => {
     if (data.website_url && data.website_url.length > 0) {
-      // honeypot tripped — silently succeed
+      // Honeypot tripped; silently succeed.
       return { success: true, id: null };
     }
 
@@ -48,7 +48,7 @@ export const submitDiscoveryCall = createServerFn({ method: "POST" })
       user_agent: data.user_agent || null,
     };
 
-    // Save to database first — must succeed
+    // Save to database first; this must succeed.
     const { data: saved, error: dbError } = await supabaseAdmin
       .from("discovery_call_submissions")
       .insert(row)
@@ -60,7 +60,7 @@ export const submitDiscoveryCall = createServerFn({ method: "POST" })
       throw new Error("Database save failed");
     }
 
-    // Then attempt email — failure here does NOT fail the submission
+    // Then attempt email. Failure here does not fail the submission.
     try {
       const apiKey = process.env.RESEND_API_KEY;
       if (!apiKey) {
@@ -96,7 +96,7 @@ export const submitDiscoveryCall = createServerFn({ method: "POST" })
             </div>
             <div style="margin-top:24px;padding-top:16px;border-top:1px solid #e2e8f0;font-size:12px;color:#64748b">
               <p style="margin:0">Reply to this email to contact the founder directly.</p>
-              <p style="margin:4px 0 0">Submitted: ${new Date().toISOString()} — Source: ${escapeHtml(row.source_page)}</p>
+              <p style="margin:4px 0 0">Submitted: ${new Date().toISOString()}. Source: ${escapeHtml(row.source_page)}</p>
             </div>
           </div>
         `;
@@ -105,7 +105,7 @@ export const submitDiscoveryCall = createServerFn({ method: "POST" })
           from: "Opsirix Intake <noreply@opsirix.com>",
           to: "Opsirix@gmail.com",
           replyTo: row.email,
-          subject: `New Discovery Call Request — ${row.full_name}`,
+          subject: `New Discovery Call Request: ${row.full_name}`,
           html,
         });
         if (emailError) {

@@ -188,7 +188,7 @@
 }
 
 /* Nexus professional network */
-.nexus-auth-page, .nexus-workspace, .nexus-directory, .nexus-invite { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--foreground); }
+.nexus-auth-page, .nexus-workspace, .nexus-directory, .nexus-invite { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--color-ice); }
 .nexus-auth-page { min-height: 100vh; padding: 48px 24px; display: grid; place-items: center; background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px); background-size: 64px 64px; }
 .nexus-auth-shell { width: min(1080px, 100%); display: grid; grid-template-columns: 1.05fr .95fr; border: 1px solid var(--border-subtle); background: var(--color-navy); box-shadow: var(--shadow-card); }
 .nexus-auth-intro, .nexus-auth-panel { padding: 56px; }

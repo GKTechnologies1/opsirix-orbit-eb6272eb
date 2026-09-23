@@ -23,12 +23,12 @@ const BENEFITS = [
 ];
 
 const TYPES = [
-  { icon: "⚖️", t: "Immigration Attorneys", d: "Founders with organized documentation and clear context." },
-  { icon: "📊", t: "CPAs and Bookkeepers", d: "Financial coordination handled. Accounting work ready to begin." },
-  { icon: "🏦", t: "Banking Partners", d: "Startup-ready founders who need business banking setup." },
-  { icon: "🛡️", t: "Insurance Brokers", d: "Founders who need GL, E&O, or Cyber Liability coverage." },
-  { icon: "💻", t: "Technology Partners", d: "Founders who need software development, AI, or MVP builds." },
-  { icon: "🏛️", t: "University Partners", d: "Campus programs seeking operational resources for student founders." },
+  { t: "Immigration Attorneys", d: "Founders with organized documentation and clear context." },
+  { t: "CPAs and Bookkeepers", d: "Financial coordination handled. Accounting work ready to begin." },
+  { t: "Banking Partners", d: "Startup-ready founders who need business banking setup." },
+  { t: "Insurance Brokers", d: "Founders who need GL, E&O, or Cyber Liability coverage." },
+  { t: "Technology Partners", d: "Founders who need software development, AI, or MVP builds." },
+  { t: "University Partners", d: "Campus programs seeking operational resources for student founders." },
 ];
 
 const STEPS = [
@@ -66,7 +66,6 @@ function Page() {
           <div className="inner-grid-3">
             {TYPES.map((t) => (
               <div key={t.t} className="inner-card">
-                <div style={{ fontSize: 28, marginBottom: 12 }}>{t.icon}</div>
                 <h3>{t.t}</h3>
                 <p>{t.d}</p>
               </div>

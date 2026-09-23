@@ -49,8 +49,11 @@ function AuthPage() {
         else setMessage("Check your email to confirm your account, then return here to sign in.");
       } else setMessage(error?.message ?? "We could not create your account. Please try again.");
     } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (!error) await navigate({ to: safeNext });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (!error && data.user) {
+        await supabase.from("profiles").upsert({ id: data.user.id, email: data.user.email ?? email, full_name: String(data.user.user_metadata.full_name ?? "") });
+        await navigate({ to: safeNext });
+      }
       else setMessage(error.message);
     }
     setPending(false);

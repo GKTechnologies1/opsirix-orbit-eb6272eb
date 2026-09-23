@@ -71,6 +71,10 @@ function PartnerApplicationPage() {
     if (error) setMessage(error.message);
     else if (data) {
       setApplication(data);
+      if (ref) {
+        const { data: campaign } = await supabase.from("partner_campaigns").select("id").eq("code", ref).eq("is_active", true).maybeSingle();
+        if (campaign) await supabase.from("partner_attributions").upsert({ user_id: auth.user.id, application_id: data.id, campaign_id: campaign.id }, { onConflict: "user_id,campaign_id" });
+      }
       if (submit) await navigate({ to: "/partner" });
       else setMessage("Draft saved.");
     }
