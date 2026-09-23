@@ -54,7 +54,7 @@ function AuthPage() {
         await supabase.from("profiles").upsert({ id: data.user.id, email: data.user.email ?? email, full_name: String(data.user.user_metadata.full_name ?? "") });
         await navigate({ to: safeNext });
       }
-      else setMessage(error.message);
+      else setMessage(error?.message ?? "We could not sign you in. Please try again.");
     }
     setPending(false);
   }

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { CTASection } from "@/components/shared/CTASection";
+import { MODULES } from "@/lib/modules";
 
 export const Route = createFileRoute("/platform/")({
   head: () => ({
@@ -20,19 +21,6 @@ const PRINCIPLES = [
   { t: "Structured from day one", d: "Opsirix organizes the operational layer before things become messy. Documents, workflows, and partner coordination in one place." },
   { t: "Connected, not siloed", d: "Every module in the Opsirix platform connects to the others. A document added to Vault appears in Flow. A Grid score improvement shows in the OS dashboard." },
   { t: "Coordination, not advice", d: "Opsirix coordinates operations. Licensed professionals handle legal, immigration, tax, and accounting matters independently." },
-];
-
-type Module = { icon: string; name: string; desc: string; who: string; href: string };
-const MODULES: Module[] = [
-  { icon: "🖥️", name: "Opsirix OS", desc: "The central founder operations dashboard.", who: "Every active Opsirix founder", href: "/platform/os" },
-  { icon: "🚀", name: "Opsirix Launch", desc: "Startup formation and operational setup coordination.", who: "Pre-launch and newly formed companies", href: "/platform/launch" },
-  { icon: "⚡", name: "Opsirix Flow", desc: "Workflow engine for founder operations.", who: "Active founders managing ongoing tasks", href: "/platform/flow" },
-  { icon: "🔒", name: "Opsirix Vault", desc: "Secure document organization for founders.", who: "Founders who need organized, accessible records", href: "/platform/vault" },
-  { icon: "🔗", name: "Opsirix Nexus", desc: "Partner coordination network for founders.", who: "Founders who work with attorneys, CPAs, and service partners", href: "/platform/nexus" },
-  { icon: "📊", name: "Opsirix Grid", desc: "Monthly operational readiness score.", who: "Founders who want structured operational visibility", href: "/platform/grid" },
-  { icon: "🧠", name: "Opsirix AI", desc: "Operational intelligence and detection layer.", who: "Founders who need smarter workflow visibility", href: "/platform/ai" },
-  { icon: "⚙️", name: "Opsirix Core", desc: "Managed operations support for higher-touch needs.", who: "Founders who need operational support, not just tools", href: "/platform/core" },
-  { icon: "🏛️", name: "Opsirix Studio", desc: "Venture readiness layer for operationally mature founders.", who: "Founders with strong operational foundations preparing for growth", href: "/platform/studio" },
 ];
 
 const CONNECTIONS = [
@@ -131,15 +119,14 @@ function Page() {
             }}
           >
             {MODULES.map((m) => (
-              <a key={m.name} href={m.href} className="inner-card module-card-link">
-                <div style={{ fontSize: 28, marginBottom: 10 }}>{m.icon}</div>
+              <Link key={m.name} to={m.to} className="inner-card module-card-link">
                 <h3 style={{ fontFamily: "var(--font-sora)", fontWeight: 700 }}>{m.name}</h3>
-                <p>{m.desc}</p>
+                <p>{m.short}</p>
                 <p style={{ fontSize: 12, color: "#64748B", marginTop: 6 }}>
-                  <strong style={{ color: "#0057D9" }}>Who it helps:</strong> {m.who}
+                  <strong style={{ color: "#0057D9" }}>Who it helps:</strong> {m.audience}
                 </p>
                 <span className="module-card-cta">Explore Module →</span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
