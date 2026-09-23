@@ -20,9 +20,13 @@ import { Route as ForUniversitiesRouteImport } from './routes/for-universities'
 import { Route as ForPartnersRouteImport } from './routes/for-partners'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as EarlyStageFoundersRouteImport } from './routes/early-stage-founders'
+import { Route as DirectoryRouteImport } from './routes/directory'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlatformIndexRouteImport } from './routes/platform.index'
 import { Route as PlatformVaultRouteImport } from './routes/platform.vault'
 import { Route as PlatformStudioRouteImport } from './routes/platform.studio'
 import { Route as PlatformOsRouteImport } from './routes/platform.os'
@@ -32,6 +36,10 @@ import { Route as PlatformGridRouteImport } from './routes/platform.grid'
 import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
 import { Route as PlatformCoreRouteImport } from './routes/platform.core'
 import { Route as PlatformAiRouteImport } from './routes/platform.ai'
+import { Route as JoinCodeRouteImport } from './routes/join.$code'
+import { Route as AuthenticatedPartnerIndexRouteImport } from './routes/_authenticated.partner.index'
+import { Route as AuthenticatedPartnerApplyRouteImport } from './routes/_authenticated.partner.apply'
+import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_authenticated.admin.applications'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -88,9 +96,19 @@ const EarlyStageFoundersRoute = EarlyStageFoundersRouteImport.update({
   path: '/early-stage-founders',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DirectoryRoute = DirectoryRouteImport.update({
+  id: '/directory',
+  path: '/directory',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -98,10 +116,19 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PlatformIndexRoute = PlatformIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PlatformRoute,
 } as any)
 const PlatformVaultRoute = PlatformVaultRouteImport.update({
   id: '/vault',
@@ -148,11 +175,36 @@ const PlatformAiRoute = PlatformAiRouteImport.update({
   path: '/ai',
   getParentRoute: () => PlatformRoute,
 } as any)
+const JoinCodeRoute = JoinCodeRouteImport.update({
+  id: '/join/$code',
+  path: '/join/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedPartnerIndexRoute =
+  AuthenticatedPartnerIndexRouteImport.update({
+    id: '/partner/',
+    path: '/partner/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPartnerApplyRoute =
+  AuthenticatedPartnerApplyRouteImport.update({
+    id: '/partner/apply',
+    path: '/partner/apply',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminApplicationsRoute =
+  AuthenticatedAdminApplicationsRouteImport.update({
+    id: '/admin/applications',
+    path: '/admin/applications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/directory': typeof DirectoryRoute
   '/early-stage-founders': typeof EarlyStageFoundersRoute
   '/faq': typeof FaqRoute
   '/for-partners': typeof ForPartnersRoute
@@ -164,6 +216,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/join/$code': typeof JoinCodeRoute
   '/platform/ai': typeof PlatformAiRoute
   '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
@@ -173,22 +226,28 @@ export interface FileRoutesByFullPath {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
+  '/platform/': typeof PlatformIndexRoute
+  '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
+  '/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/partner/': typeof AuthenticatedPartnerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/directory': typeof DirectoryRoute
   '/early-stage-founders': typeof EarlyStageFoundersRoute
   '/faq': typeof FaqRoute
   '/for-partners': typeof ForPartnersRoute
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
-  '/platform': typeof PlatformRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/join/$code': typeof JoinCodeRoute
   '/platform/ai': typeof PlatformAiRoute
   '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
@@ -198,12 +257,19 @@ export interface FileRoutesByTo {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
+  '/platform': typeof PlatformIndexRoute
+  '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
+  '/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/partner': typeof AuthenticatedPartnerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/directory': typeof DirectoryRoute
   '/early-stage-founders': typeof EarlyStageFoundersRoute
   '/faq': typeof FaqRoute
   '/for-partners': typeof ForPartnersRoute
@@ -215,6 +281,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/join/$code': typeof JoinCodeRoute
   '/platform/ai': typeof PlatformAiRoute
   '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
@@ -224,13 +291,19 @@ export interface FileRoutesById {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
+  '/platform/': typeof PlatformIndexRoute
+  '/_authenticated/admin/applications': typeof AuthenticatedAdminApplicationsRoute
+  '/_authenticated/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/_authenticated/partner/': typeof AuthenticatedPartnerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/directory'
     | '/early-stage-founders'
     | '/faq'
     | '/for-partners'
@@ -242,6 +315,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/join/$code'
     | '/platform/ai'
     | '/platform/core'
     | '/platform/flow'
@@ -251,22 +325,28 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
+    | '/platform/'
+    | '/admin/applications'
+    | '/partner/apply'
+    | '/partner/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/directory'
     | '/early-stage-founders'
     | '/faq'
     | '/for-partners'
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
-    | '/platform'
     | '/privacy'
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/join/$code'
     | '/platform/ai'
     | '/platform/core'
     | '/platform/flow'
@@ -276,11 +356,18 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
+    | '/platform'
+    | '/admin/applications'
+    | '/partner/apply'
+    | '/partner'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/auth'
     | '/contact'
+    | '/directory'
     | '/early-stage-founders'
     | '/faq'
     | '/for-partners'
@@ -292,6 +379,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/terms'
+    | '/join/$code'
     | '/platform/ai'
     | '/platform/core'
     | '/platform/flow'
@@ -301,12 +389,19 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
+    | '/platform/'
+    | '/_authenticated/admin/applications'
+    | '/_authenticated/partner/apply'
+    | '/_authenticated/partner/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  DirectoryRoute: typeof DirectoryRoute
   EarlyStageFoundersRoute: typeof EarlyStageFoundersRoute
   FaqRoute: typeof FaqRoute
   ForPartnersRoute: typeof ForPartnersRoute
@@ -318,6 +413,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  JoinCodeRoute: typeof JoinCodeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -399,11 +495,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EarlyStageFoundersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/directory': {
+      id: '/directory'
+      path: '/directory'
+      fullPath: '/directory'
+      preLoaderRoute: typeof DirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -413,12 +523,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/platform/': {
+      id: '/platform/'
+      path: '/'
+      fullPath: '/platform/'
+      preLoaderRoute: typeof PlatformIndexRouteImport
+      parentRoute: typeof PlatformRoute
     }
     '/platform/vault': {
       id: '/platform/vault'
@@ -483,8 +607,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformAiRouteImport
       parentRoute: typeof PlatformRoute
     }
+    '/join/$code': {
+      id: '/join/$code'
+      path: '/join/$code'
+      fullPath: '/join/$code'
+      preLoaderRoute: typeof JoinCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/partner/': {
+      id: '/_authenticated/partner/'
+      path: '/partner'
+      fullPath: '/partner/'
+      preLoaderRoute: typeof AuthenticatedPartnerIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner/apply': {
+      id: '/_authenticated/partner/apply'
+      path: '/partner/apply'
+      fullPath: '/partner/apply'
+      preLoaderRoute: typeof AuthenticatedPartnerApplyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/applications': {
+      id: '/_authenticated/admin/applications'
+      path: '/admin/applications'
+      fullPath: '/admin/applications'
+      preLoaderRoute: typeof AuthenticatedAdminApplicationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
+  AuthenticatedPartnerApplyRoute: typeof AuthenticatedPartnerApplyRoute
+  AuthenticatedPartnerIndexRoute: typeof AuthenticatedPartnerIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
+  AuthenticatedPartnerApplyRoute: AuthenticatedPartnerApplyRoute,
+  AuthenticatedPartnerIndexRoute: AuthenticatedPartnerIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface PlatformRouteChildren {
   PlatformAiRoute: typeof PlatformAiRoute
@@ -496,6 +663,7 @@ interface PlatformRouteChildren {
   PlatformOsRoute: typeof PlatformOsRoute
   PlatformStudioRoute: typeof PlatformStudioRoute
   PlatformVaultRoute: typeof PlatformVaultRoute
+  PlatformIndexRoute: typeof PlatformIndexRoute
 }
 
 const PlatformRouteChildren: PlatformRouteChildren = {
@@ -508,6 +676,7 @@ const PlatformRouteChildren: PlatformRouteChildren = {
   PlatformOsRoute: PlatformOsRoute,
   PlatformStudioRoute: PlatformStudioRoute,
   PlatformVaultRoute: PlatformVaultRoute,
+  PlatformIndexRoute: PlatformIndexRoute,
 }
 
 const PlatformRouteWithChildren = PlatformRoute._addFileChildren(
@@ -516,8 +685,11 @@ const PlatformRouteWithChildren = PlatformRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  DirectoryRoute: DirectoryRoute,
   EarlyStageFoundersRoute: EarlyStageFoundersRoute,
   FaqRoute: FaqRoute,
   ForPartnersRoute: ForPartnersRoute,
@@ -529,6 +701,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  JoinCodeRoute: JoinCodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

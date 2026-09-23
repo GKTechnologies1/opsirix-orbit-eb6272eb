@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { MODULES } from "@/lib/modules";
 
 const BASE_URL = "https://opsirix.com";
 
@@ -20,6 +21,13 @@ const ENTRIES: SitemapEntry[] = [
   { path: "/about", changefreq: "monthly", priority: "0.7" },
   { path: "/faq", changefreq: "weekly", priority: "0.8" },
   { path: "/contact", changefreq: "monthly", priority: "0.8" },
+  { path: "/platform", changefreq: "monthly", priority: "0.9" },
+  ...MODULES.map((module) => ({
+    path: module.to,
+    changefreq: "monthly" as const,
+    priority: "0.8",
+  })),
+  { path: "/directory", changefreq: "weekly", priority: "0.7" },
 ];
 
 export const Route = createFileRoute("/sitemap.xml")({
