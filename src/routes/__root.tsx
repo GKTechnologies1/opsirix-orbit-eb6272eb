@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -196,13 +197,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const workspace = pathname === "/auth" || pathname.startsWith("/partner") || pathname.startsWith("/admin");
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Navbar />
+      {!workspace && <Navbar />}
       <Outlet />
-      <Footer />
-      <StickyCta />
+      {!workspace && <Footer />}
+      {!workspace && <StickyCta />}
     </QueryClientProvider>
   );
 }

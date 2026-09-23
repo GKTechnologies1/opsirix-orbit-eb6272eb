@@ -1,5 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { z } from "zod";
 import { Check, FileUp, Save } from "lucide-react";
 import { WorkspaceShell } from "@/components/nexus/WorkspaceShell";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,7 @@ import type { Database } from "@/integrations/supabase/types";
 type Application = Database["public"]["Tables"]["partner_applications"]["Row"];
 
 export const Route = createFileRoute("/_authenticated/partner/apply")({
+  validateSearch: z.object({ ref: z.string().max(120).optional().catch(undefined) }),
   head: () => ({ meta: [
     { title: "Partner Application | Opsirix Nexus" },
     { name: "description", content: "Complete your private Opsirix Nexus partner application." },
@@ -22,6 +24,7 @@ export const Route = createFileRoute("/_authenticated/partner/apply")({
 
 function PartnerApplicationPage() {
   const navigate = useNavigate();
+  const { ref } = Route.useSearch();
   const [application, setApplication] = useState<Application | null>(null);
   const [loading, setLoading] = useState(true);
   const [pending, setPending] = useState(false);
@@ -56,6 +59,7 @@ function PartnerApplicationPage() {
       license_jurisdiction: String(form.get("licenseJurisdiction") ?? "").trim() || null,
       professional_summary: String(form.get("summary") ?? "").trim(),
       service_areas: String(form.get("serviceAreas") ?? "").split(",").map((v) => v.trim()).filter(Boolean),
+      referral_code: ref ?? application?.referral_code ?? null,
       status: submit ? "submitted" as const : "draft" as const,
       submitted_at: submit ? new Date().toISOString() : null,
       updated_at: new Date().toISOString(),
