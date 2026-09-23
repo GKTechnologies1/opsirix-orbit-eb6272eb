@@ -2282,3 +2282,4 @@
 .svc-layout .svc-search input { padding-left: 42px; min-height: 48px; }
 .svc-layout input:not([type=checkbox]):focus, .svc-layout select:focus, .svc-layout textarea:focus { border-color: var(--color-cyan); box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-cyan) 18%, transparent); }
 .svc-actions button:disabled { opacity: .45; }
+.nexus-sidebar nav { grid-auto-rows: min-content; align-content: start; }.nexus-sidebar nav a { height: auto; }
