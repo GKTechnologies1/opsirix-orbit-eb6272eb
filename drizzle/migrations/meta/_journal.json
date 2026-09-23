@@ -22,6 +22,13 @@
       "when": 1790198854219,
       "tag": "0002_create_nexus_service_catalog",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790199373789,
+      "tag": "0003_extensible_partner_types",
+      "breakpoints": true
     }
   ]
 }
