@@ -38,6 +38,7 @@ import { Route as PlatformCoreRouteImport } from './routes/platform.core'
 import { Route as PlatformAiRouteImport } from './routes/platform.ai'
 import { Route as JoinCodeRouteImport } from './routes/join.$code'
 import { Route as AuthenticatedPartnerIndexRouteImport } from './routes/_authenticated.partner.index'
+import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_authenticated.partner.services'
 import { Route as AuthenticatedPartnerApplyRouteImport } from './routes/_authenticated.partner.apply'
 import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_authenticated.admin.applications'
 
@@ -186,6 +187,12 @@ const AuthenticatedPartnerIndexRoute =
     path: '/partner/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedPartnerServicesRoute =
+  AuthenticatedPartnerServicesRouteImport.update({
+    id: '/partner/services',
+    path: '/partner/services',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPartnerApplyRoute =
   AuthenticatedPartnerApplyRouteImport.update({
     id: '/partner/apply',
@@ -229,6 +236,7 @@ export interface FileRoutesByFullPath {
   '/platform/': typeof PlatformIndexRoute
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/partner/': typeof AuthenticatedPartnerIndexRoute
 }
 export interface FileRoutesByTo {
@@ -260,6 +268,7 @@ export interface FileRoutesByTo {
   '/platform': typeof PlatformIndexRoute
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/partner': typeof AuthenticatedPartnerIndexRoute
 }
 export interface FileRoutesById {
@@ -294,6 +303,7 @@ export interface FileRoutesById {
   '/platform/': typeof PlatformIndexRoute
   '/_authenticated/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/_authenticated/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/_authenticated/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/_authenticated/partner/': typeof AuthenticatedPartnerIndexRoute
 }
 export interface FileRouteTypes {
@@ -328,6 +338,7 @@ export interface FileRouteTypes {
     | '/platform/'
     | '/admin/applications'
     | '/partner/apply'
+    | '/partner/services'
     | '/partner/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -359,6 +370,7 @@ export interface FileRouteTypes {
     | '/platform'
     | '/admin/applications'
     | '/partner/apply'
+    | '/partner/services'
     | '/partner'
   id:
     | '__root__'
@@ -392,6 +404,7 @@ export interface FileRouteTypes {
     | '/platform/'
     | '/_authenticated/admin/applications'
     | '/_authenticated/partner/apply'
+    | '/_authenticated/partner/services'
     | '/_authenticated/partner/'
   fileRoutesById: FileRoutesById
 }
@@ -621,6 +634,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPartnerIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/partner/services': {
+      id: '/_authenticated/partner/services'
+      path: '/partner/services'
+      fullPath: '/partner/services'
+      preLoaderRoute: typeof AuthenticatedPartnerServicesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/partner/apply': {
       id: '/_authenticated/partner/apply'
       path: '/partner/apply'
@@ -641,12 +661,14 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
   AuthenticatedPartnerApplyRoute: typeof AuthenticatedPartnerApplyRoute
+  AuthenticatedPartnerServicesRoute: typeof AuthenticatedPartnerServicesRoute
   AuthenticatedPartnerIndexRoute: typeof AuthenticatedPartnerIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
   AuthenticatedPartnerApplyRoute: AuthenticatedPartnerApplyRoute,
+  AuthenticatedPartnerServicesRoute: AuthenticatedPartnerServicesRoute,
   AuthenticatedPartnerIndexRoute: AuthenticatedPartnerIndexRoute,
 }
 
