@@ -13,7 +13,6 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as ImmigrantFoundersRouteImport } from './routes/immigrant-founders'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as ForUniversitiesRouteImport } from './routes/for-universities'
@@ -23,6 +22,7 @@ import { Route as EarlyStageFoundersRouteImport } from './routes/early-stage-fou
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlatformIndexRouteImport } from './routes/platform.index'
 import { Route as PlatformVaultRouteImport } from './routes/platform.vault'
 import { Route as PlatformStudioRouteImport } from './routes/platform.studio'
 import { Route as PlatformOsRouteImport } from './routes/platform.os'
@@ -51,11 +51,6 @@ const ServicesRoute = ServicesRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlatformRoute = PlatformRouteImport.update({
-  id: '/platform',
-  path: '/platform',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImmigrantFoundersRoute = ImmigrantFoundersRouteImport.update({
@@ -103,50 +98,55 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlatformIndexRoute = PlatformIndexRouteImport.update({
+  id: '/platform/',
+  path: '/platform/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlatformVaultRoute = PlatformVaultRouteImport.update({
-  id: '/vault',
-  path: '/vault',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/vault',
+  path: '/platform/vault',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformStudioRoute = PlatformStudioRouteImport.update({
-  id: '/studio',
-  path: '/studio',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/studio',
+  path: '/platform/studio',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformOsRoute = PlatformOsRouteImport.update({
-  id: '/os',
-  path: '/os',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/os',
+  path: '/platform/os',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformNexusRoute = PlatformNexusRouteImport.update({
-  id: '/nexus',
-  path: '/nexus',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/nexus',
+  path: '/platform/nexus',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformLaunchRoute = PlatformLaunchRouteImport.update({
-  id: '/launch',
-  path: '/launch',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/launch',
+  path: '/platform/launch',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformGridRoute = PlatformGridRouteImport.update({
-  id: '/grid',
-  path: '/grid',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/grid',
+  path: '/platform/grid',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformFlowRoute = PlatformFlowRouteImport.update({
-  id: '/flow',
-  path: '/flow',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/flow',
+  path: '/platform/flow',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformCoreRoute = PlatformCoreRouteImport.update({
-  id: '/core',
-  path: '/core',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/core',
+  path: '/platform/core',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const PlatformAiRoute = PlatformAiRouteImport.update({
-  id: '/ai',
-  path: '/ai',
-  getParentRoute: () => PlatformRoute,
+  id: '/platform/ai',
+  path: '/platform/ai',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -159,7 +159,6 @@ export interface FileRoutesByFullPath {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
-  '/platform': typeof PlatformRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -173,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
+  '/platform/': typeof PlatformIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -184,7 +184,6 @@ export interface FileRoutesByTo {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
-  '/platform': typeof PlatformRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -198,6 +197,7 @@ export interface FileRoutesByTo {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
+  '/platform': typeof PlatformIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -210,7 +210,6 @@ export interface FileRoutesById {
   '/for-universities': typeof ForUniversitiesRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
-  '/platform': typeof PlatformRouteWithChildren
   '/privacy': typeof PrivacyRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -224,6 +223,7 @@ export interface FileRoutesById {
   '/platform/os': typeof PlatformOsRoute
   '/platform/studio': typeof PlatformStudioRoute
   '/platform/vault': typeof PlatformVaultRoute
+  '/platform/': typeof PlatformIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -237,7 +237,6 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
-    | '/platform'
     | '/privacy'
     | '/services'
     | '/sitemap.xml'
@@ -251,6 +250,7 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
+    | '/platform/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -262,7 +262,6 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
-    | '/platform'
     | '/privacy'
     | '/services'
     | '/sitemap.xml'
@@ -276,6 +275,7 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
+    | '/platform'
   id:
     | '__root__'
     | '/'
@@ -287,7 +287,6 @@ export interface FileRouteTypes {
     | '/for-universities'
     | '/how-it-works'
     | '/immigrant-founders'
-    | '/platform'
     | '/privacy'
     | '/services'
     | '/sitemap.xml'
@@ -301,6 +300,7 @@ export interface FileRouteTypes {
     | '/platform/os'
     | '/platform/studio'
     | '/platform/vault'
+    | '/platform/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -313,11 +313,20 @@ export interface RootRouteChildren {
   ForUniversitiesRoute: typeof ForUniversitiesRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ImmigrantFoundersRoute: typeof ImmigrantFoundersRoute
-  PlatformRoute: typeof PlatformRouteWithChildren
   PrivacyRoute: typeof PrivacyRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  PlatformAiRoute: typeof PlatformAiRoute
+  PlatformCoreRoute: typeof PlatformCoreRoute
+  PlatformFlowRoute: typeof PlatformFlowRoute
+  PlatformGridRoute: typeof PlatformGridRoute
+  PlatformLaunchRoute: typeof PlatformLaunchRoute
+  PlatformNexusRoute: typeof PlatformNexusRoute
+  PlatformOsRoute: typeof PlatformOsRoute
+  PlatformStudioRoute: typeof PlatformStudioRoute
+  PlatformVaultRoute: typeof PlatformVaultRoute
+  PlatformIndexRoute: typeof PlatformIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -348,13 +357,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/platform': {
-      id: '/platform'
-      path: '/platform'
-      fullPath: '/platform'
-      preLoaderRoute: typeof PlatformRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/immigrant-founders': {
@@ -420,99 +422,78 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/platform/': {
+      id: '/platform/'
+      path: '/platform'
+      fullPath: '/platform/'
+      preLoaderRoute: typeof PlatformIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/platform/vault': {
       id: '/platform/vault'
-      path: '/vault'
+      path: '/platform/vault'
       fullPath: '/platform/vault'
       preLoaderRoute: typeof PlatformVaultRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
     '/platform/studio': {
       id: '/platform/studio'
-      path: '/studio'
+      path: '/platform/studio'
       fullPath: '/platform/studio'
       preLoaderRoute: typeof PlatformStudioRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
     '/platform/os': {
       id: '/platform/os'
-      path: '/os'
+      path: '/platform/os'
       fullPath: '/platform/os'
       preLoaderRoute: typeof PlatformOsRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
     '/platform/nexus': {
       id: '/platform/nexus'
-      path: '/nexus'
+      path: '/platform/nexus'
       fullPath: '/platform/nexus'
       preLoaderRoute: typeof PlatformNexusRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
     '/platform/launch': {
       id: '/platform/launch'
-      path: '/launch'
+      path: '/platform/launch'
       fullPath: '/platform/launch'
       preLoaderRoute: typeof PlatformLaunchRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
     '/platform/grid': {
       id: '/platform/grid'
-      path: '/grid'
+      path: '/platform/grid'
       fullPath: '/platform/grid'
       preLoaderRoute: typeof PlatformGridRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
     '/platform/flow': {
       id: '/platform/flow'
-      path: '/flow'
+      path: '/platform/flow'
       fullPath: '/platform/flow'
       preLoaderRoute: typeof PlatformFlowRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
     '/platform/core': {
       id: '/platform/core'
-      path: '/core'
+      path: '/platform/core'
       fullPath: '/platform/core'
       preLoaderRoute: typeof PlatformCoreRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
     '/platform/ai': {
       id: '/platform/ai'
-      path: '/ai'
+      path: '/platform/ai'
       fullPath: '/platform/ai'
       preLoaderRoute: typeof PlatformAiRouteImport
-      parentRoute: typeof PlatformRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-interface PlatformRouteChildren {
-  PlatformAiRoute: typeof PlatformAiRoute
-  PlatformCoreRoute: typeof PlatformCoreRoute
-  PlatformFlowRoute: typeof PlatformFlowRoute
-  PlatformGridRoute: typeof PlatformGridRoute
-  PlatformLaunchRoute: typeof PlatformLaunchRoute
-  PlatformNexusRoute: typeof PlatformNexusRoute
-  PlatformOsRoute: typeof PlatformOsRoute
-  PlatformStudioRoute: typeof PlatformStudioRoute
-  PlatformVaultRoute: typeof PlatformVaultRoute
-}
-
-const PlatformRouteChildren: PlatformRouteChildren = {
-  PlatformAiRoute: PlatformAiRoute,
-  PlatformCoreRoute: PlatformCoreRoute,
-  PlatformFlowRoute: PlatformFlowRoute,
-  PlatformGridRoute: PlatformGridRoute,
-  PlatformLaunchRoute: PlatformLaunchRoute,
-  PlatformNexusRoute: PlatformNexusRoute,
-  PlatformOsRoute: PlatformOsRoute,
-  PlatformStudioRoute: PlatformStudioRoute,
-  PlatformVaultRoute: PlatformVaultRoute,
-}
-
-const PlatformRouteWithChildren = PlatformRoute._addFileChildren(
-  PlatformRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -524,11 +505,20 @@ const rootRouteChildren: RootRouteChildren = {
   ForUniversitiesRoute: ForUniversitiesRoute,
   HowItWorksRoute: HowItWorksRoute,
   ImmigrantFoundersRoute: ImmigrantFoundersRoute,
-  PlatformRoute: PlatformRouteWithChildren,
   PrivacyRoute: PrivacyRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  PlatformAiRoute: PlatformAiRoute,
+  PlatformCoreRoute: PlatformCoreRoute,
+  PlatformFlowRoute: PlatformFlowRoute,
+  PlatformGridRoute: PlatformGridRoute,
+  PlatformLaunchRoute: PlatformLaunchRoute,
+  PlatformNexusRoute: PlatformNexusRoute,
+  PlatformOsRoute: PlatformOsRoute,
+  PlatformStudioRoute: PlatformStudioRoute,
+  PlatformVaultRoute: PlatformVaultRoute,
+  PlatformIndexRoute: PlatformIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

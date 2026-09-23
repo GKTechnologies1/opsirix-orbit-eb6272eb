@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { CTASection } from "@/components/shared/CTASection";
 
-export const Route = createFileRoute("/platform")({
+export const Route = createFileRoute("/platform/")({
   head: () => ({
     meta: [
       { title: "Opsirix Platform | Nine Founder Operations Modules" },
