@@ -75,3 +75,8 @@ export const STATUS_LABELS: Record<string, string> = {
 };
 
 export const splitList = (value: string) => value.split(",").map((v) => v.trim()).filter(Boolean);
+
+/** Standard insurance lines of authority. Each coverage inquiry lists the lines it needs. */
+export const LICENSE_LINES: Record<string, string> = {
+  property: "Property", casualty: "Casualty", life: "Life", accident_health: "Accident and health", surety: "Surety",
+};

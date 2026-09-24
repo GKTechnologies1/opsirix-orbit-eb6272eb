@@ -6,7 +6,7 @@ import { WorkspaceShell } from "@/components/nexus/WorkspaceShell";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
-import { EVIDENCE_METHODS, ONBOARDING_STEPS, REACH_OPTIONS, STATUS_LABELS, TRACK_TYPES, TRACK_TYPE_IDS, splitList, typeIdFromLabel, type StepId, type TrackTypeId } from "@/lib/nexus-tracks";
+import { EVIDENCE_METHODS, LICENSE_LINES, ONBOARDING_STEPS, REACH_OPTIONS, STATUS_LABELS, TRACK_TYPES, TRACK_TYPE_IDS, splitList, typeIdFromLabel, type StepId, type TrackTypeId } from "@/lib/nexus-tracks";
 
 type T = Database["public"]["Tables"];
 type Application = T["partner_applications"]["Row"];
