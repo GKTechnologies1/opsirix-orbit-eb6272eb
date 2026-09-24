@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { reviewSubject, type ReviewInput } from "@/lib/nexus-review.functions";
-import { EVIDENCE_METHODS, STATUS_LABELS, TRACK_TYPES, typeIdFromLabel } from "@/lib/nexus-tracks";
+import { EVIDENCE_METHODS, STATUS_LABELS, licenseStatus, TRACK_TYPES, typeIdFromLabel } from "@/lib/nexus-tracks";
 
 type T = Database["public"]["Tables"];
 type Row<K extends keyof T> = T[K]["Row"];
@@ -146,8 +146,9 @@ function ReviewPage() {
 
     {data.licenses.length > 0 && <Section title="Insurance licenses">
       {data.licenses.map((l) => <div key={l.id} className="nx-subject">
-        <h3>{l.state_code} · {l.line_of_authority} <span className={`nexus-status ${l.review_status}`}>{STATUS_LABELS[l.review_status]}</span></h3>
+        <h3>{l.state_code} · {l.line_of_authority} <span className={`nexus-status ${licenseStatus(l).key}`}>{licenseStatus(l).label}</span></h3>
         <p className="nexus-muted">License {l.license_number}{l.producer_id ? ` · Producer ID ${l.producer_id}` : ""}{l.expires_on ? ` · Expires ${l.expires_on}` : " · No expiry given"}. Check against the state regulator's records before verifying.</p>
+        {licenseStatus(l).key === "expired" && <p className="nexus-muted">This record was checked, but the license is not currently valid. It does not count toward any current license requirement, Insurance approval, or public claim.</p>}
         <History items={history("license", l.id)} notes={data.notes} />
         <DecisionForm {...common} subjectType="license" subjectId={l.id} subjectLabel={`License ${l.state_code} ${l.line_of_authority}`} actions={[["verified", "Verify"], ["changes_requested", "Request changes"], ["declined", "Reject"]]} />
       </div>)}
@@ -217,6 +218,8 @@ function History({ items, notes, events = [] }: { items: Row<"partner_review_dec
   </ul></details>;
 }
 
+const PAST: Record<string, string> = { approved: "approved", changes_requested: "sent back with a change request", declined: "declined", verified: "verified", recorded: "recorded" };
+
 function DecisionForm({ applicationId, subjectType, subjectId, subjectLabel, actions, onDone, onResult, agreement }: { applicationId: string; subjectType: ReviewInput["subjectType"]; subjectId: string; subjectLabel: string; actions: [ReviewInput["decision"], string][]; onDone: () => Promise<void>; onResult: (r: { ok: boolean; text: string; subject: string }) => void; notes: Row<"partner_review_internal_notes">[]; agreement?: boolean }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -231,9 +234,9 @@ function DecisionForm({ applicationId, subjectType, subjectId, subjectLabel, act
     setBusy(true); setError(""); setOk("");
     try {
       const res = await reviewSubject({ data: { applicationId, subjectType, subjectId, subjectLabel, decision, applicantMessage: applicantMessage || undefined, internalNote: String(f.get("internalNote") ?? "").trim() || undefined, agreementReference: String(f.get("agreementReference") ?? "").trim() || undefined } });
-      const label = actions.find(([v]) => v === decision)?.[1] ?? decision;
-      if (!res.success) { setError(res.error); onResult({ ok: false, text: `${subjectLabel}: "${label}" was not saved. ${res.error}`, subject: subjectType }); }
-      else { setOk("Decision saved."); form.reset(); onResult({ ok: true, text: `${subjectLabel}: "${label}" saved.`, subject: subjectType }); await onDone(); }
+      const past = PAST[decision] ?? "updated";
+      if (!res.success) { setError(res.error); onResult({ ok: false, text: `${subjectLabel} not ${past}. Nothing was saved. ${res.error}`, subject: subjectType }); }
+      else { setOk(`${subjectLabel} ${past}.`); form.reset(); onResult({ ok: true, text: `${subjectLabel} ${past}.`, subject: subjectType }); await onDone(); }
     } catch (err) { const m = err instanceof Error ? err.message : "The decision could not be saved."; setError(m); onResult({ ok: false, text: `${subjectLabel}: not saved. ${m}`, subject: subjectType }); }
     setBusy(false);
   }
