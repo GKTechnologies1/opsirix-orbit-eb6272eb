@@ -134,6 +134,13 @@
       "when": 1790286727881,
       "tag": "0018_founder_managed_staff_access_by_email",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1790286792940,
+      "tag": "0019_allow_founders_to_read_staff_access_grants",
+      "breakpoints": true
     }
   ]
 }
