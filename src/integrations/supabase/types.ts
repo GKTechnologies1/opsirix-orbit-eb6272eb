@@ -1228,6 +1228,47 @@ export type Database = {
         }
         Relationships: []
       }
+      staff_access_grants: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          granted_by: string
+          id: string
+          organization_id: string
+          revoked_at: string | null
+          scope: string
+          staff_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          granted_by: string
+          id?: string
+          organization_id: string
+          revoked_at?: string | null
+          scope?: string
+          staff_user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          granted_by?: string
+          id?: string
+          organization_id?: string
+          revoked_at?: string | null
+          scope?: string
+          staff_user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "staff_access_grants_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -1268,6 +1309,10 @@ export type Database = {
         Returns: boolean
       }
       create_company_workspace: { Args: { _name: string }; Returns: string }
+      has_active_staff_grant: {
+        Args: { _organization_id: string; _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1325,6 +1370,15 @@ export type Database = {
       }
       set_organization_member: {
         Args: { _organization_id: string; _role: string; _user_id: string }
+        Returns: undefined
+      }
+      set_staff_access_grant: {
+        Args: {
+          _enabled: boolean
+          _expires_at?: string
+          _organization_id: string
+          _staff_user_id: string
+        }
         Returns: undefined
       }
       set_staff_role: {

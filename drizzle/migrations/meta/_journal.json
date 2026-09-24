@@ -120,6 +120,13 @@
       "when": 1790286576436,
       "tag": "0016_phase_one_company_workspaces_and_staff_access",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1790286707774,
+      "tag": "0017_scope_staff_company_access_grants",
+      "breakpoints": true
     }
   ]
 }
