@@ -100,20 +100,4 @@ Limitations: no permanent automated file retains the 19-case run; full browser d
 
 ## Public-copy correction state
 
-Thirteen audited corrections are saved only in the project and are not published on `opsirix.com`:
-
-1. `BeforeAfterSection`: “All critical documents organized in Opsirix Vault, encrypted, current, audit-ready in minutes” → “Critical documents organized in a structured Opsirix Vault and easier to locate when needed”.
-2. `ComplianceBoundary`: “Encrypted storage, compliance calendar, audit-readiness” → “Structured records, operational dates, and document organization”.
-3. `OpsirixOSPreview`: “Encrypted, organized, always accessible” → “Structured document organization and retrieval”.
-4. `ServicesGrid`: “Encrypted document management. Compliance-calendar-driven. Audit-ready. Every critical document protected.” → “Structured document organization with records connected to operational dates and workflows.”
-5. Contact metadata description: “recommend the right Opsirix path within one business day” → “contact you to discuss the right Opsirix path”.
-6. Contact Open Graph description: same timed wording → same non-timed wording.
-7. Contact information row: “RESPONSE TIME: Within 1 business day of submission” → “WHAT HAPPENS NEXT: We review your submission and contact you about next steps”.
-8. Contact lead: “schedule your 30-minute Discovery Call within 1 business day” → “contact you to schedule your 30-minute Discovery Call”.
-9. Contact form: “Complete all sections. Response within 1 business day.” → “Complete all sections. We will contact you about next steps.”
-10. FAQ section: “We review within one business day and schedule...” → “We review your submission and contact you to schedule...”.
-11. Founder journey discovery: “We review within 1 business day” → “We review your submitted information”.
-12. Founder journey intake: “Risk classified within 1 business day” → “Intake reviewed before activation”.
-13. FAQ page: “We review your intake within one business day and schedule...” → “We review your intake and contact you to schedule...”.
-
-Returning either claim requires the security implementation and independent verification, or defined service-time measurement and approved operational evidence, documented in the full reconciliation report. Publishing later requires the explicit production Publish/Update action followed by verification on `https://opsirix.com/`.
+The 13-item old/new wording table is preserved in the shareable v7 report. All corrections are saved in project source only and are not published on `opsirix.com`. Restoring either claim requires the documented security evidence and independent review, or measured service-time evidence and an approved commitment. Publishing later requires the explicit production Publish/Update action and verification on `https://opsirix.com/`.
