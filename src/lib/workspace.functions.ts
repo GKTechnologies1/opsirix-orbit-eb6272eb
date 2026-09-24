@@ -5,6 +5,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 const companyName = z.string().trim().min(2).max(160);
 const uuid = z.string().uuid();
 const staffRole = z.enum(["operations_lead", "compliance_coordinator"]);
+const staffGrant = z.object({ organizationId: uuid, email: z.string().trim().email().max(255), enabled: z.boolean(), expiresAt: z.string().datetime().nullable() });
 
 export const getCompanyWorkspaces = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -12,13 +13,17 @@ export const getCompanyWorkspaces = createServerFn({ method: "GET" })
     const { data: organizations, error } = await context.supabase.from("organizations").select("id,name,created_by,created_at,updated_at").order("created_at", { ascending: false });
     if (error) throw error;
     const ids = organizations.map((item) => item.id);
-    const [members, events] = await Promise.all([
+    const [members, events, grants] = await Promise.all([
       ids.length ? context.supabase.from("organization_members").select("organization_id,user_id,role,created_at").in("organization_id", ids) : Promise.resolve({ data: [], error: null }),
       ids.length ? context.supabase.from("audit_events").select("id,organization_id,actor_id,event_type,summary,created_at").in("organization_id", ids).order("created_at", { ascending: false }).limit(100) : Promise.resolve({ data: [], error: null }),
+      ids.length ? context.supabase.from("staff_access_grants").select("organization_id,staff_user_id,expires_at,revoked_at,created_at").in("organization_id", ids) : Promise.resolve({ data: [], error: null }),
     ]);
     if (members.error) throw members.error;
     if (events.error) throw events.error;
-    return { organizations, members: members.data ?? [], events: events.data ?? [], userId: context.userId };
+    if (grants.error) throw grants.error;
+    const staffIds = [...new Set((grants.data ?? []).map((item) => item.staff_user_id))];
+    const { data: staffPeople } = staffIds.length ? await context.supabase.from("profiles").select("id,full_name,email").in("id", staffIds) : { data: [] };
+    return { organizations, members: members.data ?? [], events: events.data ?? [], grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
   });
 
 export const createCompanyWorkspace = createServerFn({ method: "POST" })
@@ -35,6 +40,20 @@ export const renameCompanyWorkspace = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => z.object({ organizationId: uuid, name: companyName }).parse(input))
   .handler(async ({ data, context }) => {
     const { error } = await context.supabase.rpc("rename_company_workspace", { _organization_id: data.organizationId, _name: data.name });
+    if (error) return { success: false as const, error: error.message };
+    return { success: true as const };
+  });
+
+export const setCompanyStaffGrant = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => staffGrant.parse(input))
+  .handler(async ({ data, context }) => {
+    const { error } = await context.supabase.rpc("set_staff_access_by_email", {
+      _organization_id: data.organizationId,
+      _email: data.email,
+      _enabled: data.enabled,
+      _expires_at: data.expiresAt,
+    });
     if (error) return { success: false as const, error: error.message };
     return { success: true as const };
   });

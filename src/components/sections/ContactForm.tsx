@@ -160,7 +160,7 @@ export function ContactForm() {
                     <option value="" disabled>Select…</option><option value="yes">Yes</option><option value="no">No</option>
                   </select>
                 </Field>
-                <Field label="Do you have an attorney?*" error={errors.hasAttorney?.message}>
+                <Field label="Is a licensed attorney engaged?*" error={errors.hasAttorney?.message}>
                   <select className={inputCls(!!errors.hasAttorney)} defaultValue="" {...register("hasAttorney")}>
                     <option value="" disabled>Select…</option>
                     <option value="yes">Yes</option>
