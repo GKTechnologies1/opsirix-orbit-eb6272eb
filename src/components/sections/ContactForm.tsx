@@ -14,7 +14,6 @@ const schema = z.object({
   company: z.string().min(1, "Company name required").max(150),
   founderType: z.string().min(1, "Please select your founder type"),
   companyStage: z.string().min(1, "Please select your company stage"),
-  immigrationSensitive: z.enum(["yes", "no"], { required_error: "Required" }),
   hasAttorney: z.enum(["yes", "no"], { required_error: "Required" }),
   hasCPA: z.enum(["yes", "no"], { required_error: "Required" }),
   hasEntity: z.enum(["yes", "no"], { required_error: "Required" }),
@@ -48,7 +47,6 @@ export function ContactForm() {
           company_name: data.company,
           business_stage: `${data.founderType} / ${data.companyStage}`,
           service_interest: [
-            `Immigration-sensitive matter: ${data.immigrationSensitive}`,
             `Attorney: ${data.hasAttorney}`,
             `CPA: ${data.hasCPA}`,
             `Entity formed: ${data.hasEntity}`,
@@ -129,7 +127,6 @@ export function ContactForm() {
                   <option value="" disabled>Select your founder type…</option>
                   <optgroup label="FOUNDER TYPES">
                     <option>Early-stage founder (any background)</option>
-                    <option>Founder with an immigration-sensitive matter</option>
                     <option>International founder</option>
                   </optgroup>
                   <optgroup label="PARTNER TYPES">
@@ -155,11 +152,6 @@ export function ContactForm() {
               </Field>
 
               <div className="contact-row">
-                <Field label="Is there an immigration-sensitive matter?*" error={errors.immigrationSensitive?.message}>
-                  <select className={inputCls(!!errors.immigrationSensitive)} defaultValue="" {...register("immigrationSensitive")}>
-                    <option value="" disabled>Select…</option><option value="yes">Yes</option><option value="no">No</option>
-                  </select>
-                </Field>
                 <Field label="Is a licensed attorney engaged?*" error={errors.hasAttorney?.message}>
                   <select className={inputCls(!!errors.hasAttorney)} defaultValue="" {...register("hasAttorney")}>
                     <option value="" disabled>Select…</option>
