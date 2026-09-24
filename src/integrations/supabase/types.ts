@@ -956,6 +956,7 @@ export type Database = {
           label: string
           partner_type: string
           qualification_note: string | null
+          required_lines: string[] | null
           retired_at: string | null
           search_aliases: string[]
           updated_at: string
@@ -974,6 +975,7 @@ export type Database = {
           label: string
           partner_type: string
           qualification_note?: string | null
+          required_lines?: string[] | null
           retired_at?: string | null
           search_aliases?: string[]
           updated_at?: string
@@ -992,6 +994,7 @@ export type Database = {
           label?: string
           partner_type?: string
           qualification_note?: string | null
+          required_lines?: string[] | null
           retired_at?: string | null
           search_aliases?: string[]
           updated_at?: string
@@ -1145,6 +1148,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      application_type_id: { Args: { _application: string }; Returns: string }
+      assert_can_edit_type: {
+        Args: { _type: string; _uid: string }
+        Returns: undefined
+      }
       can_register_type: {
         Args: { _type: string; _uid: string }
         Returns: boolean
@@ -1154,6 +1162,10 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      insurance_service_licensed: {
+        Args: { _service: string; _user: string }
         Returns: boolean
       }
       listing_type_is_public: {
