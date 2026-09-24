@@ -148,6 +148,13 @@
       "when": 1790286844445,
       "tag": "0020_tighten_phase_one_founder_controls",
       "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1790286952476,
+      "tag": "0021_resolve_staff_grants_against_authenticated_accounts",
+      "breakpoints": true
     }
   ]
 }
