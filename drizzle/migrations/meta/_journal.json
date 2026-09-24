@@ -36,6 +36,20 @@
       "when": 1790200428810,
       "tag": "0004_partner_track_details_and_licenses",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790268881434,
+      "tag": "0005_harden_draft_catalogs_and_private_records",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790268882434,
+      "tag": "0006_seed_nexus_service_catalog",
+      "breakpoints": true
     }
   ]
 }
