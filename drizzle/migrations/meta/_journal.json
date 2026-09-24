@@ -43,6 +43,13 @@
       "when": 1790268881434,
       "tag": "0005_harden_draft_catalogs_and_private_records",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790268882434,
+      "tag": "0006_seed_nexus_service_catalog",
+      "breakpoints": true
     }
   ]
 }
