@@ -20,5 +20,7 @@
 - [x] Seed 3 hidden types, 14 categories, 49 draft choices (catalog v2), hidden from non-admins
 - [x] Private representative/track details and insurance license tables; access tests passed after fixes
 - [x] Open questions decided (see project memory)
+- [x] Publication gate: closed partner types cannot be published (admin, service role, approval) or shown publicly; tested
+- [x] Revised draft wording for all 49 choices and registration steps proposed (not applied to the catalog)
 - [ ] Owner approves exact catalog wording (blocked: owner review)
 - [ ] Track-specific registration, public-display authorization fields, consent records, introductions, directory filters, admin review screens (blocked: paused by owner)
