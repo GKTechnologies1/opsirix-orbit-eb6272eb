@@ -38,8 +38,9 @@ function ReviewPage() {
   const [data, setData] = useState<Loaded | null>(null);
   const [missing, setMissing] = useState(false);
   const [flash, setFlash] = useState<{ ok: boolean; text: string; subject: string } | null>(null);
+  const [loadError, setLoadError] = useState(false);
   const load = useCallback(async () => {
-    const { data: auth } = await supabase.auth.getUser(); if (!auth.user) return;
+    const { data: auth, error: authError } = await supabase.auth.getUser(); if (authError) throw authError; if (!auth.user) return;
     const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: auth.user.id, _role: "admin" });
     setAllowed(Boolean(isAdmin)); if (!isAdmin) return;
     const { data: app } = await supabase.from("partner_applications").select("*").eq("id", id).maybeSingle();
@@ -75,11 +76,16 @@ function ReviewPage() {
       catalog: Object.fromEntries(cat.map((c) => [c.id, c])), types: Object.fromEntries((types.data ?? []).map((t) => [t.id, { label: t.label, open: t.is_open_for_registration }])),
     });
   }, [id]);
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    // A first request can fail if the page opens while the session is still settling; retry before giving up.
+    let alive = true;
+    (async () => { for (let i = 0; i < 3 && alive; i++) { try { await load(); return; } catch { await new Promise((r) => setTimeout(r, 700 * (i + 1))); } } if (alive) setLoadError(true); })();
+    return () => { alive = false; };
+  }, [load]);
 
   if (allowed === false) return <WorkspaceShell eyebrow="Authorized review" title="Access restricted"><div className="nexus-empty"><CircleX /><h2>Access restricted</h2><p>This workspace is available only to authorized Opsirix reviewers.</p></div></WorkspaceShell>;
   if (missing) return <WorkspaceShell eyebrow="Authorized review" title="Not found"><div className="nexus-empty"><h2>Application not found</h2><Link to="/admin/applications">Back to the queue</Link></div></WorkspaceShell>;
-  if (!data) return <WorkspaceShell eyebrow="Authorized review" title="Loading"><p className="nexus-muted">Loading application.</p></WorkspaceShell>;
+  if (!data) return <WorkspaceShell eyebrow="Authorized review" title="Loading">{loadError ? <p className="nx-error" role="alert">This application could not be loaded. Refresh the page to try again.</p> : <p className="nexus-muted">Loading application.</p>}</WorkspaceShell>;
 
   const { app, details } = data;
   const typeId = typeIdFromLabel(app.professional_type);
