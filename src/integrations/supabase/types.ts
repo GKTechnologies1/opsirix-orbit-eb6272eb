@@ -1198,6 +1198,7 @@ export type Database = {
         Args: { _application: string; _type: string }
         Returns: boolean
       }
+      type_id_for_label: { Args: { _label: string }; Returns: string }
     }
     Enums: {
       app_role: "applicant" | "partner" | "admin"

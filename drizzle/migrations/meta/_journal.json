@@ -92,6 +92,13 @@
       "when": 1790274570855,
       "tag": "0012_nexus_preview_enforcement_and_insurance_lines",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1790274975339,
+      "tag": "0013_nexus_type_label_case_insensitive",
+      "breakpoints": true
     }
   ]
 }
