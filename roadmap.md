@@ -1,34 +1,8 @@
-# Nexus Foundation
+# Roadmap
 
-- [x] Repair nested module routes and sitemap taxonomy
-- [x] Add partner-network schema, private credential storage, roles, and RLS
-- [x] Add account entry and protected workspace shell
-- [x] Add persisted partner application and QR attribution flow
-- [x] Add partner dashboard and admin review
-- [x] Add approved-only directory shell
-- [x] Verify existing discovery records, security, build, and responsive flows
-
-- [x] Nexus service catalog v1 (137 services), selector at /partner/services, draft-only selections
-- [ ] Admin screens: catalog add/rename/retire, "Other service" review, service-level qualification review
-- [ ] Client search page using shared catalog matcher
-- [ ] Remove TEST records (test-nexus-*@example.test) when the owner says checks are finished
-- [x] Catalog reproducible through setup migration (tested on a blank copy)
-- [x] Admin review and publication tested with a test admin account
-
-## Additional partner types (University, Banking, Insurance) — PAUSED pending owner catalog approval
-- [x] Partner types gain a track and a registration switch; first three no longer shown as the full list
-- [x] Seed 3 hidden types, 14 categories, 49 draft choices (catalog v2), hidden from non-admins
-- [x] Private representative/track details and insurance license tables; access tests passed after fixes
-- [x] Open questions decided (see project memory)
-- [x] Publication gate: closed partner types cannot be published (admin, service role, approval) or shown publicly; tested
-- [x] Revised draft wording for all 49 choices and registration steps proposed (not applied to the catalog)
-- [ ] Owner approves exact catalog wording (blocked: owner review)
-- [ ] Track-specific registration, public-display authorization fields, consent records, introductions, directory filters, admin review screens (blocked: paused by owner)
-
-## Onboarding and review screens (Sep 24)
-- [x] Database: preview access, per-part review states, profile versions, reviewer messages vs private notes, automatic removal rules
-- [x] Draft wording for all 49 choices applied (types still closed)
-- [x] Screens: /partner/onboarding, /partner/profile, /admin/review/$id, /admin/preview
-- [ ] End-to-end tests with University, Banking, Insurance, and admin test accounts (not yet run)
-- [ ] Mobile screenshots of the new screens
-- [ ] Founder consent records and introductions (intentionally not built)
+- [ ] Reconcile documents 07 and 08 and update the complete v6 report
+- [ ] Implement Phase 1 workspace, staff-role, permission, and audit foundation
+- [ ] Apply and verify the Phase 1 database migration without changing Nexus states
+- [ ] Test authorization, audit, desktop, and 390px flows
+- [ ] Capture the 13 corrected public-copy locations in preview
+- [ ] Report saved project state separately from published opsirix.com state
