@@ -71,6 +71,13 @@
       "when": 1790273560117,
       "tag": "0009_nexus_onboarding_review_foundation",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1790273608290,
+      "tag": "0010_nexus_draft_catalog_wording_v2",
+      "breakpoints": true
     }
   ]
 }
