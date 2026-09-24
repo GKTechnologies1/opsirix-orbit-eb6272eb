@@ -1,0 +1,2 @@
+DROP TRIGGER IF EXISTS guard_application ON public.partner_applications;
+CREATE TRIGGER guard_application BEFORE INSERT OR UPDATE ON public.partner_applications FOR EACH ROW EXECUTE FUNCTION public.guard_application();
