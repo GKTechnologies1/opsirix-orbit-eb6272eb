@@ -2310,3 +2310,52 @@
 .nexus-application-form .nx-error, .nexus-workspace .nx-error { color: var(--nexus-danger); }
 .nexus-application-form label.nexus-search.nx-choice-search, .nexus-workspace label.nexus-search.nx-choice-search { display: flex; flex-direction: row; align-items: center; gap: 8px; width: 100%; margin-top: 12px; }
 .nexus-workspace label.nx-choice-search input { min-height: 44px; }
+
+/* Opsirix OS and Staff Console foundations */
+.ops-workspace { min-height: 100vh; display: grid; grid-template-columns: 248px minmax(0, 1fr); background: var(--bg-primary); color: var(--color-ice); font-family: var(--font-inter); }
+.ops-sidebar { position: sticky; top: 0; height: 100vh; padding: 28px 20px; display: flex; flex-direction: column; gap: 22px; border-right: 1px solid var(--border-subtle); background: var(--color-navy); }
+.ops-workspace--staff .ops-sidebar { background: var(--bg-surface); border-right-color: var(--border-cyan); }
+.ops-product-mark, .ops-kicker, .ops-panel-kicker { color: var(--color-cyan); font: 600 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+.ops-product-mark { padding-top: 18px; border-top: 1px solid var(--border-subtle); }
+.ops-sidebar nav { display: grid; gap: 6px; flex: 1; }
+.ops-sidebar nav a { min-height: 44px; display: flex; gap: 10px; align-items: center; padding: 10px 12px; color: var(--color-gray); text-decoration: none; }
+.ops-sidebar nav a:hover, .ops-sidebar nav a[aria-current="page"] { color: var(--color-ice); background: var(--bg-elevated); }
+.ops-sidebar svg { width: 18px; }
+.ops-workspace-main { min-width: 0; padding: 56px clamp(24px, 5vw, 72px) 88px; }
+.ops-workspace-main > header { margin-bottom: 24px; }
+.ops-workspace-main h1 { margin: 7px 0 0; color: var(--color-ice); font: 700 clamp(30px, 4vw, 46px) var(--font-sora); letter-spacing: 0; }
+.ops-lead { max-width: 760px; margin: 0 0 32px; color: var(--color-gray); line-height: 1.7; }
+.ops-panel, .ops-empty { padding: 26px; border: 1px solid var(--border-subtle); background: var(--bg-surface); }
+.ops-workspace--staff .ops-panel { border-left: 3px solid var(--color-cyan); }
+.ops-panel h2, .ops-empty h2 { margin: 6px 0 10px; color: var(--color-ice); font: 700 21px var(--font-sora); letter-spacing: 0; }
+.ops-panel h3 { color: var(--color-ice); font: 600 14px var(--font-sora); }
+.ops-panel p, .ops-empty p, .ops-muted { color: var(--color-gray); line-height: 1.65; }
+.ops-panel a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--color-cyan); }
+.ops-create-form { display: grid; grid-template-columns: minmax(220px, 1fr) minmax(240px, 1fr) auto; gap: 18px; align-items: end; }
+.ops-create-form h2 { margin-bottom: 0; }
+.ops-panel label { display: grid; gap: 8px; color: var(--color-ice); font-size: 13px; font-weight: 600; }
+.ops-panel input, .ops-panel select { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid var(--border-subtle); background: var(--bg-primary); color: var(--color-ice); }
+.ops-panel input:focus, .ops-panel select:focus { outline: 2px solid var(--color-cyan); outline-offset: 2px; }
+.ops-feedback { color: var(--nexus-success); margin: 16px 0; }
+.ops-company-list { display: grid; gap: 18px; margin-top: 22px; }
+.ops-panel-heading, .ops-inline-form, .ops-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.ops-count { display: inline-flex; align-items: center; gap: 6px; color: var(--color-gray); }
+.ops-count svg { width: 17px; }
+.ops-inline-form { margin: 18px 0; justify-content: flex-start; }
+.ops-inline-form label { flex: 1; max-width: 520px; }
+.ops-history { display: grid; gap: 1px; margin-top: 18px; }
+.ops-history-row { min-height: 48px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--border-subtle); color: var(--color-gray); font-size: 13px; }
+.ops-history-row svg { width: 15px; }
+.ops-history-row time { font-family: var(--font-mono); font-size: 10px; }
+.ops-stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 20px; }
+.ops-stat-grid article { min-height: 116px; padding: 20px; border: 1px solid var(--border-subtle); background: var(--bg-surface); }
+.ops-stat-grid span { display: block; color: var(--color-gray); font-size: 12px; }
+.ops-stat-grid strong { display: block; margin-top: 16px; color: var(--color-ice); font: 600 17px var(--font-sora); }
+.ops-access-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 20px; }
+.ops-access-form .ops-actions, .ops-access-form .ops-feedback { grid-column: 1 / -1; }
+.ops-table-wrap { overflow-x: auto; }
+.ops-table-wrap table { width: 100%; min-width: 600px; border-collapse: collapse; }
+.ops-table-wrap th, .ops-table-wrap td { padding: 13px 10px; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+.ops-table-wrap th { color: var(--color-gray); font: 600 10px var(--font-mono); text-transform: uppercase; }
+@media (max-width: 900px) { .ops-workspace { grid-template-columns: 1fr; }.ops-sidebar { position: static; height: auto; flex-direction: row; align-items: center; overflow-x: auto; }.ops-sidebar nav { display: flex; }.ops-stat-grid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .ops-sidebar { padding: 16px; flex-wrap: wrap; gap: 12px; }.ops-product-mark { border: 0; padding: 0; }.ops-sidebar nav { order: 3; flex: 1 0 100%; overflow-x: auto; }.ops-sidebar nav a { white-space: nowrap; }.ops-workspace-main { padding: 36px 20px 72px; }.ops-create-form, .ops-access-form { grid-template-columns: 1fr; }.ops-create-form button, .ops-access-form .ops-actions, .ops-access-form .ops-feedback { grid-column: auto; }.ops-inline-form, .ops-panel-heading { align-items: stretch; flex-direction: column; }.ops-inline-form button { width: 100%; }.ops-history-row { grid-template-columns: auto 1fr; }.ops-history-row time { grid-column: 2; }.ops-actions { flex-direction: column; align-items: stretch; }.ops-actions button { width: 100%; } }

@@ -29,7 +29,7 @@ const FEATURES = [
   { t: "EIN and banking readiness", d: "Checklists for EIN application and business banking setup organized and tracked. Next steps are clear." },
   { t: "Attorney and CPA handoff preparation", d: "Documents prepared for your first attorney and CPA engagement. Opsirix coordinates the introduction through Nexus. Professionals serve you independently." },
   { t: "Initial document collection", d: "Formation documents, operating agreements, and initial contracts collected and organized in Vault." },
-  { t: "Launch timeline", d: "A structured timeline for the first 30 days of operational setup. Each task has a status and an owner in Flow." },
+  { t: "Launch timeline", d: "A structured, jurisdiction-neutral coordination timeline. Each task has a status and an owner in Flow." },
   { t: "Vendor and account setup tracker", d: "Business tools, software, accounts, and service providers tracked as they are set up." },
 ];
 

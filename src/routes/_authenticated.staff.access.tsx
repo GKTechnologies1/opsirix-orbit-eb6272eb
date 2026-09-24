@@ -46,7 +46,10 @@ function StaffAccess() {
         {message && <p className="ops-feedback" role="status">{message}</p>}
       </form>
       <section className="ops-panel"><h2>Current staff</h2><div className="ops-table-wrap"><table><thead><tr><th>Person</th><th>Role</th><th>Granted</th></tr></thead><tbody>{data.team.map((item) => <tr key={`${item.user_id}-${item.role}`}><td>{item.person?.full_name || item.person?.email || "Account"}</td><td>{item.role === "admin" ? "Admin / CEO" : item.role === "operations_lead" ? "Operations Lead" : "Compliance Coordinator"}</td><td>{new Date(item.created_at).toLocaleDateString()}</td></tr>)}</tbody></table></div></section>
-      <section className="ops-panel"><h2>Access history</h2><div className="ops-history">{data.history.map((event) => <div className="ops-history-row" key={event.id}><span>{event.summary}</span><span>{String(event.metadata.role ?? "")}</span><time>{new Date(event.created_at).toLocaleString()}</time></div>)}</div></section>
+      <section className="ops-panel"><h2>Access history</h2><div className="ops-history">{data.history.map((event) => {
+        const role = event.metadata && typeof event.metadata === "object" && !Array.isArray(event.metadata) ? event.metadata.role : "";
+        return <div className="ops-history-row" key={event.id}><span>{event.summary}</span><span>{String(role ?? "")}</span><time>{new Date(event.created_at).toLocaleString()}</time></div>;
+      })}</div></section>
     </>}
   </OperatingShell>;
 }

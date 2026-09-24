@@ -13,7 +13,7 @@ type Service = {
 };
 
 const SERVICES: Service[] = [
-  { icon: "🚀", title: "Opsirix Launch", tag: "Formation Layer", body: "Zero to operational in 30 days. Entity coordination, EIN, banking, Vault creation, and Nexus introductions.", gradient: "linear-gradient(90deg, #0D9E8F, #2DD4BF)", to: "/platform/launch" },
+  { icon: "🚀", title: "Opsirix Launch", tag: "Formation Layer", body: "A jurisdiction-neutral coordination workflow for entity, banking, document, and professional handoffs.", gradient: "linear-gradient(90deg, #0D9E8F, #2DD4BF)", to: "/platform/launch" },
   { icon: "⚡", title: "Opsirix Flow", tag: "Workflow Engine", body: "Weekly workflow orchestration. Task routing, escalation management, project boards, and operational cadence.", gradient: "linear-gradient(90deg, #7C3AED, #A78BFA)", to: "/platform/flow" },
   { icon: "🔒", title: "Opsirix Vault", tag: "Document Intelligence", body: "Structured document organization with records connected to operational dates and workflows.", gradient: "linear-gradient(90deg, #0D9E8F, #0057D9)", to: "/platform/vault" },
   { icon: "🔗", title: "Opsirix Nexus", tag: "Partner Network", body: "Warm routing to licensed attorneys, CPAs, insurance, and tech partners at exactly the right moment.", gradient: "linear-gradient(90deg, #0057D9, #66C7F4)", to: "/platform/nexus" },
