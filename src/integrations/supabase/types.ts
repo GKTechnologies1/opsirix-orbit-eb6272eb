@@ -294,6 +294,57 @@ export type Database = {
           },
         ]
       }
+      partner_listing_types: {
+        Row: {
+          application_id: string
+          created_at: string
+          id: string
+          partner_type_id: string
+          review_note: string | null
+          review_status: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          user_id: string
+        }
+        Insert: {
+          application_id: string
+          created_at?: string
+          id?: string
+          partner_type_id: string
+          review_note?: string | null
+          review_status?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          user_id: string
+        }
+        Update: {
+          application_id?: string
+          created_at?: string
+          id?: string
+          partner_type_id?: string
+          review_note?: string | null
+          review_status?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_listing_types_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_listing_types_partner_type_id_fkey"
+            columns: ["partner_type_id"]
+            isOneToOne: false
+            referencedRelation: "service_partner_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       partner_profiles: {
         Row: {
           city: string | null
@@ -305,6 +356,9 @@ export type Database = {
           partner_type_id: string | null
           professional_summary: string
           professional_type: string
+          profile_review_status: string
+          profile_reviewed_at: string | null
+          profile_reviewed_by: string | null
           service_areas: string[]
           state_region: string | null
           updated_at: string
@@ -320,6 +374,9 @@ export type Database = {
           partner_type_id?: string | null
           professional_summary?: string
           professional_type: string
+          profile_review_status?: string
+          profile_reviewed_at?: string | null
+          profile_reviewed_by?: string | null
           service_areas?: string[]
           state_region?: string | null
           updated_at?: string
@@ -335,6 +392,9 @@ export type Database = {
           partner_type_id?: string | null
           professional_summary?: string
           professional_type?: string
+          profile_review_status?: string
+          profile_reviewed_at?: string | null
+          profile_reviewed_by?: string | null
           service_areas?: string[]
           state_region?: string | null
           updated_at?: string
@@ -861,7 +921,24 @@ export type Database = {
         }
         Returns: boolean
       }
+      listing_type_is_public: {
+        Args: { _type: string; _user: string }
+        Returns: boolean
+      }
       partner_type_is_open: { Args: { _type: string }; Returns: boolean }
+      profile_is_public: { Args: { _user: string }; Returns: boolean }
+      public_partner_services: {
+        Args: never
+        Returns: {
+          accepting_inquiries: boolean
+          is_featured: boolean
+          label: string
+          offering_description: string
+          partner_type: string
+          service_id: string
+          user_id: string
+        }[]
+      }
     }
     Enums: {
       app_role: "applicant" | "partner" | "admin"
