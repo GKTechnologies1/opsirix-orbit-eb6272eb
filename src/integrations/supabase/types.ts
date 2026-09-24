@@ -14,6 +14,50 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_events: {
+        Row: {
+          actor_id: string
+          created_at: string
+          event_type: string
+          id: string
+          metadata: Json
+          organization_id: string | null
+          subject_id: string
+          subject_type: string
+          summary: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          event_type: string
+          id?: string
+          metadata?: Json
+          organization_id?: string | null
+          subject_id: string
+          subject_type: string
+          summary: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          event_type?: string
+          id?: string
+          metadata?: Json
+          organization_id?: string | null
+          subject_id?: string
+          subject_type?: string
+          summary?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       discovery_call_submissions: {
         Row: {
           business_stage: string | null
@@ -68,6 +112,68 @@ export type Database = {
           updated_at?: string | null
           user_agent?: string | null
           website?: string | null
+        }
+        Relationships: []
+      }
+      organization_members: {
+        Row: {
+          added_by: string
+          created_at: string
+          id: string
+          organization_id: string
+          role: Database["public"]["Enums"]["organization_member_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          added_by: string
+          created_at?: string
+          id?: string
+          organization_id: string
+          role?: Database["public"]["Enums"]["organization_member_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          added_by?: string
+          created_at?: string
+          id?: string
+          organization_id?: string
+          role?: Database["public"]["Enums"]["organization_member_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organization_members_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organizations: {
+        Row: {
+          created_at: string
+          created_by: string
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          id?: string
+          name?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -1153,15 +1259,24 @@ export type Database = {
         Args: { _type: string; _uid: string }
         Returns: undefined
       }
+      can_access_organization: {
+        Args: { _organization_id: string; _user_id: string }
+        Returns: boolean
+      }
       can_register_type: {
         Args: { _type: string; _uid: string }
         Returns: boolean
       }
+      create_company_workspace: { Args: { _name: string }; Returns: string }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      has_staff_role: {
+        Args: { _roles?: string[]; _user_id: string }
         Returns: boolean
       }
       insurance_offered_states: {
@@ -1177,6 +1292,10 @@ export type Database = {
       listing_type_is_public: {
         Args: { _type: string; _user: string }
         Returns: boolean
+      }
+      organization_role: {
+        Args: { _organization_id: string; _user_id: string }
+        Returns: Database["public"]["Enums"]["organization_member_role"]
       }
       partner_type_is_open: { Args: { _type: string }; Returns: boolean }
       profile_is_public: { Args: { _user: string }; Returns: boolean }
@@ -1200,6 +1319,18 @@ export type Database = {
           user_id: string
         }[]
       }
+      rename_company_workspace: {
+        Args: { _name: string; _organization_id: string }
+        Returns: undefined
+      }
+      set_organization_member: {
+        Args: { _organization_id: string; _role: string; _user_id: string }
+        Returns: undefined
+      }
+      set_staff_role: {
+        Args: { _enabled: boolean; _role: string; _user_id: string }
+        Returns: undefined
+      }
       type_evidence_ok: {
         Args: { _application: string; _type: string }
         Returns: boolean
@@ -1207,8 +1338,14 @@ export type Database = {
       type_id_for_label: { Args: { _label: string }; Returns: string }
     }
     Enums: {
-      app_role: "applicant" | "partner" | "admin"
+      app_role:
+        | "applicant"
+        | "partner"
+        | "admin"
+        | "operations_lead"
+        | "compliance_coordinator"
       credential_status: "pending" | "verified" | "rejected"
+      organization_member_role: "owner" | "member" | "viewer"
       partner_application_status:
         | "draft"
         | "submitted"
@@ -1347,8 +1484,15 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["applicant", "partner", "admin"],
+      app_role: [
+        "applicant",
+        "partner",
+        "admin",
+        "operations_lead",
+        "compliance_coordinator",
+      ],
       credential_status: ["pending", "verified", "rejected"],
+      organization_member_role: ["owner", "member", "viewer"],
       partner_application_status: [
         "draft",
         "submitted",
