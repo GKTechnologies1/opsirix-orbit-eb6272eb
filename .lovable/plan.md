@@ -28,19 +28,6 @@ Place a concise Nexus section after the module introduction and before founder-s
 
 Initially show category cards only. No name, logo, summary, or count appears. A future curated partner requires every current publication gate plus separate, versioned consent for each exact homepage field.
 
-## Public Nexus overview
-
-Keep `/platform/nexus` public. Replace unsupported automatic matching, Vault packet, and integration claims with:
-
-- `A human-reviewed path to professional help.`
-- `Nexus helps individuals and businesses explain a nonconfidential need and request an introduction. Opsirix reviews each request. We do not automatically send your information to a partner.`
-- Reasons: `A contract or company legal question`; `Accounting, tax, or bookkeeping support`; `Custom software or IT work`; `Finding an approved program or financial or insurance relationship when those Nexus categories are open`.
-- `Reviewed before anything is shared`
-- `Opsirix reviews the request, checks that the category is available, and identifies an eligible approved partner. We record your specific consent before disclosing your identity or contact details. You can decline and nothing is shared.`
-- Actions: `Create a free account to browse` and `Tell us what kind of help you need`.
-
-The available-category list is server-filtered. Closed types are never presented as available.
-
 ## Free member directory
 
 - Public explanation: `A free account lets you browse and filter approved Nexus profiles. It does not enroll you in another Opsirix service or create a company workspace.`
@@ -71,12 +58,17 @@ Use a Nexus inquiry record, not a company, Launch intake, CRM note, or Discovery
 
 ## Permissions and audit
 
-- Signed-out visitors see general copy and only explicitly consented curated fields after all publication gates.
-- Free members see the approved directory projection, never review or credential records.
-- Partners see their own private application records and accepted introduction details only.
-- Operations Lead and Compliance Coordinator receive only explicitly assigned Nexus scopes; staff title alone does not grant universal access.
-- Admin/CEO uses separate authorized review operations. Nexus access never implies company, CRM, Vault, or AI access.
-- Reuse `profile_is_public`, `listing_type_is_public`, current evidence checks, and Phase 1 roles/audit patterns. Every consent, disclosure, status, staff-access, and closure action is audited without confidential content in summaries.
+| Data | Public | Free member | Partner | Staff |
+|---|---|---|---|---|
+| Open categories/general copy | Yes | Yes | Yes | Yes |
+| Curated partner fields | Only exact-consented fields after all gates | Same | Same | Same |
+| Approved directory projection | No | Yes | Yes as member | Role-scoped |
+| Draft/closed/suspended/withdrawn data | No | No | Own only | Assigned review only |
+| Credentials/private documents | No | No | Own only | Assigned review only |
+| Reviewer notes | No | No | No | Assigned review only |
+| Inquiry identity/contact | No | Own if linked later | Only after recipient-specific consent | Assigned scope |
+
+Reuse `profile_is_public`, `listing_type_is_public`, evidence checks, and Phase 1 role/audit patterns. Nexus access never implies company, CRM, Vault, or AI access. Staff title alone grants no universal access. Audit consent, disclosure, status, staff access, and closure without confidential content in summaries.
 
 ## Decisions required before implementation
 
@@ -104,7 +96,7 @@ Migrations: `0016` roles/organizations/members/audit; `0017` scoped grants; `001
 
 All 19 isolated permission checks passed: admin self-grant refused; two approved staff roles granted; two founders created isolated workspaces; owner added viewer; viewer rename refused; cross-founder reads hidden; ungranted staff saw no companies; one-company Operations Lead grant worked; ungranted Compliance Coordinator stayed isolated; Admin/CEO rename refused; owner revocation removed access immediately; direct audit insert refused; anonymous reads empty; anonymous creation refused; and successful mutations wrote audit events. Test records were removed.
 
-Limitations: full browser desktop/390px acceptance for these three screens is incomplete; older project security warnings remain for separate functions; no member-management screen, CRM, Launch, Grid, Vault, AI, pricing, or retention/deletion workflow was added.
+Limitations: no permanent automated file retains the 19-case run; full browser desktop/390px acceptance is incomplete; older project security warnings remain; no member-management screen, CRM, Launch, Grid, Vault, AI, pricing, or retention/deletion workflow was added.
 
 ## Public-copy correction state
 
