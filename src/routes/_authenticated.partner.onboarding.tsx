@@ -54,7 +54,8 @@ type Data = {
 type Errors = Record<string, string>;
 
 async function loadData(): Promise<Data | null> {
-  const { data: auth } = await supabase.auth.getUser();
+  let { data: auth, error: authError } = await supabase.auth.getUser();
+  for (let i = 1; authError && i <= 2; i++) { await new Promise((r) => setTimeout(r, 700 * i)); ({ data: auth, error: authError } = await supabase.auth.getUser()); }
   if (!auth.user) return null;
   const uid = auth.user.id;
   const [types, app] = await Promise.all([
