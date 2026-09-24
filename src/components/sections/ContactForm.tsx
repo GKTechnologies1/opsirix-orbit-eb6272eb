@@ -95,7 +95,7 @@ export function ContactForm() {
         ) : (
           <motion.div key="form" initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <h3 className="contact-h3">Founder Intake Form</h3>
-            <p className="contact-sub">Complete all sections. Response within 1 business day.</p>
+            <p className="contact-sub">Complete all sections. We will contact you about next steps.</p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
               <div className="contact-row">

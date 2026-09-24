@@ -5,7 +5,7 @@ type Feature = { emoji: string; title: string; desc: string };
 
 const FEATURES: Feature[] = [
   { emoji: "📊", title: "Founder Dashboard", desc: "Real-time Grid score, tasks, and operational status" },
-  { emoji: "🔒", title: "Document Vault", desc: "Encrypted, organized, always accessible" },
+  { emoji: "🔒", title: "Document Vault", desc: "Structured document organization and retrieval" },
   { emoji: "🗺️", title: "Workflow Map", desc: "Visual map of all active tasks and owners" },
   { emoji: "🔗", title: "Partner Hub", desc: "Attorney, CPA, insurance, coordinated" },
   { emoji: "⭐", title: "Readiness Score", desc: "50-point Grid with investor-exportable history" },
