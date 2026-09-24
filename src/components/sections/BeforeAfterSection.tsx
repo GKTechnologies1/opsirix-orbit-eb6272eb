@@ -256,7 +256,7 @@ export function BeforeAfterSection() {
               margin: 0,
             }}
           >
-            Most founders complete their operational setup within the first 30 days.
+            Each setup follows an agreed sequence, with progress visible as work is completed.
           </p>
           <Link
             to="/how-it-works"

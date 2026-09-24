@@ -113,6 +113,55 @@
       "when": 1790276198709,
       "tag": "0015_insurance_state_and_line_licensing",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1790286576436,
+      "tag": "0016_phase_one_company_workspaces_and_staff_access",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1790286707774,
+      "tag": "0017_scope_staff_company_access_grants",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1790286727881,
+      "tag": "0018_founder_managed_staff_access_by_email",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1790286792940,
+      "tag": "0019_allow_founders_to_read_staff_access_grants",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1790286844445,
+      "tag": "0020_tighten_phase_one_founder_controls",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1790286952476,
+      "tag": "0021_resolve_staff_grants_against_authenticated_accounts",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1790286979324,
+      "tag": "0022_fail_closed_on_missing_owner_membership",
+      "breakpoints": true
     }
   ]
 }

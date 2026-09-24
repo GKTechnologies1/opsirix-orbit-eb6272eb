@@ -14,7 +14,6 @@ const schema = z.object({
   company: z.string().min(1, "Company name required").max(150),
   founderType: z.string().min(1, "Please select your founder type"),
   companyStage: z.string().min(1, "Please select your company stage"),
-  visaStatus: z.string().max(120).optional(),
   hasAttorney: z.enum(["yes", "no"], { required_error: "Required" }),
   hasCPA: z.enum(["yes", "no"], { required_error: "Required" }),
   hasEntity: z.enum(["yes", "no"], { required_error: "Required" }),
@@ -48,7 +47,6 @@ export function ContactForm() {
           company_name: data.company,
           business_stage: `${data.founderType} / ${data.companyStage}`,
           service_interest: [
-            data.visaStatus ? `Visa: ${data.visaStatus}` : null,
             `Attorney: ${data.hasAttorney}`,
             `CPA: ${data.hasCPA}`,
             `Entity formed: ${data.hasEntity}`,
@@ -129,12 +127,7 @@ export function ContactForm() {
                   <option value="" disabled>Select your founder type…</option>
                   <optgroup label="FOUNDER TYPES">
                     <option>Early-stage founder (any background)</option>
-                    <option>F-1 / OPT / STEM OPT founder</option>
-                    <option>H-1B professional founder</option>
-                    <option>H-4 EAD founder</option>
-                    <option>International entrepreneur (non-U.S.)</option>
-                    <option>Green card holder founder</option>
-                    <option>U.S. citizen / PR founder</option>
+                    <option>International founder</option>
                   </optgroup>
                   <optgroup label="PARTNER TYPES">
                     <option>Immigration attorney / CPA partner</option>
@@ -158,16 +151,8 @@ export function ContactForm() {
                 </select>
               </Field>
 
-              <Field label="Visa or Immigration Status (optional)" error={errors.visaStatus?.message}>
-                <input
-                  className={inputCls(!!errors.visaStatus)}
-                  placeholder="e.g., F-1, OPT, H-1B, Green Card, U.S. Citizen, International"
-                  {...register("visaStatus")}
-                />
-              </Field>
-
               <div className="contact-row">
-                <Field label="Do you have an attorney?*" error={errors.hasAttorney?.message}>
+                <Field label="Is a licensed attorney engaged?*" error={errors.hasAttorney?.message}>
                   <select className={inputCls(!!errors.hasAttorney)} defaultValue="" {...register("hasAttorney")}>
                     <option value="" disabled>Select…</option>
                     <option value="yes">Yes</option>
