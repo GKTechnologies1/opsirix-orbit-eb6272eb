@@ -1372,6 +1372,15 @@ export type Database = {
         Args: { _organization_id: string; _role: string; _user_id: string }
         Returns: undefined
       }
+      set_staff_access_by_email: {
+        Args: {
+          _email: string
+          _enabled: boolean
+          _expires_at?: string
+          _organization_id: string
+        }
+        Returns: undefined
+      }
       set_staff_access_grant: {
         Args: {
           _enabled: boolean
