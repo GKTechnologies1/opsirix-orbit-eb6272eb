@@ -42,7 +42,9 @@ import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_auth
 import { Route as AuthenticatedPartnerProfileRouteImport } from './routes/_authenticated.partner.profile'
 import { Route as AuthenticatedPartnerOnboardingRouteImport } from './routes/_authenticated.partner.onboarding'
 import { Route as AuthenticatedPartnerApplyRouteImport } from './routes/_authenticated.partner.apply'
+import { Route as AuthenticatedAdminPreviewRouteImport } from './routes/_authenticated.admin.preview'
 import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_authenticated.admin.applications'
+import { Route as AuthenticatedAdminReviewIdRouteImport } from './routes/_authenticated.admin.review.$id'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -213,10 +215,22 @@ const AuthenticatedPartnerApplyRoute =
     path: '/partner/apply',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminPreviewRoute =
+  AuthenticatedAdminPreviewRouteImport.update({
+    id: '/admin/preview',
+    path: '/admin/preview',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminApplicationsRoute =
   AuthenticatedAdminApplicationsRouteImport.update({
     id: '/admin/applications',
     path: '/admin/applications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminReviewIdRoute =
+  AuthenticatedAdminReviewIdRouteImport.update({
+    id: '/admin/review/$id',
+    path: '/admin/review/$id',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -249,11 +263,13 @@ export interface FileRoutesByFullPath {
   '/platform/vault': typeof PlatformVaultRoute
   '/platform/': typeof PlatformIndexRoute
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
+  '/admin/preview': typeof AuthenticatedAdminPreviewRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/partner/': typeof AuthenticatedPartnerIndexRoute
+  '/admin/review/$id': typeof AuthenticatedAdminReviewIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -283,11 +299,13 @@ export interface FileRoutesByTo {
   '/platform/vault': typeof PlatformVaultRoute
   '/platform': typeof PlatformIndexRoute
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
+  '/admin/preview': typeof AuthenticatedAdminPreviewRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/partner': typeof AuthenticatedPartnerIndexRoute
+  '/admin/review/$id': typeof AuthenticatedAdminReviewIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -320,11 +338,13 @@ export interface FileRoutesById {
   '/platform/vault': typeof PlatformVaultRoute
   '/platform/': typeof PlatformIndexRoute
   '/_authenticated/admin/applications': typeof AuthenticatedAdminApplicationsRoute
+  '/_authenticated/admin/preview': typeof AuthenticatedAdminPreviewRoute
   '/_authenticated/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/_authenticated/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/_authenticated/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/_authenticated/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/_authenticated/partner/': typeof AuthenticatedPartnerIndexRoute
+  '/_authenticated/admin/review/$id': typeof AuthenticatedAdminReviewIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -357,11 +377,13 @@ export interface FileRouteTypes {
     | '/platform/vault'
     | '/platform/'
     | '/admin/applications'
+    | '/admin/preview'
     | '/partner/apply'
     | '/partner/onboarding'
     | '/partner/profile'
     | '/partner/services'
     | '/partner/'
+    | '/admin/review/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -391,11 +413,13 @@ export interface FileRouteTypes {
     | '/platform/vault'
     | '/platform'
     | '/admin/applications'
+    | '/admin/preview'
     | '/partner/apply'
     | '/partner/onboarding'
     | '/partner/profile'
     | '/partner/services'
     | '/partner'
+    | '/admin/review/$id'
   id:
     | '__root__'
     | '/'
@@ -427,11 +451,13 @@ export interface FileRouteTypes {
     | '/platform/vault'
     | '/platform/'
     | '/_authenticated/admin/applications'
+    | '/_authenticated/admin/preview'
     | '/_authenticated/partner/apply'
     | '/_authenticated/partner/onboarding'
     | '/_authenticated/partner/profile'
     | '/_authenticated/partner/services'
     | '/_authenticated/partner/'
+    | '/_authenticated/admin/review/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -688,6 +714,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPartnerApplyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/preview': {
+      id: '/_authenticated/admin/preview'
+      path: '/admin/preview'
+      fullPath: '/admin/preview'
+      preLoaderRoute: typeof AuthenticatedAdminPreviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/applications': {
       id: '/_authenticated/admin/applications'
       path: '/admin/applications'
@@ -695,25 +728,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminApplicationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/review/$id': {
+      id: '/_authenticated/admin/review/$id'
+      path: '/admin/review/$id'
+      fullPath: '/admin/review/$id'
+      preLoaderRoute: typeof AuthenticatedAdminReviewIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
+  AuthenticatedAdminPreviewRoute: typeof AuthenticatedAdminPreviewRoute
   AuthenticatedPartnerApplyRoute: typeof AuthenticatedPartnerApplyRoute
   AuthenticatedPartnerOnboardingRoute: typeof AuthenticatedPartnerOnboardingRoute
   AuthenticatedPartnerProfileRoute: typeof AuthenticatedPartnerProfileRoute
   AuthenticatedPartnerServicesRoute: typeof AuthenticatedPartnerServicesRoute
   AuthenticatedPartnerIndexRoute: typeof AuthenticatedPartnerIndexRoute
+  AuthenticatedAdminReviewIdRoute: typeof AuthenticatedAdminReviewIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
+  AuthenticatedAdminPreviewRoute: AuthenticatedAdminPreviewRoute,
   AuthenticatedPartnerApplyRoute: AuthenticatedPartnerApplyRoute,
   AuthenticatedPartnerOnboardingRoute: AuthenticatedPartnerOnboardingRoute,
   AuthenticatedPartnerProfileRoute: AuthenticatedPartnerProfileRoute,
   AuthenticatedPartnerServicesRoute: AuthenticatedPartnerServicesRoute,
   AuthenticatedPartnerIndexRoute: AuthenticatedPartnerIndexRoute,
+  AuthenticatedAdminReviewIdRoute: AuthenticatedAdminReviewIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
