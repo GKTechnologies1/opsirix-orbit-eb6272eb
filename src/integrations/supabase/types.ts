@@ -73,11 +73,13 @@ export type Database = {
       }
       partner_applications: {
         Row: {
+          application_kind: string
           city: string | null
           created_at: string
           id: string
           license_jurisdiction: string | null
           license_number: string | null
+          onboarding_step: string | null
           organization_name: string
           phone: string | null
           professional_summary: string
@@ -93,11 +95,13 @@ export type Database = {
           years_experience: number | null
         }
         Insert: {
+          application_kind?: string
           city?: string | null
           created_at?: string
           id?: string
           license_jurisdiction?: string | null
           license_number?: string | null
+          onboarding_step?: string | null
           organization_name?: string
           phone?: string | null
           professional_summary?: string
@@ -113,11 +117,13 @@ export type Database = {
           years_experience?: number | null
         }
         Update: {
+          application_kind?: string
           city?: string | null
           created_at?: string
           id?: string
           license_jurisdiction?: string | null
           license_number?: string | null
+          onboarding_step?: string | null
           organization_name?: string
           phone?: string | null
           professional_summary?: string
@@ -248,6 +254,7 @@ export type Database = {
         Row: {
           application_id: string
           created_at: string
+          expires_on: string | null
           id: string
           license_number: string
           line_of_authority: string
@@ -261,6 +268,7 @@ export type Database = {
         Insert: {
           application_id: string
           created_at?: string
+          expires_on?: string | null
           id?: string
           license_number: string
           line_of_authority: string
@@ -274,6 +282,7 @@ export type Database = {
         Update: {
           application_id?: string
           created_at?: string
+          expires_on?: string | null
           id?: string
           license_number?: string
           line_of_authority?: string
@@ -345,6 +354,68 @@ export type Database = {
           },
         ]
       }
+      partner_profile_revisions: {
+        Row: {
+          application_id: string | null
+          city: string | null
+          created_at: string
+          display_name: string
+          id: string
+          organization_name: string
+          professional_summary: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          service_areas: string[]
+          state_region: string | null
+          status: string
+          submitted_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          application_id?: string | null
+          city?: string | null
+          created_at?: string
+          display_name?: string
+          id?: string
+          organization_name?: string
+          professional_summary?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          service_areas?: string[]
+          state_region?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          application_id?: string | null
+          city?: string | null
+          created_at?: string
+          display_name?: string
+          id?: string
+          organization_name?: string
+          professional_summary?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          service_areas?: string[]
+          state_region?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_profile_revisions_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       partner_profiles: {
         Row: {
           city: string | null
@@ -352,6 +423,7 @@ export type Database = {
           display_name: string
           id: string
           is_published: boolean
+          is_suspended: boolean
           organization_name: string
           partner_type_id: string | null
           professional_summary: string
@@ -361,6 +433,7 @@ export type Database = {
           profile_reviewed_by: string | null
           service_areas: string[]
           state_region: string | null
+          suspension_reason: string | null
           updated_at: string
           user_id: string
         }
@@ -370,6 +443,7 @@ export type Database = {
           display_name: string
           id?: string
           is_published?: boolean
+          is_suspended?: boolean
           organization_name: string
           partner_type_id?: string | null
           professional_summary?: string
@@ -379,6 +453,7 @@ export type Database = {
           profile_reviewed_by?: string | null
           service_areas?: string[]
           state_region?: string | null
+          suspension_reason?: string | null
           updated_at?: string
           user_id: string
         }
@@ -388,6 +463,7 @@ export type Database = {
           display_name?: string
           id?: string
           is_published?: boolean
+          is_suspended?: boolean
           organization_name?: string
           partner_type_id?: string | null
           professional_summary?: string
@@ -397,6 +473,7 @@ export type Database = {
           profile_reviewed_by?: string | null
           service_areas?: string[]
           state_region?: string | null
+          suspension_reason?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -406,6 +483,50 @@ export type Database = {
             columns: ["partner_type_id"]
             isOneToOne: false
             referencedRelation: "service_partner_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_review_decisions: {
+        Row: {
+          applicant_message: string | null
+          application_id: string
+          created_at: string
+          decision: string
+          id: string
+          reviewer_id: string
+          subject_id: string
+          subject_label: string | null
+          subject_type: string
+        }
+        Insert: {
+          applicant_message?: string | null
+          application_id: string
+          created_at?: string
+          decision: string
+          id?: string
+          reviewer_id: string
+          subject_id: string
+          subject_label?: string | null
+          subject_type: string
+        }
+        Update: {
+          applicant_message?: string | null
+          application_id?: string
+          created_at?: string
+          decision?: string
+          id?: string
+          reviewer_id?: string
+          subject_id?: string
+          subject_label?: string | null
+          subject_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_review_decisions_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "partner_applications"
             referencedColumns: ["id"]
           },
         ]
@@ -450,6 +571,48 @@ export type Database = {
             columns: ["application_id"]
             isOneToOne: false
             referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_review_internal_notes: {
+        Row: {
+          application_id: string
+          author_id: string
+          created_at: string
+          decision_id: string | null
+          id: string
+          note: string
+        }
+        Insert: {
+          application_id: string
+          author_id: string
+          created_at?: string
+          decision_id?: string | null
+          id?: string
+          note: string
+        }
+        Update: {
+          application_id?: string
+          author_id?: string
+          created_at?: string
+          decision_id?: string | null
+          id?: string
+          note?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_review_internal_notes_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "partner_review_internal_notes_decision_id_fkey"
+            columns: ["decision_id"]
+            isOneToOne: false
+            referencedRelation: "partner_review_decisions"
             referencedColumns: ["id"]
           },
         ]
@@ -623,58 +786,91 @@ export type Database = {
       }
       partner_track_details: {
         Row: {
+          agreement_reference: string | null
+          agreement_status: string
           application_id: string
           audiences: string[]
+          authority_evidence_detail: string | null
+          authority_evidence_method: string | null
+          authority_review_status: string
           authority_verified: boolean
           campus_or_program: string | null
           carriers_markets: string | null
           created_at: string
           geographic_reach: string | null
+          industries: string[]
           introduction_method: string | null
           languages: string[]
+          org_public_consent: boolean
+          rep_public_consent: boolean
           representative_authorized: boolean
           representative_email: string | null
           representative_name: string
+          representative_phone: string | null
           representative_title: string | null
+          response_time: string | null
           segments_served: string[]
+          service_areas: string[]
           track: string
           updated_at: string
           user_id: string
         }
         Insert: {
+          agreement_reference?: string | null
+          agreement_status?: string
           application_id: string
           audiences?: string[]
+          authority_evidence_detail?: string | null
+          authority_evidence_method?: string | null
+          authority_review_status?: string
           authority_verified?: boolean
           campus_or_program?: string | null
           carriers_markets?: string | null
           created_at?: string
           geographic_reach?: string | null
+          industries?: string[]
           introduction_method?: string | null
           languages?: string[]
+          org_public_consent?: boolean
+          rep_public_consent?: boolean
           representative_authorized?: boolean
           representative_email?: string | null
           representative_name: string
+          representative_phone?: string | null
           representative_title?: string | null
+          response_time?: string | null
           segments_served?: string[]
+          service_areas?: string[]
           track: string
           updated_at?: string
           user_id: string
         }
         Update: {
+          agreement_reference?: string | null
+          agreement_status?: string
           application_id?: string
           audiences?: string[]
+          authority_evidence_detail?: string | null
+          authority_evidence_method?: string | null
+          authority_review_status?: string
           authority_verified?: boolean
           campus_or_program?: string | null
           carriers_markets?: string | null
           created_at?: string
           geographic_reach?: string | null
+          industries?: string[]
           introduction_method?: string | null
           languages?: string[]
+          org_public_consent?: boolean
+          rep_public_consent?: boolean
           representative_authorized?: boolean
           representative_email?: string | null
           representative_name?: string
+          representative_phone?: string | null
           representative_title?: string | null
+          response_time?: string | null
           segments_served?: string[]
+          service_areas?: string[]
           track?: string
           updated_at?: string
           user_id?: string
@@ -685,6 +881,38 @@ export type Database = {
             columns: ["application_id"]
             isOneToOne: true
             referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_type_preview_access: {
+        Row: {
+          created_at: string
+          granted_by: string
+          note: string | null
+          partner_type_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          granted_by: string
+          note?: string | null
+          partner_type_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          granted_by?: string
+          note?: string | null
+          partner_type_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_type_preview_access_partner_type_id_fkey"
+            columns: ["partner_type_id"]
+            isOneToOne: false
+            referencedRelation: "service_partner_types"
             referencedColumns: ["id"]
           },
         ]
@@ -719,6 +947,7 @@ export type Database = {
           approved_by: string | null
           catalog_version: number
           category_id: string
+          client_label: string | null
           created_at: string
           description: string
           display_order: number
@@ -736,6 +965,7 @@ export type Database = {
           approved_by?: string | null
           catalog_version?: number
           category_id: string
+          client_label?: string | null
           created_at?: string
           description: string
           display_order?: number
@@ -753,6 +983,7 @@ export type Database = {
           approved_by?: string | null
           catalog_version?: number
           category_id?: string
+          client_label?: string | null
           created_at?: string
           description?: string
           display_order?: number
@@ -914,6 +1145,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      can_register_type: {
+        Args: { _type: string; _uid: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -927,6 +1162,14 @@ export type Database = {
       }
       partner_type_is_open: { Args: { _type: string }; Returns: boolean }
       profile_is_public: { Args: { _user: string }; Returns: boolean }
+      public_partner_representatives: {
+        Args: never
+        Returns: {
+          representative_name: string
+          representative_title: string
+          user_id: string
+        }[]
+      }
       public_partner_services: {
         Args: never
         Returns: {
@@ -938,6 +1181,10 @@ export type Database = {
           service_id: string
           user_id: string
         }[]
+      }
+      type_evidence_ok: {
+        Args: { _application: string; _type: string }
+        Returns: boolean
       }
     }
     Enums: {

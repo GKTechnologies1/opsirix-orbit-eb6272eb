@@ -107,7 +107,7 @@ function PartnerApplicationPage() {
         <form className="nexus-application-form" onSubmit={save}>
           <section className="nexus-work-card"><h2>Organization and practice</h2><div className="nexus-form-grid">
             <label>Organization name<input name="organizationName" required maxLength={160} defaultValue={application?.organization_name} /></label>
-            <label>Professional type<select name="professionalType" required defaultValue={application?.professional_type}><option value="">Select one</option>{["Attorney","Immigration Attorney","CPA","Bookkeeper","Insurance Broker","Banking Partner","Technology Partner","University Partner","Other"].map((item) => <option key={item}>{item}</option>)}</select></label>
+            <label>Professional type<select name="professionalType" required defaultValue={application?.professional_type}><option value="">Select one</option>{["Attorney","Immigration Attorney","CPA","Bookkeeper","Technology Partner","Other"].map((item) => <option key={item}>{item}</option>)}</select></label>
             <label>Website<input name="website" type="url" maxLength={300} defaultValue={application?.website ?? ""} /></label>
             <label>Phone<input name="phone" type="tel" maxLength={40} defaultValue={application?.phone ?? ""} /></label>
             <label>City<input name="city" maxLength={100} defaultValue={application?.city ?? ""} /></label>
