@@ -1164,10 +1164,16 @@ export type Database = {
         }
         Returns: boolean
       }
-      insurance_service_licensed: {
-        Args: { _service: string; _user: string }
-        Returns: boolean
+      insurance_offered_states: {
+        Args: { _geography: string; _user: string }
+        Returns: string[]
       }
+      insurance_service_licensed:
+        | { Args: { _service: string; _user: string }; Returns: boolean }
+        | {
+            Args: { _service: string; _states: string[]; _user: string }
+            Returns: boolean
+          }
       listing_type_is_public: {
         Args: { _type: string; _user: string }
         Returns: boolean
