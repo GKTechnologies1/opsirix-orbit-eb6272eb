@@ -32,7 +32,7 @@ const OPSIRIX_ROWS: RowItem[] = [
   {
     icon: "🔒",
     title: "Document organization & Vault management",
-    subtitle: "Encrypted storage, compliance calendar, audit-readiness",
+    subtitle: "Structured records, operational dates, and document organization",
     badge: OPSIRIX_BADGE,
   },
   {

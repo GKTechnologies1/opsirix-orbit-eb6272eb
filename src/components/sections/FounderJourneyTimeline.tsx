@@ -18,14 +18,14 @@ const STEPS: Step[] = [
     details: [
       "Complete 15-min Intake Flow",
       "No discovery call required first",
-      "We review within 1 business day",
+      "We review your submitted information",
       "No commitment at this stage",
     ],
   },
   {
     emoji: "📋",
     title: "Intake",
-    desc: "Risk classified within 1 business day",
+    desc: "Intake reviewed before activation",
     details: [
       "Compliance Coordinator reviews intake",
       "Risk classified Low/Medium/High",

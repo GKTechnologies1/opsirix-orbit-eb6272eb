@@ -13,7 +13,7 @@ const BEFORE = [
 ];
 
 const AFTER = [
-  "All critical documents organized in Opsirix Vault, encrypted, current, audit-ready in minutes",
+  "Critical documents organized in a structured Opsirix Vault and easier to locate when needed",
   "Attorney, CPA, and partner team coordinated through Opsirix Nexus, right timing, full preparation",
   "Live compliance calendar, every deadline tracked, 90-day advance alerts, nothing missed",
   "Monthly Opsirix Grid review, priorities set, progress tracked, score improving every quarter",

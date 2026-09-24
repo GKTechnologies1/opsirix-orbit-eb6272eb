@@ -43,7 +43,7 @@ const SERVICES: QA[] = [
 
 const GETTING_STARTED: QA[] = [
   { q: "How does Opsirix work with licensed professionals?", a: "Opsirix coordinates the administrative and logistical relationship between founders and their licensed professionals: scheduling, document preparation, and follow-up. Opsirix does not supervise or provide the professional advice itself. Attorneys, CPAs, and other licensed professionals serve founders independently." },
-  { q: "How do I get started with Opsirix?", a: "Complete the founder intake form at opsirix.com/contact. We review your intake within one business day and schedule a free 30-minute Discovery Call to understand your operational situation and recommend the right Opsirix path." },
+  { q: "How do I get started with Opsirix?", a: "Complete the founder intake form at opsirix.com/contact. We review your intake and contact you to schedule a free 30-minute Discovery Call to understand your operational situation and recommend the right Opsirix path." },
   { q: "What happens after I book a discovery call?", a: "After the Discovery Call, you receive four onboarding documents to review and sign. Once signed, your Opsirix Launch session is scheduled within five business days. During Launch: Vault is created, Flow is activated, Nexus introductions are made, and your Grid baseline is established." },
   { q: "How much does Opsirix cost?", a: "Opsirix pricing is customized after a discovery call. Every founder's situation is different, so we first review your company stage, documentation needs, operational complexity, partner coordination needs, and support level. After that, we recommend the right Opsirix path and provide pricing directly." },
 ];

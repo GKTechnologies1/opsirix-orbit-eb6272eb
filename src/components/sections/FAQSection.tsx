@@ -16,7 +16,7 @@ const FAQS: QA[] = [
   },
   {
     q: "How do founders get started?",
-    a: "Complete the founder intake form. We review within one business day and schedule a free 30-minute Discovery Call to understand your situation and recommend the right Opsirix path.",
+    a: "Complete the founder intake form. We review your submission and contact you to schedule a free 30-minute Discovery Call to understand your situation and recommend the right Opsirix path.",
   },
 ];
 
