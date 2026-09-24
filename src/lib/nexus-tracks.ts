@@ -80,3 +80,12 @@ export const splitList = (value: string) => value.split(",").map((v) => v.trim()
 export const LICENSE_LINES: Record<string, string> = {
   property: "Property", casualty: "Casualty", life: "Life", accident_health: "Accident and health", surety: "Surety",
 };
+
+/** License status for display. A verified record that has expired is labeled separately; it never counts as a current license. */
+export function licenseStatus(l: { review_status: string; expires_on: string | null }): { key: string; label: string } {
+  const today = new Date().toISOString().slice(0, 10);
+  if (l.review_status === "verified" && l.expires_on && l.expires_on < today) {
+    return { key: "expired", label: `Verified record — expired ${l.expires_on}` };
+  }
+  return { key: l.review_status, label: STATUS_LABELS[l.review_status] ?? l.review_status };
+}
