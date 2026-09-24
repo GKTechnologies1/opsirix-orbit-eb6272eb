@@ -6,7 +6,7 @@ import { WorkspaceShell } from "@/components/nexus/WorkspaceShell";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
-import { EVIDENCE_METHODS, ONBOARDING_STEPS, REACH_OPTIONS, STATUS_LABELS, TRACK_TYPES, TRACK_TYPE_IDS, splitList, typeIdFromLabel, type StepId, type TrackTypeId } from "@/lib/nexus-tracks";
+import { EVIDENCE_METHODS, LICENSE_LINES, ONBOARDING_STEPS, REACH_OPTIONS, STATUS_LABELS, TRACK_TYPES, TRACK_TYPE_IDS, splitList, typeIdFromLabel, type StepId, type TrackTypeId } from "@/lib/nexus-tracks";
 
 type T = Database["public"]["Tables"];
 type Application = T["partner_applications"]["Row"];
@@ -577,10 +577,10 @@ function LicensesCard({ d, onChange, error }: { d: Data; onChange: () => Promise
   return <section className="nexus-work-card"><h2>State licenses<Vis scope="private" /></h2>
     <p>Add each state and line of authority. Opsirix checks them before any line can be listed. Expired licenses are removed from public view automatically.</p>
     {error && <p className="nx-error" role="alert"><AlertCircle aria-hidden />{error}</p>}
-    {d.licenses.length > 0 && <div className="nexus-table-wrap"><table><thead><tr><th>State</th><th>Line</th><th>License</th><th>Producer ID</th><th>Expires</th><th>Status</th><th><span className="sr-only">Actions</span></th></tr></thead><tbody>{d.licenses.map((l) => <tr key={l.id}><td>{l.state_code}</td><td>{l.line_of_authority}</td><td>{l.license_number}</td><td>{l.producer_id ?? ""}</td><td>{l.expires_on ?? ""}</td><td><span className={`nexus-status ${l.review_status}`}>{STATUS_LABELS[l.review_status]}</span></td><td>{l.review_status !== "verified" && <Button size="icon" variant="ghost" onClick={() => remove(l.id)} aria-label={`Remove ${l.state_code} license`}><Trash2 /></Button>}</td></tr>)}</tbody></table></div>}
+    {d.licenses.length > 0 && <div className="nexus-table-wrap"><table><thead><tr><th>State</th><th>Line</th><th>License</th><th>Producer ID</th><th>Expires</th><th>Status</th><th><span className="sr-only">Actions</span></th></tr></thead><tbody>{d.licenses.map((l) => <tr key={l.id}><td>{l.state_code}</td><td>{LICENSE_LINES[l.line_of_authority] ?? l.line_of_authority}</td><td>{l.license_number}</td><td>{l.producer_id ?? ""}</td><td>{l.expires_on ?? ""}</td><td><span className={`nexus-status ${l.review_status}`}>{STATUS_LABELS[l.review_status]}</span></td><td>{l.review_status !== "verified" && <Button size="icon" variant="ghost" onClick={() => remove(l.id)} aria-label={`Remove ${l.state_code} license`}><Trash2 /></Button>}</td></tr>)}</tbody></table></div>}
     <form onSubmit={add} noValidate className="nexus-form-grid">
       <Field id="licState" label="State code" error={errs.licState}><input {...aria("licState", errs)} maxLength={2} placeholder="TX" /></Field>
-      <Field id="licLine" label="Line of authority" error={errs.licLine}><input {...aria("licLine", errs)} maxLength={120} placeholder="Property and casualty" /></Field>
+      <Field id="licLine" label="Line of authority" error={errs.licLine}><select {...aria("licLine", errs)} defaultValue=""><option value="" disabled>Choose a line</option>{Object.entries(LICENSE_LINES).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></Field>
       <Field id="licNumber" label="Resident license number" error={errs.licNumber}><input {...aria("licNumber", errs)} maxLength={60} /></Field>
       <Field id="licProducer" label="National producer number (optional)"><input {...aria("licProducer", errs)} maxLength={60} /></Field>
       <Field id="licExpires" label="Expiry date (optional)"><input {...aria("licExpires", errs)} type="date" /></Field>

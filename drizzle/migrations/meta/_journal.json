@@ -85,6 +85,27 @@
       "when": 1790273693076,
       "tag": "0011_listing_claim_resubmit_after_changes",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1790274570855,
+      "tag": "0012_nexus_preview_enforcement_and_insurance_lines",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1790274975339,
+      "tag": "0013_nexus_type_label_case_insensitive",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1790275117579,
+      "tag": "0014_nexus_guard_application_on_insert",
+      "breakpoints": true
     }
   ]
 }
