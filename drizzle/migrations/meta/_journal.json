@@ -50,6 +50,13 @@
       "when": 1790268882434,
       "tag": "0006_seed_nexus_service_catalog",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1790272387373,
+      "tag": "0007_publication_gate_closed_partner_types",
+      "breakpoints": true
     }
   ]
 }

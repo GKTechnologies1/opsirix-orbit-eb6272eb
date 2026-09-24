@@ -302,6 +302,7 @@ export type Database = {
           id: string
           is_published: boolean
           organization_name: string
+          partner_type_id: string | null
           professional_summary: string
           professional_type: string
           service_areas: string[]
@@ -316,6 +317,7 @@ export type Database = {
           id?: string
           is_published?: boolean
           organization_name: string
+          partner_type_id?: string | null
           professional_summary?: string
           professional_type: string
           service_areas?: string[]
@@ -330,6 +332,7 @@ export type Database = {
           id?: string
           is_published?: boolean
           organization_name?: string
+          partner_type_id?: string | null
           professional_summary?: string
           professional_type?: string
           service_areas?: string[]
@@ -337,7 +340,15 @@ export type Database = {
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "partner_profiles_partner_type_id_fkey"
+            columns: ["partner_type_id"]
+            isOneToOne: false
+            referencedRelation: "service_partner_types"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       partner_review_events: {
         Row: {
@@ -850,6 +861,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      partner_type_is_open: { Args: { _type: string }; Returns: boolean }
     }
     Enums: {
       app_role: "applicant" | "partner" | "admin"
