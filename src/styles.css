@@ -2303,3 +2303,5 @@
 /* Outline buttons inside the dark Nexus workspace: keep the label readable. */
 .nexus-workspace-main button.bg-background { background: transparent; color: inherit; border-color: var(--color-gray); }
 .nexus-workspace-main button.bg-background:hover { background: color-mix(in oklab, currentColor 10%, transparent); }
+@media (max-width: 900px) { .nexus-workspace { grid-template-rows: auto 1fr; align-content: start; } .nexus-sidebar { align-self: start; } }
+@media (max-width: 640px) { .nexus-sidebar { justify-content: space-between; gap: 12px; } .nexus-sidebar nav { flex: 1 0 100%; gap: 4px; } .nexus-workspace-main button, .nexus-workspace-main .nx-list li { max-width: 100%; } .nx-list li { flex-wrap: wrap; overflow-wrap: anywhere; } }
