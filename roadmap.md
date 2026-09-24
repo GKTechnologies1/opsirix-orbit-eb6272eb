@@ -24,3 +24,11 @@
 - [x] Revised draft wording for all 49 choices and registration steps proposed (not applied to the catalog)
 - [ ] Owner approves exact catalog wording (blocked: owner review)
 - [ ] Track-specific registration, public-display authorization fields, consent records, introductions, directory filters, admin review screens (blocked: paused by owner)
+
+## Onboarding and review screens (Sep 24)
+- [x] Database: preview access, per-part review states, profile versions, reviewer messages vs private notes, automatic removal rules
+- [x] Draft wording for all 49 choices applied (types still closed)
+- [x] Screens: /partner/onboarding, /partner/profile, /admin/review/$id, /admin/preview
+- [ ] End-to-end tests with University, Banking, Insurance, and admin test accounts (not yet run)
+- [ ] Mobile screenshots of the new screens
+- [ ] Founder consent records and introductions (intentionally not built)
