@@ -542,8 +542,11 @@ function ChoicesStep({ d, typeId, eoi, onChange, onNext }: { d: Data; typeId: Tr
 }
 
 async function openOwnFile(path: string) {
-  const { data, error } = await supabase.storage.from("partner-credentials").createSignedUrl(path, 120);
-  if (error) window.alert(error.message); else window.open(data.signedUrl, "_blank", "noopener");
+  // Open the tab during the click so browsers don't block it, then point it at the short-lived private link.
+  const tab = window.open("", "_blank");
+  const { data: link, error } = await supabase.storage.from("partner-credentials").createSignedUrl(path, 120);
+  if (error || !link) { tab?.close(); window.alert(error?.message ?? "The document could not be opened."); return; }
+  if (tab) { tab.opener = null; tab.location.href = link.signedUrl; } else window.location.assign(link.signedUrl);
 }
 
 function OwnFiles({ files }: { files: Data["credentials"] }) {

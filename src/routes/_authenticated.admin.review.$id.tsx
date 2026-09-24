@@ -90,8 +90,11 @@ function ReviewPage() {
     ? <p className={flash.ok ? "nx-ok" : "nx-error"} role={flash.ok ? "status" : "alert"}>{!flash.ok && <AlertCircle aria-hidden />}{flash.text}</p> : null;
 
   async function openFile(path: string) {
-    const { data: signed, error } = await supabase.storage.from("partner-credentials").createSignedUrl(path, 120);
-    if (error) window.alert(error.message); else window.open(signed.signedUrl, "_blank", "noopener");
+  // Open the tab during the click so browsers don't block it, then point it at the short-lived private link.
+  const tab = window.open("", "_blank");
+  const { data: link, error } = await supabase.storage.from("partner-credentials").createSignedUrl(path, 120);
+  if (error || !link) { tab?.close(); window.alert(error?.message ?? "The document could not be opened."); return; }
+  if (tab) { tab.opener = null; tab.location.href = link.signedUrl; } else window.location.assign(link.signedUrl);
   }
 
   return <WorkspaceShell eyebrow="Authorized review" title={app.organization_name || "Untitled application"}>
