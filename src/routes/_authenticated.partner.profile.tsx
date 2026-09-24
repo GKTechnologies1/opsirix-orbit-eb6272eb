@@ -31,8 +31,9 @@ function ProfilePage() {
   const [s, setS] = useState<State | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [msg, setMsg] = useState("");
+  const [loadError, setLoadError] = useState(false);
   const load = useCallback(async () => {
-    const { data: auth } = await supabase.auth.getUser(); if (!auth.user) return;
+    const { data: auth, error: authError } = await supabase.auth.getUser(); if (authError) throw authError; if (!auth.user) return;
     const uid = auth.user.id;
     const [app, profile, revision, claims, types, isPublic] = await Promise.all([
       supabase.from("partner_applications").select("id").eq("user_id", uid).maybeSingle(),
@@ -46,7 +47,12 @@ function ProfilePage() {
     const decisions = app.data ? (await supabase.from("partner_review_decisions").select("*").eq("application_id", app.data.id).in("subject_type", ["profile_revision", "listing", "listing_type"]).order("created_at", { ascending: false })).data ?? [] : [];
     setS({ userId: uid, appId: app.data?.id ?? null, profile: profile.data, revision: revision.data, isPublic: Boolean(isPublic.data), claims: withPublic, types: Object.fromEntries((types.data ?? []).map((t) => [t.id, t.label])), decisions });
   }, []);
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    // A first request can fail if the page opens while the session is still settling; retry before giving up.
+    let alive = true;
+    (async () => { for (let i = 0; i < 3 && alive; i++) { try { await load(); return; } catch { await new Promise((r) => setTimeout(r, 700 * (i + 1))); } } if (alive) setLoadError(true); })();
+    return () => { alive = false; };
+  }, [load]);
 
   async function save(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); if (!s) return;
@@ -70,7 +76,7 @@ function ProfilePage() {
     setMsg(res.error ? res.error.message : "Withdrawn. It is no longer public."); await load();
   }
 
-  if (!s) return <WorkspaceShell eyebrow="Partner workspace" title="Your profile"><p className="nexus-muted">Loading.</p></WorkspaceShell>;
+  if (!s) return <WorkspaceShell eyebrow="Partner workspace" title="Your profile">{loadError ? <p className="nx-error" role="alert">Your profile could not be loaded. Refresh the page to try again.</p> : <p className="nexus-muted">Loading.</p>}</WorkspaceShell>;
   const base = s.revision ?? s.profile;
   const changed = (k: keyof Revision & keyof Profile) => s.revision && s.profile && JSON.stringify(s.revision[k]) !== JSON.stringify(s.profile[k]);
   const editable = !s.revision || s.revision.status !== "submitted";

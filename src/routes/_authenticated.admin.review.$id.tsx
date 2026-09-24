@@ -37,8 +37,10 @@ function ReviewPage() {
   const [allowed, setAllowed] = useState<boolean | null>(null);
   const [data, setData] = useState<Loaded | null>(null);
   const [missing, setMissing] = useState(false);
+  const [flash, setFlash] = useState<{ ok: boolean; text: string; subject: string } | null>(null);
+  const [loadError, setLoadError] = useState(false);
   const load = useCallback(async () => {
-    const { data: auth } = await supabase.auth.getUser(); if (!auth.user) return;
+    const { data: auth, error: authError } = await supabase.auth.getUser(); if (authError) throw authError; if (!auth.user) return;
     const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: auth.user.id, _role: "admin" });
     setAllowed(Boolean(isAdmin)); if (!isAdmin) return;
     const { data: app } = await supabase.from("partner_applications").select("*").eq("id", id).maybeSingle();
@@ -74,25 +76,36 @@ function ReviewPage() {
       catalog: Object.fromEntries(cat.map((c) => [c.id, c])), types: Object.fromEntries((types.data ?? []).map((t) => [t.id, { label: t.label, open: t.is_open_for_registration }])),
     });
   }, [id]);
-  useEffect(() => { void load(); }, [load]);
+  useEffect(() => {
+    // A first request can fail if the page opens while the session is still settling; retry before giving up.
+    let alive = true;
+    (async () => { for (let i = 0; i < 3 && alive; i++) { try { await load(); return; } catch { await new Promise((r) => setTimeout(r, 700 * (i + 1))); } } if (alive) setLoadError(true); })();
+    return () => { alive = false; };
+  }, [load]);
 
   if (allowed === false) return <WorkspaceShell eyebrow="Authorized review" title="Access restricted"><div className="nexus-empty"><CircleX /><h2>Access restricted</h2><p>This workspace is available only to authorized Opsirix reviewers.</p></div></WorkspaceShell>;
   if (missing) return <WorkspaceShell eyebrow="Authorized review" title="Not found"><div className="nexus-empty"><h2>Application not found</h2><Link to="/admin/applications">Back to the queue</Link></div></WorkspaceShell>;
-  if (!data) return <WorkspaceShell eyebrow="Authorized review" title="Loading"><p className="nexus-muted">Loading application.</p></WorkspaceShell>;
+  if (!data) return <WorkspaceShell eyebrow="Authorized review" title="Loading">{loadError ? <p className="nx-error" role="alert">This application could not be loaded. Refresh the page to try again.</p> : <p className="nexus-muted">Loading application.</p>}</WorkspaceShell>;
 
   const { app, details } = data;
   const typeId = typeIdFromLabel(app.professional_type);
   const eoi = app.application_kind === "expression_of_interest";
   const history = (type: string, subjectId?: string) => data.decisions.filter((d) => d.subject_type === type && (!subjectId || d.subject_id === subjectId));
-  const common = { applicationId: app.id, onDone: load, notes: data.notes };
+  const common = { applicationId: app.id, onDone: load, notes: data.notes, onResult: setFlash };
+  const flashLine = (subject?: string) => flash && (!subject || flash.subject === subject)
+    ? <p className={flash.ok ? "nx-ok" : "nx-error"} role={flash.ok ? "status" : "alert"}>{!flash.ok && <AlertCircle aria-hidden />}{flash.text}</p> : null;
 
   async function openFile(path: string) {
-    const { data: signed, error } = await supabase.storage.from("partner-credentials").createSignedUrl(path, 120);
-    if (error) window.alert(error.message); else window.open(signed.signedUrl, "_blank", "noopener");
+  // Open the tab during the click so browsers don't block it, then point it at the short-lived private link.
+  const tab = window.open("", "_blank");
+  const { data: link, error } = await supabase.storage.from("partner-credentials").createSignedUrl(path, 120);
+  if (error || !link) { tab?.close(); window.alert(error?.message ?? "The document could not be opened."); return; }
+  if (tab) { tab.opener = null; tab.location.href = link.signedUrl; } else window.location.assign(link.signedUrl);
   }
 
   return <WorkspaceShell eyebrow="Authorized review" title={app.organization_name || "Untitled application"}>
     <Link to="/admin/applications" className="nx-back"><ArrowLeft aria-hidden />Back to the queue</Link>
+    <div aria-live="polite" className="nx-flash">{flashLine()}</div>
     <p className="nx-notice-line">Every decision here runs through the same database rules as the rest of Nexus. A decision the rules don't allow is refused and nothing changes.</p>
 
     <Section title="Application" status={app.status}>
@@ -150,6 +163,7 @@ function ReviewPage() {
     </Section>
 
     {!eoi && <Section title="Profile" status={data.revision?.status}>
+      {flashLine("profile_revision")}
       <div className="nx-versions">
         <div><h3>Approved version</h3>{data.profile ? <><p>{data.profile.organization_name}</p><p className="nexus-muted">{data.profile.professional_summary}</p><p className="nexus-muted">Published: {data.profile.is_published ? "yes" : "no"} · Suspended: {data.profile.is_suspended ? "yes" : "no"} · Visible to visitors: {data.profilePublic ? "yes" : "no"}</p></> : <p className="nexus-muted">None yet.</p>}</div>
         <div><h3>Proposed version</h3>{data.revision ? <><p>{data.revision.organization_name}</p><p className="nexus-muted">{data.revision.professional_summary}</p><p className="nexus-muted">{[data.revision.city, data.revision.state_region].filter(Boolean).join(", ")} · {data.revision.service_areas.join(", ")}</p></> : <p className="nexus-muted">No pending changes.</p>}</div>
@@ -203,7 +217,7 @@ function History({ items, notes, events = [] }: { items: Row<"partner_review_dec
   </ul></details>;
 }
 
-function DecisionForm({ applicationId, subjectType, subjectId, subjectLabel, actions, onDone, agreement }: { applicationId: string; subjectType: ReviewInput["subjectType"]; subjectId: string; subjectLabel: string; actions: [ReviewInput["decision"], string][]; onDone: () => Promise<void>; notes: Row<"partner_review_internal_notes">[]; agreement?: boolean }) {
+function DecisionForm({ applicationId, subjectType, subjectId, subjectLabel, actions, onDone, onResult, agreement }: { applicationId: string; subjectType: ReviewInput["subjectType"]; subjectId: string; subjectLabel: string; actions: [ReviewInput["decision"], string][]; onDone: () => Promise<void>; onResult: (r: { ok: boolean; text: string; subject: string }) => void; notes: Row<"partner_review_internal_notes">[]; agreement?: boolean }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [ok, setOk] = useState("");
@@ -217,8 +231,10 @@ function DecisionForm({ applicationId, subjectType, subjectId, subjectLabel, act
     setBusy(true); setError(""); setOk("");
     try {
       const res = await reviewSubject({ data: { applicationId, subjectType, subjectId, subjectLabel, decision, applicantMessage: applicantMessage || undefined, internalNote: String(f.get("internalNote") ?? "").trim() || undefined, agreementReference: String(f.get("agreementReference") ?? "").trim() || undefined } });
-      if (!res.success) setError(res.error); else { setOk("Decision saved."); form.reset(); await onDone(); }
-    } catch (err) { setError(err instanceof Error ? err.message : "The decision could not be saved."); }
+      const label = actions.find(([v]) => v === decision)?.[1] ?? decision;
+      if (!res.success) { setError(res.error); onResult({ ok: false, text: `${subjectLabel}: "${label}" was not saved. ${res.error}`, subject: subjectType }); }
+      else { setOk("Decision saved."); form.reset(); onResult({ ok: true, text: `${subjectLabel}: "${label}" saved.`, subject: subjectType }); await onDone(); }
+    } catch (err) { const m = err instanceof Error ? err.message : "The decision could not be saved."; setError(m); onResult({ ok: false, text: `${subjectLabel}: not saved. ${m}`, subject: subjectType }); }
     setBusy(false);
   }
   return <form className="nx-decision" onSubmit={submit} noValidate aria-label={`Decision for ${subjectLabel}`}>

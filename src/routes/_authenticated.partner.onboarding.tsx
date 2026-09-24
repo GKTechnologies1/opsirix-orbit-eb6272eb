@@ -54,7 +54,8 @@ type Data = {
 type Errors = Record<string, string>;
 
 async function loadData(): Promise<Data | null> {
-  const { data: auth } = await supabase.auth.getUser();
+  let { data: auth, error: authError } = await supabase.auth.getUser();
+  for (let i = 1; authError && i <= 2; i++) { await new Promise((r) => setTimeout(r, 700 * i)); ({ data: auth, error: authError } = await supabase.auth.getUser()); }
   if (!auth.user) return null;
   const uid = auth.user.id;
   const [types, app] = await Promise.all([
@@ -541,6 +542,19 @@ function ChoicesStep({ d, typeId, eoi, onChange, onNext }: { d: Data; typeId: Tr
   </section>;
 }
 
+async function openOwnFile(path: string) {
+  // Open the tab during the click so browsers don't block it, then point it at the short-lived private link.
+  const tab = window.open("", "_blank");
+  const { data: link, error } = await supabase.storage.from("partner-credentials").createSignedUrl(path, 120);
+  if (error || !link) { tab?.close(); window.alert(error?.message ?? "The document could not be opened."); return; }
+  if (tab) { tab.opener = null; tab.location.href = link.signedUrl; } else window.location.assign(link.signedUrl);
+}
+
+function OwnFiles({ files }: { files: Data["credentials"] }) {
+  if (!files.length) return null;
+  return <ul className="nx-list">{files.map((f) => <li key={f.id}><span className="nx-file-name">{f.original_filename}</span><span className={`nexus-status ${f.status}`}>{STATUS_LABELS[f.status]}</span><Button size="sm" variant="ghost" type="button" onClick={() => openOwnFile(f.storage_path)}>Open privately</Button></li>)}</ul>;
+}
+
 function UploadCard({ d, type, title, onDone }: { d: Data; type: string; title: string; onDone: () => Promise<void> }) {
   const [msg, setMsg] = useState("");
   async function upload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -556,7 +570,7 @@ function UploadCard({ d, type, title, onDone }: { d: Data; type: string; title: 
   return <section className="nexus-work-card"><h2>{title}<Vis scope="private" /></h2>
     <label className="nexus-upload"><FileUp aria-hidden /> Upload a PDF or image, up to 10 MB<input type="file" accept=".pdf,.png,.jpg,.jpeg" onChange={upload} /></label>
     {msg && <p className="nx-notice-line" role="status">{msg}</p>}
-    {files.length > 0 && <ul className="nx-list">{files.map((f) => <li key={f.id}>{f.original_filename}<span className={`nexus-status ${f.status}`}>{STATUS_LABELS[f.status]}</span></li>)}</ul>}
+    <OwnFiles files={files} />
   </section>;
 }
 
@@ -602,6 +616,7 @@ function LockedSummary({ d, typeId, eoi }: { d: Data; typeId: TrackTypeId; eoi: 
   return <section className="nexus-work-card"><h2>{eoi ? "Expression of interest sent" : "In review"}</h2>
     <p>{eoi ? "This stays private. It does not create a listing or make the university an Opsirix partner." : "You can't edit while Opsirix is reviewing. If a reviewer asks for changes, this page opens for editing again."}</p>
     <dl className="nx-review-list">{rows.map(([k, v], i) => <div key={i}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+    {d.credentials.length > 0 && <><h3>Your private documents</h3><OwnFiles files={d.credentials} /></>}
     {!eoi && <Link to="/partner/profile">View your profile versions</Link>}
   </section>;
 }
