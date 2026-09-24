@@ -2287,7 +2287,7 @@
 /* Institution and brokerage onboarding + review */
 .nx-statusbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
 .nx-vis{display:inline-flex;align-items:center;gap:4px;margin-left:8px;font:600 11px 'JetBrains Mono',monospace;color:var(--color-cyan)}.nx-vis svg{width:12px;height:12px}.nx-vis.private{color:var(--nexus-warning)}
-.nx-steps{display:flex;gap:6px;overflow-x:auto;list-style:none;padding:0;margin:0 0 20px}.nx-steps button{display:flex;align-items:center;gap:6px;white-space:nowrap;padding:10px 12px;border-top:2px solid var(--border-subtle);color:var(--color-gray);font-size:13px;background:none}.nx-steps button.active{border-color:var(--color-cyan);color:var(--color-ice)}.nx-steps button:focus-visible{outline:2px solid var(--color-cyan)}.nx-steps svg{width:14px;color:var(--nexus-success)}
+.nx-steps{position:relative;display:flex;gap:6px;overflow-x:auto;list-style:none;padding:0;margin:0 0 20px}.nx-steps button{position:relative;display:flex;align-items:center;gap:6px;white-space:nowrap;padding:10px 12px;border-top:2px solid var(--border-subtle);color:var(--color-gray);font-size:13px;background:none}.nx-steps button.active{border-color:var(--color-cyan);color:var(--color-ice)}.nx-steps button:focus-visible{outline:2px solid var(--color-cyan)}.nx-steps svg{width:14px;color:var(--nexus-success)}
 .nx-field{display:grid;gap:8px;border:0;padding:0;margin:14px 0}.nx-hint{color:var(--color-gray);font-size:13px}.nx-error{display:flex;gap:6px;align-items:center;color:var(--nexus-danger);font-size:13px}.nx-error svg{width:14px}.nx-ok{color:var(--nexus-success);display:flex;gap:6px}
 .nx-check{display:flex!important;gap:10px;align-items:flex-start;font-weight:400!important}.nx-check input{min-height:auto!important;width:auto!important;margin-top:3px}.nx-check-block span{display:grid;gap:4px}.nx-check-block small{color:var(--color-gray)}
 .nx-checkgroup>div{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
@@ -2305,3 +2305,8 @@
 .nexus-workspace-main button.bg-background:hover { background: color-mix(in oklab, currentColor 10%, transparent); }
 @media (max-width: 900px) { .nexus-workspace { grid-template-rows: auto 1fr; align-content: start; } .nexus-sidebar { align-self: start; } }
 @media (max-width: 640px) { .nexus-sidebar { justify-content: space-between; gap: 12px; } .nexus-sidebar nav { flex: 1 0 100%; gap: 4px; } .nexus-workspace-main button, .nexus-workspace-main .nx-list li { max-width: 100%; } .nx-list li { flex-wrap: wrap; overflow-wrap: anywhere; } }
+
+/* Onboarding: keep field errors red and the choice search on one row, even inside form label rules. */
+.nexus-application-form .nx-error, .nexus-workspace .nx-error { color: var(--nexus-danger); }
+.nexus-application-form label.nexus-search.nx-choice-search, .nexus-workspace label.nexus-search.nx-choice-search { display: flex; flex-direction: row; align-items: center; gap: 8px; width: 100%; margin-top: 12px; }
+.nexus-workspace label.nx-choice-search input { min-height: 44px; }
