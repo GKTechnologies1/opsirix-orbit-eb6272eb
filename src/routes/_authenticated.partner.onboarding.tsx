@@ -313,7 +313,7 @@ function OnboardingPage() {
       <span className="nexus-muted">Introductions to founders are not enabled yet.</span>
     </div>
     {previewOnly && <p className="nexus-notice nx-inline-notice"><Lock aria-hidden />This type is closed to public sign-up. You can see it because Opsirix gave this account private preview access. Nothing here can be published while the type is closed.</p>}
-    <Messages decisions={d.decisions} />
+    <Messages decisions={d.decisions} licenses={d.licenses} />
     <nav aria-label="Onboarding steps"><ol className="nx-steps">{ONBOARDING_STEPS.map((s, i) => {
       const bad = issues.some((x) => x.step === s.id);
       return <li key={s.id}><button type="button" onClick={() => go(s.id)} aria-current={s.id === step ? "step" : undefined} disabled={!d.app && s.id !== "type"} className={s.id === step ? "active" : ""}>
@@ -439,10 +439,17 @@ function OnboardingPage() {
   </WorkspaceShell>;
 }
 
-function Messages({ decisions }: { decisions: Decision[] }) {
+function Messages({ decisions, licenses }: { decisions: Decision[]; licenses: Data["licenses"] }) {
   if (!decisions.length) return null;
+  const label = (m: Decision) => {
+    if (m.subject_type === "license" && m.decision === "verified") {
+      const l = licenses.find((x) => x.id === m.subject_id);
+      if (l && licenseStatus(l).key === "expired") return { key: "expired", text: licenseStatus(l).label };
+    }
+    return { key: m.decision, text: STATUS_LABELS[m.decision] ?? m.decision.replaceAll("_", " ") };
+  };
   return <section className="nexus-work-card nx-messages" aria-label="Messages from Opsirix"><h2>Messages from Opsirix</h2><ul>{decisions.map((m) => <li key={m.id}>
-    <span className={`nexus-status ${m.decision}`}>{STATUS_LABELS[m.decision] ?? m.decision.replaceAll("_", " ")}</span>
+    <span className={`nexus-status ${label(m).key}`}>{label(m).text}</span>
     <strong>{m.subject_label ?? m.subject_type.replaceAll("_", " ")}</strong>
     {m.applicant_message && <p>{m.applicant_message}</p>}
     <time className="nexus-muted">{new Date(m.created_at).toLocaleDateString()}</time>
