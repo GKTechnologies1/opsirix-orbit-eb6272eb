@@ -39,6 +39,7 @@ import { Route as PlatformAiRouteImport } from './routes/platform.ai'
 import { Route as JoinCodeRouteImport } from './routes/join.$code'
 import { Route as AuthenticatedPartnerIndexRouteImport } from './routes/_authenticated.partner.index'
 import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_authenticated.partner.services'
+import { Route as AuthenticatedPartnerProfileRouteImport } from './routes/_authenticated.partner.profile'
 import { Route as AuthenticatedPartnerOnboardingRouteImport } from './routes/_authenticated.partner.onboarding'
 import { Route as AuthenticatedPartnerApplyRouteImport } from './routes/_authenticated.partner.apply'
 import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_authenticated.admin.applications'
@@ -194,6 +195,12 @@ const AuthenticatedPartnerServicesRoute =
     path: '/partner/services',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedPartnerProfileRoute =
+  AuthenticatedPartnerProfileRouteImport.update({
+    id: '/partner/profile',
+    path: '/partner/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPartnerOnboardingRoute =
   AuthenticatedPartnerOnboardingRouteImport.update({
     id: '/partner/onboarding',
@@ -244,6 +251,7 @@ export interface FileRoutesByFullPath {
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
+  '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/partner/': typeof AuthenticatedPartnerIndexRoute
 }
@@ -277,6 +285,7 @@ export interface FileRoutesByTo {
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
+  '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/partner': typeof AuthenticatedPartnerIndexRoute
 }
@@ -313,6 +322,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/_authenticated/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/_authenticated/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
+  '/_authenticated/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/_authenticated/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/_authenticated/partner/': typeof AuthenticatedPartnerIndexRoute
 }
@@ -349,6 +359,7 @@ export interface FileRouteTypes {
     | '/admin/applications'
     | '/partner/apply'
     | '/partner/onboarding'
+    | '/partner/profile'
     | '/partner/services'
     | '/partner/'
   fileRoutesByTo: FileRoutesByTo
@@ -382,6 +393,7 @@ export interface FileRouteTypes {
     | '/admin/applications'
     | '/partner/apply'
     | '/partner/onboarding'
+    | '/partner/profile'
     | '/partner/services'
     | '/partner'
   id:
@@ -417,6 +429,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/applications'
     | '/_authenticated/partner/apply'
     | '/_authenticated/partner/onboarding'
+    | '/_authenticated/partner/profile'
     | '/_authenticated/partner/services'
     | '/_authenticated/partner/'
   fileRoutesById: FileRoutesById
@@ -654,6 +667,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPartnerServicesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/partner/profile': {
+      id: '/_authenticated/partner/profile'
+      path: '/partner/profile'
+      fullPath: '/partner/profile'
+      preLoaderRoute: typeof AuthenticatedPartnerProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/partner/onboarding': {
       id: '/_authenticated/partner/onboarding'
       path: '/partner/onboarding'
@@ -682,6 +702,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
   AuthenticatedPartnerApplyRoute: typeof AuthenticatedPartnerApplyRoute
   AuthenticatedPartnerOnboardingRoute: typeof AuthenticatedPartnerOnboardingRoute
+  AuthenticatedPartnerProfileRoute: typeof AuthenticatedPartnerProfileRoute
   AuthenticatedPartnerServicesRoute: typeof AuthenticatedPartnerServicesRoute
   AuthenticatedPartnerIndexRoute: typeof AuthenticatedPartnerIndexRoute
 }
@@ -690,6 +711,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
   AuthenticatedPartnerApplyRoute: AuthenticatedPartnerApplyRoute,
   AuthenticatedPartnerOnboardingRoute: AuthenticatedPartnerOnboardingRoute,
+  AuthenticatedPartnerProfileRoute: AuthenticatedPartnerProfileRoute,
   AuthenticatedPartnerServicesRoute: AuthenticatedPartnerServicesRoute,
   AuthenticatedPartnerIndexRoute: AuthenticatedPartnerIndexRoute,
 }
