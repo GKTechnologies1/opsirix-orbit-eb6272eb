@@ -32,9 +32,9 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
       <Link to="/" aria-label="Opsirix home"><OpsirixLogo /></Link>
       <div className="ops-product-mark">{mode === "staff" ? "Staff Console" : "Opsirix OS"}</div>
       <nav aria-label={mode === "staff" ? "Staff Console" : "Company workspace"}>
-        <Link to="/workspace/"><Building2 />Companies</Link>
-        {mode === "company" && <Link to="/workspace/"><History />History</Link>}
-        {staff && <Link to="/staff/"><ShieldCheck />Staff Console</Link>}
+        <Link to="/workspace"><Building2 />Companies</Link>
+        {mode === "company" && <Link to="/workspace"><History />History</Link>}
+        {staff && <Link to="/staff"><ShieldCheck />Staff Console</Link>}
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
       </nav>
       <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>

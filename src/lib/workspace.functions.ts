@@ -52,7 +52,7 @@ export const setCompanyStaffGrant = createServerFn({ method: "POST" })
       _organization_id: data.organizationId,
       _email: data.email,
       _enabled: data.enabled,
-      _expires_at: data.expiresAt,
+      _expires_at: data.expiresAt ?? undefined,
     });
     if (error) return { success: false as const, error: error.message };
     return { success: true as const };
