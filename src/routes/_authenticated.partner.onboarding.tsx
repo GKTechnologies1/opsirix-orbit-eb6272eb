@@ -610,7 +610,7 @@ function LockedSummary({ d, typeId, eoi }: { d: Data; typeId: TrackTypeId; eoi: 
     ["Application", STATUS_LABELS[d.app!.status]],
     ...(!eoi ? [["Partner type claim", claim ? STATUS_LABELS[claim.review_status] : "Not submitted"], ["Your role", STATUS_LABELS[d.details?.authority_review_status ?? "pending"]], ["Profile", d.revision ? STATUS_LABELS[d.revision.status] : "No pending changes"]] as [string, string][] : []),
     ...(typeId === "university" && !eoi ? [["Written agreement", STATUS_LABELS[d.details?.agreement_status ?? "none"]]] as [string, string][] : []),
-    ...(typeId === "insurance" ? d.licenses.map((l) => [`License ${l.state_code} ${l.line_of_authority}`, STATUS_LABELS[l.review_status]] as [string, string]) : []),
+    ...(typeId === "insurance" ? d.licenses.map((l) => [`License ${l.state_code} ${LICENSE_LINES[l.line_of_authority] ?? l.line_of_authority}`, licenseStatus(l).label] as [string, string]) : []),
     ...d.selections.filter((s) => s.partner_type === typeId).map((s) => [d.services.find((x) => x.id === s.service_id)?.label ?? s.service_id, STATUS_LABELS[s.review_status]] as [string, string]),
   ];
   return <section className="nexus-work-card"><h2>{eoi ? "Expression of interest sent" : "In review"}</h2>
