@@ -541,6 +541,16 @@ function ChoicesStep({ d, typeId, eoi, onChange, onNext }: { d: Data; typeId: Tr
   </section>;
 }
 
+async function openOwnFile(path: string) {
+  const { data, error } = await supabase.storage.from("partner-credentials").createSignedUrl(path, 120);
+  if (error) window.alert(error.message); else window.open(data.signedUrl, "_blank", "noopener");
+}
+
+function OwnFiles({ files }: { files: Data["credentials"] }) {
+  if (!files.length) return null;
+  return <ul className="nx-list">{files.map((f) => <li key={f.id}><span className="nx-file-name">{f.original_filename}</span><span className={`nexus-status ${f.status}`}>{STATUS_LABELS[f.status]}</span><Button size="sm" variant="ghost" type="button" onClick={() => openOwnFile(f.storage_path)}>Open privately</Button></li>)}</ul>;
+}
+
 function UploadCard({ d, type, title, onDone }: { d: Data; type: string; title: string; onDone: () => Promise<void> }) {
   const [msg, setMsg] = useState("");
   async function upload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -556,7 +566,7 @@ function UploadCard({ d, type, title, onDone }: { d: Data; type: string; title: 
   return <section className="nexus-work-card"><h2>{title}<Vis scope="private" /></h2>
     <label className="nexus-upload"><FileUp aria-hidden /> Upload a PDF or image, up to 10 MB<input type="file" accept=".pdf,.png,.jpg,.jpeg" onChange={upload} /></label>
     {msg && <p className="nx-notice-line" role="status">{msg}</p>}
-    {files.length > 0 && <ul className="nx-list">{files.map((f) => <li key={f.id}>{f.original_filename}<span className={`nexus-status ${f.status}`}>{STATUS_LABELS[f.status]}</span></li>)}</ul>}
+    <OwnFiles files={files} />
   </section>;
 }
 
@@ -602,6 +612,7 @@ function LockedSummary({ d, typeId, eoi }: { d: Data; typeId: TrackTypeId; eoi: 
   return <section className="nexus-work-card"><h2>{eoi ? "Expression of interest sent" : "In review"}</h2>
     <p>{eoi ? "This stays private. It does not create a listing or make the university an Opsirix partner." : "You can't edit while Opsirix is reviewing. If a reviewer asks for changes, this page opens for editing again."}</p>
     <dl className="nx-review-list">{rows.map(([k, v], i) => <div key={i}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+    {d.credentials.length > 0 && <><h3>Your private documents</h3><OwnFiles files={d.credentials} /></>}
     {!eoi && <Link to="/partner/profile">View your profile versions</Link>}
   </section>;
 }
