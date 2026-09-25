@@ -59,7 +59,7 @@ function StaffInquiries() {
   }
 
   return <OperatingShell mode="staff" eyebrow="Nexus" title="Nexus inquiries">
-    {loadError ? <section className="ops-empty"><CircleX /><h2>Inquiries could not be loaded</h2><Button variant="outline" onClick={() => refresh()}>Try again</Button></section> :
+    {loadError ? <section className="ops-empty"><CircleX /><h2>Inquiries could not be loaded</h2><Button variant="outline" className="ops-outline" onClick={() => refresh()}>Try again</Button></section> :
      !data ? <p className="ops-muted">Checking access.</p> : !data.allowed ? <section className="ops-empty"><CircleX /><h2>Access restricted</h2><p>Nexus inquiries are available only to assigned Opsirix staff.</p></section> : <>
       <p className="ops-lead">Operations Lead is the default triage role, with Admin/CEO oversight. You see an inquiry only when it is assigned to you{data.isAdmin ? ", or as Admin/CEO" : ""}. Introduction disclosure to partners is turned off.</p>
       {message && <p className="ops-feedback" role="status">{message}</p>}
@@ -68,7 +68,7 @@ function StaffInquiries() {
         <div className="ops-table-wrap"><table><thead><tr><th>Received</th><th>Category</th><th>Status</th><th>Assigned</th><th><span className="sr-only">Actions</span></th></tr></thead><tbody>
           {data.inquiries.map((q) => {
             const a = data.assignments.filter((x) => x.inquiry_id === q.id);
-            return <tr key={q.id}><td>{new Date(q.created_at).toLocaleString()}{q.is_test ? " · TEST" : ""}</td><td>{NEXUS_CATEGORY_COPY[q.category_id]?.title ?? q.category_id}</td><td>{STATUS[q.status]}</td><td>{a.length ? a.map((x) => `${x.person?.email ?? "Staff"} (${x.purpose === "triage" ? "triage" : "review task"})`).join(", ") : "Unassigned: Operations Lead queue"}</td><td><Button variant="outline" size="sm" onClick={() => view(q.id)}>Open</Button></td></tr>;
+            return <tr key={q.id}><td>{new Date(q.created_at).toLocaleString()}{q.is_test ? " · TEST" : ""}</td><td>{NEXUS_CATEGORY_COPY[q.category_id]?.title ?? q.category_id}</td><td>{STATUS[q.status]}</td><td>{a.length ? a.map((x) => `${x.person?.email ?? "Staff"} (${x.purpose === "triage" ? "triage" : "review task"})`).join(", ") : "Unassigned: Operations Lead queue"}</td><td><Button variant="outline" className="ops-outline" size="sm" onClick={() => view(q.id)}>Open</Button></td></tr>;
           })}
         </tbody></table></div>}
       </section>
@@ -78,11 +78,11 @@ function StaffInquiries() {
         <p className="ops-muted">{detail.email}{detail.phone ? ` · ${detail.phone}` : ""}{detail.location ? ` · ${detail.location}` : ""}</p>
         <p>{detail.description}</p>
         <p className="ops-muted">Consent text version {detail.disclosure_version}. Partner disclosure is disabled until the recipient-specific consent flow is approved.</p>
-        <div className="ops-actions"><Button variant="outline" onClick={() => status(detail.id, "under_review")}>Mark under review</Button><Button variant="outline" onClick={() => status(detail.id, "closed")}>Close inquiry</Button><Button disabled title="Disabled until consent flow is approved">Request introduction consent</Button></div>
+        <div className="ops-actions"><Button variant="outline" className="ops-outline" onClick={() => status(detail.id, "under_review")}>Mark under review</Button><Button variant="outline" className="ops-outline" onClick={() => status(detail.id, "closed")}>Close inquiry</Button><Button disabled title="Disabled until consent flow is approved">Request introduction consent</Button></div>
         <form className="ops-access-form" onSubmit={(e) => changeAssignment(e, detail.id)}>
           <label>Staff email<input name="email" type="email" required maxLength={255} /></label>
           <label>Assignment<select name="purpose" defaultValue={data.isAdmin ? "triage" : "review_task"}>{data.isAdmin && <option value="triage">Triage (Operations Lead)</option>}<option value="review_task">Review task (Compliance Coordinator)</option></select></label>
-          <div className="ops-actions"><Button name="action" value="add" type="submit">Assign</Button><Button name="action" value="remove" variant="outline" type="submit">Remove assignment</Button></div>
+          <div className="ops-actions"><Button name="action" value="add" type="submit">Assign</Button><Button name="action" value="remove" variant="outline" className="ops-outline" type="submit">Remove assignment</Button></div>
         </form>
       </section>}
     </>}
