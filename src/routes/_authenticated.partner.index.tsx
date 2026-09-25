@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { getMyOpxReferences } from "@/lib/workspace.functions";
 import { ArrowRight, Clock3, FileCheck2 } from "lucide-react";
 import { WorkspaceShell } from "@/components/nexus/WorkspaceShell";
 import { supabase } from "@/integrations/supabase/client";
@@ -11,6 +13,9 @@ export const Route = createFileRoute("/_authenticated/partner/")({
   component: PartnerDashboard,
 });
 function PartnerDashboard() {
+  const loadOpx = useServerFn(getMyOpxReferences);
+  const [opx, setOpx] = useState<Awaited<ReturnType<typeof getMyOpxReferences>>>();
+  useEffect(() => { loadOpx().then(setOpx).catch(() => undefined); }, [loadOpx]);
   const [application, setApplication] = useState<Application | null | undefined>(undefined);
   useEffect(() => { supabase.auth.getUser().then(async ({ data }) => { if (!data.user) return; const result = await supabase.from("partner_applications").select("*").eq("user_id", data.user.id).maybeSingle(); setApplication(result.data); }); }, []);
   const labels: Record<string, string> = { draft: "Draft", submitted: "Submitted", under_review: "Under review", changes_requested: "Changes requested", approved: "Approved", declined: "Not approved" };

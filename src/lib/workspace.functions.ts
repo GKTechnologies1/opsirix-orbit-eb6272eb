@@ -13,17 +13,20 @@ export const getCompanyWorkspaces = createServerFn({ method: "GET" })
     const { data: organizations, error } = await context.supabase.from("organizations").select("id,name,created_by,created_at,updated_at").order("created_at", { ascending: false });
     if (error) throw error;
     const ids = organizations.map((item) => item.id);
-    const [members, events, grants] = await Promise.all([
+    const [members, events, grants, refs] = await Promise.all([
       ids.length ? context.supabase.from("organization_members").select("organization_id,user_id,role,created_at").in("organization_id", ids) : Promise.resolve({ data: [], error: null }),
       ids.length ? context.supabase.from("audit_events").select("id,organization_id,actor_id,event_type,summary,created_at").in("organization_id", ids).order("created_at", { ascending: false }).limit(100) : Promise.resolve({ data: [], error: null }),
       ids.length ? context.supabase.from("staff_access_grants").select("organization_id,staff_user_id,expires_at,revoked_at,created_at").in("organization_id", ids) : Promise.resolve({ data: [], error: null }),
+      ids.length ? context.supabase.from("opx_references").select("number,organization_id").in("organization_id", ids) : Promise.resolve({ data: [], error: null }),
     ]);
+    const opx: Record<string, string> = {};
+    for (const r of refs.data ?? []) if (r.organization_id) opx[r.organization_id] = `OPX-${String(r.number).padStart(6, "0")}`;
     if (members.error) throw members.error;
     if (events.error) throw events.error;
     if (grants.error) throw grants.error;
     const staffIds = [...new Set((grants.data ?? []).map((item) => item.staff_user_id))];
     const { data: staffPeople } = staffIds.length ? await context.supabase.from("profiles").select("id,full_name,email").in("id", staffIds) : { data: [] };
-    return { organizations, members: members.data ?? [], events: events.data ?? [], grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
+    return { opx, organizations, members: members.data ?? [], events: events.data ?? [], grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
   });
 
 export const createCompanyWorkspace = createServerFn({ method: "POST" })
