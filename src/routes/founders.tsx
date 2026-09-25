@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { FolderOpen, CalendarClock, Link2, BarChart3 } from "lucide-react";
 import { PageHeader } from "@/components/shared/PageHeader";
 
 const TITLE = "Opsirix for Founders and Business Owners | Operations Support";
@@ -43,10 +44,10 @@ const FOUNDER_TYPES = [
 ];
 
 const FEATURES = [
-  { icon: "📁", t: "Documents organized and accessible", d: "Formation papers, banking documents, attorney correspondence, and operating records organized in Opsirix Vault. Available when you need them." },
-  { icon: "🗓️", t: "Deadlines tracked in advance", d: "Important dates, renewal timelines, filing deadlines, and review schedules maintained as part of your operational calendar, never discovered after the fact." },
-  { icon: "🔗", t: "Attorneys and CPAs coordinated", d: "Opsirix Nexus coordinates scheduling, document delivery, and communication between founders and their licensed professionals. Opsirix does not provide legal or immigration advice." },
-  { icon: "📊", t: "Monthly operational health check", d: "The Opsirix Grid scores your operational readiness across five areas each month. You know exactly where you stand and what needs attention." },
+  { icon: FolderOpen, t: "Documents organized and accessible", d: "Formation papers, banking documents, attorney correspondence, and operating records organized in Opsirix Vault. Available when you need them." },
+  { icon: CalendarClock, t: "Deadlines tracked in advance", d: "Important dates, renewal timelines, filing deadlines, and review schedules maintained as part of your operational calendar, never discovered after the fact." },
+  { icon: Link2, t: "Attorneys and CPAs coordinated", d: "Opsirix Nexus coordinates scheduling, document delivery, and communication between founders and their licensed professionals. Opsirix does not provide legal or immigration advice." },
+  { icon: BarChart3, t: "Monthly operational health check", d: "The Opsirix Grid scores your operational readiness across five areas each month. You know exactly where you stand and what needs attention." },
 ];
 
 const HANDLES = [
@@ -111,7 +112,7 @@ function Page() {
           <h2 className="inner-h2">Choose the path that fits.</h2>
           <div className="inner-grid-3">
             <div className="inner-card"><h3>Book a discovery call</h3><p>Talk through your company stage and operational needs with Opsirix.</p><Link to="/contact" className="inline-link">Book a call</Link></div>
-            <div className="inner-card"><h3>Find professional help</h3><p>Ask Opsirix Nexus for a human-reviewed introduction to an attorney, CPA, or software firm. No other purchase is required.</p><Link to="/nexus/help" className="inline-link">Find help through Nexus</Link></div>
+            <div className="inner-card"><h3>Find professional help</h3><p>Ask Opsirix Nexus for a human-reviewed introduction to an attorney, CPA, software firm, university program, banking partner, or insurance broker. No other purchase is required.</p><Link to="/nexus/help" className="inline-link">Find help through Nexus</Link></div>
             <div className="inner-card"><h3>See how it works</h3><p>Follow the founder journey from first call to organized operations.</p><Link to="/how-it-works" className="inline-link">How Opsirix works</Link></div>
           </div>
         </div>
@@ -142,7 +143,7 @@ function Page() {
           <div className="inner-grid-3">
             {FEATURES.map((c) => (
               <div key={c.t} className="inner-card">
-                <div style={{ fontSize: 28, marginBottom: 12 }}>{c.icon}</div>
+                <div style={{ marginBottom: 12, color: "var(--color-brand-blue, #0057D9)" }}><c.icon size={26} strokeWidth={1.75} aria-hidden /></div>
                 <h3>{c.t}</h3>
                 <p>{c.d}</p>
               </div>

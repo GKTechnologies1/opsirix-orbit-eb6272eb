@@ -86,21 +86,20 @@ export function Navbar() {
               style={{
                 height: 36,
                 backgroundColor: "#0057D9",
-                padding: "0 24px",
+                padding: "0 40px",
               }}
               className="flex items-center justify-center relative"
             >
               <p
+                className="announce-text"
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 11,
                   color: "#fff",
-                  letterSpacing: "0.08em",
                   margin: 0,
                   textAlign: "center",
                 }}
               >
-                🚀 Opsirix is now accepting early-stage founders. Book a discovery call →
+                Opsirix is welcoming founders and business owners.{" "}<Link to="/contact" style={{ color: "inherit", textDecoration: "underline", textUnderlineOffset: 3 }}>Book a discovery call →</Link>
               </p>
               <button
                 onClick={dismissAnnouncement}
