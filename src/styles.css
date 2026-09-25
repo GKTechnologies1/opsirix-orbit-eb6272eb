@@ -2477,3 +2477,8 @@
 .ops-panel .content-preview h2.faq-h2 { color: #071B33; margin: 0; }
 .ops-faq-actions { display: flex; flex-direction: row !important; flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
 .ops-faq-actions button { width: auto !important; }
+
+.ops-history-details { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 6px 0 0; font-size: 12.5px; }
+.ops-history-details div { display: flex; gap: 4px; }
+.ops-history-details dt { color: var(--muted-foreground); }
+.ops-history-details dd { margin: 0; }
