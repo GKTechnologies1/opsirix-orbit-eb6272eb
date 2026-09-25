@@ -6,7 +6,8 @@ import { BeforeAfterSection } from "@/components/sections/BeforeAfterSection";
 import { ServicesGrid } from "@/components/sections/ServicesGrid";
 import { ComplianceBoundary } from "@/components/sections/ComplianceBoundary";
 import { ImmigrantFounderSection } from "@/components/sections/ImmigrantFounderSection";
-import { PartnerEcosystem } from "@/components/sections/PartnerEcosystem";
+import { NexusDiscoverySection } from "@/components/sections/NexusDiscoverySection";
+import { getOpenNexusCategories } from "@/lib/nexus.functions";
 import { FounderJourneyTimeline } from "@/components/sections/FounderJourneyTimeline";
 import { OpsirixOSPreview } from "@/components/sections/OpsirixOSPreview";
 import { StatsBar } from "@/components/sections/StatsBar";
@@ -28,14 +29,20 @@ export const Route = createFileRoute("/")({
         content:
           "Opsirix organizes documents, workflows, and partner coordination for early-stage and immigrant founders. Structure your startup operations from day one.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { property: "og:url", content: "https://opsirix.com/" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/" }],
   }),
+  loader: () => getOpenNexusCategories(),
+  errorComponent: () => <main><p>Please refresh the page.</p></main>,
+  notFoundComponent: () => <main><p>Page not found.</p></main>,
   component: Index,
 });
 
 function Index() {
+  const categories = Route.useLoaderData();
   return (
     <main style={{ backgroundColor: "var(--bg-primary)" }}>
       <HeroSection />
@@ -45,7 +52,7 @@ function Index() {
       <ServicesGrid />
       <ComplianceBoundary />
       <ImmigrantFounderSection />
-      <PartnerEcosystem />
+      <NexusDiscoverySection categories={categories} />
       <FounderJourneyTimeline />
       <OpsirixOSPreview />
       <StatsBar />

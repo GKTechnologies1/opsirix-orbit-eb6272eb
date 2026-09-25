@@ -2,11 +2,12 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { ArrowRight, CheckCircle2, Eye, EyeOff, ShieldCheck } from "lucide-react";
+import { NEXUS_ACCOUNT_DATA_NOTICE } from "@/lib/nexus-discovery";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
-const searchSchema = z.object({ next: z.string().optional().catch(undefined) });
+const searchSchema = z.object({ next: z.string().optional().catch(undefined), purpose: z.enum(["directory"]).optional().catch(undefined) });
 
 export const Route = createFileRoute("/auth")({
   validateSearch: searchSchema,
@@ -25,7 +26,8 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const { next } = Route.useSearch();
+  const { next, purpose } = Route.useSearch();
+  const member = purpose === "directory";
   const [mode, setMode] = useState<"signup" | "signin">("signup");
   const [showPassword, setShowPassword] = useState(false);
   const [pending, setPending] = useState(false);
@@ -65,22 +67,22 @@ function AuthPage() {
         <section className="nexus-auth-intro" aria-labelledby="auth-title">
           <Link to="/" aria-label="Opsirix home"><OpsirixLogo /></Link>
           <div>
-            <p className="nexus-kicker">Nexus Partner Network</p>
-            <h1 id="auth-title">Tell us what you do best.</h1>
-            <p>We'll review your details and help you set up a profile that makes it easier for the right people to find you.</p>
+            <p className="nexus-kicker">{member ? "Nexus member directory" : "Nexus Partner Network"}</p>
+            <h1 id="auth-title">{member ? "Browse approved Nexus profiles." : "Tell us what you do best."}</h1>
+            <p>{member ? "A free account lets you browse and filter approved Nexus profiles. It does not enroll you in another Opsirix service or create a company workspace." : "We'll review your details and help you set up a profile that makes it easier for the right people to find you."}</p>
           </div>
-          <ul className="nexus-assurance-list">
+          {member ? <p className="nexus-panel-copy">{NEXUS_ACCOUNT_DATA_NOTICE}</p> : <ul className="nexus-assurance-list">
             <li><ShieldCheck aria-hidden="true" /> Your application stays private during review.</li>
             <li><CheckCircle2 aria-hidden="true" /> Every application is reviewed by a person.</li>
-          </ul>
+          </ul>}
         </section>
         <section className="nexus-auth-panel" aria-label="Partner account">
           <div className="nexus-segmented" role="group" aria-label="Account action">
             <Button type="button" variant={mode === "signup" ? "default" : "ghost"} onClick={() => setMode("signup")}>Create account</Button>
             <Button type="button" variant={mode === "signin" ? "default" : "ghost"} onClick={() => setMode("signin")}>Sign in</Button>
           </div>
-          <h2>{mode === "signup" ? "Create your partner account" : "Welcome back"}</h2>
-          <p className="nexus-panel-copy">{mode === "signup" ? "Start an application and return to it at any time." : "Access your application and review status."}</p>
+          <h2>{mode === "signup" ? (member ? "Create your free account" : "Create your partner account") : "Welcome back"}</h2>
+          <p className="nexus-panel-copy">{member ? "No purchase, founder intake, or company workspace is required." : mode === "signup" ? "Start an application and return to it at any time." : "Access your application and review status."}</p>
           <form onSubmit={submit} className="nexus-form">
             {mode === "signup" && <label>Full name<input name="fullName" autoComplete="name" required maxLength={120} /></label>}
             <label>Email address<input name="email" type="email" autoComplete="email" required maxLength={255} /></label>
