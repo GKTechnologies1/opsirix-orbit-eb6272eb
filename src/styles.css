@@ -2317,7 +2317,7 @@
 .ops-workspace--staff .ops-sidebar { background: var(--bg-surface); border-right-color: var(--border-cyan); }
 .ops-product-mark, .ops-kicker, .ops-panel-kicker { color: var(--color-cyan); font: 600 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
 .ops-product-mark { padding-top: 18px; border-top: 1px solid var(--border-subtle); }
-.ops-sidebar nav { display: grid; gap: 6px; flex: 1; }
+.ops-sidebar nav { display: grid; gap: 6px; flex: 1; align-content: start; }
 .ops-sidebar nav a { min-height: 44px; display: flex; gap: 10px; align-items: center; padding: 10px 12px; color: var(--color-gray); text-decoration: none; }
 .ops-sidebar nav a:hover, .ops-sidebar nav a[aria-current="page"] { color: var(--color-ice); background: var(--bg-elevated); }
 .ops-sidebar svg { width: 18px; }
@@ -2405,3 +2405,5 @@
 .nx-muted { color: var(--color-gray); }
 @media (max-width: 900px) { .nx-categories { grid-template-columns: 1fr 1fr; } .nx-filters { grid-template-columns: 1fr; } }
 @media (max-width: 640px) { .nx-home { padding: 64px 20px; } .nx-page { padding: 104px 20px 64px; } .nx-categories, .nx-split { grid-template-columns: 1fr; } .nx-actions .nx-btn { width: 100%; } }
+
+.ops-workspace-main button[data-variant="outline"], .ops-workspace-main .ops-outline { background: transparent; color: var(--color-ice); border: 1px solid var(--border-subtle); }

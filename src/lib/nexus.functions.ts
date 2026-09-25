@@ -46,7 +46,8 @@ export const submitNexusInquiry = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     if (data.phone && data.phone.length < 6) return { success: false as const, error: "Please enter a valid phone number or leave it blank." };
     if (!(data.category in NEXUS_CATEGORY_COPY)) return { success: false as const, error: "That category is not currently available through Nexus." };
-    const ip = getRequestHeader("cf-connecting-ip") ?? getRequestHeader("x-forwarded-for")?.split(",")[0]?.trim() ?? "";
+    // Only the hosting edge sets cf-connecting-ip; forwarded headers are caller-controlled and ignored.
+    const ip = getRequestHeader("cf-connecting-ip") ?? "";
     const clientHash = ip ? await sha256(`nexus:${ip}`) : null;
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: id, error } = await supabaseAdmin.rpc("submit_nexus_inquiry", {
@@ -57,7 +58,8 @@ export const submitNexusInquiry = createServerFn({ method: "POST" })
       _location: data.location ?? "",
       _description: data.description,
       _disclosure_version: NEXUS_DISCLOSURE_VERSION,
-      _client_hash: clientHash ?? "",
+      // No trusted address: skip the per-client limit rather than sharing one global bucket.
+      _client_hash: clientHash as string,
     });
     if (error || !id) {
       if (error?.message.includes("category_unavailable")) return { success: false as const, error: "That category is not currently available through Nexus." };
