@@ -104,6 +104,50 @@ export const setStaffAccess = createServerFn({ method: "POST" })
     if (error) return { success: false as const, error: error.message };
     return { success: true as const };
   });
+
+/** Admin/CEO only: search the internal (non-company) audit history. Other roles receive nothing. */
+export const searchAuditHistory = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        text: z.string().trim().max(120).optional(),
+        eventType: z.string().trim().max(80).optional(),
+        from: z.string().trim().max(10).optional(),
+        to: z.string().trim().max(10).optional(),
+        limit: z.number().int().min(10).max(200).optional(),
+      })
+      .parse(input ?? {}),
+  )
+  .handler(async ({ data, context }) => {
+    const sb = context.supabase;
+    const { data: isAdmin } = await sb.rpc("has_role", { _user_id: context.userId, _role: "admin" });
+    if (!isAdmin) return { allowed: false as const, events: [], types: [] };
+    const { data: typeRows } = await sb.from("audit_events").select("event_type").is("organization_id", null).limit(500);
+    let query = sb
+      .from("audit_events")
+      .select("id,actor_id,event_type,subject_id,summary,created_at")
+      .is("organization_id", null)
+      .order("created_at", { ascending: false })
+      .limit(data.limit ?? 100);
+    if (data.eventType) query = query.eq("event_type", data.eventType);
+    if (data.from) query = query.gte("created_at", `${data.from}T00:00:00.000Z`);
+    if (data.to) query = query.lte("created_at", `${data.to}T23:59:59.999Z`);
+    if (data.text) {
+      const safe = data.text.replaceAll(",", " ").replaceAll("%", " ");
+      query = query.or(`summary.ilike.%${safe}%,event_type.ilike.%${safe}%`);
+    }
+    const { data: events, error } = await query;
+    if (error) return { allowed: true as const, events: [], types: [], error: error.message };
+    const actorIds = [...new Set((events ?? []).map((e) => e.actor_id).filter(Boolean))] as string[];
+    const { data: people } = actorIds.length ? await sb.from("profiles").select("id,full_name,email").in("id", actorIds) : { data: [] };
+    return {
+      allowed: true as const,
+      types: [...new Set((typeRows ?? []).map((r) => r.event_type))].sort(),
+      events: (events ?? []).map((e) => ({ ...e, actor: (people ?? []).find((p) => p.id === e.actor_id) ?? null })),
+    };
+  });
+
 /** Admin/CEO overview: counts and queues from real records only. Non-admins receive nothing. */
 export const getAdminOverview = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
