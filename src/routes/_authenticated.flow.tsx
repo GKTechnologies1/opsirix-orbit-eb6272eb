@@ -40,14 +40,14 @@ function FlowPage() {
   return (
     <OperatingShell mode="company" eyebrow="Opsirix Flow" title="Company tasks">
       <p className="text-muted-foreground max-w-2xl">Boards hold the work your company is coordinating. Owners and delegated members edit; viewers can read. Opsirix staff with company access can flag a task for attention. Partners see only tasks an owner shares with them.</p>
-      {message && <p role="status" className="rounded-md border border-border bg-card p-3 text-sm">{message}</p>}
+      {message && <p role="status" className="rounded-md border border-border p-3 text-sm">{message}</p>}
       {error && <div role="alert" className="text-sm">{error} <Button size="sm" variant="outline" onClick={() => void refresh()}>Retry</Button></div>}
       {!data && !error && <p>Loading Flow…</p>}
       {data && !data.companies.length && <p>You don't have access to any company workspace yet. Create one under Companies first.</p>}
       {data && company && (
         <>
           {data.companies.length > 1 && (
-            <label className="flex max-w-sm flex-col gap-1 text-sm">Company
+            <label className="ops-panel flex max-w-sm flex-col gap-1 text-sm">Company
               <select className="w-full" value={company.id} onChange={(e) => setOrgId(e.target.value)}>
                 {data.companies.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
@@ -58,7 +58,7 @@ function FlowPage() {
           {company.isOwner && <EditorForm company={company} onDone={done} />}
           {!company.boards.length && <p className="rounded-md border border-dashed border-border p-4 text-sm">No boards yet.{company.canEdit ? " Create the first one above." : ""}</p>}
           {company.boards.map((b) => (
-            <section key={b.id} className="rounded-lg border border-border bg-card p-4 space-y-3" aria-label={`Board ${b.name}`}>
+            <section key={b.id} className="ops-panel space-y-3" aria-label={`Board ${b.name}`}>
               <h2 className="text-lg font-semibold">{b.name} <span className="text-sm font-normal text-muted-foreground">({b.tasks.length} {b.tasks.length === 1 ? "task" : "tasks"})</span></h2>
               {company.canEdit && <TaskForm company={company} boardId={b.id} onDone={done} />}
               {!b.tasks.length && <p className="text-sm text-muted-foreground">No tasks on this board.</p>}
@@ -84,7 +84,7 @@ function BoardForm({ company, onDone }: { company: Company; onDone: OnDone }) {
     if (r.success) f.reset(); await onDone(r, "Board created.");
   }
   return (
-    <form onSubmit={submit} className="flex flex-wrap items-end gap-2">
+    <form onSubmit={submit} className="ops-panel flex flex-wrap items-end gap-2">
       <label className="flex-1 min-w-[12rem] text-sm">New board name<input name="name" required minLength={2} maxLength={120} className={input} /></label>
       <Button type="submit">Create board</Button>
     </form>
@@ -100,7 +100,7 @@ function EditorForm({ company, onDone }: { company: Company; onDone: OnDone }) {
     if (r.success) f.reset(); await onDone(r, v.get("action") === "grant" ? "Member can now edit Flow." : "Flow editing removed.");
   }
   return (
-    <details className="rounded-md border border-border p-3 text-sm">
+    <details className="ops-panel text-sm">
       <summary className="cursor-pointer">Delegate editing ({company.editors.length} delegated)</summary>
       {company.editors.length > 0 && <p className="mt-2 text-muted-foreground">Delegated: {company.editors.join(", ")}</p>}
       <form onSubmit={submit} className="mt-2 flex flex-wrap items-end gap-2">
@@ -164,7 +164,7 @@ function TaskRow({ n, task, company, boardId, onDone }: { n: number; task: Task;
         {company.isOwner && task.shared > 0 && <span className="inline-flex items-center gap-1"><Share2 className="h-3 w-3" />Shared with {task.shared}</span>}
       </div>
       {task.details && <p className="whitespace-pre-wrap text-muted-foreground">{task.details}</p>}
-      {task.escalated_at && <p className="flex items-start gap-2 rounded bg-muted p-2"><AlertTriangle className="h-4 w-4 shrink-0" />Opsirix flagged this: {task.escalation_note}</p>}
+      {task.escalated_at && <p className="flex items-start gap-2 rounded border border-border p-2"><AlertTriangle className="h-4 w-4 shrink-0" />Opsirix flagged this: {task.escalation_note}</p>}
       <div className="flex flex-wrap gap-2">
         {company.canEdit && <Button size="sm" variant="outline" onClick={() => setEditing(true)}>Edit</Button>}
       </div>

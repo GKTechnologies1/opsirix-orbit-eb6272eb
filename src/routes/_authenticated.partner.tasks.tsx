@@ -30,7 +30,7 @@ function PartnerTasks() {
       {tasks && tasks.length > 0 && <p className="text-sm">{tasks.length} shared {tasks.length === 1 ? "task" : "tasks"}</p>}
       <ol className="space-y-2">
         {tasks?.map((t, i) => (
-          <li key={t.task_id} className="rounded-md border border-border bg-card p-3 text-sm">
+          <li key={t.task_id} className="rounded-md border border-border p-3 text-sm">
             <span className="text-muted-foreground">#{i + 1} · {t.company}</span>
             <p className="text-base font-semibold">{t.title}</p>
             <p>{STATUS[t.status] ?? t.status} · {t.due_on ? `Due ${t.due_on}` : "No due date"}</p>
