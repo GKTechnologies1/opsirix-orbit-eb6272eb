@@ -41,6 +41,7 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
         {staff && mode === "staff" && <Link to="/staff/inquiries"><Inbox />Nexus inquiries</Link>}
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
         {admin && mode === "staff" && <Link to="/staff/content"><FileText />Content & Catalog</Link>}
+        {admin && mode === "staff" && <Link to="/staff/features"><History />Features & Releases</Link>}
       </nav>
       <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>
     </aside>

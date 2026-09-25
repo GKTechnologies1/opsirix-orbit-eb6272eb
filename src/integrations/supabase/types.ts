@@ -1327,6 +1327,48 @@ export type Database = {
         }
         Relationships: []
       }
+      release_records: {
+        Row: {
+          activated_at: string
+          activated_by: string
+          authorized_by: string
+          created_at: string
+          effect_backend: string
+          effect_live_site: string
+          effect_preview: string
+          feature_key: string
+          id: string
+          test_result: string
+          title: string
+        }
+        Insert: {
+          activated_at: string
+          activated_by: string
+          authorized_by: string
+          created_at?: string
+          effect_backend: string
+          effect_live_site: string
+          effect_preview: string
+          feature_key: string
+          id?: string
+          test_result: string
+          title: string
+        }
+        Update: {
+          activated_at?: string
+          activated_by?: string
+          authorized_by?: string
+          created_at?: string
+          effect_backend?: string
+          effect_live_site?: string
+          effect_preview?: string
+          feature_key?: string
+          id?: string
+          test_result?: string
+          title?: string
+        }
+        Relationships: []
+      }
       service_catalog: {
         Row: {
           approved_at: string | null
