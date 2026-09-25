@@ -2466,7 +2466,6 @@
 .list-toolbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:12px 0}
 .list-toolbar label{display:grid;gap:4px;font-size:13px;color:var(--color-gray)}
 .list-toolbar input,.list-toolbar select{min-height:40px;padding:6px 10px;border:1px solid var(--border-subtle);border-radius:6px;background:transparent;color:inherit}
-.list-toolbar select option{color:#111}
 .list-summary{font-size:13px;color:var(--color-gray);margin:6px 0 10px}
 .list-link{background:none;border:0;color:var(--color-cyan);text-decoration:underline;cursor:pointer;padding:0}
 .list-pager{display:flex;gap:12px;align-items:center;justify-content:flex-end;margin:12px 0;font-size:13px}
