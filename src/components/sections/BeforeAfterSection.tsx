@@ -120,8 +120,8 @@ export function BeforeAfterSection() {
         <div className="before-after-grid" style={{ marginTop: 56 }}>
           {/* BEFORE */}
           <motion.div
-            initial={{ x: -40, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ y: 24, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease }}
             style={{
@@ -199,8 +199,8 @@ export function BeforeAfterSection() {
 
           {/* AFTER */}
           <motion.div
-            initial={{ x: 40, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
+            initial={{ y: 24, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, delay: 0.1, ease }}
             style={{
