@@ -395,6 +395,52 @@ export type Database = {
           },
         ]
       }
+      opx_references: {
+        Row: {
+          created_at: string
+          merged_into: number | null
+          number: number
+          organization_id: string | null
+          partner_application_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          merged_into?: number | null
+          number?: number
+          organization_id?: string | null
+          partner_application_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          merged_into?: number | null
+          number?: number
+          organization_id?: string | null
+          partner_application_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "opx_references_merged_into_fkey"
+            columns: ["merged_into"]
+            isOneToOne: false
+            referencedRelation: "opx_references"
+            referencedColumns: ["number"]
+          },
+          {
+            foreignKeyName: "opx_references_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: true
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "opx_references_partner_application_id_fkey"
+            columns: ["partner_application_id"]
+            isOneToOne: true
+            referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organization_members: {
         Row: {
           added_by: string
@@ -632,6 +678,70 @@ export type Database = {
             columns: ["application_id"]
             isOneToOne: false
             referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_intro_notes: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          introduction_id: string
+        }
+        Insert: {
+          author_id?: string
+          body: string
+          created_at?: string
+          id?: string
+          introduction_id: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          introduction_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_intro_notes_introduction_id_fkey"
+            columns: ["introduction_id"]
+            isOneToOne: false
+            referencedRelation: "nexus_introductions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_intro_state: {
+        Row: {
+          follow_up: boolean
+          introduction_id: string
+          read_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          follow_up?: boolean
+          introduction_id: string
+          read_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          follow_up?: boolean
+          introduction_id?: string
+          read_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_intro_state_introduction_id_fkey"
+            columns: ["introduction_id"]
+            isOneToOne: false
+            referencedRelation: "nexus_introductions"
             referencedColumns: ["id"]
           },
         ]
@@ -1705,9 +1815,24 @@ export type Database = {
         Returns: undefined
       }
       admin_introduction_counts: { Args: never; Returns: Json }
+      admin_merge_opx: {
+        Args: { _keep: number; _retire: number }
+        Returns: undefined
+      }
       admin_move_catalog_choice: {
         Args: { _direction: number; _id: string }
         Returns: undefined
+      }
+      admin_search_opx: {
+        Args: { _q: string }
+        Returns: {
+          created_at: string
+          kind: string
+          merged_into: string
+          name: string
+          reference: string
+          status: string
+        }[]
       }
       admin_set_catalog_retired: {
         Args: { _id: string; _retired: boolean }
@@ -1863,6 +1988,7 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      opx_format: { Args: { _n: number }; Returns: string }
       organization_role: {
         Args: { _organization_id: string; _user_id: string }
         Returns: Database["public"]["Enums"]["organization_member_role"]
@@ -1875,6 +2001,7 @@ export type Database = {
           sent_at: string
         }[]
       }
+      partner_owns_intro: { Args: { _intro: string }; Returns: boolean }
       partner_type_is_open: { Args: { _type: string }; Returns: boolean }
       preview_nexus_send: { Args: { _intro: string }; Returns: Json }
       profile_is_public: { Args: { _user: string }; Returns: boolean }
