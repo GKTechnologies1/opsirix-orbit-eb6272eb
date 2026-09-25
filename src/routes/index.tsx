@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
     links: [{ rel: "canonical", href: "https://opsirix.com/" }],
   }),
   loader: async () => {
-    const [categories, content] = await Promise.all([getOpenNexusCategories(), getPublishedContent({ data: { keys: ["home.nexus"] } })]);
+    const [categories, content] = await Promise.all([getOpenNexusCategories(), getPublishedContent({ data: { keys: ["home.nexus", "home.faq"] } })]);
     return { categories, content };
   },
   errorComponent: () => <main><p>Please refresh the page.</p></main>,
@@ -60,7 +60,7 @@ function Index() {
       <FounderJourneyTimeline />
       <OpsirixOSPreview />
       <StatsBar />
-      <FAQSection />
+      <FAQSection content={content["home.faq"]} />
       <FinalCTA />
     </main>
   );

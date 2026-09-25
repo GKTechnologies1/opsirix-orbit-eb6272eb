@@ -4,7 +4,8 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { Database } from "@/integrations/supabase/types";
 
-export type ContentBody = { heading: string; body: string; cta_label?: string; cta_href?: string };
+export type FaqItem = { q: string; a: string };
+export type ContentBody = { heading: string; body: string; cta_label?: string; cta_href?: string; items?: FaqItem[] };
 
 /** Public: only published, non-pricing content. Pricing is never returned. */
 export const getPublishedContent = createServerFn({ method: "GET" })
@@ -46,15 +47,16 @@ export const getContentAdmin = createServerFn({ method: "GET" })
     };
   });
 
-const body = z.object({ heading: z.string().trim().min(1).max(160), body: z.string().trim().min(1).max(2000), cta_label: z.string().trim().max(60).optional(), cta_href: z.string().trim().max(300).optional() });
+const body = z.object({ heading: z.string().trim().min(1).max(160), body: z.string().trim().min(1).max(2000), cta_label: z.string().trim().max(60).optional(), cta_href: z.string().trim().max(300).optional(), items: z.array(z.object({ q: z.string().trim().min(1).max(200), a: z.string().trim().min(1).max(1200) })).min(1).max(12).optional() });
 
 export const saveContentDraft = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d: { key: string; body: ContentBody; summary: string }) => z.object({ key: z.string(), body, summary: z.string().trim().min(1).max(300) }).parse(d))
   .handler(async ({ data, context }) => {
-    const clean: Record<string, string> = { heading: data.body.heading, body: data.body.body };
+    const clean: Record<string, unknown> = { heading: data.body.heading, body: data.body.body };
+    if (data.body.items) clean.items = data.body.items;
     if (data.body.cta_label || data.body.cta_href) { clean.cta_label = data.body.cta_label ?? ""; clean.cta_href = data.body.cta_href ?? ""; }
-    const { error } = await context.supabase.rpc("save_content_draft", { _key: data.key, _body: clean, _summary: data.summary });
+    const { error } = await context.supabase.rpc("save_content_draft", { _key: data.key, _body: clean as never, _summary: data.summary });
     return ok(error);
   });
 
