@@ -2351,6 +2351,9 @@
 .ops-inline-form { margin: 18px 0; justify-content: flex-start; }
 .ops-inline-form label { flex: 1; max-width: 520px; }
 .ops-history { display: grid; gap: 1px; margin-top: 18px; }
+.ops-history-search { display: grid; gap: 6px; margin: 10px 0 4px; font-size: 12px; color: var(--color-gray); max-width: 420px; }
+.ops-history-search input { min-height: 44px; }
+
 .ops-history-row { min-height: 48px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--border-subtle); color: var(--color-gray); font-size: 13px; }
 .ops-history-row svg { width: 15px; }
 .ops-history-row time { font-family: var(--font-mono); font-size: 10px; }
