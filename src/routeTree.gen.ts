@@ -40,6 +40,7 @@ import { Route as PlatformCoreRouteImport } from './routes/platform.core'
 import { Route as PlatformAiRouteImport } from './routes/platform.ai'
 import { Route as NexusHelpRouteImport } from './routes/nexus.help'
 import { Route as JoinCodeRouteImport } from './routes/join.$code'
+import { Route as AuthenticatedFlowRouteImport } from './routes/_authenticated.flow'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated.account'
 import { Route as AuthenticatedWorkspaceIndexRouteImport } from './routes/_authenticated.workspace.index'
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated.staff.index'
@@ -48,6 +49,7 @@ import { Route as AuthenticatedStaffInquiriesRouteImport } from './routes/_authe
 import { Route as AuthenticatedStaffFeaturesRouteImport } from './routes/_authenticated.staff.features'
 import { Route as AuthenticatedStaffContentRouteImport } from './routes/_authenticated.staff.content'
 import { Route as AuthenticatedStaffAccessRouteImport } from './routes/_authenticated.staff.access'
+import { Route as AuthenticatedPartnerTasksRouteImport } from './routes/_authenticated.partner.tasks'
 import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_authenticated.partner.services'
 import { Route as AuthenticatedPartnerProfileRouteImport } from './routes/_authenticated.partner.profile'
 import { Route as AuthenticatedPartnerOnboardingRouteImport } from './routes/_authenticated.partner.onboarding'
@@ -213,6 +215,11 @@ const JoinCodeRoute = JoinCodeRouteImport.update({
   path: '/join/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedFlowRoute = AuthenticatedFlowRouteImport.update({
+  id: '/flow',
+  path: '/flow',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
   id: '/account',
   path: '/account',
@@ -257,6 +264,12 @@ const AuthenticatedStaffAccessRoute =
   AuthenticatedStaffAccessRouteImport.update({
     id: '/staff/access',
     path: '/staff/access',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPartnerTasksRoute =
+  AuthenticatedPartnerTasksRouteImport.update({
+    id: '/partner/tasks',
+    path: '/partner/tasks',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedPartnerServicesRoute =
@@ -340,6 +353,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/flow': typeof AuthenticatedFlowRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -361,6 +375,7 @@ export interface FileRoutesByFullPath {
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
+  '/partner/tasks': typeof AuthenticatedPartnerTasksRoute
   '/staff/access': typeof AuthenticatedStaffAccessRoute
   '/staff/content': typeof AuthenticatedStaffContentRoute
   '/staff/features': typeof AuthenticatedStaffFeaturesRoute
@@ -389,6 +404,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/flow': typeof AuthenticatedFlowRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -410,6 +426,7 @@ export interface FileRoutesByTo {
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
+  '/partner/tasks': typeof AuthenticatedPartnerTasksRoute
   '/staff/access': typeof AuthenticatedStaffAccessRoute
   '/staff/content': typeof AuthenticatedStaffContentRoute
   '/staff/features': typeof AuthenticatedStaffFeaturesRoute
@@ -441,6 +458,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
+  '/_authenticated/flow': typeof AuthenticatedFlowRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -462,6 +480,7 @@ export interface FileRoutesById {
   '/_authenticated/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/_authenticated/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/_authenticated/partner/services': typeof AuthenticatedPartnerServicesRoute
+  '/_authenticated/partner/tasks': typeof AuthenticatedPartnerTasksRoute
   '/_authenticated/staff/access': typeof AuthenticatedStaffAccessRoute
   '/_authenticated/staff/content': typeof AuthenticatedStaffContentRoute
   '/_authenticated/staff/features': typeof AuthenticatedStaffFeaturesRoute
@@ -493,6 +512,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/account'
+    | '/flow'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -514,6 +534,7 @@ export interface FileRouteTypes {
     | '/partner/onboarding'
     | '/partner/profile'
     | '/partner/services'
+    | '/partner/tasks'
     | '/staff/access'
     | '/staff/content'
     | '/staff/features'
@@ -542,6 +563,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/account'
+    | '/flow'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -563,6 +585,7 @@ export interface FileRouteTypes {
     | '/partner/onboarding'
     | '/partner/profile'
     | '/partner/services'
+    | '/partner/tasks'
     | '/staff/access'
     | '/staff/content'
     | '/staff/features'
@@ -593,6 +616,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/_authenticated/account'
+    | '/_authenticated/flow'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -614,6 +638,7 @@ export interface FileRouteTypes {
     | '/_authenticated/partner/onboarding'
     | '/_authenticated/partner/profile'
     | '/_authenticated/partner/services'
+    | '/_authenticated/partner/tasks'
     | '/_authenticated/staff/access'
     | '/_authenticated/staff/content'
     | '/_authenticated/staff/features'
@@ -867,6 +892,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JoinCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/flow': {
+      id: '/_authenticated/flow'
+      path: '/flow'
+      fullPath: '/flow'
+      preLoaderRoute: typeof AuthenticatedFlowRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/account': {
       id: '/_authenticated/account'
       path: '/account'
@@ -921,6 +953,13 @@ declare module '@tanstack/react-router' {
       path: '/staff/access'
       fullPath: '/staff/access'
       preLoaderRoute: typeof AuthenticatedStaffAccessRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner/tasks': {
+      id: '/_authenticated/partner/tasks'
+      path: '/partner/tasks'
+      fullPath: '/partner/tasks'
+      preLoaderRoute: typeof AuthenticatedPartnerTasksRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/partner/services': {
@@ -998,6 +1037,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
+  AuthenticatedFlowRoute: typeof AuthenticatedFlowRoute
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
   AuthenticatedAdminPreviewRoute: typeof AuthenticatedAdminPreviewRoute
   AuthenticatedNexusDirectoryRoute: typeof AuthenticatedNexusDirectoryRoute
@@ -1007,6 +1047,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPartnerOnboardingRoute: typeof AuthenticatedPartnerOnboardingRoute
   AuthenticatedPartnerProfileRoute: typeof AuthenticatedPartnerProfileRoute
   AuthenticatedPartnerServicesRoute: typeof AuthenticatedPartnerServicesRoute
+  AuthenticatedPartnerTasksRoute: typeof AuthenticatedPartnerTasksRoute
   AuthenticatedStaffAccessRoute: typeof AuthenticatedStaffAccessRoute
   AuthenticatedStaffContentRoute: typeof AuthenticatedStaffContentRoute
   AuthenticatedStaffFeaturesRoute: typeof AuthenticatedStaffFeaturesRoute
@@ -1019,6 +1060,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAccountRoute: AuthenticatedAccountRoute,
+  AuthenticatedFlowRoute: AuthenticatedFlowRoute,
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
   AuthenticatedAdminPreviewRoute: AuthenticatedAdminPreviewRoute,
   AuthenticatedNexusDirectoryRoute: AuthenticatedNexusDirectoryRoute,
@@ -1029,6 +1071,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPartnerOnboardingRoute: AuthenticatedPartnerOnboardingRoute,
   AuthenticatedPartnerProfileRoute: AuthenticatedPartnerProfileRoute,
   AuthenticatedPartnerServicesRoute: AuthenticatedPartnerServicesRoute,
+  AuthenticatedPartnerTasksRoute: AuthenticatedPartnerTasksRoute,
   AuthenticatedStaffAccessRoute: AuthenticatedStaffAccessRoute,
   AuthenticatedStaffContentRoute: AuthenticatedStaffContentRoute,
   AuthenticatedStaffFeaturesRoute: AuthenticatedStaffFeaturesRoute,
