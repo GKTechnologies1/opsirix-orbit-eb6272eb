@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { ArrowRight, CircleX, ShieldCheck } from "lucide-react";
 import { OperatingShell } from "@/components/workspace/OperatingShell";
-import { getStaffConsole } from "@/lib/workspace.functions";
+import { getAdminOverview, getStaffConsole } from "@/lib/workspace.functions";
 
 export const Route = createFileRoute("/_authenticated/staff/")({
   head: () => ({ meta: [
@@ -28,4 +28,42 @@ function StaffHome() {
       {data.isAdmin ? <AdminOverview /> : <section className="ops-panel"><ShieldCheck /><p className="ops-panel-kicker">Your duties</p><h2>Assigned work only</h2><p>You see Nexus help requests only when Admin/CEO assigns them to you.</p><Link to="/staff/inquiries">Open my assigned requests <ArrowRight /></Link></section>}
     </>}
   </OperatingShell>;
+}
+type Overview = NonNullable<Awaited<ReturnType<typeof getAdminOverview>>>;
+type QueueTo = "/admin/applications" | "/staff/inquiries";
+
+function Queue({ label, value, to, note }: { label: string; value: number; to: QueueTo; note?: string }) {
+  return <article><span>{label}</span><strong>{value}</strong>{note && <small className="ops-muted">{note}</small>}<Link to={to}>Open <ArrowRight /></Link></article>;
+}
+
+function AdminOverview() {
+  const load = useServerFn(getAdminOverview);
+  const [o, setO] = useState<Overview | null | undefined>();
+  const [err, setErr] = useState(false);
+  useEffect(() => { load().then(setO).catch(() => setErr(true)); }, [load]);
+  if (err) return <p className="ops-muted" role="alert">The overview could not load. Refresh to try again.</p>;
+  if (o === undefined) return <p className="ops-muted">Loading overview.</p>;
+  if (!o) return null;
+  return <>
+    <section className="ops-panel"><h2>Partner review queues</h2><div className="ops-stat-grid">
+      <Queue label="Applications waiting" value={o.applications.submitted} to="/admin/applications" note={`${o.applications.changes} awaiting applicant changes, ${o.applications.draft} drafts`} />
+      <Queue label="Credentials to check" value={o.credentialsPending} to="/admin/applications" />
+      <Queue label="Representative authority to check" value={o.authorityPending} to="/admin/applications" />
+      <Queue label="University agreements not recorded" value={o.universityAgreementMissing} to="/admin/applications" />
+      <Queue label="Insurance licenses to check" value={o.licensesPending} to="/admin/applications" note={`${o.licensesExpired} expired records`} />
+      <Queue label="Profile edits to review" value={o.profileEditsPending} to="/admin/applications" />
+      <Queue label="Services to review" value={o.servicesPending} to="/admin/applications" />
+      <Queue label="Other service suggestions" value={o.suggestionsPending} to="/admin/applications" />
+    </div></section>
+    <section className="ops-panel"><h2>Help requests</h2><div className="ops-stat-grid">
+      <Queue label="Open requests" value={o.inquiriesOpen} to="/staff/inquiries" />
+      <Queue label="Unassigned" value={o.inquiriesUnassigned} to="/staff/inquiries" note="Assign to a named Operations Lead" />
+      <Queue label="Compliance review tasks" value={o.complianceTasks} to="/staff/inquiries" />
+      <article><span>Introduction consent</span><strong>Off</strong><small className="ops-muted">Not built. No details are disclosed to partners.</small></article>
+    </div></section>
+    <section className="ops-panel"><h2>Categories and publication</h2><div className="ops-table-wrap"><table><thead><tr><th>Category</th><th>Applications</th><th>Claims pending</th><th>Claims approved</th><th>Published listings</th></tr></thead><tbody>
+      {o.types.map((t) => <tr key={t.id}><td>{t.label}</td><td>{t.open ? "Open" : "Closed"}</td><td>{t.claimsPending}</td><td>{t.claimsApproved}</td><td>{t.published}</td></tr>)}
+    </tbody></table></div><Link to="/admin/preview">Manage closed-category preview access <ArrowRight /></Link></section>
+    <section className="ops-panel"><h2>Recent audit history</h2>{o.audit.length ? <ul className="ops-list">{o.audit.map((a) => <li key={a.id}><strong>{a.event_type}</strong> {a.summary} <span className="ops-muted">{new Date(a.created_at).toISOString().slice(0, 16).replace("T", " ")} UTC</span></li>)}</ul> : <p className="ops-muted">No events yet.</p>}<Link to="/staff/access">Manage staff access <ArrowRight /></Link></section>
+  </>;
 }
