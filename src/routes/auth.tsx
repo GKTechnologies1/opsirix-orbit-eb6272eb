@@ -47,14 +47,14 @@ function AuthPage() {
       const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: fullName } } });
       if (!error && data.user) {
         await supabase.from("profiles").upsert({ id: data.user.id, email, full_name: fullName });
-        if (data.session) await navigate({ to: safeNext });
+        if (data.session) await navigate({ href: safeNext });
         else setMessage("Check your email to confirm your account, then return here to sign in.");
       } else setMessage(error?.message ?? "We could not create your account. Please try again.");
     } else {
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (!error && data.user) {
         await supabase.from("profiles").upsert({ id: data.user.id, email: data.user.email ?? email, full_name: String(data.user.user_metadata.full_name ?? "") });
-        await navigate({ to: safeNext });
+        await navigate({ href: safeNext });
       }
       else setMessage(error?.message ?? "We could not sign you in. Please try again.");
     }
