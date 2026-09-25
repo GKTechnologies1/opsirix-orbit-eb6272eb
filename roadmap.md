@@ -6,9 +6,9 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Staff/workspace shell mobile empty space fix
 - [x] Closed categories hidden from visitor, member, partner (direct checks)
 - [x] /staff overview role tests; platform audit history limited to Admin/CEO
-- [ ] Nexus founder help requests (next phase)
-- [ ] Consent-based introductions — blocked: consent wording/disclosure decision
-- [ ] University/Banking/Insurance release — blocked: owner go-ahead
+- [x] Nexus help requests for all six categories (preview form; server requires open category)
+- [ ] Consent-based introductions — draft wording delivered; blocked: owner approval of wording
+- [x] University/Banking/Insurance opened for applications and help requests 2026-09-25 17:56-17:58 UTC; no listings published
 - [ ] Shared company workflows, then Flow, Grid, Core, Launch in phases — Launch blocked on OPSIRIX_05
 - [ ] Vault, AI — blocked: privacy architecture + specialist review
 - [ ] Visual redesign (separate track) — needs direction review
@@ -17,3 +17,5 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Add more page sections and FAQs to the portal, one at a time
 - [ ] Audit search in Staff Console
 - [ ] Connect GitHub and opsirix.com — owner action
+- [x] Announcement bar broadened; founder card line icons
+- [x] Domain and 137-vs-91 catalog reconciliation (report: opsirix-nexus-rollout-v1.md)
