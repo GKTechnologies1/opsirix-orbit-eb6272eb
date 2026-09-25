@@ -30,7 +30,15 @@ export const getCompanyWorkspaces = createServerFn({ method: "GET" })
     const memberPeople = peopleLists.flatMap((r) => (r.data ?? []).map((p) => ({ id: p.user_id, full_name: p.full_name, email: p.email })));
     const staffIds = [...new Set((grants.data ?? []).map((item) => item.staff_user_id))];
     const { data: staffPeople } = staffIds.length ? await context.supabase.from("profiles").select("id,full_name,email").in("id", staffIds) : { data: [] };
-    return { opx, organizations, members: (members.data ?? []).map((m) => ({ ...m, person: ownerOf.has(m.organization_id) ? (memberPeople ?? []).find((p) => p.id === m.user_id) ?? null : null })), events: events.data ?? [], grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
+    const people = new Map(memberPeople.map((p) => [p.id, p.full_name || p.email]));
+    const memberSet = new Set((members.data ?? []).map((m) => `${m.organization_id}:${m.user_id}`));
+    const actorLabel = (e: { organization_id: string | null; actor_id: string }) =>
+      e.actor_id === context.userId ? "You"
+      : e.organization_id && ownerOf.has(e.organization_id) && people.has(e.actor_id) ? people.get(e.actor_id)!
+      : e.organization_id && memberSet.has(`${e.organization_id}:${e.actor_id}`) ? "A company member"
+      : "Opsirix";
+    const eventsOut = (events.data ?? []).map(({ actor_id, ...e }) => ({ ...e, actor: actorLabel({ ...e, actor_id }) }));
+    return { opx, organizations, members: (members.data ?? []).map((m) => ({ ...m, person: ownerOf.has(m.organization_id) ? (memberPeople ?? []).find((p) => p.id === m.user_id) ?? null : null })), events: eventsOut, grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
   });
 
 export const createCompanyWorkspace = createServerFn({ method: "POST" })

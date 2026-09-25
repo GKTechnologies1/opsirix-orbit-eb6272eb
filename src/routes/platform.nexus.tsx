@@ -1,3 +1,5 @@
+import { getPublishedContent } from "@/lib/content.functions";
+import { FAQSection } from "@/components/sections/FAQSection";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
@@ -8,7 +10,7 @@ const TITLE = "Opsirix Nexus | Professional Partner Coordination Network";
 const DESC = "The right professional, at the right time, with the right information. Request a human-reviewed introduction to an independent attorney, CPA, software/IT firm, university program, banking partner, or insurance broker. Nothing is shared without your specific consent.";
 
 export const Route = createFileRoute("/platform/nexus")({
-  loader: () => getOpenNexusCategories(),
+  loader: async () => { const [categories, content] = await Promise.all([getOpenNexusCategories(), getPublishedContent({ data: { keys: ["nexus.faq"] } })]); return { categories, faq: content["nexus.faq"] }; },
   head: () => ({
     meta: [
       { title: TITLE },
@@ -47,7 +49,8 @@ const HOW = [
 
 
 function NexusPage() {
-  const categories = Route.useLoaderData().filter((id) => NEXUS_CATEGORY_COPY[id]);
+  const { categories: allCategories, faq } = Route.useLoaderData();
+  const categories = allCategories.filter((id) => NEXUS_CATEGORY_COPY[id]);
   return (
     <ModulePageLayout
       moduleName="Opsirix Nexus"
@@ -117,6 +120,7 @@ function NexusPage() {
         <Link to="/directory" className="module-btn-secondary">Create a free account to browse</Link>
         <Link to="/for-partners" className="module-btn-secondary">Apply to join Nexus</Link>
       </div>
+      {faq?.items?.length ? <FAQSection content={faq} /> : null}
     </ModulePageLayout>
   );
 }
