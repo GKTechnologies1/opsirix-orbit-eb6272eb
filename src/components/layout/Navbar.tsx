@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -15,7 +16,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "How It Works", to: "/how-it-works" },
   { label: "About", to: "/about" },
   { label: "Platform", to: "/platform", dropdown: true },
-  { label: "Immigrant Founders", to: "/immigrant-founders" },
+  { label: "Founders", to: "/founders" },
   { label: "Partners", to: "/for-partners" },
   { label: "Universities", to: "/for-universities" },
   { label: "FAQ", to: "/faq" },
@@ -319,15 +320,15 @@ export function Navbar() {
         </motion.div>
       </header>
 
-      <AnimatePresence>
+      {typeof document !== "undefined" && createPortal(<AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ y: -300, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -300, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed top-0 left-0 right-0 z-[99] lg:hidden"
-            style={{ backgroundColor: "#071B33", minHeight: "100vh" }}
+            className="fixed top-0 left-0 right-0 z-[120] lg:hidden overflow-y-auto"
+            style={{ backgroundColor: "#071B33", height: "100dvh" }}
           >
             <div
               className="flex items-center justify-between"
@@ -468,7 +469,7 @@ export function Navbar() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>, document.body)}
     </>
   );
 }

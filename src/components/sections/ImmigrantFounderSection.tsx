@@ -76,7 +76,7 @@ export function ImmigrantFounderSection() {
             </div>
 
             <ScrollReveal delay={0.4}>
-              <Link to="/immigrant-founders" className="immigrant-cta">
+              <Link to="/founders" hash="immigrant-founders" className="immigrant-cta">
                 Learn More About Immigrant Founder Support
                 <ArrowRight size={16} />
               </Link>

@@ -22,13 +22,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Opsirix organizes documents, workflows, and partner coordination for early-stage and immigrant founders. Structure your startup operations from day one.",
+          "Opsirix organizes documents, workflows, and partner coordination for founders and business owners, with dedicated support for immigrant founders.",
       },
       { property: "og:title", content: "Opsirix - Founder Operations Platform for Startups" },
       {
         property: "og:description",
         content:
-          "Opsirix organizes documents, workflows, and partner coordination for early-stage and immigrant founders. Structure your startup operations from day one.",
+          "Opsirix organizes documents, workflows, and partner coordination for founders and business owners, with dedicated support for immigrant founders.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
