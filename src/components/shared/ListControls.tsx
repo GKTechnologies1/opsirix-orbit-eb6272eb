@@ -31,7 +31,7 @@ export function useListControls<T>(rows: T[], opts: { text: (row: T) => string; 
   };
 }
 
-type Controls = ReturnType<typeof useListControls<never>>;
+type Controls = Omit<ReturnType<typeof useListControls<unknown>>, "visible" | "sorts" | "filterDefs"> & { sorts: { key: string; label: string }[]; filterDefs: { key: string; label: string; options: { value: string; label: string }[] }[] };
 
 export function ListToolbar({ c, label, placeholder }: { c: Pick<Controls, "query" | "setQuery" | "sort" | "setSort" | "sorts" | "filterDefs" | "filters" | "setFilter">; label: string; placeholder?: string }) {
   return <div className="list-toolbar" role="search" aria-label={label}>
@@ -41,7 +41,7 @@ export function ListToolbar({ c, label, placeholder }: { c: Pick<Controls, "quer
   </div>;
 }
 
-export function ListSummary({ c, noun }: { c: Pick<Controls, "matched" | "total" | "start" | "visible">; noun: [string, string] }) {
+export function ListSummary({ c, noun }: { c: Pick<Controls, "matched" | "total" | "start"> & { visible: unknown[] }; noun: [string, string] }) {
   const w = c.total === 1 ? noun[0] : noun[1];
   if (c.matched === 0) return null;
   return <p className="list-summary" role="status">Showing {c.start + 1} to {c.start + c.visible.length} of {c.matched}{c.matched !== c.total ? ` matching (${c.total} ${w} in total)` : ` ${c.matched === 1 ? noun[0] : noun[1]}`}.</p>;
