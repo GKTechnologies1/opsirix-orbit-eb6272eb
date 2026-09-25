@@ -55,7 +55,14 @@ export const getCompanyWorkspaces = createServerFn({ method: "GET" })
       }
       return out;
     };
-    const eventsOut = (events.data ?? []).map(({ actor_id, metadata, subject_id, ...e }) => ({ ...e, actor: actorLabel({ ...e, actor_id }), details: detailsFor({ ...e, subject_id, metadata }) }));
+    // Direct reads return full rows only for owners (RLS). Everyone else gets the server-side projection.
+    const ownerEvents = (events.data ?? []).filter((e) => e.organization_id && ownerOf.has(e.organization_id));
+    const otherIds = ids.filter((id) => !ownerOf.has(id));
+    const projected = (await Promise.all(otherIds.map((id) => context.supabase.rpc("company_history_view", { _organization_id: id })))).flatMap((r) => (r.data ?? []).map((e) => ({ ...e, details: (Array.isArray(e.details) ? e.details : []) as { label: string; value: string }[] })));
+    const eventsOut = [
+      ...ownerEvents.map(({ actor_id, metadata, subject_id, ...e }) => ({ ...e, actor: actorLabel({ ...e, actor_id }), details: detailsFor({ ...e, subject_id, metadata }) })),
+      ...projected,
+    ].sort((a, b) => b.created_at.localeCompare(a.created_at));
     return { opx, organizations, members: (members.data ?? []).map((m) => ({ ...m, person: ownerOf.has(m.organization_id) ? (memberPeople ?? []).find((p) => p.id === m.user_id) ?? null : null })), events: eventsOut, grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
   });
 

@@ -10,6 +10,8 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Consent-based introductions built and tested with TEST accounts (preview; backend live)
 - [ ] Publish Nexus help/directory/requests pages — blocked: automatic preview build fails intermittently (Lovable support)
 - [x] University/Banking/Insurance opened for applications and help requests 2026-09-25 17:56-17:58 UTC; no listings published
+- [x] Company history direct-read gap closed: full rows only for owners/Admin; others get role-limited projection (5 roles tested directly + page)
+- [ ] opsirix.com finding reported 2026-09-25 21:30 UTC: current preview build is live on opsirix.lovable.app; opsirix.com now proxies it from a separate server. Awaiting owner decision before rollback or Flow backend changes
 - [ ] Flow, Grid, Core: proposals presented 2026-09-25 20:15 UTC; blocked on owner decisions (Flow without Launch, Grid 25 criteria text, Core scope)
 - [ ] Launch: blocked on OPSIRIX_05 intake document
 - [ ] Vault, AI — blocked: privacy architecture + specialist review
