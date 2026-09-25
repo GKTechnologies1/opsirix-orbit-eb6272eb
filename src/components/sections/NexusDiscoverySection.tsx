@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import type { ContentBody } from "@/lib/content.functions";
-import { NEXUS_BOUNDARY, NEXUS_CATEGORY_COPY, NEXUS_NETWORK_NOTE } from "@/lib/nexus-discovery";
+import { NEXUS_BOUNDARY, NEXUS_CATEGORY_COPY, nexusNetworkNote } from "@/lib/nexus-discovery";
 
 export function NexusDiscoverySection({ categories, content }: { categories: string[]; content?: ContentBody }) {
   const open = categories.filter((id) => NEXUS_CATEGORY_COPY[id]);
@@ -30,7 +30,7 @@ export function NexusDiscoverySection({ categories, content }: { categories: str
             ))}
           </div>
         </>}
-        <p className="nx-note">{NEXUS_NETWORK_NOTE}</p>
+        {nexusNetworkNote(categories) && <p className="nx-note">{nexusNetworkNote(categories)}</p>}
 
         <ScrollReveal delay={0.1}>
           <div className="partner-banner">

@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 import { getOpenNexusCategories } from "@/lib/nexus.functions";
-import { NEXUS_CATEGORY_COPY } from "@/lib/nexus-discovery";
+import { NEXUS_CATEGORY_COPY, nexusNetworkNote } from "@/lib/nexus-discovery";
 
 const TITLE = "Opsirix Nexus | Professional Partner Coordination Network";
 const DESC = "The right professional, at the right time, with the right information. Request a human-reviewed introduction to an independent attorney, CPA, or software/IT firm. Nothing is shared without your specific consent.";

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { FolderOpen, CalendarClock, Link2, BarChart3 } from "lucide-react";
 import { PageHeader } from "@/components/shared/PageHeader";
 
 const TITLE = "Opsirix for Founders and Business Owners | Operations Support";
@@ -142,7 +143,7 @@ function Page() {
           <div className="inner-grid-3">
             {FEATURES.map((c) => (
               <div key={c.t} className="inner-card">
-                <div style={{ marginBottom: 12, color: "var(--cyan, currentColor)" }}><c.icon size={26} strokeWidth={1.5} aria-hidden /></div>
+                <div style={{ marginBottom: 12, color: "var(--accent-cyan, currentColor)" }}><c.icon size={26} strokeWidth={1.5} aria-hidden /></div>
                 <h3>{c.t}</h3>
                 <p>{c.d}</p>
               </div>
