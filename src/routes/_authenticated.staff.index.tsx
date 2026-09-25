@@ -25,7 +25,7 @@ function StaffHome() {
     {!data ? <p className="ops-muted">Checking access.</p> : !data.allowed ? <section className="ops-empty"><CircleX /><h2>Access restricted</h2><p>Company membership does not grant access to internal Opsirix operations.</p></section> : <>
       <p className="ops-lead">A separate internal workspace for approved Opsirix roles. Pipeline notes, risk discussions, and pricing negotiations will remain outside founder workspaces.</p>
       <div className="ops-stat-grid"><article><span>Current role</span><strong>{data.roles.includes("admin") ? "Admin / CEO" : data.roles.includes("operations_lead") ? "Operations Lead" : "Compliance Coordinator"}</strong></article><article><span>Phase 1</span><strong>Access boundaries active</strong></article><article><span>Sensitive records</span><strong>Not collected</strong></article></div>
-      <section className="ops-panel"><ShieldCheck /><p className="ops-panel-kicker">Foundation only</p><h2>Staff workflows are not active yet</h2><p>This release establishes separate access and audit history. It does not add the CRM pipeline, Launch intake, Grid reviews, Vault, AI, or pricing records.</p>{data.isAdmin && <Link to="/staff/access">Manage staff access <ArrowRight /></Link>}</section>
+      {data.isAdmin ? <AdminOverview /> : <section className="ops-panel"><ShieldCheck /><p className="ops-panel-kicker">Your duties</p><h2>Assigned work only</h2><p>You see Nexus help requests only when Admin/CEO assigns them to you.</p><Link to="/staff/inquiries">Open my assigned requests <ArrowRight /></Link></section>}
     </>}
   </OperatingShell>;
 }

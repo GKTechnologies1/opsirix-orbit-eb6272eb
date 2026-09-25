@@ -95,3 +95,50 @@ export const setStaffAccess = createServerFn({ method: "POST" })
     if (error) return { success: false as const, error: error.message };
     return { success: true as const };
   });
+/** Admin/CEO overview: counts and queues from real records only. Non-admins receive nothing. */
+export const getAdminOverview = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const sb = context.supabase;
+    const { data: isAdmin } = await sb.rpc("has_role", { _user_id: context.userId, _role: "admin" });
+    if (!isAdmin) return null;
+    const today = new Date().toISOString().slice(0, 10);
+    const [apps, types, track, lic, revs, svc, sug, inq, asg, prof, cred, audit, ptypes] = await Promise.all([
+      sb.from("partner_applications").select("status"),
+      sb.from("partner_listing_types").select("partner_type_id,review_status"),
+      sb.from("partner_track_details").select("track,authority_review_status,agreement_status"),
+      sb.from("partner_licenses").select("review_status,expires_on"),
+      sb.from("partner_profile_revisions").select("status"),
+      sb.from("partner_service_selections").select("partner_type,review_status"),
+      sb.from("partner_service_suggestions").select("status"),
+      sb.from("nexus_inquiries").select("id,status,category_id"),
+      sb.from("nexus_inquiry_assignments").select("inquiry_id,purpose,revoked_at"),
+      sb.from("partner_profiles").select("partner_type_id,is_published,is_suspended"),
+      sb.from("partner_credentials").select("status"),
+      sb.from("audit_events").select("id,event_type,summary,created_at").order("created_at", { ascending: false }).limit(15),
+      sb.from("service_partner_types").select("id,label,is_open_for_registration").order("display_order"),
+    ]);
+    const n = <T,>(rows: T[] | null, f: (r: T) => boolean) => (rows ?? []).filter(f).length;
+    const assigned = new Set((asg.data ?? []).filter((a) => !a.revoked_at).map((a) => a.inquiry_id));
+    return {
+      applications: { submitted: n(apps.data, (r) => r.status === "submitted" || r.status === "under_review"), changes: n(apps.data, (r) => r.status === "changes_requested"), draft: n(apps.data, (r) => r.status === "draft"), approved: n(apps.data, (r) => r.status === "approved") },
+      credentialsPending: n(cred.data, (r) => r.status === "pending"),
+      authorityPending: n(track.data, (r) => r.authority_review_status === "pending"),
+      universityAgreementMissing: n(track.data, (r) => r.track === "university" && r.agreement_status !== "recorded"),
+      licensesPending: n(lic.data, (r) => r.review_status === "pending"),
+      licensesExpired: n(lic.data, (r) => !!r.expires_on && r.expires_on < today),
+      profileEditsPending: n(revs.data, (r) => r.status === "submitted"),
+      servicesPending: n(svc.data, (r) => r.review_status === "submitted" || r.review_status === "pending"),
+      suggestionsPending: n(sug.data, (r) => r.status === "pending"),
+      inquiriesOpen: n(inq.data, (r) => r.status !== "closed"),
+      inquiriesUnassigned: n(inq.data, (r) => r.status !== "closed" && !assigned.has(r.id)),
+      complianceTasks: n(asg.data, (r) => !r.revoked_at && r.purpose === "review_task"),
+      types: (ptypes.data ?? []).map((t) => ({
+        id: t.id, label: t.label, open: t.is_open_for_registration,
+        claimsPending: n(types.data, (r) => r.partner_type_id === t.id && r.review_status === "pending"),
+        claimsApproved: n(types.data, (r) => r.partner_type_id === t.id && r.review_status === "approved"),
+        published: n(prof.data, (r) => r.partner_type_id === t.id && r.is_published && !r.is_suspended),
+      })),
+      audit: audit.data ?? [],
+    };
+  });
