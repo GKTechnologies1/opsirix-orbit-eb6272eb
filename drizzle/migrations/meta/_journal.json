@@ -267,6 +267,13 @@
       "when": 1790366708437,
       "tag": "0037_content_faq_items",
       "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1790366999909,
+      "tag": "0038_content_allow_long_dash",
+      "breakpoints": true
     }
   ]
 }
