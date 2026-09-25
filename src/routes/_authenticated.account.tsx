@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -9,7 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { getMyAccess } from "@/lib/access.functions";
 
 export const Route = createFileRoute("/_authenticated/account")({
-  validateSearch: (s: Record<string, unknown>) => ({ auto: s.auto === 1 || s.auto === "1" ? 1 : undefined }),
+  validateSearch: z.object({ auto: z.coerce.number().optional().catch(undefined) }),
   head: () => ({
     meta: [
       { title: "Choose your workspace | Opsirix" },
