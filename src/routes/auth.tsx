@@ -32,7 +32,7 @@ function AuthPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState("");
-  const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/account";
+  const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/account?auto=1";
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

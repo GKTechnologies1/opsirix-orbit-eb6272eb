@@ -9,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { getMyAccess } from "@/lib/access.functions";
 
 export const Route = createFileRoute("/_authenticated/account")({
+  validateSearch: (s: Record<string, unknown>) => ({ auto: s.auto === 1 || s.auto === "1" ? 1 : undefined }),
   head: () => ({
     meta: [
       { title: "Choose your workspace | Opsirix" },
@@ -29,10 +30,14 @@ function AccountHub() {
   const { data, isLoading, isError, refetch } = useQuery({ queryKey: ["my-access"], queryFn: () => fetchAccess() });
   const areas = data?.areas ?? [];
 
-  // One area only: go straight there.
+  const { auto } = Route.useSearch();
+  // Right after sign-in: one workspace goes straight there; several show the switcher.
   useEffect(() => {
-    if (areas.length === 1) void navigate({ to: areas[0].to, replace: true });
-  }, [areas, navigate]);
+    if (!auto || !data) return;
+    const main = data.areas.filter((a) => a.key !== "member");
+    if (main.length === 0) void navigate({ to: "/nexus/directory", replace: true });
+    else if (main.length === 1) void navigate({ to: main[0].to, replace: true });
+  }, [auto, data, navigate]);
 
   async function signOut() {
     await queryClient.cancelQueries();
