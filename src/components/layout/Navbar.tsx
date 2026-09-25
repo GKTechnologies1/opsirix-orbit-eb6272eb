@@ -313,11 +313,11 @@ export function Navbar() {
             className="hidden lg:flex items-center gap-3"
           >
             {signedIn ? (
-              <Link to="/account" className="nav-auth-link">My workspace</Link>
+              <Link to="/account" className="nav-auth-link" style={{ color: "rgba(255,255,255,0.88)" }}>My workspace</Link>
             ) : (
               <>
-                <Link to="/auth" search={{ mode: "signin" }} className="nav-auth-link">Sign in</Link>
-                <Link to="/auth" search={{ mode: "signup" }} className="btn btn-secondary" style={{ padding: "8px 16px", fontSize: 13.5 }}>Create account</Link>
+                <Link to="/auth" search={{ mode: "signin" }} className="nav-auth-link" style={{ color: "rgba(255,255,255,0.88)" }}>Sign in</Link>
+                <Link to="/auth" search={{ mode: "signup" }} className="btn btn-secondary" style={{ padding: "8px 16px", fontSize: 13.5, color: "rgba(255,255,255,0.92)" }}>Create account</Link>
               </>
             )}
             <Link
@@ -478,11 +478,11 @@ export function Navbar() {
 
             <div className="nav-auth-mobile" style={{ padding: "24px", display: "grid", gap: 12 }}>
               {signedIn ? (
-                <Link to="/account" onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex" }}>My workspace</Link>
+                <Link to="/account" onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex", color: "rgba(255,255,255,0.92)" }}>My workspace</Link>
               ) : (
                 <>
-                  <Link to="/auth" search={{ mode: "signin" }} onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex" }}>Sign in</Link>
-                  <Link to="/auth" search={{ mode: "signup" }} onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex" }}>Create account</Link>
+                  <Link to="/auth" search={{ mode: "signin" }} onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex", color: "rgba(255,255,255,0.92)" }}>Sign in</Link>
+                  <Link to="/auth" search={{ mode: "signup" }} onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex", color: "rgba(255,255,255,0.92)" }}>Create account</Link>
                 </>
               )}
               <Link
