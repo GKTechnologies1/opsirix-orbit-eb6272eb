@@ -28,3 +28,9 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Introductions enabled 2026-09-25 18:46:36 UTC (wording approved; portal vs email history; notice-only retry)
 - [ ] Publish Nexus pages to opsirix.lovable.app: blocked on intermittent managed build error (escalate to Lovable support)
 - [ ] Pricing (schedule approval), Terms acknowledgement (wording), retention (period), Vault/AI (privacy/security review), Launch (OPSIRIX_05)
+
+## Access and handoff (2026-09-25 19:15 UTC)
+- [x] Header Sign in / Create account (desktop + mobile), /account switcher, role routing; 49/49 checks
+- [x] DevOps handoff v1 (clean build 3/3 outside Lovable)
+- [ ] Fill repo/branch in handoff: blocked on owner connecting GitHub
+- [ ] Next phase: Staff Console audit search, then founder workflows (company history, requests) per tracker

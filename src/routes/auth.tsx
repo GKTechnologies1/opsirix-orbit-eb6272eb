@@ -7,16 +7,16 @@ import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
-const searchSchema = z.object({ next: z.string().optional().catch(undefined), purpose: z.enum(["directory"]).optional().catch(undefined) });
+const searchSchema = z.object({ next: z.string().optional().catch(undefined), purpose: z.enum(["directory"]).optional().catch(undefined), mode: z.enum(["signin", "signup"]).optional().catch(undefined) });
 
 export const Route = createFileRoute("/auth")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [
-      { title: "Partner Sign In | Opsirix Nexus" },
-      { name: "description", content: "Create or access your secure Opsirix Nexus partner account." },
-      { property: "og:title", content: "Partner Sign In | Opsirix Nexus" },
-      { property: "og:description", content: "Create or access your secure Opsirix Nexus partner account." },
+      { title: "Sign in or create an account | Opsirix" },
+      { name: "description", content: "Sign in to Opsirix, or create a free account for the Nexus directory, help requests, company workspaces or a partner application." },
+      { property: "og:title", content: "Sign in or create an account | Opsirix" },
+      { property: "og:description", content: "Sign in to Opsirix, or create a free account for the Nexus directory, help requests, company workspaces or a partner application." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -26,13 +26,13 @@ export const Route = createFileRoute("/auth")({
 
 function AuthPage() {
   const navigate = useNavigate();
-  const { next, purpose } = Route.useSearch();
+  const { next, purpose, mode: initialMode } = Route.useSearch();
   const member = purpose === "directory";
-  const [mode, setMode] = useState<"signup" | "signin">("signup");
+  const [mode, setMode] = useState<"signup" | "signin">(initialMode ?? "signup");
   const [showPassword, setShowPassword] = useState(false);
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState("");
-  const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/partner";
+  const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/account?auto=1";
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,14 +47,14 @@ function AuthPage() {
       const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { full_name: fullName } } });
       if (!error && data.user) {
         await supabase.from("profiles").upsert({ id: data.user.id, email, full_name: fullName });
-        if (data.session) await navigate({ to: safeNext });
+        if (data.session) await navigate({ href: safeNext });
         else setMessage("Check your email to confirm your account, then return here to sign in.");
       } else setMessage(error?.message ?? "We could not create your account. Please try again.");
     } else {
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (!error && data.user) {
         await supabase.from("profiles").upsert({ id: data.user.id, email: data.user.email ?? email, full_name: String(data.user.user_metadata.full_name ?? "") });
-        await navigate({ to: safeNext });
+        await navigate({ href: safeNext });
       }
       else setMessage(error?.message ?? "We could not sign you in. Please try again.");
     }
@@ -67,13 +67,15 @@ function AuthPage() {
         <section className="nexus-auth-intro" aria-labelledby="auth-title">
           <Link to="/" aria-label="Opsirix home"><OpsirixLogo /></Link>
           <div>
-            <p className="nexus-kicker">{member ? "Nexus member directory" : "Nexus Partner Network"}</p>
-            <h1 id="auth-title">{member ? "Browse approved Nexus profiles." : "Tell us what you do best."}</h1>
-            <p>{member ? "A free account lets you browse and filter approved Nexus profiles. It does not enroll you in another Opsirix service or create a company workspace." : "We'll review your details and help you set up a profile that makes it easier for the right people to find you."}</p>
+            <p className="nexus-kicker">{member ? "Nexus member directory" : "Your Opsirix account"}</p>
+            <h1 id="auth-title">{member ? "Browse approved Nexus profiles." : "One account, the right place for you."}</h1>
+            <p>{member ? "A free account lets you browse and filter approved Nexus profiles. It does not enroll you in another Opsirix service or create a company workspace." : "A free account is where you start. After you sign in, you choose what you need:"}</p>
           </div>
           {member ? <p className="nexus-panel-copy">{NEXUS_ACCOUNT_DATA_NOTICE}</p> : <ul className="nexus-assurance-list">
-            <li><ShieldCheck aria-hidden="true" /> Your application stays private during review.</li>
-            <li><CheckCircle2 aria-hidden="true" /> Every application is reviewed by a person.</li>
+            <li><CheckCircle2 aria-hidden="true" /> Browse approved Nexus profiles and follow your help requests.</li>
+            <li><CheckCircle2 aria-hidden="true" /> Set up a company workspace for your business, or join one when its owner invites you.</li>
+            <li><CheckCircle2 aria-hidden="true" /> Apply as a Nexus partner. Every application is reviewed by a person and stays private during review.</li>
+            <li><ShieldCheck aria-hidden="true" /> Opsirix staff and Admin/CEO access can't be requested here. It is granted only by the Admin/CEO through the Staff Console.</li>
           </ul>}
         </section>
         <section className="nexus-auth-panel" aria-label="Partner account">

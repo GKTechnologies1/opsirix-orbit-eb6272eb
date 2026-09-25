@@ -50,7 +50,7 @@ function MemberDirectory() {
   return (
     <main className="nx-page">
       <div className="nx-wrap">
-        <div className="nx-topbar"><p className="nexus-kicker">Nexus member directory</p><button type="button" className="nx-link" onClick={signOut}>Sign out</button></div>
+        <div className="nx-topbar"><p className="nexus-kicker">Nexus member directory</p><span style={{ display: "flex", gap: 16, flexWrap: "wrap" }}><Link to="/nexus/requests" className="nx-link">My requests</Link><Link to="/account" className="nx-link">Switch workspace</Link><button type="button" className="nx-link" onClick={signOut}>Sign out</button></span></div>
         <h1>Approved Nexus profiles</h1>
         <p className="nx-intro">Profiles appear here only after Opsirix review. Professionals work independently under their own engagement terms.</p>
         <div className="nx-filters" role="search">

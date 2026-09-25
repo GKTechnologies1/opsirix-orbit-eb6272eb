@@ -2448,3 +2448,13 @@
 .ops-intro { margin-top: 24px; display: grid; gap: 12px; }
 .ops-intro-card { border: 1px solid rgba(148,163,184,.3); border-radius: 8px; padding: 14px; display: grid; gap: 8px; }
 .ops-send-review { border-left: 3px solid var(--color-brand-blue); padding: 8px 14px; display: grid; gap: 6px; overflow-wrap: anywhere; }
+
+.account-hub-list { list-style: none; padding: 0; margin: 20px 0; display: grid; gap: 10px; }
+.account-hub-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; color: inherit; text-decoration: none; }
+.account-hub-item:hover, .account-hub-item:focus-visible { border-color: var(--primary); }
+.account-hub-item span { display: grid; gap: 2px; }
+.account-hub-item small { opacity: 0.75; }
+.site-header .nav-auth-link { font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.85); text-decoration: none; padding: 8px 10px; }
+.site-header .nav-auth-link:hover { text-decoration: underline; }
+
+.site-header a.btn-secondary, .nav-auth-mobile a.btn-secondary { color: rgba(255,255,255,0.9); }

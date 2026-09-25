@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, FileText, Inbox, KeyRound, LayoutDashboard, ListChecks, LogOut, Search, ShieldCheck, UserRound } from "lucide-react";
+import { Building2, FileText, Inbox, KeyRound, LayoutDashboard, ListChecks, LogOut, Repeat, Search, ShieldCheck, UserRound } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -26,7 +26,7 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
   }, []);
   async function signOut() {
     await supabase.auth.signOut();
-    await navigate({ to: "/auth" });
+    await navigate({ to: "/auth", replace: true });
   }
   return (
     <div className="nexus-workspace">
@@ -43,6 +43,7 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
           <Link to="/directory"><Search />Directory</Link>
           {isAdmin && <Link to="/admin/applications"><ShieldCheck />Review queue</Link>}
           {isAdmin && <Link to="/admin/preview"><KeyRound />Preview access</Link>}
+          <Link to="/account"><Repeat />Switch workspace</Link>
         </nav>
         <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>
       </aside>

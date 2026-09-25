@@ -28,6 +28,18 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showAnnouncement, setShowAnnouncement] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    void import("@/integrations/supabase/client").then(({ supabase }) => {
+      supabase.auth.getSession().then(({ data }) => { if (active) setSignedIn(Boolean(data.session)); });
+      const { data } = supabase.auth.onAuthStateChange((_event, session) => { if (active) setSignedIn(Boolean(session)); });
+      unsub = () => data.subscription.unsubscribe();
+    });
+    let unsub = () => {};
+    return () => { active = false; unsub(); };
+  }, []);
   const [platformOpen, setPlatformOpen] = useState(false);
   const [mobilePlatformOpen, setMobilePlatformOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -300,6 +312,14 @@ export function Navbar() {
           <motion.div
             className="hidden lg:flex items-center gap-3"
           >
+            {signedIn ? (
+              <Link to="/account" className="nav-auth-link" style={{ color: "rgba(255,255,255,0.88)" }}>My workspace</Link>
+            ) : (
+              <>
+                <Link to="/auth" search={{ mode: "signin" }} className="nav-auth-link" style={{ color: "rgba(255,255,255,0.88)" }}>Sign in</Link>
+                <Link to="/auth" search={{ mode: "signup" }} className="btn btn-secondary" style={{ padding: "8px 16px", fontSize: 13.5, color: "rgba(255,255,255,0.92)" }}>Create account</Link>
+              </>
+            )}
             <Link
               to="/contact"
               className="btn btn-primary"
@@ -456,7 +476,15 @@ export function Navbar() {
               })}
             </nav>
 
-            <div style={{ padding: "24px" }}>
+            <div className="nav-auth-mobile" style={{ padding: "24px", display: "grid", gap: 12 }}>
+              {signedIn ? (
+                <Link to="/account" onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex", color: "rgba(255,255,255,0.92)" }}>My workspace</Link>
+              ) : (
+                <>
+                  <Link to="/auth" search={{ mode: "signin" }} onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex", color: "rgba(255,255,255,0.92)" }}>Sign in</Link>
+                  <Link to="/auth" search={{ mode: "signup" }} onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex", color: "rgba(255,255,255,0.92)" }}>Create account</Link>
+                </>
+              )}
               <Link
                 to="/contact"
                 onClick={() => setMobileOpen(false)}
