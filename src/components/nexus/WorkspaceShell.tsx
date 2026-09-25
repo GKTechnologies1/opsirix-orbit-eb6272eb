@@ -39,6 +39,7 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
           <Link to="/partner/services"><ListChecks />Services</Link>
           <Link to="/partner/profile"><UserRound />Profile</Link>
           <Link to="/partner/introductions"><Inbox />Introductions</Link>
+          <Link to="/partner/tasks"><ListChecks />Shared tasks</Link>
           {canOnboard && <Link to="/partner/onboarding"><Building2 />Institutions and brokerages</Link>}
           <Link to="/directory"><Search />Directory</Link>
           {isAdmin && <Link to="/admin/applications"><ShieldCheck />Review queue</Link>}

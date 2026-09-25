@@ -11,7 +11,7 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Publish Nexus help/directory/requests pages — blocked: automatic preview build fails intermittently (Lovable support)
 - [x] University/Banking/Insurance opened for applications and help requests 2026-09-25 17:56-17:58 UTC; no listings published
 - [x] Company history direct-read gap closed: full rows only for owners/Admin; others get role-limited projection (5 roles tested directly + page)
-- [ ] opsirix.com finding reported 2026-09-25 21:30 UTC: current preview build is live on opsirix.lovable.app; opsirix.com now proxies it from a separate server. Awaiting owner decision before rollback or Flow backend changes
+- [x] opsirix.com finding: owner keeps current live site; recorded in DevOps handoff v2. No TEST Content publishing against shared backend
 - [ ] Flow, Grid, Core: proposals presented 2026-09-25 20:15 UTC; blocked on owner decisions (Flow without Launch, Grid 25 criteria text, Core scope)
 - [ ] Launch: blocked on OPSIRIX_05 intake document
 - [ ] Vault, AI — blocked: privacy architecture + specialist review
@@ -52,7 +52,8 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 
 
 ## Owner direction received 2026-09-25 (uploaded note)
-- [ ] Flow phase 1: owner-created boards without Launch; tasks (owner, due date, status); owner may delegate create/assign; viewers read-only; staff escalations within assigned work with audited clearing; partner sees only explicitly shared tasks.
+- [x] Flow phase 1 (preview /flow, /partner/tasks; 34/34 backend, 8/8 browser): owner-created boards without Launch; tasks (owner, due date, status); owner may delegate create/assign; viewers read-only; staff escalations within assigned work with audited clearing; partner sees only explicitly shared tasks.
+- [ ] Grid record structure + review screens (scoring disabled until criteria approved)
 - [ ] Core (after Flow): managed operational requests, owner-granted scoped/time-limited staff access with immediate revoke, audited lifecycle; no Vault file access; no "free"/pricing labels.
 - [ ] Grid: draft 25 evidence criteria from OPSIRIX_23 for review; record structure/permissions/draft screens only; scoring disabled.
 - [x] Member list pagination verified with 12 TEST members (2 pages); history date range + role-filtered details (owners see person/end date; viewers see access/scope only). 25/25 browser+backend checks.
