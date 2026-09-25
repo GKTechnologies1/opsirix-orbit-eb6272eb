@@ -140,6 +140,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    overflow-x: clip;
   }
 }
 
@@ -1734,6 +1735,9 @@
 .inner-table th { font-family: 'Sora', sans-serif; font-weight: 700; color: #071B33; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
 .inner-table tbody tr { border-top: 1px solid #E2E8F0; }
 .inner-table td { color: #475569; line-height: 1.55; }
+@media (max-width: 640px) {
+  .inner-table { display: block; max-width: 100%; overflow-x: auto; }
+}
 
 .inner-list { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
 .inner-list li { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; background: #F3F8FF; border-radius: 10px; font-size: 14px; color: #334155; line-height: 1.6; }
@@ -1826,6 +1830,7 @@
 
   /* ---- Chaos cards ---- */
   .founder-chaos-grid { grid-template-columns: 1fr !important; gap: 14px; }
+  .founder-chaos-proof { grid-template-columns: 1fr !important; gap: 14px !important; }
 
   /* ---- Layer section ---- */
   .opsirix-layer-grid { gap: 40px; }
@@ -2385,6 +2390,7 @@
 .nx-form { display: grid; gap: 18px; margin-top: 32px; }
 .nx-form label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; color: var(--color-ice); }
 .nx-form input:not([type=checkbox]), .nx-form select, .nx-form textarea, .nx-filters input, .nx-filters select { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid var(--border-subtle); background: var(--bg-surface); color: var(--color-ice); font: inherit; font-weight: 400; }
+.nx-form input.sr-only { width: 1px; min-height: 1px; padding: 0; border: 0; }
 .nx-form [aria-invalid=true] { border-color: var(--destructive) !important; }
 .nx-check { grid-template-columns: 22px 1fr !important; align-items: start; font-weight: 400 !important; color: var(--color-gray) !important; line-height: 1.55; }
 .nx-check input { width: 20px; height: 20px; margin-top: 2px; }
