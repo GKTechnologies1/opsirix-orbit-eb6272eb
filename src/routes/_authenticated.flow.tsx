@@ -41,7 +41,7 @@ function FlowPage() {
     <OperatingShell mode="company" eyebrow="Opsirix Flow" title="Company tasks">
       <p className="text-muted-foreground max-w-2xl">Boards hold the work your company is coordinating. Owners and delegated members edit; viewers can read. Opsirix staff with company access can flag a task for attention. Partners see only tasks an owner shares with them.</p>
       {message && <p role="status" className="rounded-md border border-border p-3 text-sm">{message}</p>}
-      {error && <div role="alert" className="text-sm">{error} <Button size="sm" variant="outline" onClick={() => void refresh()}>Retry</Button></div>}
+      {error && <div role="alert" className="text-sm">{error} <Button size="sm" variant="secondary" onClick={() => void refresh()}>Retry</Button></div>}
       {!data && !error && <p>Loading Flow…</p>}
       {data && !data.companies.length && <p>You don't have access to any company workspace yet. Create one under Companies first.</p>}
       {data && company && (
@@ -106,7 +106,7 @@ function EditorForm({ company, onDone }: { company: Company; onDone: OnDone }) {
       <form onSubmit={submit} className="mt-2 flex flex-wrap items-end gap-2">
         <label className="flex-1 min-w-[12rem]">Member email<input name="email" type="email" required className={input} /></label>
         <Button type="submit" name="action" value="grant">Allow editing</Button>
-        <Button type="submit" name="action" value="remove" variant="outline">Remove</Button>
+        <Button type="submit" name="action" value="remove" variant="secondary">Remove</Button>
       </form>
     </details>
   );
@@ -130,7 +130,7 @@ function TaskForm({ company, boardId, task, onDone, onClose }: { company: Compan
       <label>Owner<select name="assignee" defaultValue={task?.assignee_id ?? ""} className={input}><option value="">Unassigned</option>{company.members.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}</select></label>
       <label>Due date<input name="due" type="date" defaultValue={task?.due_on ?? ""} className={input} /></label>
       <label>Status<select name="status" defaultValue={task?.status ?? "todo"} className={input}>{Object.entries(STATUS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></label>
-      <div className="flex items-end gap-2"><Button type="submit">{task ? "Save task" : "Add task"}</Button>{onClose && <Button type="button" variant="outline" onClick={onClose}>Cancel</Button>}</div>
+      <div className="flex items-end gap-2"><Button type="submit">{task ? "Save task" : "Add task"}</Button>{onClose && <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>}</div>
     </form>
   );
 }
@@ -166,12 +166,12 @@ function TaskRow({ n, task, company, boardId, onDone }: { n: number; task: Task;
       {task.details && <p className="whitespace-pre-wrap text-muted-foreground">{task.details}</p>}
       {task.escalated_at && <p className="flex items-start gap-2 rounded border border-border p-2"><AlertTriangle className="h-4 w-4 shrink-0" />Opsirix flagged this: {task.escalation_note}</p>}
       <div className="flex flex-wrap gap-2">
-        {company.canEdit && <Button size="sm" variant="outline" onClick={() => setEditing(true)}>Edit</Button>}
+        {company.canEdit && <Button size="sm" variant="secondary" onClick={() => setEditing(true)}>Edit</Button>}
       </div>
       {company.canEscalate && (
         <form onSubmit={esc} className="flex flex-wrap items-end gap-2">
           <label className="flex-1 min-w-[10rem]">{task.escalated_at ? "Reason for clearing" : "Reason to flag"}<input name="note" maxLength={500} className={input} /></label>
-          {task.escalated_at ? <Button size="sm" type="submit" name="action" value="clear" variant="outline">Clear flag</Button> : <Button size="sm" type="submit" name="action" value="raise">Flag for attention</Button>}
+          {task.escalated_at ? <Button size="sm" type="submit" name="action" value="clear" variant="secondary">Clear flag</Button> : <Button size="sm" type="submit" name="action" value="raise">Flag for attention</Button>}
         </form>
       )}
       {company.isOwner && (
@@ -179,7 +179,7 @@ function TaskRow({ n, task, company, boardId, onDone }: { n: number; task: Task;
           <form onSubmit={doShare} className="mt-2 flex flex-wrap items-end gap-2">
             <label className="flex-1 min-w-[10rem]">Partner account email<input name="email" type="email" required className={input} /></label>
             <Button size="sm" type="submit" name="action" value="share">Share</Button>
-            <Button size="sm" type="submit" name="action" value="unshare" variant="outline">Stop sharing</Button>
+            <Button size="sm" type="submit" name="action" value="unshare" variant="secondary">Stop sharing</Button>
           </form>
           <p className="mt-1 text-muted-foreground">The partner sees this task's title, details, due date and status only.</p>
         </details>
