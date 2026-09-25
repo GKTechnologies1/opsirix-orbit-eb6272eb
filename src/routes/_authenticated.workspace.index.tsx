@@ -99,5 +99,29 @@ function CompanyWorkspaces() {
           <CompanyHistory events={events} />
         </section>;
       })}</div>}
+    <p className="ops-muted">Need a professional? <Link to="/nexus/help">Ask for help</Link>, then follow it on <Link to="/nexus/requests">your Nexus requests</Link>.</p>
   </OperatingShell>;
+}
+
+type CompanyEvent = { id: string; summary: string; created_at: string; event_type: string };
+
+function CompanyHistory({ events }: { events: CompanyEvent[] }) {
+  const [term, setTerm] = useState("");
+  const [showAll, setShowAll] = useState(false);
+  const needle = term.trim().toLowerCase();
+  const matched = needle
+    ? events.filter((e) => `${e.summary} ${e.event_type}`.toLowerCase().includes(needle))
+    : events;
+  const shown = showAll || needle ? matched : matched.slice(0, 8);
+  return <div className="ops-history">
+    <h3>History</h3>
+    <label className="ops-history-search">Search this company history
+      <input type="search" value={term} onChange={(e) => setTerm(e.target.value)} maxLength={120} placeholder="For example: member, renamed" />
+    </label>
+    {!events.length ? <p className="ops-muted">No activity yet.</p> : !matched.length ? <p className="ops-muted" role="status">Nothing in this company history matches that search.</p> : <>
+      {needle && <p className="ops-muted" role="status">{matched.length} matching {matched.length === 1 ? "entry" : "entries"}.</p>}
+      {shown.map((event) => <div className="ops-history-row" key={event.id}><Clock3 /><span>{event.summary}</span><time>{new Date(event.created_at).toLocaleString()}</time></div>)}
+      {!needle && matched.length > 8 && <Button variant="outline" className="ops-outline" type="button" onClick={() => setShowAll(!showAll)}>{showAll ? "Show fewer" : `Show all ${matched.length}`}</Button>}
+    </>}
+  </div>;
 }
