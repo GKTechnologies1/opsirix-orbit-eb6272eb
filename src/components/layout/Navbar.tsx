@@ -86,7 +86,7 @@ export function Navbar() {
               style={{
                 height: 36,
                 backgroundColor: "#0057D9",
-                padding: "0 24px",
+                padding: "0 40px",
               }}
               className="flex items-center justify-center relative"
             >

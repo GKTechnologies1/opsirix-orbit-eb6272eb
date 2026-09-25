@@ -143,7 +143,7 @@ function Page() {
           <div className="inner-grid-3">
             {FEATURES.map((c) => (
               <div key={c.t} className="inner-card">
-                <div style={{ marginBottom: 12, color: "var(--color-cyan)" }}><c.icon size={26} strokeWidth={1.5} aria-hidden /></div>
+                <div style={{ marginBottom: 12, color: "var(--color-brand-blue, #0057D9)" }}><c.icon size={26} strokeWidth={1.75} aria-hidden /></div>
                 <h3>{c.t}</h3>
                 <p>{c.d}</p>
               </div>
