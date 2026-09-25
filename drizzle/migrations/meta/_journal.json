@@ -162,6 +162,13 @@
       "when": 1790286979324,
       "tag": "0022_fail_closed_on_missing_owner_membership",
       "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1790351440773,
+      "tag": "0023_nexus_discovery_directory_and_inquiries",
+      "breakpoints": true
     }
   ]
 }
