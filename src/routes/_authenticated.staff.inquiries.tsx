@@ -6,6 +6,7 @@ import { OperatingShell } from "@/components/workspace/OperatingShell";
 import { Button } from "@/components/ui/button";
 import { assignNexusInquiry, listNexusInquiries, openNexusInquiry, setNexusInquiryStatus } from "@/lib/nexus.functions";
 import { NEXUS_CATEGORY_COPY } from "@/lib/nexus-discovery";
+import { ListEmpty, ListPager, ListSummary, ListToolbar, useListControls } from "@/components/shared/ListControls";
 import { cancelIntroduction, previewSend, proposeIntroduction, sendIntroduction, retryPartnerNotice, staffIntroductions } from "@/lib/nexus-intro.functions";
 
 export const Route = createFileRoute("/_authenticated/staff/inquiries")({
@@ -24,6 +25,35 @@ type ListData = Awaited<ReturnType<typeof listNexusInquiries>>;
 type Detail = Extract<Awaited<ReturnType<typeof openNexusInquiry>>, { success: true }>["inquiry"];
 const STATUS: Record<string, string> = { received: "Received", under_review: "Under review", consent_requested: "Consent requested", introduced: "Introduced", closed: "Closed" };
 
+function InquiryTable({ data, onOpen }: { data: Extract<ListData, { allowed: true }>; onOpen: (id: string) => void }) {
+  type Q = (typeof data.inquiries)[number];
+  const assigned = (q: Q) => data.assignments.filter((x) => x.inquiry_id === q.id);
+  const c = useListControls(data.inquiries, {
+    text: (q) => `${NEXUS_CATEGORY_COPY[q.category_id]?.title ?? q.category_id} ${STATUS[q.status] ?? q.status} ${q.is_test ? "test" : ""} ${assigned(q).map((x) => x.person?.email ?? "").join(" ")}`,
+    sorts: [
+      { key: "new", label: "Newest first", compare: (a, b) => b.created_at.localeCompare(a.created_at) },
+      { key: "old", label: "Oldest first", compare: (a, b) => a.created_at.localeCompare(b.created_at) },
+      { key: "unassigned", label: "Unassigned first", compare: (a, b) => assigned(a).length - assigned(b).length || a.created_at.localeCompare(b.created_at) },
+    ],
+    filters: [
+      { key: "status", label: "Status", options: Object.entries(STATUS).map(([value, label]) => ({ value, label })), match: (q, v) => q.status === v },
+      { key: "cat", label: "Category", options: [...new Set(data.inquiries.map((q) => q.category_id))].map((k) => ({ value: k, label: NEXUS_CATEGORY_COPY[k]?.title ?? k })), match: (q, v) => q.category_id === v },
+      { key: "assign", label: "Assignment", options: [{ value: "none", label: "Unassigned" }, { value: "some", label: "Assigned" }], match: (q, v) => (v === "none") === (assigned(q).length === 0) },
+      { key: "test", label: "Record type", options: [{ value: "test", label: "TEST only" }, { value: "real", label: "Real only" }], match: (q, v) => (v === "test") === q.is_test },
+    ],
+    pageSize: 20,
+  });
+  return <>
+    {data.inquiries.length > 0 && <><ListToolbar c={c} label="Search requests" placeholder="For example: attorney, under review, TEST" /><ListSummary c={c} noun={["request", "requests"]} /></>}
+    <ListEmpty c={c}><div className="ops-empty"><Inbox /><p>No inquiries {data.isAdmin ? "yet" : "are assigned to you"}.</p></div></ListEmpty>
+    {c.visible.length > 0 && <div className="ops-table-wrap"><table><thead><tr><th>#</th><th>Received</th><th>Category</th><th>Status</th><th>Assigned</th><th><span className="sr-only">Actions</span></th></tr></thead><tbody>
+      {c.visible.map((q, n) => { const a = assigned(q);
+        return <tr key={q.id}><td>{c.start + n + 1}</td><td>{new Date(q.created_at).toLocaleString()}{q.is_test ? " · TEST" : ""}</td><td>{NEXUS_CATEGORY_COPY[q.category_id]?.title ?? q.category_id}</td><td>{STATUS[q.status]}</td><td>{a.length ? a.map((x) => `${x.person?.email ?? "Staff"} (${x.purpose === "triage" ? "triage" : "review task"})`).join(", ") : "Unassigned: Operations Lead queue"}</td><td><Button variant="outline" className="ops-outline" size="sm" onClick={() => onOpen(q.id)}>Open</Button></td></tr>; })}
+    </tbody></table></div>}
+    <ListPager c={c} />
+  </>;
+}
+
 function StaffInquiries() {
   const list = useServerFn(listNexusInquiries);
   const open = useServerFn(openNexusInquiry);
@@ -33,7 +63,6 @@ function StaffInquiries() {
   const [loadError, setLoadError] = useState(false);
   const [detail, setDetail] = useState<Detail | null>(null);
   const [message, setMessage] = useState("");
-  const [filter, setFilter] = useState("");
 
   const refresh = useCallback(async () => {
     try { setData(await list()); setLoadError(false); } catch { setLoadError(true); }
@@ -67,21 +96,7 @@ function StaffInquiries() {
       <p className="ops-lead">Operations Lead is the default triage role, with Admin/CEO oversight. You see an inquiry only when it is assigned to you{data.isAdmin ? ", or as Admin/CEO" : ""}. Partners receive details only after the founder authorizes a named introduction and staff review and send it.</p>
       {message && <p className="ops-feedback" role="status">{message}</p>}
       <section className="ops-panel"><h2>{data.isAdmin ? "All inquiries" : "Assigned to you"}</h2>
-        <label className="ops-history-search">Search requests
-          <input type="search" value={filter} onChange={(e) => setFilter(e.target.value)} maxLength={120} placeholder="For example: attorney, under review, TEST" />
-        </label>
-        {(() => {
-          const needle = filter.trim().toLowerCase();
-          const rows = data.inquiries.filter((q) => !needle || `${NEXUS_CATEGORY_COPY[q.category_id]?.title ?? q.category_id} ${STATUS[q.status] ?? q.status} ${q.is_test ? "test" : ""} ${new Date(q.created_at).toLocaleString()}`.toLowerCase().includes(needle));
-          return data.inquiries.length === 0 ? <div className="ops-empty"><Inbox /><p>No inquiries {data.isAdmin ? "yet" : "are assigned to you"}.</p></div> :
-          rows.length === 0 ? <p className="ops-muted" role="status">No requests match that search.</p> :
-        <div className="ops-table-wrap"><table><thead><tr><th>Received</th><th>Category</th><th>Status</th><th>Assigned</th><th><span className="sr-only">Actions</span></th></tr></thead><tbody>
-          {rows.map((q) => {
-            const a = data.assignments.filter((x) => x.inquiry_id === q.id);
-            return <tr key={q.id}><td>{new Date(q.created_at).toLocaleString()}{q.is_test ? " · TEST" : ""}</td><td>{NEXUS_CATEGORY_COPY[q.category_id]?.title ?? q.category_id}</td><td>{STATUS[q.status]}</td><td>{a.length ? a.map((x) => `${x.person?.email ?? "Staff"} (${x.purpose === "triage" ? "triage" : "review task"})`).join(", ") : "Unassigned: Operations Lead queue"}</td><td><Button variant="outline" className="ops-outline" size="sm" onClick={() => view(q.id)}>Open</Button></td></tr>;
-          })}
-        </tbody></table></div>;
-        })()}
+        <InquiryTable data={data} onOpen={view} />
       </section>
 
       {detail && <section className="ops-panel" aria-labelledby="inq-detail">
