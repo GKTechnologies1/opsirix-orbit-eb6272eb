@@ -65,7 +65,7 @@ export function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-[100]"
+        className="site-header sticky top-0 z-[100]"
         style={{
           transition: "background 0.3s, box-shadow 0.3s",
           backgroundColor: scrolled ? "rgba(13,15,20,0.97)" : "rgba(13,15,20,0.90)",
@@ -116,7 +116,7 @@ export function Navbar() {
           initial={{ y: -68, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.45, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="flex items-center justify-between"
+          className="site-nav-row flex items-center justify-between"
           style={{ height: 68, padding: "0 24px", maxWidth: 1240, margin: "0 auto" }}
         >
           <motion.div

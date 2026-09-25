@@ -1806,9 +1806,8 @@
   .lead { font-size: 15px !important; line-height: 1.65 !important; }
 
   /* ---- Navbar ---- */
-  header > div:last-child,
-  header > .opsirix-container { padding: 0 16px; }
-  header [aria-label="Open menu"] {
+  .site-header .site-nav-row { padding: 0 16px !important; }
+  .site-header [aria-label="Open menu"] {
     width: 44px; height: 44px; display: inline-flex;
     align-items: center; justify-content: center; padding: 0;
   }
@@ -2005,13 +2004,12 @@
 
 @media (max-width: 640px) {
   /* ---- Navbar height 60px on mobile, logo + hamburger only ---- */
-  header > div[style*="height: 68px"],
-  header > div.flex.items-center.justify-between {
+  .site-header .site-nav-row {
     height: 60px !important;
     padding: 0 16px !important;
   }
-  header [aria-label="Open menu"],
-  header [aria-label="Close menu"] {
+  .site-header [aria-label="Open menu"],
+  .site-header [aria-label="Close menu"] {
     width: 44px !important; height: 44px !important;
     display: inline-flex; align-items: center; justify-content: center;
     padding: 0 !important;
