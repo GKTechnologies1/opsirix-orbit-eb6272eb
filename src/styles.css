@@ -2474,3 +2474,6 @@
 .list-rownum{font:600 11px 'JetBrains Mono',monospace;color:var(--color-gray);margin-right:8px}
 .opx-ref{display:inline-block;font:600 12px 'JetBrains Mono',monospace;letter-spacing:.04em;color:var(--color-cyan);border:1px solid var(--border-subtle);border-radius:4px;padding:2px 6px}
 .intro-unread{border-left:3px solid var(--color-cyan)!important}
+.ops-panel .content-preview h2.faq-h2 { color: #071B33; margin: 0; }
+.ops-faq-actions { display: flex; flex-direction: row !important; flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
+.ops-faq-actions button { width: auto !important; }

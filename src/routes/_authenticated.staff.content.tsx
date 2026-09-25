@@ -67,7 +67,7 @@ function ContentBlock({ block, versions, run, openTypes }: { block: Data["blocks
     Boolean(f.cta_label) !== Boolean(f.cta_href) && "A button needs both a label and a link.",
     isFaq && !(f.items?.length) && "Add at least one question.",
     isFaq && (f.items ?? []).some((i) => !i.q.trim() || !i.a.trim()) && "Every question needs a question and an answer.",
-    JSON.stringify(f).includes("\u2014") && "Replace long dashes with commas, periods or colons."].filter(Boolean) as string[];
+  ].filter(Boolean) as string[];
   const items = f.items ?? [];
   const setItem = (n: number, patch: Partial<FaqItem>) => setF({ ...f, items: items.map((it, i) => (i === n ? { ...it, ...patch } : it)) });
   const moveItem = (n: number, d: number) => { const next = [...items]; const t = n + d; if (t < 0 || t >= next.length) return; [next[n], next[t]] = [next[t], next[n]]; setF({ ...f, items: next }); };
@@ -84,7 +84,7 @@ function ContentBlock({ block, versions, run, openTypes }: { block: Data["blocks
         {items.map((it, n) => <div key={n} className="ops-panel" style={{ padding: 12 }}>
           <label>Question {n + 1}<input value={it.q} onChange={(e) => setItem(n, { q: e.target.value })} maxLength={200} /></label>
           <label>Answer<textarea rows={3} value={it.a} onChange={(e) => setItem(n, { a: e.target.value })} maxLength={1200} /></label>
-          <div className="ops-actions">
+          <div className="ops-actions ops-faq-actions">
             <Button size="sm" variant="outline" className="ops-outline" aria-label={`Move question ${n + 1} up`} disabled={n === 0} onClick={() => moveItem(n, -1)}><ArrowUp /></Button>
             <Button size="sm" variant="outline" className="ops-outline" aria-label={`Move question ${n + 1} down`} disabled={n === items.length - 1} onClick={() => moveItem(n, 1)}><ArrowDown /></Button>
             <Button size="sm" variant="outline" className="ops-outline" disabled={items.length <= 1} onClick={() => setF({ ...f, items: items.filter((_, i) => i !== n) })}>Remove question</Button>
