@@ -190,6 +190,20 @@
       "when": 1790357263171,
       "tag": "0026_restrict_platform_audit_to_admin",
       "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1790357529194,
+      "tag": "0027_content_catalog_portal",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1790357551475,
+      "tag": "0028_catalog_change_types",
+      "breakpoints": true
     }
   ]
 }

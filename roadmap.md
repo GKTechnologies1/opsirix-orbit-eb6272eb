@@ -13,5 +13,7 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Vault, AI — blocked: privacy architecture + specialist review
 - [ ] Visual redesign (separate track) — needs direction review
 - [ ] Terms acknowledgement — blocked: versions/wording; rate-limit cleanup — blocked: retention policy
+- [x] Content & Catalog portal (homepage Nexus section + catalog controls) built and tested in preview
+- [ ] Add more page sections and FAQs to the portal, one at a time
 - [ ] Audit search in Staff Console
 - [ ] Connect GitHub and opsirix.com — owner action

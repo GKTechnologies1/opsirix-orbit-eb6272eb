@@ -1340,6 +1340,83 @@ export type Database = {
         }
         Relationships: []
       }
+      site_content_blocks: {
+        Row: {
+          created_at: string
+          key: string
+          kind: string
+          label: string
+          pages: string[]
+          published_version_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          key: string
+          kind?: string
+          label: string
+          pages?: string[]
+          published_version_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          key?: string
+          kind?: string
+          label?: string
+          pages?: string[]
+          published_version_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_content_versions: {
+        Row: {
+          author_id: string | null
+          block_key: string
+          body: Json
+          change_summary: string
+          created_at: string
+          id: string
+          published_at: string | null
+          published_by: string | null
+          status: string
+          version: number
+        }
+        Insert: {
+          author_id?: string | null
+          block_key: string
+          body: Json
+          change_summary: string
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          published_by?: string | null
+          status?: string
+          version: number
+        }
+        Update: {
+          author_id?: string | null
+          block_key?: string
+          body?: Json
+          change_summary?: string
+          created_at?: string
+          id?: string
+          published_at?: string | null
+          published_by?: string | null
+          status?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "site_content_versions_block_key_fkey"
+            columns: ["block_key"]
+            isOneToOne: false
+            referencedRelation: "site_content_blocks"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
       staff_access_grants: {
         Row: {
           created_at: string
@@ -1407,6 +1484,33 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      admin_add_catalog_choice: {
+        Args: {
+          _aliases: string[]
+          _category: string
+          _description: string
+          _id: string
+          _label: string
+        }
+        Returns: undefined
+      }
+      admin_move_catalog_choice: {
+        Args: { _direction: number; _id: string }
+        Returns: undefined
+      }
+      admin_set_catalog_retired: {
+        Args: { _id: string; _retired: boolean }
+        Returns: undefined
+      }
+      admin_update_catalog_choice: {
+        Args: {
+          _aliases: string[]
+          _client_label: string
+          _description: string
+          _id: string
+        }
+        Returns: undefined
+      }
       application_type_id: { Args: { _application: string }; Returns: string }
       assert_can_edit_type: {
         Args: { _type: string; _uid: string }
@@ -1433,6 +1537,8 @@ export type Database = {
         Args: { _inquiry: string; _user: string }
         Returns: boolean
       }
+      content_assert_admin: { Args: never; Returns: string }
+      content_validate: { Args: { _body: Json }; Returns: undefined }
       create_company_workspace: { Args: { _name: string }; Returns: string }
       has_active_staff_grant: {
         Args: { _organization_id: string; _user_id: string }
@@ -1532,9 +1638,29 @@ export type Database = {
           user_id: string
         }[]
       }
+      publish_content_version: {
+        Args: { _version: string }
+        Returns: undefined
+      }
+      published_site_content: {
+        Args: { _keys: string[] }
+        Returns: {
+          body: Json
+          key: string
+          version: number
+        }[]
+      }
       rename_company_workspace: {
         Args: { _name: string; _organization_id: string }
         Returns: undefined
+      }
+      restore_content_version: {
+        Args: { _summary: string; _version: string }
+        Returns: string
+      }
+      save_content_draft: {
+        Args: { _body: Json; _key: string; _summary: string }
+        Returns: string
       }
       set_nexus_inquiry_status: {
         Args: { _inquiry: string; _status: string }
@@ -1598,6 +1724,7 @@ export type Database = {
         Returns: boolean
       }
       type_id_for_label: { Args: { _label: string }; Returns: string }
+      unpublish_content_block: { Args: { _key: string }; Returns: undefined }
     }
     Enums: {
       app_role:

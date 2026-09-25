@@ -43,6 +43,7 @@ import { Route as AuthenticatedWorkspaceIndexRouteImport } from './routes/_authe
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated.staff.index'
 import { Route as AuthenticatedPartnerIndexRouteImport } from './routes/_authenticated.partner.index'
 import { Route as AuthenticatedStaffInquiriesRouteImport } from './routes/_authenticated.staff.inquiries'
+import { Route as AuthenticatedStaffContentRouteImport } from './routes/_authenticated.staff.content'
 import { Route as AuthenticatedStaffAccessRouteImport } from './routes/_authenticated.staff.access'
 import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_authenticated.partner.services'
 import { Route as AuthenticatedPartnerProfileRouteImport } from './routes/_authenticated.partner.profile'
@@ -225,6 +226,12 @@ const AuthenticatedStaffInquiriesRoute =
     path: '/staff/inquiries',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedStaffContentRoute =
+  AuthenticatedStaffContentRouteImport.update({
+    id: '/staff/content',
+    path: '/staff/content',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedStaffAccessRoute =
   AuthenticatedStaffAccessRouteImport.update({
     id: '/staff/access',
@@ -318,6 +325,7 @@ export interface FileRoutesByFullPath {
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/staff/access': typeof AuthenticatedStaffAccessRoute
+  '/staff/content': typeof AuthenticatedStaffContentRoute
   '/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
   '/partner/': typeof AuthenticatedPartnerIndexRoute
   '/staff/': typeof AuthenticatedStaffIndexRoute
@@ -361,6 +369,7 @@ export interface FileRoutesByTo {
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/staff/access': typeof AuthenticatedStaffAccessRoute
+  '/staff/content': typeof AuthenticatedStaffContentRoute
   '/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
   '/partner': typeof AuthenticatedPartnerIndexRoute
   '/staff': typeof AuthenticatedStaffIndexRoute
@@ -407,6 +416,7 @@ export interface FileRoutesById {
   '/_authenticated/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/_authenticated/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/_authenticated/staff/access': typeof AuthenticatedStaffAccessRoute
+  '/_authenticated/staff/content': typeof AuthenticatedStaffContentRoute
   '/_authenticated/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
   '/_authenticated/partner/': typeof AuthenticatedPartnerIndexRoute
   '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute
@@ -453,6 +463,7 @@ export interface FileRouteTypes {
     | '/partner/profile'
     | '/partner/services'
     | '/staff/access'
+    | '/staff/content'
     | '/staff/inquiries'
     | '/partner/'
     | '/staff/'
@@ -496,6 +507,7 @@ export interface FileRouteTypes {
     | '/partner/profile'
     | '/partner/services'
     | '/staff/access'
+    | '/staff/content'
     | '/staff/inquiries'
     | '/partner'
     | '/staff'
@@ -541,6 +553,7 @@ export interface FileRouteTypes {
     | '/_authenticated/partner/profile'
     | '/_authenticated/partner/services'
     | '/_authenticated/staff/access'
+    | '/_authenticated/staff/content'
     | '/_authenticated/staff/inquiries'
     | '/_authenticated/partner/'
     | '/_authenticated/staff/'
@@ -811,6 +824,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStaffInquiriesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/staff/content': {
+      id: '/_authenticated/staff/content'
+      path: '/staff/content'
+      fullPath: '/staff/content'
+      preLoaderRoute: typeof AuthenticatedStaffContentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/staff/access': {
       id: '/_authenticated/staff/access'
       path: '/staff/access'
@@ -886,6 +906,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedPartnerProfileRoute: typeof AuthenticatedPartnerProfileRoute
   AuthenticatedPartnerServicesRoute: typeof AuthenticatedPartnerServicesRoute
   AuthenticatedStaffAccessRoute: typeof AuthenticatedStaffAccessRoute
+  AuthenticatedStaffContentRoute: typeof AuthenticatedStaffContentRoute
   AuthenticatedStaffInquiriesRoute: typeof AuthenticatedStaffInquiriesRoute
   AuthenticatedPartnerIndexRoute: typeof AuthenticatedPartnerIndexRoute
   AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute
@@ -902,6 +923,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedPartnerProfileRoute: AuthenticatedPartnerProfileRoute,
   AuthenticatedPartnerServicesRoute: AuthenticatedPartnerServicesRoute,
   AuthenticatedStaffAccessRoute: AuthenticatedStaffAccessRoute,
+  AuthenticatedStaffContentRoute: AuthenticatedStaffContentRoute,
   AuthenticatedStaffInquiriesRoute: AuthenticatedStaffInquiriesRoute,
   AuthenticatedPartnerIndexRoute: AuthenticatedPartnerIndexRoute,
   AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute,

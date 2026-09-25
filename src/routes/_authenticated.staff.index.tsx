@@ -30,7 +30,7 @@ function StaffHome() {
   </OperatingShell>;
 }
 type Overview = NonNullable<Awaited<ReturnType<typeof getAdminOverview>>>;
-type QueueTo = "/admin/applications" | "/staff/inquiries";
+type QueueTo = "/admin/applications" | "/staff/inquiries" | "/staff/content";
 
 function Queue({ label, value, to, note }: { label: string; value: number; to: QueueTo; note?: string }) {
   return <article><span>{label}</span><strong>{value}</strong>{note && <small className="ops-muted" style={{ display: "block" }}>{note}</small>}<Link to={to}>Open <ArrowRight /></Link></article>;
@@ -55,6 +55,11 @@ function AdminOverview() {
       <Queue label="Services to review" value={o.servicesPending} to="/admin/applications" />
       <Queue label="Other service suggestions" value={o.suggestionsPending} to="/admin/applications" />
     </div></section>
+    <section className="ops-panel"><h2>Content & Catalog</h2><div className="ops-stat-grid">
+      <Queue label="Pending content drafts" value={o.content.drafts} to="/staff/content" />
+      <Queue label="Published content sections" value={o.content.published} to="/staff/content" />
+      <Queue label="Service suggestions" value={o.suggestionsPending} to="/admin/applications" />
+    </div>{o.content.catalogChanges.length > 0 && <ul className="ops-list">{o.content.catalogChanges.map((c) => <li key={c.id}><strong>{c.change_type}</strong> {c.service_id} <span className="ops-muted">{new Date(c.created_at).toISOString().slice(0, 16).replace("T", " ")} UTC</span></li>)}</ul>}<Link to="/staff/content">Open Content & Catalog <ArrowRight /></Link></section>
     <section className="ops-panel"><h2>Help requests</h2><div className="ops-stat-grid">
       <Queue label="Open requests" value={o.inquiriesOpen} to="/staff/inquiries" />
       <Queue label="Unassigned" value={o.inquiriesUnassigned} to="/staff/inquiries" note="Assign to a named Operations Lead" />
