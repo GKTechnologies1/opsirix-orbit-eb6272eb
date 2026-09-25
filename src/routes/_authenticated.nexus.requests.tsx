@@ -21,7 +21,7 @@ type Data = Awaited<ReturnType<typeof founderRequests>>;
 type Intro = FounderRequest["introductions"][number];
 const FIELD_LABEL: Record<string, string> = { name: "Your name", email: "Your email address", phone: "Your phone number", location: "Your location or jurisdiction", description: "Your request description" };
 const STATUS: Record<string, string> = { proposed: "Waiting for your decision", authorized: "Authorized, waiting for Opsirix staff to review and send", declined: "Declined. Nothing was shared.", withdrawn: "Withdrawn. Nothing was shared.", cancelled: "Cancelled by Opsirix. Nothing was shared.", sent: "Sent to the partner", reconsent_required: "Details changed. Please review again." };
-const EVENT: Record<string, string> = { proposed: "Opsirix proposed this introduction", authorized: "You authorized it", declined: "You declined", withdrawn: "You withdrew", cancelled: "Opsirix cancelled it", sent: "Opsirix sent it to the partner", send_failed: "A send attempt failed. Nothing was sent", reconsent_required: "Details changed; new authorization needed", partner_emailed: "Partner notified", partner_email_failed: "Partner notice email failed", partner_email_skipped: "Partner can see it in their workspace" };
+const EVENT: Record<string, string> = { proposed: "Opsirix proposed this introduction", authorized: "You authorized it", declined: "You declined", withdrawn: "You withdrew", cancelled: "Opsirix cancelled it", sent: "Shared with the partner in their Opsirix portal", shared_in_partner_portal: "Shared with the partner in their Opsirix portal", send_failed: "A send attempt failed. Nothing was sent", reconsent_required: "Details changed; new authorization needed", partner_emailed: "Partner notified", partner_email_failed: "Partner notice email failed", partner_email_skipped: "Partner can see it in their workspace" };
 
 function RequestsPage() {
   const load = useServerFn(founderRequests);
@@ -94,7 +94,7 @@ function IntroCard({ req, intro, consent, onDone }: { req: FounderRequest; intro
       <button className="nx-btn" disabled={pending} onClick={() => act("withdraw")}>Withdraw authorization</button>
     </>}
     {intro.status === "sent" && <p>Shared: {intro.selected_fields.map((f) => FIELD_LABEL[f]).join(", ")}.</p>}
-    <details className="nx-history"><summary>Status history</summary><ol>{(intro.events ?? []).filter((e) => !e.event.startsWith("partner_email")).map((e, n) => <li key={n}>{new Date(e.at).toLocaleString()}: {EVENT[e.event] ?? e.event}</li>)}</ol>
+    <details className="nx-history"><summary>Status history</summary><ol>{(intro.events ?? []).filter((e) => !e.event.startsWith("partner_email") && !e.event.startsWith("notification_")).map((e, n) => <li key={n}>{new Date(e.at).toLocaleString()}: {EVENT[e.event] ?? e.event}</li>)}</ol>
       {intro.consent_version && <p className="nx-help">Consent wording version {intro.consent_version}.</p>}</details>
   </article>;
 }

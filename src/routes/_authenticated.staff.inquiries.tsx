@@ -6,7 +6,7 @@ import { OperatingShell } from "@/components/workspace/OperatingShell";
 import { Button } from "@/components/ui/button";
 import { assignNexusInquiry, listNexusInquiries, openNexusInquiry, setNexusInquiryStatus } from "@/lib/nexus.functions";
 import { NEXUS_CATEGORY_COPY } from "@/lib/nexus-discovery";
-import { cancelIntroduction, previewSend, proposeIntroduction, sendIntroduction, staffIntroductions } from "@/lib/nexus-intro.functions";
+import { cancelIntroduction, previewSend, proposeIntroduction, sendIntroduction, retryPartnerNotice, staffIntroductions } from "@/lib/nexus-intro.functions";
 
 export const Route = createFileRoute("/_authenticated/staff/inquiries")({
   head: () => ({ meta: [
@@ -92,7 +92,9 @@ function StaffInquiries() {
 }
 
 
-const INTRO_STATUS: Record<string, string> = { proposed: "Waiting for founder", authorized: "Authorized by founder, not sent", declined: "Declined by founder", withdrawn: "Withdrawn by founder", cancelled: "Cancelled", sent: "Sent", reconsent_required: "New founder authorization required" };
+const INTRO_STATUS: Record<string, string> = { proposed: "Waiting for founder", authorized: "Authorized by founder, not sent", declined: "Declined by founder", withdrawn: "Withdrawn by founder", cancelled: "Cancelled", sent: "Shared in partner portal", reconsent_required: "New founder authorization required" };
+const NOTICE: Record<string, string> = { emailed: "delivered", email_failed: "failed", email_skipped: "not sent for this account" };
+const EVENT_LABEL: Record<string, string> = { shared_in_partner_portal: "Shared in partner portal", sent: "Shared in partner portal", notification_email_delivered: "Notification email delivered", notification_email_failed: "Notification email failed", notification_email_skipped: "Notification email not sent for this account", notification_retry_requested: "Notification email retry requested", partner_emailed: "Notification email delivered", partner_email_failed: "Notification email failed", partner_email_skipped: "Notification email not sent for this account" };
 const FIELD: Record<string, string> = { name: "Name", email: "Email", phone: "Phone", location: "Location", description: "Request description" };
 type Preview = Extract<Awaited<ReturnType<typeof previewSend>>, { success: true }>["preview"];
 
@@ -102,6 +104,7 @@ function IntroductionsPanel({ inquiryId }: { inquiryId: string }) {
   const cancel = useServerFn(cancelIntroduction);
   const preview = useServerFn(previewSend);
   const send = useServerFn(sendIntroduction);
+  const retryNotice = useServerFn(retryPartnerNotice);
   const [data, setData] = useState<Awaited<ReturnType<typeof staffIntroductions>>>();
   const [partner, setPartner] = useState("");
   const [msg, setMsg] = useState("");
@@ -132,10 +135,13 @@ function IntroductionsPanel({ inquiryId }: { inquiryId: string }) {
       <div className="ops-actions"><Button type="submit" disabled={busy || !partner}>Propose introduction</Button></div>
     </form> : <p className="ops-muted">No eligible partner is available for this request, or you are not the assigned triage owner.</p>}
     {data.intros.map((i) => <article key={i.id} className="ops-intro-card">
-      <p><strong>{i.partner_name}</strong> · {INTRO_STATUS[i.status] ?? i.status}{i.partner_notice_status ? ` · partner notice: ${i.partner_notice_status.replace("_", " ")}` : ""}</p>
+      <p><strong>{i.partner_name}</strong> · {INTRO_STATUS[i.status] ?? i.status}</p>
+      {i.status === "sent" && <p className="ops-muted">Shared in partner portal{i.sent_at ? ` on ${new Date(i.sent_at).toLocaleString()}` : ""}. Notification email: {NOTICE[i.partner_notice_status ?? ""] ?? "not recorded"}.</p>}
+      {i.status === "sent" && i.partner_notice_status === "email_failed" && <p className="ops-feedback ops-error">The partner can already see the selected information in their portal. Only the notification email failed. Do not send the introduction again.</p>}
       {i.selected_fields.length > 0 && <p className="ops-muted">Founder selected: {i.selected_fields.map((f) => FIELD[f]).join(", ")} · consent version {i.consent_version}</p>}
       {i.last_send_error && <p className="ops-feedback ops-error">Last send attempt failed: {i.last_send_error}</p>}
       <div className="ops-actions">
+        {i.status === "sent" && i.partner_notice_status === "email_failed" && <Button disabled={busy} onClick={() => run(() => retryNotice({ data: { id: i.id } }), "Notification retried.")}>Retry notification email only</Button>}
         {i.status === "authorized" && <Button disabled={busy} onClick={() => openReview(i.id)}>Review before sending</Button>}
         {["proposed", "authorized", "reconsent_required"].includes(i.status) && <Button variant="outline" className="ops-outline" disabled={busy} onClick={() => run(() => cancel({ data: { id: i.id } }), "Introduction cancelled. Nothing was sent.")}>Cancel introduction</Button>}
       </div>
@@ -148,7 +154,7 @@ function IntroductionsPanel({ inquiryId }: { inquiryId: string }) {
         {!review.p.eligible && <p className="ops-feedback ops-error">This partner is no longer eligible. Sending will fail and nothing will be sent.</p>}
         <div className="ops-actions"><Button disabled={busy} onClick={() => run(() => send({ data: { id: i.id, hash: review.p.hash ?? "" } }), "Sent.")}>Send to {review.p.partner_name}</Button><Button variant="outline" className="ops-outline" onClick={() => setReview(null)}>Close review</Button></div>
       </div>}
-      <details><summary>History</summary><ol>{(i.events ?? []).map((e, n) => <li key={n}>{new Date(e.at).toLocaleString()}: {e.event.replaceAll("_", " ")}</li>)}</ol></details>
+      <details><summary>History</summary><ol>{(i.events ?? []).map((e, n) => <li key={n}>{new Date(e.at).toLocaleString()}: {EVENT_LABEL[e.event] ?? e.event.replaceAll("_", " ")}</li>)}</ol></details>
     </article>)}
   </div>;
 }

@@ -25,6 +25,6 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Intro decline/withdraw/failed-notice tests (preview + shared backend)
 - [x] Company viewer/member invitations by email (owner only)
 - [x] Admin introduction monitoring counts on /staff
-- [ ] Enable introductions for real (non-TEST) requests: waiting on owner approval of consent wording
-- [ ] Publish to opsirix.lovable.app: waiting on owner go-ahead (owner routes domain via GitHub)
+- [x] Introductions enabled 2026-09-25 18:46:36 UTC (wording approved; portal vs email history; notice-only retry)
+- [ ] Publish Nexus pages to opsirix.lovable.app: blocked on intermittent managed build error (escalate to Lovable support)
 - [ ] Pricing (schedule approval), Terms acknowledgement (wording), retention (period), Vault/AI (privacy/security review), Launch (OPSIRIX_05)
