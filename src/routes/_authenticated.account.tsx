@@ -60,6 +60,13 @@ function AccountHub() {
               </li>
             ))}
           </ul>
+          {data && (
+            <p className="nexus-panel-copy">
+              {!areas.some((a) => a.key === "company") && <><Link to="/workspace">Set up a company workspace</Link>. </>}
+              {!areas.some((a) => a.key === "partner") && <><Link to="/partner/apply">Apply as a Nexus partner</Link>. </>}
+              Staff access is granted only by the Admin/CEO.
+            </p>
+          )}
           <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>
         </section>
       </div>
