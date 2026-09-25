@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ArrowRight, CircleX, ShieldCheck } from "lucide-react";
 import { OperatingShell } from "@/components/workspace/OperatingShell";
-import { getAdminOverview, getStaffConsole } from "@/lib/workspace.functions";
+import { Button } from "@/components/ui/button";
+import { getAdminOverview, getStaffConsole, searchAuditHistory } from "@/lib/workspace.functions";
 
 export const Route = createFileRoute("/_authenticated/staff/")({
   head: () => ({ meta: [
