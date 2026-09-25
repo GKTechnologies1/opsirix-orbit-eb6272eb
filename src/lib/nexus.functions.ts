@@ -114,15 +114,15 @@ export const assignNexusInquiry = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => z.object({ id: z.string().uuid(), email: z.string().trim().email().max(255), purpose: z.enum(["triage", "review_task"]), enabled: z.boolean() }).parse(input))
   .handler(async ({ data, context }) => {
-    const before = await context.supabase.from("nexus_inquiry_assignments").select("id", { count: "exact", head: true }).eq("inquiry_id", data.id);
+    const [{ data: isAdmin }, { data: isOps }, { data: mine }] = await Promise.all([
+      context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" }),
+      context.supabase.rpc("has_role", { _user_id: context.userId, _role: "operations_lead" }),
+      context.supabase.from("nexus_inquiry_assignments").select("id").eq("inquiry_id", data.id).eq("assignee_id", context.userId).eq("purpose", "triage").is("revoked_at", null),
+    ]);
+    const permitted = Boolean(isAdmin) || (data.purpose === "review_task" && Boolean(isOps) && Boolean(mine?.length));
     const { error } = await context.supabase.rpc("assign_nexus_inquiry", { _inquiry: data.id, _assignee_email: data.email, _purpose: data.purpose, _enabled: data.enabled });
     if (error) return { success: false as const, error: error.message };
-    const { data: allowed } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "admin" });
-    if (!allowed) {
-      const { data: mine } = await context.supabase.from("nexus_inquiry_assignments").select("id").eq("inquiry_id", data.id).eq("assignee_id", context.userId).eq("purpose", "triage").is("revoked_at", null);
-      if (!mine?.length || data.purpose !== "review_task") return { success: false as const, error: "You are not permitted to change this assignment." };
-    }
-    void before;
+    if (!permitted) return { success: false as const, error: "You are not permitted to change this assignment." };
     return { success: true as const };
   });
 
