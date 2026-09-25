@@ -34,7 +34,7 @@ function FlowPage() {
     try { setData(await load()); setError(""); } catch { setError("Flow could not load. Try again."); }
   }, [load]);
   useEffect(() => { void refresh(); }, [refresh]);
-  const company = useMemo(() => data?.companies.find((c) => c.id === orgId) ?? data?.companies[0], [data, orgId]);
+  const company = useMemo(() => data?.companies.find((c) => c.id === orgId) ?? data?.companies.find((c) => c.boards.length) ?? data?.companies[0], [data, orgId]);
   const done = async (r: { success: boolean; error?: string }, ok: string) => { setMessage(r.success ? ok : r.error ?? "Something went wrong."); await refresh(); };
 
   return (
@@ -47,8 +47,8 @@ function FlowPage() {
       {data && company && (
         <>
           {data.companies.length > 1 && (
-            <label className="flex flex-col gap-1 text-sm max-w-sm">Company
-              <select className="h-10 rounded-md border border-input bg-background px-2" value={company.id} onChange={(e) => setOrgId(e.target.value)}>
+            <label className="flex max-w-sm flex-col gap-1 text-sm">Company
+              <select className="w-full" value={company.id} onChange={(e) => setOrgId(e.target.value)}>
                 {data.companies.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
             </label>
@@ -74,7 +74,7 @@ function FlowPage() {
 }
 
 type OnDone = (r: { success: boolean; error?: string }, ok: string) => Promise<void>;
-const input = "h-10 rounded-md border border-input bg-background px-2 text-sm w-full";
+const input = "w-full";
 
 function BoardForm({ company, onDone }: { company: Company; onDone: OnDone }) {
   const create = useServerFn(createFlowBoard);
@@ -126,7 +126,7 @@ function TaskForm({ company, boardId, task, onDone, onClose }: { company: Compan
   return (
     <form onSubmit={submit} className="grid gap-2 sm:grid-cols-2 rounded-md border border-border p-3 text-sm">
       <label className="sm:col-span-2">Task<input name="title" required minLength={2} maxLength={200} defaultValue={task?.title} className={input} /></label>
-      <label className="sm:col-span-2">Details (optional)<textarea name="details" maxLength={2000} defaultValue={task?.details ?? ""} className="w-full rounded-md border border-input bg-background p-2" rows={2} /></label>
+      <label className="sm:col-span-2">Details (optional)<textarea name="details" maxLength={2000} defaultValue={task?.details ?? ""} className="w-full" rows={2} /></label>
       <label>Owner<select name="assignee" defaultValue={task?.assignee_id ?? ""} className={input}><option value="">Unassigned</option>{company.members.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}</select></label>
       <label>Due date<input name="due" type="date" defaultValue={task?.due_on ?? ""} className={input} /></label>
       <label>Status<select name="status" defaultValue={task?.status ?? "todo"} className={input}>{Object.entries(STATUS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></label>
