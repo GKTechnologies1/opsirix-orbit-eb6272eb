@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useCallback, useEffect, useState } from "react";
 import { founderDecide, founderRequests, type FounderRequest } from "@/lib/nexus-intro.functions";
 import { NEXUS_CATEGORY_COPY } from "@/lib/nexus-discovery";
+import { ListEmpty, ListPager, ListSummary, ListToolbar, useListControls } from "@/components/shared/ListControls";
 
 export const Route = createFileRoute("/_authenticated/nexus/requests")({
   head: () => ({ meta: [
@@ -36,14 +37,47 @@ function RequestsPage() {
     <p className="nx-intro">Requests sent with the email address you signed in with appear here. Nothing about you is shared with a partner unless you authorize a specific introduction.</p>
     {failed ? <p className="nx-error nx-error--block" role="alert">Your requests could not be loaded. <button className="nx-link-btn" onClick={() => refresh()}>Try again</button></p>
       : !data ? <p className="nx-note">Loading your requests.</p>
-      : data.requests.length === 0 ? <p className="nx-note">No requests found for this email address. <Link to="/nexus/help">Tell us what kind of help you need</Link>.</p>
-      : data.requests.map((r) => <section key={r.id} className="nx-request">
-          <h2>{NEXUS_CATEGORY_COPY[r.category_id]?.title ?? r.category_id}</h2>
-          <p className="nx-help">Sent {new Date(r.created_at).toLocaleString()}</p>
-          {r.introductions.length === 0 ? <p className="nx-note">Opsirix is reviewing this request. No introduction has been proposed.</p>
-            : r.introductions.map((i) => <IntroCard key={i.id} req={r} intro={i} consent={data.consent} onDone={refresh} />)}
-        </section>)}
+      : <RequestList data={data} refresh={refresh} />}
   </div></main>;
+}
+
+const REQ_STATUS: Record<string, string> = { received: "Received by Opsirix", under_review: "Under review", consent_requested: "Waiting for your decision on an introduction", introduced: "Introduction sent", closed: "Closed" };
+const catTitle = (id: string) => NEXUS_CATEGORY_COPY[id]?.title ?? id;
+const needsYou = (r: FounderRequest) => r.introductions.some((i) => i.status === "proposed" || i.status === "reconsent_required");
+
+function RequestList({ data, refresh }: { data: Data; refresh: () => Promise<void> }) {
+  const c = useListControls(data.requests, {
+    text: (r) => `${catTitle(r.category_id)} ${r.description} ${r.location ?? ""} ${REQ_STATUS[r.status] ?? r.status} ${r.introductions.map((i) => i.partner_name).join(" ")}`,
+    sorts: [
+      { key: "new", label: "Newest first", compare: (a, b) => b.created_at.localeCompare(a.created_at) },
+      { key: "old", label: "Oldest first", compare: (a, b) => a.created_at.localeCompare(b.created_at) },
+      { key: "action", label: "Needs my decision first", compare: (a, b) => Number(needsYou(b)) - Number(needsYou(a)) || b.created_at.localeCompare(a.created_at) },
+    ],
+    filters: [
+      { key: "cat", label: "Category", options: [...new Set(data.requests.map((r) => r.category_id))].map((k) => ({ value: k, label: catTitle(k) })), match: (r, v) => r.category_id === v },
+      { key: "state", label: "Status", options: [{ value: "action", label: "Needs my decision" }, { value: "open", label: "Open" }, { value: "closed", label: "Closed" }], match: (r, v) => v === "action" ? needsYou(r) : v === "closed" ? r.status === "closed" : r.status !== "closed" },
+    ],
+    pageSize: 5,
+  });
+  return <>
+    {data.requests.length > 0 && <><ListToolbar c={c} label="Search your requests" placeholder="Category, words in your request, partner name" /><ListSummary c={c} noun={["request", "requests"]} /></>}
+    <ListEmpty c={c}><p className="nx-note">No requests found for this email address. <Link to="/nexus/help">Tell us what kind of help you need</Link>.</p></ListEmpty>
+    {c.visible.map((r, n) => <section key={r.id} className="nx-request" aria-labelledby={`req-${r.id}`}>
+      <h2 id={`req-${r.id}`}><span className="list-rownum">#{c.start + n + 1}</span>{catTitle(r.category_id)}</h2>
+      <p className="nx-status">{needsYou(r) ? "Waiting for your decision on an introduction" : REQ_STATUS[r.status] ?? r.status}</p>
+      <p className="nx-help">Sent {new Date(r.created_at).toLocaleString()}</p>
+      <details className="nx-history"><summary>What you sent</summary><dl>
+        <dt>Name</dt><dd>{r.full_name || "Not given"}</dd>
+        <dt>Email</dt><dd>{r.email}</dd>
+        <dt>Phone</dt><dd>{r.phone || "Not given"}</dd>
+        <dt>Location or jurisdiction</dt><dd>{r.location || "Not given"}</dd>
+        <dt>Description</dt><dd style={{ whiteSpace: "pre-wrap" }}>{r.description}</dd>
+      </dl><p className="nx-help">Only Opsirix staff assigned to this request can read it. A partner sees only the items you choose in a specific introduction.</p></details>
+      {r.introductions.length === 0 ? <p className="nx-note">Opsirix is reviewing this request. No introduction has been proposed.</p>
+        : r.introductions.map((i) => <IntroCard key={i.id} req={r} intro={i} consent={data.consent} onDone={refresh} />)}
+    </section>)}
+    <ListPager c={c} />
+  </>;
 }
 
 function IntroCard({ req, intro, consent, onDone }: { req: FounderRequest; intro: Intro; consent: Data["consent"]; onDone: () => Promise<void> }) {

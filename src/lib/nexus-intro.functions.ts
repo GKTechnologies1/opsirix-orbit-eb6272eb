@@ -154,3 +154,48 @@ export const partnerIntroductions = createServerFn({ method: "GET" })
     const { data } = await context.supabase.rpc("partner_nexus_introductions");
     return (data ?? []) as { id: string; sent_at: string; payload: { partner: string; category: string; fields: Record<string, string> } }[];
   });
+
+export const partnerIntroWorkspace = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const sb = context.supabase;
+    const { data } = await sb.rpc("partner_nexus_introductions");
+    const rows = (data ?? []) as { id: string; sent_at: string; payload: { partner: string; category: string; fields: Record<string, string> } }[];
+    const ids = rows.map((r) => r.id);
+    const [state, notes] = await Promise.all([
+      ids.length ? sb.from("partner_intro_state").select("introduction_id,read_at,follow_up").in("introduction_id", ids) : Promise.resolve({ data: [] }),
+      ids.length ? sb.from("partner_intro_notes").select("id,introduction_id,author_id,body,created_at").in("introduction_id", ids).order("created_at") : Promise.resolve({ data: [] }),
+    ]);
+    return { userId: context.userId, rows: rows.map((r) => {
+      const s = (state.data ?? []).find((x) => x.introduction_id === r.id);
+      return { ...r, read_at: s?.read_at ?? null, follow_up: s?.follow_up ?? false, notes: (notes.data ?? []).filter((n) => n.introduction_id === r.id) };
+    }) };
+  });
+
+export const setPartnerIntroState = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: unknown) => z.object({ id: z.string().uuid(), read: z.boolean().optional(), followUp: z.boolean().optional() }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { data: cur } = await context.supabase.from("partner_intro_state").select("read_at,follow_up").eq("introduction_id", data.id).eq("user_id", context.userId).maybeSingle();
+    const row = { introduction_id: data.id, user_id: context.userId, updated_at: new Date().toISOString(),
+      read_at: data.read === undefined ? cur?.read_at ?? null : data.read ? new Date().toISOString() : null,
+      follow_up: data.followUp ?? cur?.follow_up ?? false };
+    const { error } = await context.supabase.from("partner_intro_state").upsert(row);
+    return error ? { success: false as const, error: "That introduction is not available to your account." } : { success: true as const };
+  });
+
+export const addPartnerIntroNote = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: unknown) => z.object({ id: z.string().uuid(), body: z.string().trim().min(1).max(2000) }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { error } = await context.supabase.from("partner_intro_notes").insert({ introduction_id: data.id, body: data.body, author_id: context.userId });
+    return error ? { success: false as const, error: "The note could not be saved for this introduction." } : { success: true as const };
+  });
+
+export const deletePartnerIntroNote = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: unknown) => z.object({ noteId: z.string().uuid() }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { error } = await context.supabase.from("partner_intro_notes").delete().eq("id", data.noteId).eq("author_id", context.userId);
+    return error ? { success: false as const, error: "The note could not be removed." } : { success: true as const };
+  });

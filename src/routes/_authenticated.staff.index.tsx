@@ -4,7 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import { ArrowRight, CircleX, ShieldCheck } from "lucide-react";
 import { OperatingShell } from "@/components/workspace/OperatingShell";
 import { Button } from "@/components/ui/button";
-import { getAdminOverview, getStaffConsole, searchAuditHistory } from "@/lib/workspace.functions";
+import { getAdminOverview, getStaffConsole, searchAuditHistory, searchOpxReferences } from "@/lib/workspace.functions";
+import { ListEmpty, ListPager, ListSummary, useListControls } from "@/components/shared/ListControls";
 
 export const Route = createFileRoute("/_authenticated/staff/")({
   head: () => ({ meta: [
@@ -74,6 +75,7 @@ function AdminOverview() {
       {o.types.map((t) => <tr key={t.id}><td>{t.label}</td><td>{t.open ? "Open" : "Closed"}</td><td>{t.claimsPending}</td><td>{t.claimsApproved}</td><td>{t.published}</td></tr>)}
     </tbody></table></div><Link to="/admin/preview">Manage closed-category preview access <ArrowRight /></Link></section>
     <section className="ops-panel"><h2>Recent audit history</h2>{o.audit.length ? <ul className="ops-list">{o.audit.map((a) => <li key={a.id}><strong>{a.event_type}</strong> {a.summary} <span className="ops-muted">{new Date(a.created_at).toISOString().slice(0, 16).replace("T", " ")} UTC</span></li>)}</ul> : <p className="ops-muted">No events yet.</p>}<Link to="/staff/access">Manage staff access <ArrowRight /></Link></section>
+    <OpxSearch />
     <AuditSearch />
   </>;
 }
@@ -118,3 +120,27 @@ function AuditSearch() {
   </section>;
 }
 
+
+function OpxSearch() {
+  const search = useServerFn(searchOpxReferences);
+  const [q, setQ] = useState("");
+  const [res, setRes] = useState<Awaited<ReturnType<typeof searchOpxReferences>>>();
+  const run = useCallback(async (v: string) => setRes(await search({ data: { q: v } })), [search]);
+  useEffect(() => { void run(""); }, [run]);
+  const c = useListControls(res?.rows ?? [], { text: () => "", sorts: [{ key: "num", label: "Number", compare: (a, b) => a.reference.localeCompare(b.reference) }], pageSize: 10 });
+  if (res && !res.allowed) return null;
+  return <section className="ops-panel" aria-labelledby="opx-title">
+    <h2 id="opx-title">Find an organization by OPX number</h2>
+    <p className="ops-muted">Every onboarded company and partner organization keeps one permanent reference. Numbers are never reused. Access is still controlled by account permissions, not by the number.</p>
+    <form className="ops-access-form" onSubmit={(e) => { e.preventDefault(); void run(q); }}>
+      <label>OPX number or name<input value={q} onChange={(e) => setQ(e.target.value)} maxLength={120} placeholder="For example: OPX-000004 or 4" /></label>
+      <div className="ops-actions"><Button type="submit">Search</Button></div>
+    </form>
+    <ListSummary c={c} noun={["organization", "organizations"]} />
+    <ListEmpty c={c}><p className="ops-muted" role="status">{res ? "No organization matches this search." : "Loading."}</p></ListEmpty>
+    {c.visible.length > 0 && <div className="ops-table-wrap"><table><thead><tr><th>#</th><th>Reference</th><th>Name</th><th>Kind</th><th>Status</th></tr></thead><tbody>
+      {c.visible.map((r, n) => <tr key={r.reference}><td>{c.start + n + 1}</td><td><span className="opx-ref">{r.reference}</span></td><td>{r.name || "Merged"}</td><td>{r.kind}{r.merged_into ? ` into ${r.merged_into}` : ""}</td><td>{r.status ? r.status.replaceAll("_", " ") : "Active"}</td></tr>)}
+    </tbody></table></div>}
+    <ListPager c={c} />
+  </section>;
+}
