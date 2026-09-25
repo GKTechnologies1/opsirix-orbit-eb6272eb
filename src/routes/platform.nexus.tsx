@@ -45,7 +45,6 @@ const HOW = [
   { t: "3. You decide", d: "If an introduction makes sense, we ask for your specific consent first. You can decline and nothing is shared." },
 ];
 
-const CLOSED = ["University programs", "Banking partners", "Insurance brokers"];
 
 function NexusPage() {
   const categories = Route.useLoaderData().filter((id) => NEXUS_CATEGORY_COPY[id]);
@@ -85,7 +84,8 @@ function NexusPage() {
         {categories.length > 0 && <div className="module-card-grid">
           {categories.map((id) => <div key={id} className="module-feature-card"><h3>{NEXUS_CATEGORY_COPY[id].title}</h3><p>{NEXUS_CATEGORY_COPY[id].body}</p></div>)}
         </div>}
-        <p className="nx-note">{CLOSED.join(", ")} are planned Nexus categories. They are not open yet, and no partners in those categories are listed.</p>
+        {nexusNetworkNote(categories) && <p className="nx-note">{nexusNetworkNote(categories)}</p>}
+        <p className="nx-note">An open category means Opsirix accepts partner applications and help requests for it. A partner appears in the member directory only after its organization, representative, category, profile and services pass review.</p>
       </section>
 
       <section style={{ marginBottom: 64 }}>

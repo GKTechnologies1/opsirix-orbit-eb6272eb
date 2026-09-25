@@ -100,7 +100,7 @@ export function Navbar() {
                   textAlign: "center",
                 }}
               >
-                🚀 Opsirix is now accepting early-stage founders. Book a discovery call →
+                Opsirix is welcoming founders and business owners. Book a discovery call →
               </p>
               <button
                 onClick={dismissAnnouncement}

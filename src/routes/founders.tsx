@@ -43,10 +43,10 @@ const FOUNDER_TYPES = [
 ];
 
 const FEATURES = [
-  { icon: "📁", t: "Documents organized and accessible", d: "Formation papers, banking documents, attorney correspondence, and operating records organized in Opsirix Vault. Available when you need them." },
-  { icon: "🗓️", t: "Deadlines tracked in advance", d: "Important dates, renewal timelines, filing deadlines, and review schedules maintained as part of your operational calendar, never discovered after the fact." },
-  { icon: "🔗", t: "Attorneys and CPAs coordinated", d: "Opsirix Nexus coordinates scheduling, document delivery, and communication between founders and their licensed professionals. Opsirix does not provide legal or immigration advice." },
-  { icon: "📊", t: "Monthly operational health check", d: "The Opsirix Grid scores your operational readiness across five areas each month. You know exactly where you stand and what needs attention." },
+  { icon: FolderOpen, t: "Documents organized and accessible", d: "Formation papers, banking documents, attorney correspondence, and operating records organized in Opsirix Vault. Available when you need them." },
+  { icon: CalendarClock, t: "Deadlines tracked in advance", d: "Important dates, renewal timelines, filing deadlines, and review schedules maintained as part of your operational calendar, never discovered after the fact." },
+  { icon: Link2, t: "Attorneys and CPAs coordinated", d: "Opsirix Nexus coordinates scheduling, document delivery, and communication between founders and their licensed professionals. Opsirix does not provide legal or immigration advice." },
+  { icon: BarChart3, t: "Monthly operational health check", d: "The Opsirix Grid scores your operational readiness across five areas each month. You know exactly where you stand and what needs attention." },
 ];
 
 const HANDLES = [
@@ -142,7 +142,7 @@ function Page() {
           <div className="inner-grid-3">
             {FEATURES.map((c) => (
               <div key={c.t} className="inner-card">
-                <div style={{ fontSize: 28, marginBottom: 12 }}>{c.icon}</div>
+                <div style={{ marginBottom: 12, color: "var(--cyan, currentColor)" }}><c.icon size={26} strokeWidth={1.5} aria-hidden /></div>
                 <h3>{c.t}</h3>
                 <p>{c.d}</p>
               </div>
