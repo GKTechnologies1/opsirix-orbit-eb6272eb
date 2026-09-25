@@ -5,9 +5,10 @@ import { ArrowDown, ArrowUp, CircleX } from "lucide-react";
 import { OperatingShell } from "@/components/workspace/OperatingShell";
 import { Button } from "@/components/ui/button";
 import { NexusDiscoverySection } from "@/components/sections/NexusDiscoverySection";
+import { FAQSection, FAQ_DEFAULT } from "@/components/sections/FAQSection";
 import {
   addCatalogChoice, getContentAdmin, moveCatalogChoice, publishContentVersion, restoreContentVersion,
-  saveContentDraft, setCatalogRetired, unpublishContentBlock, updateCatalogChoice, type ContentBody,
+  saveContentDraft, setCatalogRetired, unpublishContentBlock, updateCatalogChoice, type ContentBody, type FaqItem,
 } from "@/lib/content.functions";
 
 export const Route = createFileRoute("/_authenticated/staff/content")({
