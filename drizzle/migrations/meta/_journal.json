@@ -183,6 +183,13 @@
       "when": 1790353679034,
       "tag": "0025_nexus_keyed_rate_limit_and_member_rpc_cleanup",
       "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1790357263171,
+      "tag": "0026_restrict_platform_audit_to_admin",
+      "breakpoints": true
     }
   ]
 }
