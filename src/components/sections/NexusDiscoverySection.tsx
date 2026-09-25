@@ -17,7 +17,6 @@ export function NexusDiscoverySection({ categories }: { categories: string[] }) 
         </div>
 
         {open.length > 0 && <>
-          <h3 className="nx-label">Available through Nexus now</h3>
           <div className="partner-grid">
             {open.map((id, i) => (
               <ScrollReveal key={id} delay={0.05 + i * 0.06}>
@@ -29,7 +28,7 @@ export function NexusDiscoverySection({ categories }: { categories: string[] }) 
             ))}
           </div>
         </>}
-        <p className="nx-note">{NEXUS_NETWORK_NOTE}</p>
+        <p className="nx-note">Available through Nexus now: the categories above. {NEXUS_NETWORK_NOTE}</p>
 
         <ScrollReveal delay={0.1}>
           <div className="partner-banner">
