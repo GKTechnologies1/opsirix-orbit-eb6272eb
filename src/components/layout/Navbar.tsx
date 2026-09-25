@@ -326,8 +326,8 @@ export function Navbar() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -300, opacity: 0 }}
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed top-0 left-0 right-0 z-[99] lg:hidden"
-            style={{ backgroundColor: "#071B33", minHeight: "100vh" }}
+            className="fixed top-0 left-0 right-0 z-[120] lg:hidden overflow-y-auto"
+            style={{ backgroundColor: "#071B33", height: "100dvh" }}
           >
             <div
               className="flex items-center justify-between"
