@@ -301,6 +301,7 @@ export type Database = {
           last_send_error: string | null
           partner_name: string
           partner_notice_at: string | null
+          partner_notice_attempts: number
           partner_notice_status: string | null
           partner_profile_id: string
           partner_user_id: string
@@ -328,6 +329,7 @@ export type Database = {
           last_send_error?: string | null
           partner_name: string
           partner_notice_at?: string | null
+          partner_notice_attempts?: number
           partner_notice_status?: string | null
           partner_profile_id: string
           partner_user_id: string
@@ -355,6 +357,7 @@ export type Database = {
           last_send_error?: string | null
           partner_name?: string
           partner_notice_at?: string | null
+          partner_notice_attempts?: number
           partner_notice_status?: string | null
           partner_profile_id?: string
           partner_user_id?: string
@@ -1695,6 +1698,7 @@ export type Database = {
         Args: { _fields: string[]; _intro: string; _version: string }
         Returns: undefined
       }
+      begin_nexus_notice_retry: { Args: { _intro: string }; Returns: string }
       can_access_organization: {
         Args: { _organization_id: string; _user_id: string }
         Returns: boolean
