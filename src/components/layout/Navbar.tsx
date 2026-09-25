@@ -65,7 +65,7 @@ export function Navbar() {
   return (
     <>
       <header
-        className="fixed top-0 left-0 right-0 z-[100]"
+        className="site-header sticky top-0 z-[100]"
         style={{
           transition: "background 0.3s, box-shadow 0.3s",
           backgroundColor: scrolled ? "rgba(13,15,20,0.97)" : "rgba(13,15,20,0.90)",
@@ -113,16 +113,10 @@ export function Navbar() {
         </AnimatePresence>
 
         <motion.div
-          initial={{ y: -68, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.45, delay: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          className="flex items-center justify-between"
+          className="site-nav-row flex items-center justify-between"
           style={{ height: 68, padding: "0 24px", maxWidth: 1240, margin: "0 auto" }}
         >
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.85 }}
           >
             <Link to="/" className="flex items-center" style={{ gap: 10 }}>
               <OpsirixLogo size={34} />
@@ -161,9 +155,6 @@ export function Navbar() {
                 return (
                   <motion.div
                     key={link.to}
-                    initial={{ y: -8, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.35, delay: 0.9 + idx * 0.05 }}
                     style={{ position: "relative" }}
                     onMouseEnter={openPlatform}
                     onMouseLeave={scheduleClosePlatform}
@@ -291,9 +282,6 @@ export function Navbar() {
               return (
                 <motion.div
                   key={link.to}
-                  initial={{ y: -8, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.35, delay: 0.9 + idx * 0.05 }}
                 >
                   <Link
                     to={link.to}
@@ -310,9 +298,6 @@ export function Navbar() {
           </nav>
 
           <motion.div
-            initial={{ y: -8, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 1.25 }}
             className="hidden lg:flex items-center gap-3"
           >
             <Link

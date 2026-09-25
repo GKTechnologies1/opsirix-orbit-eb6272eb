@@ -1,0 +1,1 @@
+Public navigation stays sticky in normal document flow, and navbar responsive rules must be scoped to `.site-header`; this reserves dynamic announcement height and prevents page-header collisions.
