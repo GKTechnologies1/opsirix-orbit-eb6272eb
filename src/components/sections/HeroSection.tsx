@@ -207,7 +207,7 @@ export function HeroSection() {
             {[
               "Compliance-first architecture",
               "Not a law firm or visa advisor",
-              "Immigrant founder ready",
+              "Dedicated immigrant founder support",
             ].map((t) => (
               <div key={t} className="flex items-center gap-2">
                 <CheckCircle2 size={17} color="#66C7F4" strokeWidth={2} />

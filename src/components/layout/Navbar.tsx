@@ -15,7 +15,7 @@ const NAV_LINKS: NavLink[] = [
   { label: "How It Works", to: "/how-it-works" },
   { label: "About", to: "/about" },
   { label: "Platform", to: "/platform", dropdown: true },
-  { label: "Immigrant Founders", to: "/immigrant-founders" },
+  { label: "Founders", to: "/founders" },
   { label: "Partners", to: "/for-partners" },
   { label: "Universities", to: "/for-universities" },
   { label: "FAQ", to: "/faq" },

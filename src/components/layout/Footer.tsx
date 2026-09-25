@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Linkedin } from "lucide-react";
 import { OpsirixLogo, OpsirixWordmark } from "./OpsirixLogo";
 
-type FooterLink = { label: string; to?: string; href?: string; soon?: boolean };
+type FooterLink = { label: string; to?: string; hash?: string; href?: string; soon?: boolean };
 
 const PLATFORM_LINKS: FooterLink[] = [
   { label: "Opsirix OS", to: "/platform/os", soon: true },
@@ -17,10 +17,11 @@ const PLATFORM_LINKS: FooterLink[] = [
 ];
 
 const FOUNDER_LINKS: FooterLink[] = [
-  { label: "F-1 Founders", to: "/immigrant-founders" },
-  { label: "OPT Founders", to: "/immigrant-founders" },
-  { label: "H-1B Professionals", to: "/immigrant-founders" },
-  { label: "International Founders", to: "/immigrant-founders" },
+  { label: "All Founders", to: "/founders" },
+  { label: "F-1 Founders", to: "/founders", hash: "immigrant-founders" },
+  { label: "OPT Founders", to: "/founders", hash: "immigrant-founders" },
+  { label: "H-1B Professionals", to: "/founders", hash: "immigrant-founders" },
+  { label: "International Founders", to: "/founders", hash: "immigrant-founders" },
   { label: "Early-Stage Founders", to: "/early-stage-founders" },
   { label: "Founder Journey", to: "/how-it-works" },
   { label: "Book Discovery Call", to: "/contact" },
@@ -84,7 +85,7 @@ function FooterLinkEl({ link }: { link: FooterLink }) {
 
   if (link.to) {
     return (
-      <Link to={link.to} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
+      <Link to={link.to} hash={link.hash} style={linkStyle} onMouseEnter={onEnter} onMouseLeave={onLeave}>
         {content}
       </Link>
     );

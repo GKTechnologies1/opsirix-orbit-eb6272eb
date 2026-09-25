@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Opsirix is the Founder Operations OS. We help early-stage, immigrant, and technical founders turn operational chaos into structured execution through workflow orchestration, documentation systems, and partner coordination.",
+          "Opsirix is the Founder Operations OS. We help founders and business owners, with dedicated support for immigrant founders, turn operational chaos into structured execution through workflow orchestration, documentation systems, and partner coordination.",
       },
       {
         name: "keywords",
