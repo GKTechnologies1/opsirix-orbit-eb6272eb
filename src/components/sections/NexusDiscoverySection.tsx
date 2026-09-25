@@ -1,18 +1,19 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import type { ContentBody } from "@/lib/content.functions";
 import { NEXUS_BOUNDARY, NEXUS_CATEGORY_COPY, NEXUS_NETWORK_NOTE } from "@/lib/nexus-discovery";
 
-export function NexusDiscoverySection({ categories }: { categories: string[] }) {
+export function NexusDiscoverySection({ categories, content }: { categories: string[]; content?: ContentBody }) {
   const open = categories.filter((id) => NEXUS_CATEGORY_COPY[id]);
   return (
     <section className="partner-section" aria-labelledby="nx-home-title">
       <div className="partner-container">
         <div className="partner-header">
           <ScrollReveal><span className="partner-label">Opsirix Nexus</span></ScrollReveal>
-          <ScrollReveal delay={0.05}><h2 id="nx-home-title" className="partner-h2">Find the right professional support.</h2></ScrollReveal>
+          <ScrollReveal delay={0.05}><h2 id="nx-home-title" className="partner-h2">{content?.heading ?? "Find the right professional support."}</h2></ScrollReveal>
           <ScrollReveal delay={0.1}>
-            <p className="partner-sub">Opsirix Nexus helps individuals and businesses request a human-reviewed introduction to an independent professional or participating organization. You do not need to purchase another Opsirix service to ask for help.</p>
+            <p className="partner-sub">{content?.body ?? "Opsirix Nexus helps individuals and businesses request a human-reviewed introduction to an independent professional or participating organization. You do not need to purchase another Opsirix service to ask for help."}</p>
           </ScrollReveal>
         </div>
 
@@ -39,7 +40,7 @@ export function NexusDiscoverySection({ categories }: { categories: string[] }) 
               <p className="nx-boundary">{NEXUS_BOUNDARY}</p>
             </div>
             <div className="nx-banner-actions">
-              <Link to="/nexus/help" className="partner-banner-cta">Find help through Nexus <ArrowRight size={16} /></Link>
+              {content?.cta_href && content.cta_href !== "/nexus/help" ? <a href={content.cta_href} className="partner-banner-cta">{content.cta_label} <ArrowRight size={16} /></a> : <Link to="/nexus/help" className="partner-banner-cta">{content?.cta_label || "Find help through Nexus"} <ArrowRight size={16} /></Link>}
               <Link to="/directory" className="partner-link">Browse with a free account <ArrowRight size={14} /></Link>
             </div>
           </div>

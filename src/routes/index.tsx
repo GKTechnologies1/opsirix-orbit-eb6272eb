@@ -8,6 +8,7 @@ import { ComplianceBoundary } from "@/components/sections/ComplianceBoundary";
 import { ImmigrantFounderSection } from "@/components/sections/ImmigrantFounderSection";
 import { NexusDiscoverySection } from "@/components/sections/NexusDiscoverySection";
 import { getOpenNexusCategories } from "@/lib/nexus.functions";
+import { getPublishedContent } from "@/lib/content.functions";
 import { FounderJourneyTimeline } from "@/components/sections/FounderJourneyTimeline";
 import { OpsirixOSPreview } from "@/components/sections/OpsirixOSPreview";
 import { StatsBar } from "@/components/sections/StatsBar";
@@ -35,14 +36,17 @@ export const Route = createFileRoute("/")({
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/" }],
   }),
-  loader: () => getOpenNexusCategories(),
+  loader: async () => {
+    const [categories, content] = await Promise.all([getOpenNexusCategories(), getPublishedContent({ data: { keys: ["home.nexus"] } })]);
+    return { categories, content };
+  },
   errorComponent: () => <main><p>Please refresh the page.</p></main>,
   notFoundComponent: () => <main><p>Page not found.</p></main>,
   component: Index,
 });
 
 function Index() {
-  const categories = Route.useLoaderData();
+  const { categories, content } = Route.useLoaderData();
   return (
     <main style={{ backgroundColor: "var(--bg-primary)" }}>
       <HeroSection />
@@ -52,7 +56,7 @@ function Index() {
       <ServicesGrid />
       <ComplianceBoundary />
       <ImmigrantFounderSection />
-      <NexusDiscoverySection categories={categories} />
+      <NexusDiscoverySection categories={categories} content={content["home.nexus"]} />
       <FounderJourneyTimeline />
       <OpsirixOSPreview />
       <StatsBar />
