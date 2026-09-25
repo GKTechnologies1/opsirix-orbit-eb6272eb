@@ -57,7 +57,7 @@ export const submitNexusInquiry = createServerFn({ method: "POST" })
       _location: data.location ?? "",
       _description: data.description,
       _disclosure_version: NEXUS_DISCLOSURE_VERSION,
-      _client_hash: clientHash ?? undefined,
+      _client_hash: clientHash ?? "",
     });
     if (error || !id) {
       if (error?.message.includes("category_unavailable")) return { success: false as const, error: "That category is not currently available through Nexus." };
