@@ -70,34 +70,56 @@ export const sendIntroduction = createServerFn({ method: "POST" })
     const { data: r, error } = await context.supabase.rpc("send_nexus_introduction", { _intro: data.id, _hash: data.hash });
     if (error || !r) return { success: false as const, error: friendly(error?.message) };
     const res = r as { result: string; error?: string; partner_user_id?: string };
-    if (res.result === "already_sent") return { success: true as const, message: "Already sent. No duplicate was created." };
+    if (res.result === "already_sent") return { success: true as const, message: "Already shared in the partner portal. No duplicate was created. To reach the partner, retry the notification email only." };
     if (res.result === "reconsent_required") return { success: false as const, error: "The partner or shared details changed. New founder authorization is required. Nothing was sent." };
     if (res.result === "payload_mismatch") return { success: false as const, error: "The details you reviewed are out of date. Reload and review again. Nothing was sent." };
     if (res.result === "not_authorized") return { success: false as const, error: "This introduction is not authorized (it may have been withdrawn). Nothing was sent." };
     if (res.result === "failed") return { success: false as const, error: `${res.error} Nothing was sent; the founder can still withdraw.` };
-    // Sent: the partner can now see it in their workspace. Email notice carries no personal details.
-    let notice: "emailed" | "email_failed" | "email_skipped" = "email_skipped";
-    try {
-      const apiKey = process.env["RESEND_API_KEY"];
-      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-      const { data: u } = await supabaseAdmin.auth.admin.getUserById(res.partner_user_id!);
-      if (apiKey && u.user?.email && !u.user.email.toLowerCase().endsWith("@example.test")) {
-        const { Resend } = await import("resend");
-        const { error: mailError } = await new Resend(apiKey).emails.send({
-          from: "Opsirix Nexus <noreply@opsirix.com>",
-          to: u.user.email,
-          subject: "You have a new Opsirix introduction",
-          html: `<div style="font-family:system-ui,sans-serif;max-width:560px;color:#0f172a"><p>Opsirix has sent you a new introduction through Nexus.</p><p>Sign in to your Opsirix partner workspace and open Introductions to see the details the person chose to share.</p><p style="color:#64748b;font-size:13px">For privacy, this email does not include the person's details.</p></div>`,
-        });
-        notice = mailError ? "email_failed" : "emailed";
-        if (mailError) console.error("Partner notice email failed", mailError.message);
-      }
-    } catch (e) {
-      notice = "email_failed";
-      console.error("Partner notice email threw", e instanceof Error ? e.message : e);
-    }
+    const notice = await notifyPartner(res.partner_user_id!);
     await context.supabase.rpc("record_nexus_partner_notice", { _intro: data.id, _status: notice });
-    return { success: true as const, message: notice === "emailed" ? "Sent. The partner was notified by email." : notice === "email_failed" ? "Sent. The partner can see it in their workspace, but the email notice failed." : "Sent. The partner can see it in their workspace." };
+    return { success: true as const, message: noticeMessage(notice) };
+  });
+
+function noticeMessage(notice: string) {
+  if (notice === "emailed") return "Shared in the partner portal. Notification email delivered.";
+  if (notice === "email_failed") return "Shared in the partner portal: the partner can already see the selected information. The notification email failed; retry the email only. Do not send the introduction again.";
+  return "Shared in the partner portal. No notification email was sent for this account.";
+}
+
+// Sends only a generic notice email. Never carries personal details and never re-shares the introduction.
+async function notifyPartner(partnerUserId: string): Promise<"emailed" | "email_failed" | "email_skipped"> {
+  try {
+    const apiKey = process.env["RESEND_API_KEY"];
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: u } = await supabaseAdmin.auth.admin.getUserById(partnerUserId);
+    if (!apiKey || !u.user?.email || u.user.email.toLowerCase().endsWith("@example.test")) return "email_skipped";
+    const { Resend } = await import("resend");
+    const { error: mailError } = await new Resend(apiKey).emails.send({
+      from: "Opsirix Nexus <noreply@opsirix.com>",
+      to: u.user.email,
+      subject: "You have a new Opsirix introduction",
+      html: `<div style="font-family:system-ui,sans-serif;max-width:560px;color:#0f172a"><p>Opsirix has sent you a new introduction through Nexus.</p><p>Sign in to your Opsirix partner workspace and open Introductions to see the details the person chose to share.</p><p style="color:#64748b;font-size:13px">For privacy, this email does not include the person's details.</p></div>`,
+    });
+    if (mailError) console.error("Partner notice email failed", mailError.message);
+    return mailError ? "email_failed" : "emailed";
+  } catch (e) {
+    console.error("Partner notice email threw", e instanceof Error ? e.message : e);
+    return "email_failed";
+  }
+}
+
+export const retryPartnerNotice = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: unknown) => id.parse(i))
+  .handler(async ({ data, context }) => {
+    const { data: partnerUserId, error } = await context.supabase.rpc("begin_nexus_notice_retry", { _intro: data.id });
+    if (error || !partnerUserId) {
+      const m = error?.message ?? "";
+      return { success: false as const, error: m.includes("already_notified") ? "The notification email was already delivered." : m.includes("retry_limit") ? "Retry limit reached. Contact the partner another way." : m.includes("not_shared") ? "This introduction has not been shared, so there is nothing to notify." : friendly(m) };
+    }
+    const notice = await notifyPartner(partnerUserId as string);
+    await context.supabase.rpc("record_nexus_partner_notice", { _intro: data.id, _status: notice });
+    return notice === "emailed" ? { success: true as const, message: "Notification email delivered. The introduction itself was not sent again." } : { success: false as const, error: notice === "email_failed" ? "Notification email failed again. The partner can still see the introduction in their portal." : "No notification email is sent for this account." };
   });
 
 // ---------- Founder ----------
