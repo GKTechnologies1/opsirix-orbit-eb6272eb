@@ -58,6 +58,15 @@ export const setCompanyStaffGrant = createServerFn({ method: "POST" })
     return { success: true as const };
   });
 
+export const setCompanyMember = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => z.object({ organizationId: z.string().uuid(), email: z.string().trim().email().max(255), role: z.enum(["member", "viewer", "remove"]) }).parse(input))
+  .handler(async ({ data, context }) => {
+    const { error } = await context.supabase.rpc("set_organization_member_by_email", { _organization_id: data.organizationId, _email: data.email, _role: data.role });
+    if (error) return { success: false as const, error: error.message };
+    return { success: true as const };
+  });
+
 export const getStaffConsole = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {

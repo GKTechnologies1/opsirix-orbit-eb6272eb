@@ -64,7 +64,10 @@ function AdminOverview() {
       <Queue label="Open requests" value={o.inquiriesOpen} to="/staff/inquiries" />
       <Queue label="Unassigned" value={o.inquiriesUnassigned} to="/staff/inquiries" note="Assign to a named Operations Lead" />
       <Queue label="Compliance review tasks" value={o.complianceTasks} to="/staff/inquiries" />
-      <article><span>Introduction consent</span><strong>Off</strong><small className="ops-muted">Not built. No details are disclosed to partners.</small></article>
+      <Queue label="Introductions awaiting founder" value={o.intros?.awaiting_founder ?? 0} to="/staff/inquiries" />
+      <Queue label="Authorized, ready to review and send" value={o.intros?.ready_to_send ?? 0} to="/staff/inquiries" />
+      <Queue label="Introductions sent" value={o.intros?.sent ?? 0} to="/staff/inquiries" />
+      <Queue label="Partner notices failed" value={o.intros?.notice_failed ?? 0} to="/staff/inquiries" note="Introduction was sent; notify the partner again" />
     </div></section>
     <section className="ops-panel"><h2>Categories and publication</h2><div className="ops-table-wrap"><table><thead><tr><th>Category</th><th>Applications</th><th>Claims pending</th><th>Claims approved</th><th>Published listings</th></tr></thead><tbody>
       {o.types.map((t) => <tr key={t.id}><td>{t.label}</td><td>{t.open ? "Open" : "Closed"}</td><td>{t.claimsPending}</td><td>{t.claimsApproved}</td><td>{t.published}</td></tr>)}
