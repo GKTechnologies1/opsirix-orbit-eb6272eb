@@ -1,0 +1,2 @@
+ALTER TABLE public.service_catalog_changes DROP CONSTRAINT service_catalog_changes_change_type_check;
+ALTER TABLE public.service_catalog_changes ADD CONSTRAINT service_catalog_changes_change_type_check CHECK (change_type = ANY (ARRAY['added','renamed','updated','retired','restored','edited','reordered','reactivated']));
