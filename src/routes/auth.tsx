@@ -7,7 +7,7 @@ import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 
-const searchSchema = z.object({ next: z.string().optional().catch(undefined), purpose: z.enum(["directory"]).optional().catch(undefined), mode: z.enum(["signin", "signup"]).optional().catch(undefined) });
+const searchSchema = z.object({ next: z.string().optional().catch(undefined), purpose: z.enum(["directory", "team"]).optional().catch(undefined), mode: z.enum(["signin", "signup"]).optional().catch(undefined) });
 
 export const Route = createFileRoute("/auth")({
   validateSearch: searchSchema,
@@ -28,6 +28,8 @@ function AuthPage() {
   const navigate = useNavigate();
   const { next, purpose, mode: initialMode } = Route.useSearch();
   const member = purpose === "directory";
+  const team = purpose === "team";
+  const partnerEntry = !!next && (next.startsWith("/partner") || next.startsWith("/join"));
   const [mode, setMode] = useState<"signup" | "signin">(initialMode ?? "signup");
   const [showPassword, setShowPassword] = useState(false);
   const [pending, setPending] = useState(false);
@@ -75,16 +77,15 @@ function AuthPage() {
             <li><CheckCircle2 aria-hidden="true" /> Browse approved Nexus profiles and follow your help requests.</li>
             <li><CheckCircle2 aria-hidden="true" /> Set up a company workspace for your business, or join one when its owner invites you.</li>
             <li><CheckCircle2 aria-hidden="true" /> Apply as a Nexus partner. Every application is reviewed by a person and stays private during review.</li>
-            <li><ShieldCheck aria-hidden="true" /> Opsirix staff and Admin/CEO access can't be requested here. It is granted only by the Admin/CEO through the Staff Console.</li>
           </ul>}
         </section>
-        <section className="nexus-auth-panel" aria-label="Partner account">
+        <section className="nexus-auth-panel" aria-label="Account">
           <div className="nexus-segmented" role="group" aria-label="Account action">
             <Button type="button" variant={mode === "signup" ? "default" : "ghost"} onClick={() => setMode("signup")}>Create account</Button>
             <Button type="button" variant={mode === "signin" ? "default" : "ghost"} onClick={() => setMode("signin")}>Sign in</Button>
           </div>
-          <h2>{mode === "signup" ? (member ? "Create your free account" : "Create your partner account") : "Welcome back"}</h2>
-          <p className="nexus-panel-copy">{member ? "No purchase, founder intake, or company workspace is required." : mode === "signup" ? "Start an application and return to it at any time." : "Access your application and review status."}</p>
+          <h2>{mode === "signup" ? (member ? "Create your free account" : partnerEntry ? "Create your partner account" : "Create your Opsirix account") : team ? "Opsirix team sign in" : "Welcome back"}</h2>
+          <p className="nexus-panel-copy">{member ? "No purchase, founder intake, or company workspace is required." : mode === "signup" ? (partnerEntry ? "Start your partner application and return to it at any time." : "Browse the directory, ask for help, set up a company or apply as a partner.") : team ? "For authorized Opsirix employees. You will go to the Staff Console." : partnerEntry ? "Sign in to return to your partner application." : "Sign in to open your workspace."}</p>
           <form onSubmit={submit} className="nexus-form">
             {mode === "signup" && <label>Full name<input name="fullName" autoComplete="name" required maxLength={120} /></label>}
             <label>Email address<input name="email" type="email" autoComplete="email" required maxLength={255} /></label>
@@ -92,6 +93,7 @@ function AuthPage() {
             {message && <p className="nexus-form-message" role="status">{message}</p>}
             <Button type="submit" size="lg" disabled={pending}>{pending ? "Please wait" : mode === "signup" ? "Create account" : "Sign in"}<ArrowRight /></Button>
           </form>
+          {mode === "signin" && !team && <p className="nexus-panel-copy"><Link to="/auth" search={{ mode: "signin", purpose: "team", next: "/staff" }} onClick={() => setMode("signin")}>Opsirix team sign in</Link></p>}
           <p className="nexus-terms">Please read our current <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Notice</Link>.</p>
         </section>
       </div>
