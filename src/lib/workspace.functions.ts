@@ -24,11 +24,13 @@ export const getCompanyWorkspaces = createServerFn({ method: "GET" })
     if (members.error) throw members.error;
     if (events.error) throw events.error;
     if (grants.error) throw grants.error;
-    const memberIds = [...new Set((members.data ?? []).map((m) => m.user_id))];
+    // Names and emails of co-members go only to owners of that company.
+    const ownerOf = new Set((members.data ?? []).filter((m) => m.user_id === context.userId && m.role === "owner").map((m) => m.organization_id));
+    const memberIds = [...new Set((members.data ?? []).filter((m) => ownerOf.has(m.organization_id)).map((m) => m.user_id))];
     const { data: memberPeople } = memberIds.length ? await context.supabase.from("profiles").select("id,full_name,email").in("id", memberIds) : { data: [] };
     const staffIds = [...new Set((grants.data ?? []).map((item) => item.staff_user_id))];
     const { data: staffPeople } = staffIds.length ? await context.supabase.from("profiles").select("id,full_name,email").in("id", staffIds) : { data: [] };
-    return { opx, organizations, members: (members.data ?? []).map((m) => ({ ...m, person: (memberPeople ?? []).find((p) => p.id === m.user_id) ?? null })), events: events.data ?? [], grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
+    return { opx, organizations, members: (members.data ?? []).map((m) => ({ ...m, person: ownerOf.has(m.organization_id) ? (memberPeople ?? []).find((p) => p.id === m.user_id) ?? null : null })), events: events.data ?? [], grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
   });
 
 export const createCompanyWorkspace = createServerFn({ method: "POST" })
