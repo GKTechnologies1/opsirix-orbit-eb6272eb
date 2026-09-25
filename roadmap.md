@@ -10,12 +10,14 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Consent-based introductions built and tested with TEST accounts (preview; backend live)
 - [ ] Publish Nexus help/directory/requests pages — blocked: automatic preview build fails intermittently (Lovable support)
 - [x] University/Banking/Insurance opened for applications and help requests 2026-09-25 17:56-17:58 UTC; no listings published
-- [ ] Flow, Grid, Core: blocked on owner approval of the proposed specs (only proposals exist); Launch blocked on OPSIRIX_05
+- [ ] Flow, Grid, Core: proposals presented 2026-09-25 20:15 UTC; blocked on owner decisions (Flow without Launch, Grid 25 criteria text, Core scope)
+- [ ] Launch: blocked on OPSIRIX_05 intake document
 - [ ] Vault, AI — blocked: privacy architecture + specialist review
 - [ ] Visual redesign (separate track) — needs direction review
 - [ ] Terms acknowledgement — blocked: versions/wording; rate-limit cleanup — blocked: retention policy
 - [x] Content & Catalog portal (homepage Nexus section + catalog controls) built and tested in preview
-- [ ] Add more page sections and FAQs to the portal, one at a time
+- [x] Portal: homepage common questions (1-12 Q&A, reorder, preview, long-dash check); draft/publish/restore/unpublish 19/19, editor 8/8 desktop+390 (2 false alarms from test wording, confirmed by screenshot); left unpublished, built-in text shows
+- [ ] Portal: next sections one at a time (Founders page intro, Partners page, Nexus page FAQ); ready
 - [x] Audit search in Staff Console (Admin/CEO only) + request search; founder company history search
 - [ ] Connect GitHub and opsirix.com — owner action
 - [x] Announcement bar broadened; founder card line icons
