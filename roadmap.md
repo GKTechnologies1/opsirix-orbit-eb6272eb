@@ -20,3 +20,11 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Connect GitHub and opsirix.com — owner action
 - [x] Announcement bar broadened; founder card line icons
 - [x] Domain and 137-vs-91 catalog reconciliation (report: opsirix-nexus-rollout-v1.md)
+
+## Activation phase (2026-09-25)
+- [x] Intro decline/withdraw/failed-notice tests (preview + shared backend)
+- [x] Company viewer/member invitations by email (owner only)
+- [x] Admin introduction monitoring counts on /staff
+- [ ] Enable introductions for real (non-TEST) requests: waiting on owner approval of consent wording
+- [ ] Publish to opsirix.lovable.app: waiting on owner go-ahead (owner routes domain via GitHub)
+- [ ] Pricing (schedule approval), Terms acknowledgement (wording), retention (period), Vault/AI (privacy/security review), Launch (OPSIRIX_05)
