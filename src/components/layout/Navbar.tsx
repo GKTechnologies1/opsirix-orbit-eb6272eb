@@ -91,11 +91,10 @@ export function Navbar() {
               className="flex items-center justify-center relative"
             >
               <p
+                className="announce-text"
                 style={{
                   fontFamily: "var(--font-mono)",
-                  fontSize: 11,
                   color: "#fff",
-                  letterSpacing: "0.08em",
                   margin: 0,
                   textAlign: "center",
                 }}
