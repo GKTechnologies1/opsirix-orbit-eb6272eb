@@ -46,7 +46,9 @@ export const NEXUS_PLANNED_LABELS: Record<string, string> = { university: "Unive
 export function nexusNetworkNote(open: string[]): string | null {
   const closed = Object.keys(NEXUS_PLANNED_LABELS).filter((id) => !open.includes(id)).map((id) => NEXUS_PLANNED_LABELS[id]);
   if (!closed.length) return null;
-  return `${closed.join(", ")} ${closed.length === 1 ? "is a planned Nexus category" : "are planned Nexus categories"}. ${closed.length === 1 ? "It is" : "They are"} not open yet, and no partners in ${closed.length === 1 ? "that category" : "those categories"} are listed.`;
+  return closed.length === 1
+    ? `The ${closed[0]} category is planned but not open yet, and no partners in that category are listed.`
+    : `${closed.join(", ")} are planned Nexus categories. They are not open yet, and no partners in those categories are listed.`;
 }
 
 export const NEXUS_BOUNDARY =

@@ -112,7 +112,7 @@ function Page() {
           <h2 className="inner-h2">Choose the path that fits.</h2>
           <div className="inner-grid-3">
             <div className="inner-card"><h3>Book a discovery call</h3><p>Talk through your company stage and operational needs with Opsirix.</p><Link to="/contact" className="inline-link">Book a call</Link></div>
-            <div className="inner-card"><h3>Find professional help</h3><p>Ask Opsirix Nexus for a human-reviewed introduction to an attorney, CPA, or software firm. No other purchase is required.</p><Link to="/nexus/help" className="inline-link">Find help through Nexus</Link></div>
+            <div className="inner-card"><h3>Find professional help</h3><p>Ask Opsirix Nexus for a human-reviewed introduction to an attorney, CPA, software firm, university program, banking partner, or insurance broker. No other purchase is required.</p><Link to="/nexus/help" className="inline-link">Find help through Nexus</Link></div>
             <div className="inner-card"><h3>See how it works</h3><p>Follow the founder journey from first call to organized operations.</p><Link to="/how-it-works" className="inline-link">How Opsirix works</Link></div>
           </div>
         </div>

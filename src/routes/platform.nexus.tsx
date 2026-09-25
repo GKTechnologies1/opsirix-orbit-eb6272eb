@@ -5,7 +5,7 @@ import { getOpenNexusCategories } from "@/lib/nexus.functions";
 import { NEXUS_CATEGORY_COPY, nexusNetworkNote } from "@/lib/nexus-discovery";
 
 const TITLE = "Opsirix Nexus | Professional Partner Coordination Network";
-const DESC = "The right professional, at the right time, with the right information. Request a human-reviewed introduction to an independent attorney, CPA, or software/IT firm. Nothing is shared without your specific consent.";
+const DESC = "The right professional, at the right time, with the right information. Request a human-reviewed introduction to an independent attorney, CPA, software/IT firm, university program, banking partner, or insurance broker. Nothing is shared without your specific consent.";
 
 export const Route = createFileRoute("/platform/nexus")({
   loader: () => getOpenNexusCategories(),
