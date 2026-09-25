@@ -115,6 +115,168 @@ export type Database = {
         }
         Relationships: []
       }
+      flow_boards: {
+        Row: {
+          archived_at: string | null
+          created_at: string
+          created_by: string
+          id: string
+          name: string
+          organization_id: string
+        }
+        Insert: {
+          archived_at?: string | null
+          created_at?: string
+          created_by: string
+          id?: string
+          name: string
+          organization_id: string
+        }
+        Update: {
+          archived_at?: string | null
+          created_at?: string
+          created_by?: string
+          id?: string
+          name?: string
+          organization_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flow_boards_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      flow_editors: {
+        Row: {
+          created_at: string
+          granted_by: string
+          organization_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          granted_by: string
+          organization_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          granted_by?: string
+          organization_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flow_editors_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      flow_task_shares: {
+        Row: {
+          created_at: string
+          partner_user_id: string
+          revoked_at: string | null
+          shared_by: string
+          task_id: string
+        }
+        Insert: {
+          created_at?: string
+          partner_user_id: string
+          revoked_at?: string | null
+          shared_by: string
+          task_id: string
+        }
+        Update: {
+          created_at?: string
+          partner_user_id?: string
+          revoked_at?: string | null
+          shared_by?: string
+          task_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flow_task_shares_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "flow_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      flow_tasks: {
+        Row: {
+          assignee_id: string | null
+          board_id: string
+          created_at: string
+          created_by: string
+          details: string | null
+          due_on: string | null
+          escalated_at: string | null
+          escalated_by: string | null
+          escalation_note: string | null
+          id: string
+          organization_id: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assignee_id?: string | null
+          board_id: string
+          created_at?: string
+          created_by: string
+          details?: string | null
+          due_on?: string | null
+          escalated_at?: string | null
+          escalated_by?: string | null
+          escalation_note?: string | null
+          id?: string
+          organization_id: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assignee_id?: string | null
+          board_id?: string
+          created_at?: string
+          created_by?: string
+          details?: string | null
+          due_on?: string | null
+          escalated_at?: string | null
+          escalated_by?: string | null
+          escalation_note?: string | null
+          id?: string
+          organization_id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flow_tasks_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "flow_boards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flow_tasks_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nexus_consent_versions: {
         Row: {
           category_lines: Json
@@ -1909,6 +2071,45 @@ export type Database = {
         Args: { _intro: string }
         Returns: undefined
       }
+      flow_audit: {
+        Args: {
+          _meta?: Json
+          _org: string
+          _subject: string
+          _summary: string
+          _type: string
+        }
+        Returns: undefined
+      }
+      flow_can_edit: { Args: { _org: string; _user: string }; Returns: boolean }
+      flow_create_board: {
+        Args: { _name: string; _org: string }
+        Returns: string
+      }
+      flow_save_task: {
+        Args: {
+          _assignee: string
+          _board: string
+          _details: string
+          _due: string
+          _status: string
+          _task: string
+          _title: string
+        }
+        Returns: string
+      }
+      flow_set_editor: {
+        Args: { _email: string; _enabled: boolean; _org: string }
+        Returns: undefined
+      }
+      flow_set_escalation: {
+        Args: { _note: string; _raise: boolean; _task: string }
+        Returns: undefined
+      }
+      flow_share_task: {
+        Args: { _enabled: boolean; _partner_email: string; _task: string }
+        Returns: undefined
+      }
       founder_nexus_requests: { Args: never; Returns: Json }
       has_active_staff_grant: {
         Args: { _organization_id: string; _user_id: string }
@@ -2012,6 +2213,18 @@ export type Database = {
       organization_role: {
         Args: { _organization_id: string; _user_id: string }
         Returns: Database["public"]["Enums"]["organization_member_role"]
+      }
+      partner_flow_tasks: {
+        Args: never
+        Returns: {
+          company: string
+          details: string
+          due_on: string
+          shared_at: string
+          status: string
+          task_id: string
+          title: string
+        }[]
       }
       partner_nexus_introductions: {
         Args: never
