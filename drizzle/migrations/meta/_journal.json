@@ -169,6 +169,13 @@
       "when": 1790351440773,
       "tag": "0023_nexus_discovery_directory_and_inquiries",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1790351743818,
+      "tag": "0024_restrict_public_partner_lookups_to_members",
+      "breakpoints": true
     }
   ]
 }
