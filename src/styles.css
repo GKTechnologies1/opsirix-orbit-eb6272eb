@@ -2426,3 +2426,4 @@
 .ops-feedback.ops-error { color: var(--nexus-danger); }
 .content-preview { margin-top: 20px; border: 1px dashed var(--border-cyan); overflow: hidden; }
 .content-preview > .ops-panel-kicker { padding: 12px 16px 0; }
+.content-preview .partner-h2, .content-preview .partner-card-title { color: #071B33; }
