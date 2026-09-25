@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { Building2, Clock3, Users } from "lucide-react";
@@ -96,8 +96,32 @@ function CompanyWorkspaces() {
           {own?.role === "owner" && <form className="ops-inline-form" onSubmit={(event) => rename(event, organization.id)}><label><span className="sr-only">Company name</span><input name="name" defaultValue={organization.name} minLength={2} maxLength={160} /></label><Button variant="outline" type="submit">Rename</Button></form>}
           {own?.role === "owner" && <div className="ops-access-section"><h3>People in this company</h3><p className="ops-muted">Add someone who already has a free Opsirix account. Viewers can see the company summary and history only; members can also take part in company work. They never see Opsirix staff notes.</p><form className="ops-access-form" onSubmit={(event) => updateMember(event, organization.id)}><label>Their account email<input name="email" type="email" required placeholder="name@company.com" /></label><label>Access<select name="role" defaultValue="viewer"><option value="viewer">Viewer</option><option value="member">Member</option></select></label><div className="ops-actions"><Button name="action" value="add" type="submit">Add or update</Button><Button name="action" value="remove" variant="outline" type="submit">Remove</Button></div></form><div className="ops-history">{members.map((m) => <div className="ops-history-row" key={m.user_id}><Users /><span>{m.user_id === data.userId ? "You" : "Company account"} · {m.role}</span></div>)}</div></div>}
           {own?.role === "owner" && <div className="ops-access-section"><h3>Opsirix staff access</h3><p className="ops-muted">Grant an approved staff account access to this workspace summary. This never grants access to Vault or client content.</p><form className="ops-access-form" onSubmit={(event) => updateStaffGrant(event, organization.id)}><label>Staff account email<input name="email" type="email" required placeholder="staff@opsirix.com" /></label><label>Access ends (optional)<input name="expires" type="date" /></label><div className="ops-actions"><Button name="action" value="grant" type="submit">Grant access</Button><Button name="action" value="revoke" variant="outline" type="submit">Revoke access</Button></div></form>{grants.length > 0 && <div className="ops-history">{grants.map((grant) => <div className="ops-history-row" key={grant.staff_user_id}><Users /><span>{grant.person?.full_name || grant.person?.email || "Approved staff account"} · {grant.revoked_at ? "Revoked" : grant.expires_at && new Date(grant.expires_at) <= new Date() ? "Expired" : "Active"}</span><time>{grant.expires_at ? `Ends ${new Date(grant.expires_at).toLocaleDateString()}` : "No end date"}</time></div>)}</div>}</div>}
-          <div className="ops-history"><h3>Recent history</h3>{events.length ? events.slice(0, 8).map((event) => <div className="ops-history-row" key={event.id}><Clock3 /><span>{event.summary}</span><time>{new Date(event.created_at).toLocaleString()}</time></div>) : <p className="ops-muted">No activity yet.</p>}</div>
+          <CompanyHistory events={events} />
         </section>;
       })}</div>}
+    <p className="ops-muted">Need a professional? <Link to="/nexus/help">Ask for help</Link>, then follow it on <Link to="/nexus/requests">your Nexus requests</Link>.</p>
   </OperatingShell>;
+}
+
+type CompanyEvent = { id: string; summary: string; created_at: string; event_type: string };
+
+function CompanyHistory({ events }: { events: CompanyEvent[] }) {
+  const [term, setTerm] = useState("");
+  const [showAll, setShowAll] = useState(false);
+  const needle = term.trim().toLowerCase();
+  const matched = needle
+    ? events.filter((e) => `${e.summary} ${e.event_type}`.toLowerCase().includes(needle))
+    : events;
+  const shown = showAll || needle ? matched : matched.slice(0, 8);
+  return <div className="ops-history">
+    <h3>History</h3>
+    <label className="ops-history-search">Search this company history
+      <input type="search" value={term} onChange={(e) => setTerm(e.target.value)} maxLength={120} placeholder="For example: member, renamed" />
+    </label>
+    {!events.length ? <p className="ops-muted">No activity yet.</p> : !matched.length ? <p className="ops-muted" role="status">Nothing in this company history matches that search.</p> : <>
+      {needle && <p className="ops-muted" role="status">{matched.length} matching {matched.length === 1 ? "entry" : "entries"}.</p>}
+      {shown.map((event) => <div className="ops-history-row" key={event.id}><Clock3 /><span>{event.summary}</span><time>{new Date(event.created_at).toLocaleString()}</time></div>)}
+      {!needle && matched.length > 8 && <Button variant="outline" className="ops-outline" type="button" onClick={() => setShowAll(!showAll)}>{showAll ? "Show fewer" : `Show all ${matched.length}`}</Button>}
+    </>}
+  </div>;
 }

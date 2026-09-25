@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ArrowRight, CircleX, ShieldCheck } from "lucide-react";
 import { OperatingShell } from "@/components/workspace/OperatingShell";
-import { getAdminOverview, getStaffConsole } from "@/lib/workspace.functions";
+import { Button } from "@/components/ui/button";
+import { getAdminOverview, getStaffConsole, searchAuditHistory } from "@/lib/workspace.functions";
 
 export const Route = createFileRoute("/_authenticated/staff/")({
   head: () => ({ meta: [
@@ -73,5 +74,47 @@ function AdminOverview() {
       {o.types.map((t) => <tr key={t.id}><td>{t.label}</td><td>{t.open ? "Open" : "Closed"}</td><td>{t.claimsPending}</td><td>{t.claimsApproved}</td><td>{t.published}</td></tr>)}
     </tbody></table></div><Link to="/admin/preview">Manage closed-category preview access <ArrowRight /></Link></section>
     <section className="ops-panel"><h2>Recent audit history</h2>{o.audit.length ? <ul className="ops-list">{o.audit.map((a) => <li key={a.id}><strong>{a.event_type}</strong> {a.summary} <span className="ops-muted">{new Date(a.created_at).toISOString().slice(0, 16).replace("T", " ")} UTC</span></li>)}</ul> : <p className="ops-muted">No events yet.</p>}<Link to="/staff/access">Manage staff access <ArrowRight /></Link></section>
+    <AuditSearch />
   </>;
 }
+
+function AuditSearch() {
+  const search = useServerFn(searchAuditHistory);
+  const [result, setResult] = useState<Awaited<ReturnType<typeof searchAuditHistory>>>();
+  const [busy, setBusy] = useState(false);
+  const [form, setForm] = useState({ text: "", eventType: "", from: "", to: "" });
+  const run = useCallback(async (values: typeof form) => {
+    setBusy(true);
+    try {
+      setResult(await search({ data: {
+        text: values.text || undefined,
+        eventType: values.eventType || undefined,
+        from: values.from || undefined,
+        to: values.to || undefined,
+      } }));
+    } finally { setBusy(false); }
+  }, [search]);
+  useEffect(() => { void run({ text: "", eventType: "", from: "", to: "" }); }, [run]);
+
+  if (result && !result.allowed) return null;
+  return <section className="ops-panel" aria-labelledby="audit-search-title">
+    <h2 id="audit-search-title">Search history</h2>
+    <p className="ops-muted">Search the internal record of staff actions. Help request wording and founder details are never shown here.</p>
+    <form className="ops-access-form" onSubmit={(e) => { e.preventDefault(); void run(form); }}>
+      <label>Words in the record<input name="text" value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} maxLength={120} placeholder="For example: access, published" /></label>
+      <label>Kind of action<select name="eventType" value={form.eventType} onChange={(e) => setForm({ ...form, eventType: e.target.value })}><option value="">All kinds</option>{(result?.types ?? []).map((t) => <option key={t} value={t}>{t.replaceAll("_", " ")}</option>)}</select></label>
+      <label>From<input type="date" name="from" value={form.from} onChange={(e) => setForm({ ...form, from: e.target.value })} /></label>
+      <label>To<input type="date" name="to" value={form.to} onChange={(e) => setForm({ ...form, to: e.target.value })} /></label>
+      <div className="ops-actions">
+        <Button type="submit" disabled={busy}>Search</Button>
+        <Button type="button" variant="outline" className="ops-outline" disabled={busy} onClick={() => { const empty = { text: "", eventType: "", from: "", to: "" }; setForm(empty); void run(empty); }}>Clear</Button>
+      </div>
+    </form>
+    {busy && <p className="ops-muted" role="status">Searching.</p>}
+    {result && !busy && (result.events.length
+      ? <><p className="ops-muted" role="status">{result.events.length} matching {result.events.length === 1 ? "record" : "records"}.</p>
+        <ul className="ops-list">{result.events.map((a) => <li key={a.id}><strong>{a.event_type.replaceAll("_", " ")}</strong> {a.summary} <span className="ops-muted">{a.actor?.email ?? "System"} · {new Date(a.created_at).toISOString().slice(0, 16).replace("T", " ")} UTC</span></li>)}</ul></>
+      : <p className="ops-muted" role="status">No records match this search.</p>)}
+  </section>;
+}
+

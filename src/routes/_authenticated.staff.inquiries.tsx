@@ -33,6 +33,8 @@ function StaffInquiries() {
   const [loadError, setLoadError] = useState(false);
   const [detail, setDetail] = useState<Detail | null>(null);
   const [message, setMessage] = useState("");
+  const [filter, setFilter] = useState("");
+
   const refresh = useCallback(async () => {
     try { setData(await list()); setLoadError(false); } catch { setLoadError(true); }
   }, [list]);
@@ -65,14 +67,23 @@ function StaffInquiries() {
       <p className="ops-lead">Operations Lead is the default triage role, with Admin/CEO oversight. You see an inquiry only when it is assigned to you{data.isAdmin ? ", or as Admin/CEO" : ""}. Partners receive details only after the founder authorizes a named introduction and staff review and send it.</p>
       {message && <p className="ops-feedback" role="status">{message}</p>}
       <section className="ops-panel"><h2>{data.isAdmin ? "All inquiries" : "Assigned to you"}</h2>
-        {data.inquiries.length === 0 ? <div className="ops-empty"><Inbox /><p>No inquiries {data.isAdmin ? "yet" : "are assigned to you"}.</p></div> :
+        <label className="ops-history-search">Search requests
+          <input type="search" value={filter} onChange={(e) => setFilter(e.target.value)} maxLength={120} placeholder="For example: attorney, under review, TEST" />
+        </label>
+        {(() => {
+          const needle = filter.trim().toLowerCase();
+          const rows = data.inquiries.filter((q) => !needle || `${NEXUS_CATEGORY_COPY[q.category_id]?.title ?? q.category_id} ${STATUS[q.status] ?? q.status} ${q.is_test ? "test" : ""} ${new Date(q.created_at).toLocaleString()}`.toLowerCase().includes(needle));
+          return data.inquiries.length === 0 ? <div className="ops-empty"><Inbox /><p>No inquiries {data.isAdmin ? "yet" : "are assigned to you"}.</p></div> :
+          rows.length === 0 ? <p className="ops-muted" role="status">No requests match that search.</p> :
         <div className="ops-table-wrap"><table><thead><tr><th>Received</th><th>Category</th><th>Status</th><th>Assigned</th><th><span className="sr-only">Actions</span></th></tr></thead><tbody>
-          {data.inquiries.map((q) => {
+          {rows.map((q) => {
             const a = data.assignments.filter((x) => x.inquiry_id === q.id);
             return <tr key={q.id}><td>{new Date(q.created_at).toLocaleString()}{q.is_test ? " · TEST" : ""}</td><td>{NEXUS_CATEGORY_COPY[q.category_id]?.title ?? q.category_id}</td><td>{STATUS[q.status]}</td><td>{a.length ? a.map((x) => `${x.person?.email ?? "Staff"} (${x.purpose === "triage" ? "triage" : "review task"})`).join(", ") : "Unassigned: Operations Lead queue"}</td><td><Button variant="outline" className="ops-outline" size="sm" onClick={() => view(q.id)}>Open</Button></td></tr>;
           })}
-        </tbody></table></div>}
+        </tbody></table></div>;
+        })()}
       </section>
+
       {detail && <section className="ops-panel" aria-labelledby="inq-detail">
         <p className="ops-panel-kicker">{detail.is_test ? "TEST record" : "Inquiry"} · {STATUS[detail.status]}</p>
         <h2 id="inq-detail">{detail.full_name}</h2>

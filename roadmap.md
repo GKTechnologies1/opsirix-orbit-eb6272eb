@@ -16,7 +16,7 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Terms acknowledgement — blocked: versions/wording; rate-limit cleanup — blocked: retention policy
 - [x] Content & Catalog portal (homepage Nexus section + catalog controls) built and tested in preview
 - [ ] Add more page sections and FAQs to the portal, one at a time
-- [ ] Audit search in Staff Console
+- [x] Audit search in Staff Console (Admin/CEO only) + request search; founder company history search
 - [ ] Connect GitHub and opsirix.com — owner action
 - [x] Announcement bar broadened; founder card line icons
 - [x] Domain and 137-vs-91 catalog reconciliation (report: opsirix-nexus-rollout-v1.md)
@@ -32,5 +32,8 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 ## Access and handoff (2026-09-25 19:15 UTC)
 - [x] Header Sign in / Create account (desktop + mobile), /account switcher, role routing; 49/49 checks
 - [x] DevOps handoff v1 (clean build 3/3 outside Lovable)
-- [ ] Fill repo/branch in handoff: blocked on owner connecting GitHub
-- [ ] Next phase: Staff Console audit search, then founder workflows (company history, requests) per tracker
+- [ ] Fill repo/branch/commit in handoff v2: blocked on owner connecting GitHub; not "synced" until a fresh checkout of that commit builds
+- [x] DevOps handoff v2: staging must use an isolated backend (36 setup steps, storage + email tests, staging vs production variable names)
+- [x] Dual-access TEST account (`test-dual-access@example.test`), workspace switching and permission checks 39/39; Staff search 14/14
+- [ ] Next phase: remaining founder workflows (requests history detail), then shared company workflows
+
