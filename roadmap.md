@@ -48,3 +48,9 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Show OPX in staff organization views as they are built (ongoing rule)
 - [x] Renamed OPX-000012 to "TEST – GK Technologies (fictional record)", audit event recorded; no database link to real data
 
+
+## Owner direction received 2026-09-25 (uploaded note)
+- [ ] Flow phase 1: owner-created boards without Launch; tasks (owner, due date, status); owner may delegate create/assign; viewers read-only; staff escalations within assigned work with audited clearing; partner sees only explicitly shared tasks.
+- [ ] Core (after Flow): managed operational requests, owner-granted scoped/time-limited staff access with immediate revoke, audited lifecycle; no Vault file access; no "free"/pricing labels.
+- [ ] Grid: draft 25 evidence criteria from OPSIRIX_23 for review; record structure/permissions/draft screens only; scoring disabled.
+- [x] Member list pagination verified with 12 TEST members (2 pages); history date range + role-filtered details (owners see person/end date; viewers see access/scope only). 25/25 browser+backend checks.
