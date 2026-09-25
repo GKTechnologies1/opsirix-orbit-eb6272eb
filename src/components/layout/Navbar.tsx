@@ -100,7 +100,7 @@ export function Navbar() {
                   textAlign: "center",
                 }}
               >
-                Opsirix is welcoming founders and business owners. Book a discovery call →
+                Opsirix is welcoming founders and business owners.{" "}<Link to="/contact" style={{ color: "inherit", textDecoration: "underline", textUnderlineOffset: 3 }}>Book a discovery call →</Link>
               </p>
               <button
                 onClick={dismissAnnouncement}
