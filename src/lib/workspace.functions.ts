@@ -142,6 +142,7 @@ export const getAdminOverview = createServerFn({ method: "GET" })
         published: n(prof.data, (r) => r.partner_type_id === t.id && r.is_published && !r.is_suspended),
       })),
       audit: audit.data ?? [],
+      intros: ((await sb.rpc("admin_introduction_counts")).data ?? {}) as Record<string, number>,
       content: { drafts: n(cver.data, (r) => r.status === "draft"), published: n(cver.data, (r) => r.status === "published"), catalogChanges: cchg.data ?? [] },
     };
   });
