@@ -204,6 +204,13 @@
       "when": 1790357551475,
       "tag": "0028_catalog_change_types",
       "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1790360664785,
+      "tag": "0029_nexus_consent_introductions",
+      "breakpoints": true
     }
   ]
 }

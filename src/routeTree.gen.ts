@@ -49,7 +49,9 @@ import { Route as AuthenticatedStaffAccessRouteImport } from './routes/_authenti
 import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_authenticated.partner.services'
 import { Route as AuthenticatedPartnerProfileRouteImport } from './routes/_authenticated.partner.profile'
 import { Route as AuthenticatedPartnerOnboardingRouteImport } from './routes/_authenticated.partner.onboarding'
+import { Route as AuthenticatedPartnerIntroductionsRouteImport } from './routes/_authenticated.partner.introductions'
 import { Route as AuthenticatedPartnerApplyRouteImport } from './routes/_authenticated.partner.apply'
+import { Route as AuthenticatedNexusRequestsRouteImport } from './routes/_authenticated.nexus.requests'
 import { Route as AuthenticatedNexusDirectoryRouteImport } from './routes/_authenticated.nexus.directory'
 import { Route as AuthenticatedAdminPreviewRouteImport } from './routes/_authenticated.admin.preview'
 import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_authenticated.admin.applications'
@@ -262,10 +264,22 @@ const AuthenticatedPartnerOnboardingRoute =
     path: '/partner/onboarding',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedPartnerIntroductionsRoute =
+  AuthenticatedPartnerIntroductionsRouteImport.update({
+    id: '/partner/introductions',
+    path: '/partner/introductions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedPartnerApplyRoute =
   AuthenticatedPartnerApplyRouteImport.update({
     id: '/partner/apply',
     path: '/partner/apply',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedNexusRequestsRoute =
+  AuthenticatedNexusRequestsRouteImport.update({
+    id: '/nexus/requests',
+    path: '/nexus/requests',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedNexusDirectoryRoute =
@@ -327,7 +341,9 @@ export interface FileRoutesByFullPath {
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/admin/preview': typeof AuthenticatedAdminPreviewRoute
   '/nexus/directory': typeof AuthenticatedNexusDirectoryRoute
+  '/nexus/requests': typeof AuthenticatedNexusRequestsRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/partner/introductions': typeof AuthenticatedPartnerIntroductionsRoute
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
@@ -372,7 +388,9 @@ export interface FileRoutesByTo {
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/admin/preview': typeof AuthenticatedAdminPreviewRoute
   '/nexus/directory': typeof AuthenticatedNexusDirectoryRoute
+  '/nexus/requests': typeof AuthenticatedNexusRequestsRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/partner/introductions': typeof AuthenticatedPartnerIntroductionsRoute
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
@@ -420,7 +438,9 @@ export interface FileRoutesById {
   '/_authenticated/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/_authenticated/admin/preview': typeof AuthenticatedAdminPreviewRoute
   '/_authenticated/nexus/directory': typeof AuthenticatedNexusDirectoryRoute
+  '/_authenticated/nexus/requests': typeof AuthenticatedNexusRequestsRoute
   '/_authenticated/partner/apply': typeof AuthenticatedPartnerApplyRoute
+  '/_authenticated/partner/introductions': typeof AuthenticatedPartnerIntroductionsRoute
   '/_authenticated/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/_authenticated/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/_authenticated/partner/services': typeof AuthenticatedPartnerServicesRoute
@@ -468,7 +488,9 @@ export interface FileRouteTypes {
     | '/admin/applications'
     | '/admin/preview'
     | '/nexus/directory'
+    | '/nexus/requests'
     | '/partner/apply'
+    | '/partner/introductions'
     | '/partner/onboarding'
     | '/partner/profile'
     | '/partner/services'
@@ -513,7 +535,9 @@ export interface FileRouteTypes {
     | '/admin/applications'
     | '/admin/preview'
     | '/nexus/directory'
+    | '/nexus/requests'
     | '/partner/apply'
+    | '/partner/introductions'
     | '/partner/onboarding'
     | '/partner/profile'
     | '/partner/services'
@@ -560,7 +584,9 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/applications'
     | '/_authenticated/admin/preview'
     | '/_authenticated/nexus/directory'
+    | '/_authenticated/nexus/requests'
     | '/_authenticated/partner/apply'
+    | '/_authenticated/partner/introductions'
     | '/_authenticated/partner/onboarding'
     | '/_authenticated/partner/profile'
     | '/_authenticated/partner/services'
@@ -879,11 +905,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPartnerOnboardingRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/partner/introductions': {
+      id: '/_authenticated/partner/introductions'
+      path: '/partner/introductions'
+      fullPath: '/partner/introductions'
+      preLoaderRoute: typeof AuthenticatedPartnerIntroductionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/partner/apply': {
       id: '/_authenticated/partner/apply'
       path: '/partner/apply'
       fullPath: '/partner/apply'
       preLoaderRoute: typeof AuthenticatedPartnerApplyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/nexus/requests': {
+      id: '/_authenticated/nexus/requests'
+      path: '/nexus/requests'
+      fullPath: '/nexus/requests'
+      preLoaderRoute: typeof AuthenticatedNexusRequestsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/nexus/directory': {
@@ -921,7 +961,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
   AuthenticatedAdminPreviewRoute: typeof AuthenticatedAdminPreviewRoute
   AuthenticatedNexusDirectoryRoute: typeof AuthenticatedNexusDirectoryRoute
+  AuthenticatedNexusRequestsRoute: typeof AuthenticatedNexusRequestsRoute
   AuthenticatedPartnerApplyRoute: typeof AuthenticatedPartnerApplyRoute
+  AuthenticatedPartnerIntroductionsRoute: typeof AuthenticatedPartnerIntroductionsRoute
   AuthenticatedPartnerOnboardingRoute: typeof AuthenticatedPartnerOnboardingRoute
   AuthenticatedPartnerProfileRoute: typeof AuthenticatedPartnerProfileRoute
   AuthenticatedPartnerServicesRoute: typeof AuthenticatedPartnerServicesRoute
@@ -938,7 +980,10 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
   AuthenticatedAdminPreviewRoute: AuthenticatedAdminPreviewRoute,
   AuthenticatedNexusDirectoryRoute: AuthenticatedNexusDirectoryRoute,
+  AuthenticatedNexusRequestsRoute: AuthenticatedNexusRequestsRoute,
   AuthenticatedPartnerApplyRoute: AuthenticatedPartnerApplyRoute,
+  AuthenticatedPartnerIntroductionsRoute:
+    AuthenticatedPartnerIntroductionsRoute,
   AuthenticatedPartnerOnboardingRoute: AuthenticatedPartnerOnboardingRoute,
   AuthenticatedPartnerProfileRoute: AuthenticatedPartnerProfileRoute,
   AuthenticatedPartnerServicesRoute: AuthenticatedPartnerServicesRoute,

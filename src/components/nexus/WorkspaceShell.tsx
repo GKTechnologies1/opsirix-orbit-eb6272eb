@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, FileText, KeyRound, LayoutDashboard, ListChecks, LogOut, Search, ShieldCheck, UserRound } from "lucide-react";
+import { Building2, FileText, Inbox, KeyRound, LayoutDashboard, ListChecks, LogOut, Search, ShieldCheck, UserRound } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -38,6 +38,7 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
           <Link to="/partner/apply"><FileText />Application</Link>
           <Link to="/partner/services"><ListChecks />Services</Link>
           <Link to="/partner/profile"><UserRound />Profile</Link>
+          <Link to="/partner/introductions"><Inbox />Introductions</Link>
           {canOnboard && <Link to="/partner/onboarding"><Building2 />Institutions and brokerages</Link>}
           <Link to="/directory"><Search />Directory</Link>
           {isAdmin && <Link to="/admin/applications"><ShieldCheck />Review queue</Link>}

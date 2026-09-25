@@ -2431,3 +2431,20 @@
 
 .announce-text { font-size: 11px; letter-spacing: 0.08em; line-height: 1.35; }
 @media (max-width: 480px) { .announce-text { font-size: 10px; letter-spacing: 0; } }
+
+/* Nexus founder requests and consent */
+.nx-request { border-top: 1px solid var(--color-border, #e2e8f0); padding: 24px 0; }
+.nx-consent { border: 1px solid var(--color-border, #e2e8f0); border-radius: 8px; padding: 20px; margin-top: 16px; display: grid; gap: 12px; }
+.nx-consent h3 { margin: 0; font-size: 18px; }
+.nx-status { font-weight: 600; color: var(--color-brand-blue); margin: 0; }
+.nx-fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+.nx-fieldset legend { font-weight: 600; margin-bottom: 8px; }
+.nx-consent .nx-actions { margin-top: 4px; }
+.nx-feedback { padding: 10px 12px; border-radius: 6px; background: var(--color-surface, #f1f5f9); margin: 0; }
+.nx-link-btn { text-decoration: underline; background: none; border: 0; color: inherit; cursor: pointer; }
+.nx-history summary { cursor: pointer; font-weight: 600; }
+.nx-history ol { padding-left: 20px; display: grid; gap: 4px; }
+.nx-check span { overflow-wrap: anywhere; }
+.ops-intro { margin-top: 24px; display: grid; gap: 12px; }
+.ops-intro-card { border: 1px solid rgba(148,163,184,.3); border-radius: 8px; padding: 14px; display: grid; gap: 8px; }
+.ops-send-review { border-left: 3px solid var(--color-brand-blue); padding: 8px 14px; display: grid; gap: 6px; overflow-wrap: anywhere; }

@@ -115,6 +115,30 @@ export type Database = {
         }
         Relationships: []
       }
+      nexus_consent_versions: {
+        Row: {
+          category_lines: Json
+          consent_template: string
+          created_at: string
+          is_current: boolean
+          version: string
+        }
+        Insert: {
+          category_lines: Json
+          consent_template: string
+          created_at?: string
+          is_current?: boolean
+          version: string
+        }
+        Update: {
+          category_lines?: Json
+          consent_template?: string
+          created_at?: string
+          is_current?: boolean
+          version?: string
+        }
+        Relationships: []
+      }
       nexus_inquiries: {
         Row: {
           acknowledged_at: string
@@ -223,6 +247,147 @@ export type Database = {
             columns: ["inquiry_id"]
             isOneToOne: false
             referencedRelation: "nexus_inquiries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nexus_introduction_events: {
+        Row: {
+          actor_id: string | null
+          created_at: string
+          detail: Json
+          event: string
+          id: string
+          introduction_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          created_at?: string
+          detail?: Json
+          event: string
+          id?: string
+          introduction_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          created_at?: string
+          detail?: Json
+          event?: string
+          id?: string
+          introduction_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nexus_introduction_events_introduction_id_fkey"
+            columns: ["introduction_id"]
+            isOneToOne: false
+            referencedRelation: "nexus_introductions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nexus_introductions: {
+        Row: {
+          authorized_at: string | null
+          category_id: string
+          consent_payload: Json | null
+          consent_payload_hash: string | null
+          consent_text: string | null
+          consent_version: string | null
+          created_at: string
+          decided_at: string | null
+          id: string
+          inquiry_id: string
+          last_send_error: string | null
+          partner_name: string
+          partner_notice_at: string | null
+          partner_notice_status: string | null
+          partner_profile_id: string
+          partner_user_id: string
+          proposed_at: string
+          proposed_by: string
+          selected_fields: string[]
+          send_attempts: number
+          sent_at: string | null
+          sent_by: string | null
+          sent_payload: Json | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          authorized_at?: string | null
+          category_id: string
+          consent_payload?: Json | null
+          consent_payload_hash?: string | null
+          consent_text?: string | null
+          consent_version?: string | null
+          created_at?: string
+          decided_at?: string | null
+          id?: string
+          inquiry_id: string
+          last_send_error?: string | null
+          partner_name: string
+          partner_notice_at?: string | null
+          partner_notice_status?: string | null
+          partner_profile_id: string
+          partner_user_id: string
+          proposed_at?: string
+          proposed_by: string
+          selected_fields?: string[]
+          send_attempts?: number
+          sent_at?: string | null
+          sent_by?: string | null
+          sent_payload?: Json | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          authorized_at?: string | null
+          category_id?: string
+          consent_payload?: Json | null
+          consent_payload_hash?: string | null
+          consent_text?: string | null
+          consent_version?: string | null
+          created_at?: string
+          decided_at?: string | null
+          id?: string
+          inquiry_id?: string
+          last_send_error?: string | null
+          partner_name?: string
+          partner_notice_at?: string | null
+          partner_notice_status?: string | null
+          partner_profile_id?: string
+          partner_user_id?: string
+          proposed_at?: string
+          proposed_by?: string
+          selected_fields?: string[]
+          send_attempts?: number
+          sent_at?: string | null
+          sent_by?: string | null
+          sent_payload?: Json | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nexus_introductions_consent_version_fkey"
+            columns: ["consent_version"]
+            isOneToOne: false
+            referencedRelation: "nexus_consent_versions"
+            referencedColumns: ["version"]
+          },
+          {
+            foreignKeyName: "nexus_introductions_inquiry_id_fkey"
+            columns: ["inquiry_id"]
+            isOneToOne: false
+            referencedRelation: "nexus_inquiries"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "nexus_introductions_partner_profile_id_fkey"
+            columns: ["partner_profile_id"]
+            isOneToOne: false
+            referencedRelation: "partner_profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -1525,6 +1690,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      authorize_nexus_introduction: {
+        Args: { _fields: string[]; _intro: string; _version: string }
+        Returns: undefined
+      }
       can_access_organization: {
         Args: { _organization_id: string; _user_id: string }
         Returns: boolean
@@ -1537,9 +1706,18 @@ export type Database = {
         Args: { _inquiry: string; _user: string }
         Returns: boolean
       }
+      cancel_nexus_introduction: {
+        Args: { _intro: string }
+        Returns: undefined
+      }
       content_assert_admin: { Args: never; Returns: string }
       content_validate: { Args: { _body: Json }; Returns: undefined }
       create_company_workspace: { Args: { _name: string }; Returns: string }
+      decline_nexus_introduction: {
+        Args: { _intro: string }
+        Returns: undefined
+      }
+      founder_nexus_requests: { Args: never; Returns: Json }
       has_active_staff_grant: {
         Args: { _organization_id: string; _user_id: string }
         Returns: boolean
@@ -1569,6 +1747,28 @@ export type Database = {
         Args: { _type: string; _user: string }
         Returns: boolean
       }
+      nexus_build_payload: {
+        Args: { _fields: string[]; _inquiry: string; _partner_name: string }
+        Returns: Json
+      }
+      nexus_can_manage_inquiry: {
+        Args: { _inquiry: string; _user: string }
+        Returns: boolean
+      }
+      nexus_founder_email: { Args: never; Returns: string }
+      nexus_founder_owns: { Args: { _intro: string }; Returns: boolean }
+      nexus_intro_candidates: {
+        Args: { _inquiry: string }
+        Returns: {
+          organization_name: string
+          profile_id: string
+        }[]
+      }
+      nexus_intro_event: {
+        Args: { _detail?: Json; _event: string; _intro: string }
+        Returns: undefined
+      }
+      nexus_is_test_email: { Args: { _email: string }; Returns: boolean }
       nexus_member_directory: {
         Args: never
         Returns: {
@@ -1582,6 +1782,10 @@ export type Database = {
           service_areas: string[]
           state_region: string
         }[]
+      }
+      nexus_partner_eligible: {
+        Args: { _category: string; _is_test: boolean; _profile: string }
+        Returns: boolean
       }
       open_nexus_inquiry: {
         Args: { _inquiry: string }
@@ -1616,8 +1820,21 @@ export type Database = {
         Args: { _organization_id: string; _user_id: string }
         Returns: Database["public"]["Enums"]["organization_member_role"]
       }
+      partner_nexus_introductions: {
+        Args: never
+        Returns: {
+          id: string
+          payload: Json
+          sent_at: string
+        }[]
+      }
       partner_type_is_open: { Args: { _type: string }; Returns: boolean }
+      preview_nexus_send: { Args: { _intro: string }; Returns: Json }
       profile_is_public: { Args: { _user: string }; Returns: boolean }
+      propose_nexus_introduction: {
+        Args: { _inquiry: string; _profile: string }
+        Returns: string
+      }
       public_partner_representatives: {
         Args: never
         Returns: {
@@ -1650,6 +1867,10 @@ export type Database = {
           version: number
         }[]
       }
+      record_nexus_partner_notice: {
+        Args: { _intro: string; _status: string }
+        Returns: undefined
+      }
       rename_company_workspace: {
         Args: { _name: string; _organization_id: string }
         Returns: undefined
@@ -1661,6 +1882,10 @@ export type Database = {
       save_content_draft: {
         Args: { _body: Json; _key: string; _summary: string }
         Returns: string
+      }
+      send_nexus_introduction: {
+        Args: { _hash: string; _intro: string }
+        Returns: Json
       }
       set_nexus_inquiry_status: {
         Args: { _inquiry: string; _status: string }
@@ -1692,6 +1917,7 @@ export type Database = {
         Args: { _enabled: boolean; _role: string; _user_id: string }
         Returns: undefined
       }
+      staff_nexus_introductions: { Args: { _inquiry: string }; Returns: Json }
       submit_nexus_inquiry: {
         Args: {
           _category: string
@@ -1725,6 +1951,10 @@ export type Database = {
       }
       type_id_for_label: { Args: { _label: string }; Returns: string }
       unpublish_content_block: { Args: { _key: string }; Returns: undefined }
+      withdraw_nexus_introduction: {
+        Args: { _intro: string }
+        Returns: undefined
+      }
     }
     Enums: {
       app_role:
