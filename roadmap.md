@@ -36,5 +36,10 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] DevOps handoff v2: staging must use an isolated backend (36 setup steps, storage + email tests, staging vs production variable names)
 - [x] Dual-access TEST account (`test-dual-access@example.test`), workspace switching and permission checks 39/39; Staff search 14/14
 - [x] Auth copy fixes + Opsirix team sign in → /staff; 24/24 role checks
-- [ ] Next phase: remaining founder workflows (requests history detail), then shared company workflows
+- [x] Founder help-request history: details sent, request status, search/filter/sort/pages/row numbers
+- [x] OPX-000001 references: permanent, sequence-assigned (8 simultaneous = 8 distinct), never reused; 12 backfilled by creation date; Admin/CEO search + merge (lower number kept)
+- [x] Partner introductions: private workspace notes, personal read/unread, follow-up flags, search/filter/sort; 33/33 backend boundary checks, 24/24 browser
+- [x] Shared list controls (search, filters, sort, pages, counts, empty states, row numbers) on founder requests, partner introductions, staff requests, OPX search
+- [ ] Shared company workflows next: apply list controls to company history/members; show OPX in staff organization views as they are built
+- [ ] Owner decision: "GK Technologies" (OPX-000012) was created by the Compliance TEST account and is not labeled TEST; keep, rename TEST, or leave
 
