@@ -128,12 +128,13 @@ function MemberList({ members, userId }: { members: Member[]; userId: string }) 
   </div>;
 }
 
-type CompanyEvent = { id: string; summary: string; created_at: string; event_type: string };
+type CompanyEvent = { id: string; summary: string; created_at: string; event_type: string; actor: string };
 const kindLabel = (t: string) => t.replace(/^workspace\./, "").replaceAll(/[._]/g, " ");
 
 function CompanyHistory({ events }: { events: CompanyEvent[] }) {
   const c = useListControls(events, {
-    text: (e) => `${e.summary} ${kindLabel(e.event_type)}`,
+    text: (e) => `${e.summary} ${kindLabel(e.event_type)} ${e.actor}`,
+    date: (e) => e.created_at,
     sorts: [
       { key: "new", label: "Newest first", compare: (a, b) => b.created_at.localeCompare(a.created_at) },
       { key: "old", label: "Oldest first", compare: (a, b) => a.created_at.localeCompare(b.created_at) },
@@ -146,7 +147,7 @@ function CompanyHistory({ events }: { events: CompanyEvent[] }) {
     {events.length > 0 && <ListToolbar c={c} label="Search this company history" placeholder="For example: member, renamed" />}
     <ListSummary c={c} noun={["entry", "entries"]} />
     <ListEmpty c={c}><p className="ops-muted">No activity yet.</p></ListEmpty>
-    {c.visible.map((event, n) => <div className="ops-history-row" key={event.id}><Clock3 /><span><span className="list-rownum">#{c.start + n + 1}</span>{event.summary}</span><time>{new Date(event.created_at).toLocaleString()}</time></div>)}
+    {c.visible.map((event, n) => <div className="ops-history-row" key={event.id}><Clock3 /><span><span className="list-rownum">#{c.start + n + 1}</span>{event.summary}<small className="ops-muted" style={{ display: "block" }}>{kindLabel(event.event_type)} · by {event.actor}</small></span><time>{new Date(event.created_at).toLocaleString()}</time></div>)}
     <ListPager c={c} />
   </div>;
 }
