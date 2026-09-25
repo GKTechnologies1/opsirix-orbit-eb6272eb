@@ -132,7 +132,7 @@ export const getAdminOverview = createServerFn({ method: "GET" })
       suggestionsPending: n(sug.data, (r) => r.status === "pending"),
       inquiriesOpen: n(inq.data, (r) => r.status !== "closed"),
       inquiriesUnassigned: n(inq.data, (r) => r.status !== "closed" && !assigned.has(r.id)),
-      complianceTasks: n(asg.data, (r) => !r.revoked_at && r.purpose === "compliance_review"),
+      complianceTasks: n(asg.data, (r) => !r.revoked_at && r.purpose === "review_task"),
       types: (ptypes.data ?? []).map((t) => ({
         id: t.id, label: t.label, open: t.is_open_for_registration,
         claimsPending: n(types.data, (r) => r.partner_type_id === t.id && r.review_status === "pending"),
