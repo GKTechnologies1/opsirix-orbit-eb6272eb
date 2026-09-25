@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
@@ -319,7 +320,7 @@ export function Navbar() {
         </motion.div>
       </header>
 
-      <AnimatePresence>
+      {typeof document !== "undefined" && createPortal(<AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ y: -300, opacity: 0 }}
@@ -468,7 +469,7 @@ export function Navbar() {
             </div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>, document.body)}
     </>
   );
 }
