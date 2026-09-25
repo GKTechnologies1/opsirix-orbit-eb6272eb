@@ -72,11 +72,11 @@ function IntroCard({ req, intro, consent, onDone }: { req: FounderRequest; intro
     <p className="nx-status">{STATUS[intro.status] ?? intro.status}</p>
     {msg && <p className="nx-feedback" role="status">{msg}</p>}
     {open && consent && <>
-      <p>Opsirix reviewed your request and suggests introducing you to <strong>{intro.partner_name}</strong>, a {NEXUS_CATEGORY_COPY[req.category_id]?.option.toLowerCase()} in the Opsirix Nexus network.</p>
+      <p>Opsirix reviewed your request and suggests introducing you to <strong>{intro.partner_name}</strong>, a partner in the Opsirix Nexus {NEXUS_CATEGORY_COPY[req.category_id]?.title ?? req.category_id} category.</p>
       <p><strong>Why we're suggesting this:</strong> your request asked for help in this category, and this partner offers services in it. This is not an endorsement or a promise of a response, eligibility, quote, coverage, admission or outcome. Opsirix does not give legal, tax, banking, insurance or immigration advice.</p>
       {categoryLine && <p>{categoryLine}</p>}
       <fieldset className="nx-fieldset"><legend>Choose what Opsirix may share with {intro.partner_name}. Nothing is shared unless you tick it.</legend>
-        {values.map(([k, v]) => v ? <label key={k} className="nx-check"><input type="checkbox" checked={sel.includes(k)} onChange={() => toggle(k)} /><span>{FIELD_LABEL[k]}{k === "location" || k === "description" ? " (optional)" : ""}: "{v}"</span></label>
+        {values.map(([k, v]) => v ? <label key={k} className="nx-check"><input type="checkbox" checked={sel.includes(k)} onChange={() => toggle(k)} /><span>{FIELD_LABEL[k]}{k === "name" || k === "location" || k === "description" ? " (optional)" : ""}: "{v}"</span></label>
           : k === "phone" ? <p key={k} className="nx-help">You did not give a phone number.</p> : null)}
       </fieldset>
       <p className="nx-help">You must select your email address or phone number so the partner can reply. Your name is optional.{!req.phone ? " If you did not give a phone number, select your email address." : ""}</p>
