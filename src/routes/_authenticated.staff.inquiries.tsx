@@ -33,6 +33,8 @@ function StaffInquiries() {
   const [loadError, setLoadError] = useState(false);
   const [detail, setDetail] = useState<Detail | null>(null);
   const [message, setMessage] = useState("");
+  const [filter, setFilter] = useState("");
+
   const refresh = useCallback(async () => {
     try { setData(await list()); setLoadError(false); } catch { setLoadError(true); }
   }, [list]);
