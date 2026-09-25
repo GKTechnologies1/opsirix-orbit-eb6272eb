@@ -1882,6 +1882,18 @@ export type Database = {
         Args: { _intro: string }
         Returns: undefined
       }
+      company_history_view: {
+        Args: { _organization_id: string }
+        Returns: {
+          actor: string
+          created_at: string
+          details: Json
+          event_type: string
+          id: string
+          organization_id: string
+          summary: string
+        }[]
+      }
       company_member_people: {
         Args: { _organization_id: string }
         Returns: {
