@@ -2427,3 +2427,4 @@
 .content-preview { margin-top: 20px; border: 1px dashed var(--border-cyan); overflow: hidden; }
 .content-preview > .ops-panel-kicker { padding: 12px 16px 0; }
 .ops-panel .content-preview h2.partner-h2, .ops-panel .content-preview h4.partner-card-title { color: #071B33; }
+.ops-panel .content-preview h2.partner-h2 { font: 600 clamp(28px, 3.4vw, 42px)/1.18 "Sora", sans-serif; letter-spacing: -0.02em; margin: 0; }
