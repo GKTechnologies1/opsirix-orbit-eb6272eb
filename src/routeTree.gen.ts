@@ -36,15 +36,18 @@ import { Route as PlatformGridRouteImport } from './routes/platform.grid'
 import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
 import { Route as PlatformCoreRouteImport } from './routes/platform.core'
 import { Route as PlatformAiRouteImport } from './routes/platform.ai'
+import { Route as NexusHelpRouteImport } from './routes/nexus.help'
 import { Route as JoinCodeRouteImport } from './routes/join.$code'
 import { Route as AuthenticatedWorkspaceIndexRouteImport } from './routes/_authenticated.workspace.index'
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated.staff.index'
 import { Route as AuthenticatedPartnerIndexRouteImport } from './routes/_authenticated.partner.index'
+import { Route as AuthenticatedStaffInquiriesRouteImport } from './routes/_authenticated.staff.inquiries'
 import { Route as AuthenticatedStaffAccessRouteImport } from './routes/_authenticated.staff.access'
 import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_authenticated.partner.services'
 import { Route as AuthenticatedPartnerProfileRouteImport } from './routes/_authenticated.partner.profile'
 import { Route as AuthenticatedPartnerOnboardingRouteImport } from './routes/_authenticated.partner.onboarding'
 import { Route as AuthenticatedPartnerApplyRouteImport } from './routes/_authenticated.partner.apply'
+import { Route as AuthenticatedNexusDirectoryRouteImport } from './routes/_authenticated.nexus.directory'
 import { Route as AuthenticatedAdminPreviewRouteImport } from './routes/_authenticated.admin.preview'
 import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_authenticated.admin.applications'
 import { Route as AuthenticatedAdminReviewIdRouteImport } from './routes/_authenticated.admin.review.$id'
@@ -183,6 +186,11 @@ const PlatformAiRoute = PlatformAiRouteImport.update({
   path: '/ai',
   getParentRoute: () => PlatformRoute,
 } as any)
+const NexusHelpRoute = NexusHelpRouteImport.update({
+  id: '/nexus/help',
+  path: '/nexus/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JoinCodeRoute = JoinCodeRouteImport.update({
   id: '/join/$code',
   path: '/join/$code',
@@ -203,6 +211,12 @@ const AuthenticatedPartnerIndexRoute =
   AuthenticatedPartnerIndexRouteImport.update({
     id: '/partner/',
     path: '/partner/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedStaffInquiriesRoute =
+  AuthenticatedStaffInquiriesRouteImport.update({
+    id: '/staff/inquiries',
+    path: '/staff/inquiries',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedStaffAccessRoute =
@@ -233,6 +247,12 @@ const AuthenticatedPartnerApplyRoute =
   AuthenticatedPartnerApplyRouteImport.update({
     id: '/partner/apply',
     path: '/partner/apply',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedNexusDirectoryRoute =
+  AuthenticatedNexusDirectoryRouteImport.update({
+    id: '/nexus/directory',
+    path: '/nexus/directory',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminPreviewRoute =
@@ -272,6 +292,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/join/$code': typeof JoinCodeRoute
+  '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
   '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
@@ -284,11 +305,13 @@ export interface FileRoutesByFullPath {
   '/platform/': typeof PlatformIndexRoute
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/admin/preview': typeof AuthenticatedAdminPreviewRoute
+  '/nexus/directory': typeof AuthenticatedNexusDirectoryRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/staff/access': typeof AuthenticatedStaffAccessRoute
+  '/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
   '/partner/': typeof AuthenticatedPartnerIndexRoute
   '/staff/': typeof AuthenticatedStaffIndexRoute
   '/workspace/': typeof AuthenticatedWorkspaceIndexRoute
@@ -311,6 +334,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/join/$code': typeof JoinCodeRoute
+  '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
   '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
@@ -323,11 +347,13 @@ export interface FileRoutesByTo {
   '/platform': typeof PlatformIndexRoute
   '/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/admin/preview': typeof AuthenticatedAdminPreviewRoute
+  '/nexus/directory': typeof AuthenticatedNexusDirectoryRoute
   '/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/staff/access': typeof AuthenticatedStaffAccessRoute
+  '/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
   '/partner': typeof AuthenticatedPartnerIndexRoute
   '/staff': typeof AuthenticatedStaffIndexRoute
   '/workspace': typeof AuthenticatedWorkspaceIndexRoute
@@ -353,6 +379,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/join/$code': typeof JoinCodeRoute
+  '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
   '/platform/core': typeof PlatformCoreRoute
   '/platform/flow': typeof PlatformFlowRoute
@@ -365,11 +392,13 @@ export interface FileRoutesById {
   '/platform/': typeof PlatformIndexRoute
   '/_authenticated/admin/applications': typeof AuthenticatedAdminApplicationsRoute
   '/_authenticated/admin/preview': typeof AuthenticatedAdminPreviewRoute
+  '/_authenticated/nexus/directory': typeof AuthenticatedNexusDirectoryRoute
   '/_authenticated/partner/apply': typeof AuthenticatedPartnerApplyRoute
   '/_authenticated/partner/onboarding': typeof AuthenticatedPartnerOnboardingRoute
   '/_authenticated/partner/profile': typeof AuthenticatedPartnerProfileRoute
   '/_authenticated/partner/services': typeof AuthenticatedPartnerServicesRoute
   '/_authenticated/staff/access': typeof AuthenticatedStaffAccessRoute
+  '/_authenticated/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
   '/_authenticated/partner/': typeof AuthenticatedPartnerIndexRoute
   '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute
   '/_authenticated/workspace/': typeof AuthenticatedWorkspaceIndexRoute
@@ -395,6 +424,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/join/$code'
+    | '/nexus/help'
     | '/platform/ai'
     | '/platform/core'
     | '/platform/flow'
@@ -407,11 +437,13 @@ export interface FileRouteTypes {
     | '/platform/'
     | '/admin/applications'
     | '/admin/preview'
+    | '/nexus/directory'
     | '/partner/apply'
     | '/partner/onboarding'
     | '/partner/profile'
     | '/partner/services'
     | '/staff/access'
+    | '/staff/inquiries'
     | '/partner/'
     | '/staff/'
     | '/workspace/'
@@ -434,6 +466,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/join/$code'
+    | '/nexus/help'
     | '/platform/ai'
     | '/platform/core'
     | '/platform/flow'
@@ -446,11 +479,13 @@ export interface FileRouteTypes {
     | '/platform'
     | '/admin/applications'
     | '/admin/preview'
+    | '/nexus/directory'
     | '/partner/apply'
     | '/partner/onboarding'
     | '/partner/profile'
     | '/partner/services'
     | '/staff/access'
+    | '/staff/inquiries'
     | '/partner'
     | '/staff'
     | '/workspace'
@@ -475,6 +510,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/join/$code'
+    | '/nexus/help'
     | '/platform/ai'
     | '/platform/core'
     | '/platform/flow'
@@ -487,11 +523,13 @@ export interface FileRouteTypes {
     | '/platform/'
     | '/_authenticated/admin/applications'
     | '/_authenticated/admin/preview'
+    | '/_authenticated/nexus/directory'
     | '/_authenticated/partner/apply'
     | '/_authenticated/partner/onboarding'
     | '/_authenticated/partner/profile'
     | '/_authenticated/partner/services'
     | '/_authenticated/staff/access'
+    | '/_authenticated/staff/inquiries'
     | '/_authenticated/partner/'
     | '/_authenticated/staff/'
     | '/_authenticated/workspace/'
@@ -517,6 +555,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   JoinCodeRoute: typeof JoinCodeRoute
+  NexusHelpRoute: typeof NexusHelpRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -710,6 +749,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformAiRouteImport
       parentRoute: typeof PlatformRoute
     }
+    '/nexus/help': {
+      id: '/nexus/help'
+      path: '/nexus/help'
+      fullPath: '/nexus/help'
+      preLoaderRoute: typeof NexusHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/join/$code': {
       id: '/join/$code'
       path: '/join/$code'
@@ -736,6 +782,13 @@ declare module '@tanstack/react-router' {
       path: '/partner'
       fullPath: '/partner/'
       preLoaderRoute: typeof AuthenticatedPartnerIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/staff/inquiries': {
+      id: '/_authenticated/staff/inquiries'
+      path: '/staff/inquiries'
+      fullPath: '/staff/inquiries'
+      preLoaderRoute: typeof AuthenticatedStaffInquiriesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/staff/access': {
@@ -773,6 +826,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPartnerApplyRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/nexus/directory': {
+      id: '/_authenticated/nexus/directory'
+      path: '/nexus/directory'
+      fullPath: '/nexus/directory'
+      preLoaderRoute: typeof AuthenticatedNexusDirectoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/preview': {
       id: '/_authenticated/admin/preview'
       path: '/admin/preview'
@@ -800,11 +860,13 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
   AuthenticatedAdminPreviewRoute: typeof AuthenticatedAdminPreviewRoute
+  AuthenticatedNexusDirectoryRoute: typeof AuthenticatedNexusDirectoryRoute
   AuthenticatedPartnerApplyRoute: typeof AuthenticatedPartnerApplyRoute
   AuthenticatedPartnerOnboardingRoute: typeof AuthenticatedPartnerOnboardingRoute
   AuthenticatedPartnerProfileRoute: typeof AuthenticatedPartnerProfileRoute
   AuthenticatedPartnerServicesRoute: typeof AuthenticatedPartnerServicesRoute
   AuthenticatedStaffAccessRoute: typeof AuthenticatedStaffAccessRoute
+  AuthenticatedStaffInquiriesRoute: typeof AuthenticatedStaffInquiriesRoute
   AuthenticatedPartnerIndexRoute: typeof AuthenticatedPartnerIndexRoute
   AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute
   AuthenticatedWorkspaceIndexRoute: typeof AuthenticatedWorkspaceIndexRoute
@@ -814,11 +876,13 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
   AuthenticatedAdminPreviewRoute: AuthenticatedAdminPreviewRoute,
+  AuthenticatedNexusDirectoryRoute: AuthenticatedNexusDirectoryRoute,
   AuthenticatedPartnerApplyRoute: AuthenticatedPartnerApplyRoute,
   AuthenticatedPartnerOnboardingRoute: AuthenticatedPartnerOnboardingRoute,
   AuthenticatedPartnerProfileRoute: AuthenticatedPartnerProfileRoute,
   AuthenticatedPartnerServicesRoute: AuthenticatedPartnerServicesRoute,
   AuthenticatedStaffAccessRoute: AuthenticatedStaffAccessRoute,
+  AuthenticatedStaffInquiriesRoute: AuthenticatedStaffInquiriesRoute,
   AuthenticatedPartnerIndexRoute: AuthenticatedPartnerIndexRoute,
   AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute,
   AuthenticatedWorkspaceIndexRoute: AuthenticatedWorkspaceIndexRoute,
@@ -877,6 +941,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   JoinCodeRoute: JoinCodeRoute,
+  NexusHelpRoute: NexusHelpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

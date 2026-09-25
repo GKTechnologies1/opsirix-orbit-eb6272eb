@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, History, LogOut, ShieldCheck } from "lucide-react";
+import { Building2, History, Inbox, LogOut, ShieldCheck } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -35,6 +35,7 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
         <Link to="/workspace"><Building2 />Companies</Link>
         {mode === "company" && <Link to="/workspace"><History />History</Link>}
         {staff && <Link to="/staff"><ShieldCheck />Staff Console</Link>}
+        {staff && mode === "staff" && <Link to="/staff/inquiries"><Inbox />Nexus inquiries</Link>}
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
       </nav>
       <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>

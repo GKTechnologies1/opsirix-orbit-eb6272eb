@@ -115,6 +115,118 @@ export type Database = {
         }
         Relationships: []
       }
+      nexus_inquiries: {
+        Row: {
+          acknowledged_at: string
+          category_id: string
+          client_hash: string | null
+          contact_consent_at: string
+          created_at: string
+          description: string
+          disclosure_version: string
+          email: string
+          email_hash: string
+          full_name: string
+          id: string
+          is_test: boolean
+          location: string | null
+          phone: string | null
+          source: string
+          status: string
+          triage_role: string
+          updated_at: string
+        }
+        Insert: {
+          acknowledged_at: string
+          category_id: string
+          client_hash?: string | null
+          contact_consent_at: string
+          created_at?: string
+          description: string
+          disclosure_version: string
+          email: string
+          email_hash: string
+          full_name: string
+          id?: string
+          is_test?: boolean
+          location?: string | null
+          phone?: string | null
+          source?: string
+          status?: string
+          triage_role?: string
+          updated_at?: string
+        }
+        Update: {
+          acknowledged_at?: string
+          category_id?: string
+          client_hash?: string | null
+          contact_consent_at?: string
+          created_at?: string
+          description?: string
+          disclosure_version?: string
+          email?: string
+          email_hash?: string
+          full_name?: string
+          id?: string
+          is_test?: boolean
+          location?: string | null
+          phone?: string | null
+          source?: string
+          status?: string
+          triage_role?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nexus_inquiries_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "service_partner_types"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      nexus_inquiry_assignments: {
+        Row: {
+          assigned_by: string
+          assignee_id: string
+          created_at: string
+          id: string
+          inquiry_id: string
+          purpose: string
+          revoked_at: string | null
+          revoked_by: string | null
+        }
+        Insert: {
+          assigned_by: string
+          assignee_id: string
+          created_at?: string
+          id?: string
+          inquiry_id: string
+          purpose: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+        }
+        Update: {
+          assigned_by?: string
+          assignee_id?: string
+          created_at?: string
+          id?: string
+          inquiry_id?: string
+          purpose?: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "nexus_inquiry_assignments_inquiry_id_fkey"
+            columns: ["inquiry_id"]
+            isOneToOne: false
+            referencedRelation: "nexus_inquiries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organization_members: {
         Row: {
           added_by: string
@@ -1300,12 +1412,25 @@ export type Database = {
         Args: { _type: string; _uid: string }
         Returns: undefined
       }
+      assign_nexus_inquiry: {
+        Args: {
+          _assignee_email: string
+          _enabled: boolean
+          _inquiry: string
+          _purpose: string
+        }
+        Returns: undefined
+      }
       can_access_organization: {
         Args: { _organization_id: string; _user_id: string }
         Returns: boolean
       }
       can_register_type: {
         Args: { _type: string; _uid: string }
+        Returns: boolean
+      }
+      can_view_nexus_inquiry: {
+        Args: { _inquiry: string; _user: string }
         Returns: boolean
       }
       create_company_workspace: { Args: { _name: string }; Returns: string }
@@ -1338,6 +1463,49 @@ export type Database = {
         Args: { _type: string; _user: string }
         Returns: boolean
       }
+      nexus_member_directory: {
+        Args: never
+        Returns: {
+          category_ids: string[]
+          category_labels: string[]
+          city: string
+          display_name: string
+          organization_name: string
+          professional_summary: string
+          profile_id: string
+          service_areas: string[]
+          state_region: string
+        }[]
+      }
+      open_nexus_inquiry: {
+        Args: { _inquiry: string }
+        Returns: {
+          acknowledged_at: string
+          category_id: string
+          client_hash: string | null
+          contact_consent_at: string
+          created_at: string
+          description: string
+          disclosure_version: string
+          email: string
+          email_hash: string
+          full_name: string
+          id: string
+          is_test: boolean
+          location: string | null
+          phone: string | null
+          source: string
+          status: string
+          triage_role: string
+          updated_at: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "nexus_inquiries"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       organization_role: {
         Args: { _organization_id: string; _user_id: string }
         Returns: Database["public"]["Enums"]["organization_member_role"]
@@ -1368,6 +1536,10 @@ export type Database = {
         Args: { _name: string; _organization_id: string }
         Returns: undefined
       }
+      set_nexus_inquiry_status: {
+        Args: { _inquiry: string; _status: string }
+        Returns: undefined
+      }
       set_organization_member: {
         Args: { _organization_id: string; _role: string; _user_id: string }
         Returns: undefined
@@ -1393,6 +1565,19 @@ export type Database = {
       set_staff_role: {
         Args: { _enabled: boolean; _role: string; _user_id: string }
         Returns: undefined
+      }
+      submit_nexus_inquiry: {
+        Args: {
+          _category: string
+          _client_hash: string
+          _description: string
+          _disclosure_version: string
+          _email: string
+          _full_name: string
+          _location: string
+          _phone: string
+        }
+        Returns: string
       }
       type_evidence_ok: {
         Args: { _application: string; _type: string }

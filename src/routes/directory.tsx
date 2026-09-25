@@ -1,37 +1,35 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
-import { MapPin, Search } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import type { Database } from "@/integrations/supabase/types";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
+import { NEXUS_ACCOUNT_DATA_NOTICE } from "@/lib/nexus-discovery";
 
-type PartnerProfile = Database["public"]["Tables"]["partner_profiles"]["Row"];
+const TITLE = "Nexus Member Directory | Opsirix";
+const DESC = "Create a free Opsirix account to browse approved Nexus profiles. No purchase, founder intake, or company workspace required.";
 
 export const Route = createFileRoute("/directory")({
   head: () => ({ meta: [
-    { title: "Nexus Partner Directory | Opsirix" },
-    { name: "description", content: "Find approved professionals in the Opsirix Nexus partner network." },
-    { property: "og:title", content: "Nexus Partner Directory | Opsirix" },
-    { property: "og:description", content: "Find approved professionals in the Opsirix Nexus partner network." },
+    { title: TITLE },
+    { name: "description", content: DESC },
+    { property: "og:title", content: TITLE },
+    { property: "og:description", content: DESC },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary" },
   ] }),
-  component: DirectoryPage,
+  component: DirectoryIntro,
 });
 
-function DirectoryPage() {
-  const [profiles, setProfiles] = useState<PartnerProfile[]>([]);
-  const [query, setQuery] = useState("");
-  const [types, setTypes] = useState<Record<string, string[]>>({});
-  useEffect(() => {
-    supabase.from("partner_profiles").select("*").eq("is_published", true).then(({ data }) => setProfiles(data ?? []));
-    // Only types that passed their own review are returned here; self-described text is never shown as a type.
-    Promise.all([supabase.from("partner_listing_types").select("user_id, partner_type_id"), supabase.from("service_partner_types").select("id, label")]).then(([lt, pt]) => {
-      const labels = new Map((pt.data ?? []).map((t) => [t.id, t.label]));
-      const map: Record<string, string[]> = {};
-      for (const row of lt.data ?? []) (map[row.user_id] ??= []).push(labels.get(row.partner_type_id) ?? row.partner_type_id);
-      setTypes(map);
-    });
-  }, []);
-  const visible = useMemo(() => profiles.filter((profile) => `${profile.display_name} ${profile.organization_name} ${(types[profile.user_id] ?? []).join(" ")} ${profile.city} ${profile.state_region} ${profile.service_areas.join(" ")}`.toLowerCase().includes(query.toLowerCase())), [profiles, query, types]);
-  return <main className="nexus-directory"><header><div className="nexus-public-wrap"><p className="nexus-kicker">Nexus directory</p><h1>Find the right professional for the work.</h1><p>Browse approved Nexus profiles. Professionals work independently and provide services under their own engagement terms.</p><label className="nexus-search"><Search /><span className="sr-only">Search partner directory</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search by service, location, or organization" /></label></div></header><section className="nexus-public-wrap nexus-directory-results" aria-live="polite">{visible.length ? <div className="nexus-directory-grid">{visible.map((profile) => <article key={profile.id} className="nexus-directory-card"><span>{(types[profile.user_id] ?? []).join(" · ")}</span><h2>{profile.display_name}</h2><h3>{profile.organization_name}</h3>{(profile.city || profile.state_region) && <p className="nexus-location"><MapPin />{[profile.city, profile.state_region].filter(Boolean).join(", ")}</p>}<p>{profile.professional_summary}</p><ul>{profile.service_areas.map((area) => <li key={area}>{area}</li>)}</ul></article>)}</div> : <div className="nexus-empty"><Search /><h2>No published profiles found</h2><p>{query ? "Try a broader search." : "Approved profiles will appear here when partners choose to publish."}</p></div>}</section></main>;
+function DirectoryIntro() {
+  return (
+    <main className="nx-page">
+      <div className="nx-wrap nx-narrow">
+        <p className="nexus-kicker">Nexus directory</p>
+        <h1>Browse approved Nexus profiles with a free account.</h1>
+        <p className="nx-intro">A free account lets you browse and filter approved Nexus profiles. It does not enroll you in another Opsirix service or create a company workspace.</p>
+        <section className="nx-panel"><h2>What we collect for a free account</h2><p>{NEXUS_ACCOUNT_DATA_NOTICE}</p></section>
+        <div className="nx-actions">
+          <Link to="/auth" search={{ next: "/nexus/directory", purpose: "directory" }} className="nx-btn nx-btn--primary">Create a free account or sign in <ArrowRight size={16} /></Link>
+          <Link to="/nexus/help" className="nx-btn">Ask for help without an account</Link>
+        </div>
+      </div>
+    </main>
+  );
 }
