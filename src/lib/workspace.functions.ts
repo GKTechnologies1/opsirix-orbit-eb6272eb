@@ -124,7 +124,7 @@ export const getAdminOverview = createServerFn({ method: "GET" })
       applications: { submitted: n(apps.data, (r) => r.status === "submitted" || r.status === "under_review"), changes: n(apps.data, (r) => r.status === "changes_requested"), draft: n(apps.data, (r) => r.status === "draft"), approved: n(apps.data, (r) => r.status === "approved") },
       credentialsPending: n(cred.data, (r) => r.status === "pending"),
       authorityPending: n(track.data, (r) => r.authority_review_status === "pending"),
-      universityAgreementMissing: n(track.data, (r) => r.track === "university" && r.agreement_status !== "recorded"),
+      universityAgreementMissing: n(track.data, (r) => r.track === "institution" && r.agreement_status !== "recorded"),
       licensesPending: n(lic.data, (r) => r.review_status === "pending"),
       licensesExpired: n(lic.data, (r) => !!r.expires_on && r.expires_on < today),
       profileEditsPending: n(revs.data, (r) => r.status === "submitted"),
