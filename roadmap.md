@@ -17,7 +17,8 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Terms acknowledgement — blocked: versions/wording; rate-limit cleanup — blocked: retention policy
 - [x] Content & Catalog portal (homepage Nexus section + catalog controls) built and tested in preview
 - [x] Portal: homepage common questions (1-12 Q&A, reorder, preview, long-dash check); draft/publish/restore/unpublish 19/19, editor 8/8 desktop+390 (2 false alarms from test wording, confirmed by screenshot); left unpublished, built-in text shows
-- [ ] Portal: next sections one at a time (Founders page intro, Partners page, Nexus page FAQ); ready
+- [x] Portal fixes: FAQ preview heading visible, reorder buttons in a row at 390px, long-dash block removed (was a style rule, not technical); FAQ 19/19 backend + 8/8 browser rerun
+- [x] Portal: Founders intro, Partners intro, Nexus questions (hidden until published; no new public wording); 37/37 backend, 12/12 browser; all left unpublished
 - [x] Audit search in Staff Console (Admin/CEO only) + request search; founder company history search
 - [ ] Connect GitHub and opsirix.com — owner action
 - [x] Announcement bar broadened; founder card line icons
