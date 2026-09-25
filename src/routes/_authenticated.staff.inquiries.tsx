@@ -45,7 +45,7 @@ function StaffInquiries() {
   async function changeAssignment(e: FormEvent<HTMLFormElement>, id: string) {
     e.preventDefault();
     const form = e.currentTarget;
-    const v = new FormData(form);
+    const v = new FormData(form, (e.nativeEvent as SubmitEvent).submitter);
     const r = await assign({ data: { id, email: String(v.get("email") ?? ""), purpose: String(v.get("purpose")) as "triage" | "review_task", enabled: v.get("action") !== "remove" } });
     setMessage(r.success ? "Assignment updated." : r.error);
     if (r.success) form.reset();

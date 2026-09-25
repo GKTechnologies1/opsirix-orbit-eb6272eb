@@ -29,7 +29,7 @@ function StaffAccess() {
   async function update(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const values = new FormData(form);
+    const values = new FormData(form, (e.nativeEvent as SubmitEvent).submitter);
     const result = await setAccess({ data: { email: String(values.get("email") ?? ""), role: String(values.get("role")) as "operations_lead" | "compliance_coordinator", enabled: values.get("action") === "grant" } });
     setMessage(result.success ? "Staff access updated." : result.error);
     if (result.success) form.reset();

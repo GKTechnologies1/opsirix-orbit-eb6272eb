@@ -51,7 +51,7 @@ function CompanyWorkspaces() {
   async function updateStaffGrant(e: FormEvent<HTMLFormElement>, organizationId: string) {
     e.preventDefault();
     const form = e.currentTarget;
-    const values = new FormData(form);
+    const values = new FormData(form, (e.nativeEvent as SubmitEvent).submitter);
     const expires = String(values.get("expires") ?? "");
     const result = await setStaffGrant({ data: {
       organizationId,
