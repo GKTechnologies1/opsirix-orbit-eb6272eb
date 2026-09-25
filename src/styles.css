@@ -2454,5 +2454,7 @@
 .account-hub-item:hover, .account-hub-item:focus-visible { border-color: var(--primary); }
 .account-hub-item span { display: grid; gap: 2px; }
 .account-hub-item small { opacity: 0.75; }
-.site-header .nav-auth-link { font-size: 13.5px; color: var(--text-secondary, inherit); text-decoration: none; padding: 8px 10px; }
+.site-header .nav-auth-link { font-size: 13.5px; font-weight: 500; color: rgba(255,255,255,0.85); text-decoration: none; padding: 8px 10px; }
 .site-header .nav-auth-link:hover { text-decoration: underline; }
+
+.site-header a.btn-secondary, .nav-auth-mobile a.btn-secondary { color: rgba(255,255,255,0.9); }

@@ -476,7 +476,7 @@ export function Navbar() {
               })}
             </nav>
 
-            <div style={{ padding: "24px", display: "grid", gap: 12 }}>
+            <div className="nav-auth-mobile" style={{ padding: "24px", display: "grid", gap: 12 }}>
               {signedIn ? (
                 <Link to="/account" onClick={() => setMobileOpen(false)} className="btn btn-secondary w-full justify-center" style={{ display: "flex" }}>My workspace</Link>
               ) : (
