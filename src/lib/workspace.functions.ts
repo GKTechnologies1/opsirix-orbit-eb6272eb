@@ -199,3 +199,33 @@ export const getAdminOverview = createServerFn({ method: "GET" })
       content: { drafts: n(cver.data, (r) => r.status === "draft"), published: n(cver.data, (r) => r.status === "published"), catalogChanges: cchg.data ?? [] },
     };
   });
+
+const formatOpx = (n: number) => `OPX-${String(n).padStart(6, "0")}`;
+
+/** OPX references the signed-in account may see (RLS: own organizations, own application, Admin/CEO all). */
+export const getMyOpxReferences = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { data: app } = await context.supabase.from("partner_applications").select("id").eq("user_id", context.userId).maybeSingle();
+    const { data: members } = await context.supabase.from("organization_members").select("organization_id").eq("user_id", context.userId);
+    const orgIds = (members ?? []).map((m) => m.organization_id);
+    const filters = [...orgIds.map((id) => `organization_id.eq.${id}`), ...(app ? [`partner_application_id.eq.${app.id}`] : [])];
+    if (!filters.length) return { organizations: {} as Record<string, string>, application: null as string | null };
+    const { data } = await context.supabase.from("opx_references").select("number,organization_id,partner_application_id").is("merged_into", null).or(filters.join(","));
+    const organizations: Record<string, string> = {};
+    let application: string | null = null;
+    for (const r of data ?? []) {
+      if (r.organization_id) organizations[r.organization_id] = formatOpx(r.number);
+      if (app && r.partner_application_id === app.id) application = formatOpx(r.number);
+    }
+    return { organizations, application };
+  });
+
+export const searchOpxReferences = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: unknown) => z.object({ q: z.string().trim().max(120) }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { data: rows, error } = await context.supabase.rpc("admin_search_opx", { _q: data.q });
+    if (error) return { allowed: false as const, rows: [] };
+    return { allowed: true as const, rows: rows ?? [] };
+  });
