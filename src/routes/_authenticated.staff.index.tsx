@@ -33,7 +33,7 @@ type Overview = NonNullable<Awaited<ReturnType<typeof getAdminOverview>>>;
 type QueueTo = "/admin/applications" | "/staff/inquiries";
 
 function Queue({ label, value, to, note }: { label: string; value: number; to: QueueTo; note?: string }) {
-  return <article><span>{label}</span><strong>{value}</strong>{note && <small className="ops-muted">{note}</small>}<Link to={to}>Open <ArrowRight /></Link></article>;
+  return <article><span>{label}</span><strong>{value}</strong>{note && <small className="ops-muted" style={{ display: "block" }}>{note}</small>}<Link to={to}>Open <ArrowRight /></Link></article>;
 }
 
 function AdminOverview() {
