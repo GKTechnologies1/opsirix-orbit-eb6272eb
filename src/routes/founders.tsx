@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { FolderOpen, CalendarClock, Link2, BarChart3 } from "lucide-react";
+import { getPublishedContent } from "@/lib/content.functions";
 import { PageHeader } from "@/components/shared/PageHeader";
 
 const TITLE = "Opsirix for Founders and Business Owners | Operations Support";
@@ -18,6 +19,9 @@ export const Route = createFileRoute("/founders")({
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/founders" }],
   }),
+  loader: async () => (await getPublishedContent({ data: { keys: ["founders.intro"] } }))["founders.intro"] ?? null,
+  errorComponent: () => <main className="inner-page"><h1>This page is temporarily unavailable.</h1></main>,
+  notFoundComponent: () => <main className="inner-page"><h1>Page not found.</h1></main>,
   component: Page,
 });
 
@@ -74,13 +78,14 @@ const PROFESSIONALS = [
 
 
 function Page() {
+  const intro = Route.useLoaderData();
   return (
     <div className="inner-page">
       <PageHeader
         pageName="Founders"
         label="For Founders"
-        title="Operational support for founders and business owners."
-        subtitle="Opsirix helps founders and business owners organize documents, workflows, and professional coordination so they can focus on building. Every founder is welcome, whatever their background."
+        title={intro?.heading ?? "Operational support for founders and business owners."}
+        subtitle={intro?.body ?? "Opsirix helps founders and business owners organize documents, workflows, and professional coordination so they can focus on building. Every founder is welcome, whatever their background."}
       />
 
       <section className="inner-section">

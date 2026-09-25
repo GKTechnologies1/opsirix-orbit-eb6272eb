@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { getPublishedContent } from "@/lib/content.functions";
 import { PageHeader } from "@/components/shared/PageHeader";
 
 export const Route = createFileRoute("/for-partners")({
@@ -12,6 +13,9 @@ export const Route = createFileRoute("/for-partners")({
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/for-partners" }],
   }),
+  loader: async () => (await getPublishedContent({ data: { keys: ["partners.intro"] } }))["partners.intro"] ?? null,
+  errorComponent: () => <main className="inner-page"><h1>This page is temporarily unavailable.</h1></main>,
+  notFoundComponent: () => <main className="inner-page"><h1>Page not found.</h1></main>,
   component: Page,
 });
 
@@ -40,13 +44,14 @@ const STEPS = [
 ];
 
 function Page() {
+  const intro = Route.useLoaderData();
   return (
     <div className="inner-page">
       <PageHeader
         pageName="For Partners"
         label="Nexus Partner Network"
-        title="Join the Opsirix Nexus partner network."
-        subtitle="Opsirix connects founders to attorneys, CPAs, insurance, banking, and technology partners at the right moment in their operational journey. Every partner serves founders independently. Opsirix handles the coordination."
+        title={intro?.heading ?? "Join the Opsirix Nexus partner network."}
+        subtitle={intro?.body ?? "Opsirix connects founders to attorneys, CPAs, insurance, banking, and technology partners at the right moment in their operational journey. Every partner serves founders independently. Opsirix handles the coordination."}
       />
 
       <section className="inner-section">
