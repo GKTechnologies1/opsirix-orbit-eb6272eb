@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, FileText, History, Inbox, LogOut, ShieldCheck } from "lucide-react";
+import { Building2, FileText, History, Inbox, LogOut, Repeat, ShieldCheck } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -26,7 +26,7 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
 
   async function signOut() {
     await supabase.auth.signOut();
-    await navigate({ to: "/auth" });
+    await navigate({ to: "/auth", replace: true });
   }
 
   return <div className={`ops-workspace ops-workspace--${mode}`}>
@@ -42,6 +42,7 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
         {admin && mode === "staff" && <Link to="/staff/content"><FileText />Content & Catalog</Link>}
         {admin && mode === "staff" && <Link to="/staff/features"><History />Features & Releases</Link>}
+        <Link to="/account"><Repeat />Switch workspace</Link>
       </nav>
       <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>
     </aside>
