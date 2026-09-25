@@ -1,1 +1,3 @@
 Public navigation stays sticky in normal document flow, and navbar responsive rules must be scoped to `.site-header`; this reserves dynamic announcement height and prevents page-header collisions.Website content edits go through Admin-only security-definer functions (save_content_draft/publish/restore) with versioned rows, and public reads use published_site_content with code fallbacks; this keeps history, blocks pricing, and never touches category/consent rules.
+
+After sign-in everyone lands on `/account`, which reads verified access server-side (getMyAccess) and forwards single-workspace users or shows a switcher; staff access is never self-registered.
