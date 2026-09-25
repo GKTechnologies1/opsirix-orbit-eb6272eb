@@ -2412,6 +2412,6 @@
 .module-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 24px; }
 .module-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 @media (max-width: 760px) { .module-two-col { grid-template-columns: 1fr; gap: 40px; } }
-.partner-section .nx-label { margin-top: 0; }
+.partner-section .nx-label { margin: 48px 0 16px; text-align: center; }
 .partner-section .nx-note { margin: 20px 0 32px; }
 .nx-banner-actions { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }

@@ -29,4 +29,4 @@ export const NEXUS_BOUNDARY =
   "An introduction is not an endorsement or a promise of a match, response, eligibility, quote, or professional outcome. Opsirix does not provide legal, tax, banking, insurance, immigration, or other licensed advice.";
 
 export const NEXUS_ACCOUNT_DATA_NOTICE =
-  "We collect your name, email address, authentication records, acceptance of the current terms and privacy notice, and basic security and access logs. We do not require company information, founder intake answers, payment information, or private business files for directory access.";
+  "We collect your name, email address, authentication records, and basic security and access logs. We do not require company information, founder intake answers, payment information, or private business files for directory access.";

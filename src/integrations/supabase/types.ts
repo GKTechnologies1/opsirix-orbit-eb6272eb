@@ -1579,6 +1579,20 @@ export type Database = {
         }
         Returns: string
       }
+      submit_nexus_inquiry_keyed: {
+        Args: {
+          _category: string
+          _client_key: string
+          _description: string
+          _disclosure_version: string
+          _email: string
+          _email_key: string
+          _full_name: string
+          _location: string
+          _phone: string
+        }
+        Returns: string
+      }
       type_evidence_ok: {
         Args: { _application: string; _type: string }
         Returns: boolean

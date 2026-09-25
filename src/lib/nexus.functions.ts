@@ -36,9 +36,13 @@ const inquirySchema = z.object({
   website: z.string().max(0).optional(),
 });
 
-async function sha256(value: string) {
-  const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
-  return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, "0")).join("");
+async function rateKey(scope: string, value: string) {
+  // Keyed HMAC with a server-held secret: the stored value cannot be reversed by guessing emails without the key.
+  const secret = process.env["NEXUS_RATE_LIMIT_KEY"];
+  if (!secret) throw new Error("rate_key_missing");
+  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(`${scope}:${value}`));
+  return Array.from(new Uint8Array(sig), (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
 export const submitNexusInquiry = createServerFn({ method: "POST" })
@@ -48,9 +52,17 @@ export const submitNexusInquiry = createServerFn({ method: "POST" })
     if (!(data.category in NEXUS_CATEGORY_COPY)) return { success: false as const, error: "That category is not currently available through Nexus." };
     // Only the hosting edge sets cf-connecting-ip; forwarded headers are caller-controlled and ignored.
     const ip = getRequestHeader("cf-connecting-ip") ?? "";
-    const clientHash = ip ? await sha256(`nexus:${ip}`) : null;
+    let clientHash: string | null = null;
+    let emailKey: string;
+    try {
+      clientHash = ip ? await rateKey("ip", ip) : null;
+      emailKey = await rateKey("email", data.email.trim().toLowerCase());
+    } catch {
+      console.error("Nexus rate-limit key unavailable");
+      return { success: false as const, error: "Your inquiry was not saved. Please try again." };
+    }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: id, error } = await supabaseAdmin.rpc("submit_nexus_inquiry", {
+    const { data: id, error } = await supabaseAdmin.rpc("submit_nexus_inquiry_keyed", {
       _full_name: data.fullName,
       _email: data.email,
       _phone: data.phone ?? "",
@@ -59,7 +71,8 @@ export const submitNexusInquiry = createServerFn({ method: "POST" })
       _description: data.description,
       _disclosure_version: NEXUS_DISCLOSURE_VERSION,
       // No trusted address: skip the per-client limit rather than sharing one global bucket.
-      _client_hash: clientHash as string,
+      _client_key: clientHash as string,
+      _email_key: emailKey,
     });
     if (error || !id) {
       if (error?.message.includes("category_unavailable")) return { success: false as const, error: "That category is not currently available through Nexus." };
