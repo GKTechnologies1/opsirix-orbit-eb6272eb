@@ -15,7 +15,7 @@ export const getCompanyWorkspaces = createServerFn({ method: "GET" })
     const ids = organizations.map((item) => item.id);
     const [members, events, grants, refs] = await Promise.all([
       ids.length ? context.supabase.from("organization_members").select("organization_id,user_id,role,created_at").in("organization_id", ids) : Promise.resolve({ data: [], error: null }),
-      ids.length ? context.supabase.from("audit_events").select("id,organization_id,actor_id,event_type,summary,created_at").in("organization_id", ids).order("created_at", { ascending: false }).limit(100) : Promise.resolve({ data: [], error: null }),
+      ids.length ? context.supabase.from("audit_events").select("id,organization_id,actor_id,event_type,subject_id,summary,metadata,created_at").in("organization_id", ids).order("created_at", { ascending: false }).limit(100) : Promise.resolve({ data: [], error: null }),
       ids.length ? context.supabase.from("staff_access_grants").select("organization_id,staff_user_id,expires_at,revoked_at,created_at").in("organization_id", ids) : Promise.resolve({ data: [], error: null }),
       ids.length ? context.supabase.from("opx_references").select("number,organization_id").in("organization_id", ids) : Promise.resolve({ data: [], error: null }),
     ]);
@@ -37,7 +37,25 @@ export const getCompanyWorkspaces = createServerFn({ method: "GET" })
       : e.organization_id && ownerOf.has(e.organization_id) && people.has(e.actor_id) ? people.get(e.actor_id)!
       : e.organization_id && memberSet.has(`${e.organization_id}:${e.actor_id}`) ? "A company member"
       : "Opsirix";
-    const eventsOut = (events.data ?? []).map(({ actor_id, ...e }) => ({ ...e, actor: actorLabel({ ...e, actor_id }) }));
+    // Event details are filtered here by the reader's role; raw metadata never leaves the server.
+    const ROLE: Record<string, string> = { owner: "Owner", member: "Member", viewer: "Viewer" };
+    const detailsFor = (e: { organization_id: string | null; event_type: string; subject_id: string; metadata: unknown }) => {
+      const m = (e.metadata && typeof e.metadata === "object" ? e.metadata : {}) as Record<string, unknown>;
+      const owner = !!e.organization_id && ownerOf.has(e.organization_id);
+      const out: { label: string; value: string }[] = [];
+      const str = (v: unknown) => (typeof v === "string" && v.trim() ? v.trim().slice(0, 160) : null);
+      if (e.event_type === "membership.updated") {
+        if (str(m.role)) out.push({ label: "Access", value: ROLE[m.role as string] ?? String(m.role) });
+        if (owner && people.has(e.subject_id)) out.push({ label: "Person", value: people.get(e.subject_id)! });
+      } else if (e.event_type === "workspace.renamed") {
+        if (str(m.previous_name)) out.push({ label: "Previous name", value: str(m.previous_name)! });
+      } else if (e.event_type.startsWith("staff_access.")) {
+        if (str(m.scope)) out.push({ label: "Scope", value: str(m.scope)! });
+        if (owner) out.push({ label: "Ends", value: str(m.expires_at) ? new Date(m.expires_at as string).toLocaleDateString("en-US", { dateStyle: "medium" }) : "No end date" });
+      }
+      return out;
+    };
+    const eventsOut = (events.data ?? []).map(({ actor_id, metadata, subject_id, ...e }) => ({ ...e, actor: actorLabel({ ...e, actor_id }), details: detailsFor({ ...e, subject_id, metadata }) }));
     return { opx, organizations, members: (members.data ?? []).map((m) => ({ ...m, person: ownerOf.has(m.organization_id) ? (memberPeople ?? []).find((p) => p.id === m.user_id) ?? null : null })), events: eventsOut, grants: (grants.data ?? []).map((grant) => ({ ...grant, person: (staffPeople ?? []).find((person) => person.id === grant.staff_user_id) ?? null })), userId: context.userId };
   });
 

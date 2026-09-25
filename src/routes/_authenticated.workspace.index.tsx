@@ -128,12 +128,12 @@ function MemberList({ members, userId }: { members: Member[]; userId: string }) 
   </div>;
 }
 
-type CompanyEvent = { id: string; summary: string; created_at: string; event_type: string; actor: string };
+type CompanyEvent = { id: string; summary: string; created_at: string; event_type: string; actor: string; details?: { label: string; value: string }[] };
 const kindLabel = (t: string) => t.replace(/^workspace\./, "").replaceAll(/[._]/g, " ");
 
 function CompanyHistory({ events }: { events: CompanyEvent[] }) {
   const c = useListControls(events, {
-    text: (e) => `${e.summary} ${kindLabel(e.event_type)} ${e.actor}`,
+    text: (e) => `${e.summary} ${kindLabel(e.event_type)} ${e.actor} ${(e.details ?? []).map((d) => d.value).join(" ")}`,
     date: (e) => e.created_at,
     sorts: [
       { key: "new", label: "Newest first", compare: (a, b) => b.created_at.localeCompare(a.created_at) },
@@ -147,7 +147,7 @@ function CompanyHistory({ events }: { events: CompanyEvent[] }) {
     {events.length > 0 && <ListToolbar c={c} label="Search this company history" placeholder="For example: member, renamed" />}
     <ListSummary c={c} noun={["entry", "entries"]} />
     <ListEmpty c={c}><p className="ops-muted">No activity yet.</p></ListEmpty>
-    {c.visible.map((event, n) => <div className="ops-history-row" key={event.id}><Clock3 /><span><span className="list-rownum">#{c.start + n + 1}</span>{event.summary}<small className="ops-muted" style={{ display: "block" }}>{kindLabel(event.event_type)} · by {event.actor}</small></span><time>{new Date(event.created_at).toLocaleString()}</time></div>)}
+    {c.visible.map((event, n) => <div className="ops-history-row" key={event.id} data-testid="history-row"><Clock3 /><span><span className="list-rownum">#{c.start + n + 1}</span>{event.summary}<small className="ops-muted" style={{ display: "block" }}>{kindLabel(event.event_type)} · by {event.actor}</small>{event.details && event.details.length > 0 && <dl className="ops-history-details">{event.details.map((d) => <div key={d.label}><dt>{d.label}</dt><dd>{d.value}</dd></div>)}</dl>}</span><time>{new Date(event.created_at).toLocaleString()}</time></div>)}
     <ListPager c={c} />
   </div>;
 }
