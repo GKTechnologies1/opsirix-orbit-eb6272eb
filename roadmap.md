@@ -10,7 +10,7 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Consent-based introductions built and tested with TEST accounts (preview; backend live)
 - [ ] Publish Nexus help/directory/requests pages — blocked: automatic preview build fails intermittently (Lovable support)
 - [x] University/Banking/Insurance opened for applications and help requests 2026-09-25 17:56-17:58 UTC; no listings published
-- [ ] Shared company workflows, then Flow, Grid, Core, Launch in phases — Launch blocked on OPSIRIX_05
+- [ ] Flow, Grid, Core: blocked on owner approval of the proposed specs (only proposals exist); Launch blocked on OPSIRIX_05
 - [ ] Vault, AI — blocked: privacy architecture + specialist review
 - [ ] Visual redesign (separate track) — needs direction review
 - [ ] Terms acknowledgement — blocked: versions/wording; rate-limit cleanup — blocked: retention policy
@@ -40,6 +40,7 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] OPX-000001 references: permanent, sequence-assigned (8 simultaneous = 8 distinct), never reused; 12 backfilled by creation date; Admin/CEO search + merge (lower number kept)
 - [x] Partner introductions: private workspace notes, personal read/unread, follow-up flags, search/filter/sort; 33/33 backend boundary checks, 24/24 browser
 - [x] Shared list controls (search, filters, sort, pages, counts, empty states, row numbers) on founder requests, partner introductions, staff requests, OPX search
-- [ ] Shared company workflows next: apply list controls to company history/members; show OPX in staff organization views as they are built
-- [ ] Owner decision: "GK Technologies" (OPX-000012) was created by the Compliance TEST account and is not labeled TEST; keep, rename TEST, or leave
+- [x] Company history + member list controls (search, filter, sort, pages, counts, row numbers); co-member names/emails only to owners; 16/16 browser + direct checks
+- [ ] Show OPX in staff organization views as they are built (ongoing rule)
+- [x] Renamed OPX-000012 to "TEST – GK Technologies (fictional record)", audit event recorded; no database link to real data
 

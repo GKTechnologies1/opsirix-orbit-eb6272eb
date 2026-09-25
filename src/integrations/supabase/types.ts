@@ -1882,6 +1882,14 @@ export type Database = {
         Args: { _intro: string }
         Returns: undefined
       }
+      company_member_people: {
+        Args: { _organization_id: string }
+        Returns: {
+          email: string
+          full_name: string
+          user_id: string
+        }[]
+      }
       content_assert_admin: { Args: never; Returns: string }
       content_validate: { Args: { _body: Json }; Returns: undefined }
       create_company_workspace: { Args: { _name: string }; Returns: string }
