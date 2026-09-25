@@ -253,6 +253,13 @@
       "when": 1790365623310,
       "tag": "0035_opx_references_and_partner_intro_notes",
       "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1790366352176,
+      "tag": "0036_company_member_directory_for_owners",
+      "breakpoints": true
     }
   ]
 }
