@@ -103,7 +103,7 @@ export const getAdminOverview = createServerFn({ method: "GET" })
     const { data: isAdmin } = await sb.rpc("has_role", { _user_id: context.userId, _role: "admin" });
     if (!isAdmin) return null;
     const today = new Date().toISOString().slice(0, 10);
-    const [apps, types, track, lic, revs, svc, sug, inq, asg, prof, cred, audit, ptypes] = await Promise.all([
+    const [apps, types, track, lic, revs, svc, sug, inq, asg, prof, cred, audit, ptypes, cver, cchg] = await Promise.all([
       sb.from("partner_applications").select("status"),
       sb.from("partner_listing_types").select("partner_type_id,review_status"),
       sb.from("partner_track_details").select("track,authority_review_status,agreement_status"),
@@ -117,6 +117,8 @@ export const getAdminOverview = createServerFn({ method: "GET" })
       sb.from("partner_credentials").select("status"),
       sb.from("audit_events").select("id,event_type,summary,created_at").order("created_at", { ascending: false }).limit(15),
       sb.from("service_partner_types").select("id,label,is_open_for_registration").order("display_order"),
+      sb.from("site_content_versions").select("status"),
+      sb.from("service_catalog_changes").select("id,service_id,change_type,created_at").order("created_at", { ascending: false }).limit(5),
     ]);
     const n = <T,>(rows: T[] | null, f: (r: T) => boolean) => (rows ?? []).filter(f).length;
     const assigned = new Set((asg.data ?? []).filter((a) => !a.revoked_at).map((a) => a.inquiry_id));
@@ -140,5 +142,6 @@ export const getAdminOverview = createServerFn({ method: "GET" })
         published: n(prof.data, (r) => r.partner_type_id === t.id && r.is_published && !r.is_suspended),
       })),
       audit: audit.data ?? [],
+      content: { drafts: n(cver.data, (r) => r.status === "draft"), published: n(cver.data, (r) => r.status === "published"), catalogChanges: cchg.data ?? [] },
     };
   });

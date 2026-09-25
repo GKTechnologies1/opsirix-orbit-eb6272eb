@@ -2423,3 +2423,6 @@
 .partner-section .nx-label { margin: 48px 0 16px; text-align: center; }
 .partner-section .nx-note { margin: 20px 0 32px; }
 .nx-banner-actions { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ops-feedback.ops-error { color: #FCA5A5; }
+.content-preview { margin-top: 20px; border: 1px dashed var(--border-cyan); overflow: hidden; }
+.content-preview > .ops-panel-kicker { padding: 12px 16px 0; }

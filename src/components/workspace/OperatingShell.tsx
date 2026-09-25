@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, History, Inbox, LogOut, ShieldCheck } from "lucide-react";
+import { Building2, FileText, History, Inbox, LogOut, ShieldCheck } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,6 +10,7 @@ type ShellMode = "company" | "staff";
 export function OperatingShell({ mode, title, eyebrow, children }: { mode: ShellMode; title: string; eyebrow: string; children: ReactNode }) {
   const navigate = useNavigate();
   const [staff, setStaff] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -17,6 +18,8 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
       if (!data.user) return;
       const { data: allowed } = await supabase.rpc("has_staff_role", { _user_id: data.user.id });
       if (active) setStaff(Boolean(allowed));
+      const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: data.user.id, _role: "admin" });
+      if (active) setAdmin(Boolean(isAdmin));
     });
     return () => { active = false; };
   }, []);
@@ -37,6 +40,7 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
         {staff && <Link to="/staff"><ShieldCheck />Staff Console</Link>}
         {staff && mode === "staff" && <Link to="/staff/inquiries"><Inbox />Nexus inquiries</Link>}
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
+        {admin && mode === "staff" && <Link to="/staff/content"><FileText />Content & Catalog</Link>}
       </nav>
       <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>
     </aside>
