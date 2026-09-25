@@ -90,7 +90,7 @@ function AuthPage() {
             {message && <p className="nexus-form-message" role="status">{message}</p>}
             <Button type="submit" size="lg" disabled={pending}>{pending ? "Please wait" : mode === "signup" ? "Create account" : "Sign in"}<ArrowRight /></Button>
           </form>
-          <p className="nexus-terms">By continuing, you agree to our <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>.</p>
+          <p className="nexus-terms">Please read our current <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Notice</Link>.</p>
         </section>
       </div>
     </main>
