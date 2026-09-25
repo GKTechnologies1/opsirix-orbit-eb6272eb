@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 import { getOpenNexusCategories } from "@/lib/nexus.functions";
 import { NEXUS_BOUNDARY, NEXUS_CATEGORY_COPY, NEXUS_NETWORK_NOTE } from "@/lib/nexus-discovery";
 
@@ -35,23 +36,31 @@ const REASONS = [
 function NexusPage() {
   const categories = Route.useLoaderData().filter((id) => NEXUS_CATEGORY_COPY[id]);
   return (
-    <main className="nx-page">
-      <div className="nx-wrap">
-        <p className="nexus-kicker">Opsirix Nexus</p>
-        <h1>A human-reviewed path to professional help.</h1>
-        <p className="nx-intro">Nexus helps individuals and businesses explain a nonconfidential need and request an introduction. Opsirix reviews each request. We do not automatically send your information to a partner.</p>
-        {categories.length > 0 && <section aria-labelledby="nx-available"><h2 id="nx-available" className="nx-label">Available through Nexus now</h2><ul className="nx-categories">{categories.map((id) => <li key={id}><h3>{NEXUS_CATEGORY_COPY[id].title}</h3><p>{NEXUS_CATEGORY_COPY[id].body}</p></li>)}</ul></section>}
-        <p className="nx-note">{NEXUS_NETWORK_NOTE}</p>
-        <section className="nx-split">
-          <div><h2>Reasons people ask for help</h2><ul className="nx-list">{REASONS.map((r) => <li key={r}>{r}</li>)}</ul></div>
-          <div><h2>Reviewed before anything is shared</h2><p>Opsirix reviews the request, checks that the category is available, and identifies an eligible approved partner. We record your specific consent before disclosing your identity or contact details. You can decline and nothing is shared.</p></div>
-        </section>
-        <p className="nx-boundary">{NEXUS_BOUNDARY}</p>
-        <div className="nx-actions">
-          <Link to="/directory" className="nx-btn nx-btn--primary">Create a free account to browse <ArrowRight size={16} /></Link>
-          <Link to="/nexus/help" className="nx-btn">Tell us what kind of help you need</Link>
+    <ModulePageLayout
+      moduleName="Opsirix Nexus"
+      moduleTag="Professional Introductions"
+      moduleIcon=""
+      headline="A human-reviewed path to professional help."
+      subtext="Nexus helps individuals and businesses explain a nonconfidential need and request an introduction. Opsirix reviews each request. We do not automatically send your information to a partner."
+      relatedSlug="nexus"
+    >
+      {categories.length > 0 && <div style={{ marginBottom: 64 }}>
+        <p className="module-eyebrow">Available through Nexus now</p>
+        <h2 className="module-section-h2">Categories you can ask about today.</h2>
+        <div className="module-card-grid">
+          {categories.map((id) => <div key={id} className="module-feature-card"><h3>{NEXUS_CATEGORY_COPY[id].title}</h3><p>{NEXUS_CATEGORY_COPY[id].body}</p></div>)}
         </div>
+        <p className="nx-note">{NEXUS_NETWORK_NOTE}</p>
+      </div>}
+      <div className="module-two-col" style={{ marginBottom: 64 }}>
+        <div><p className="module-eyebrow">Common reasons</p><h2 className="module-section-h2">Reasons people ask for help</h2><ul className="nx-list">{REASONS.map((r) => <li key={r}><p style={{ margin: 0 }}>{r}</p></li>)}</ul></div>
+        <div><p className="module-eyebrow">How it works</p><h2 className="module-section-h2">Reviewed before anything is shared</h2><p>Opsirix reviews the request, checks that the category is available, and identifies an eligible approved partner. We record your specific consent before disclosing your identity or contact details. You can decline and nothing is shared.</p></div>
       </div>
-    </main>
+      <p className="nx-boundary">{NEXUS_BOUNDARY}</p>
+      <div className="module-cta-row" style={{ marginTop: 32 }}>
+        <Link to="/nexus/help" className="module-btn-primary">Tell us what kind of help you need <ArrowRight size={15} /></Link>
+        <Link to="/directory" className="module-btn-secondary">Create a free account to browse</Link>
+      </div>
+    </ModulePageLayout>
   );
 }
