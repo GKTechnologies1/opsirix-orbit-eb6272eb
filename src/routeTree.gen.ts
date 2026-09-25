@@ -17,6 +17,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PlatformRouteImport } from './routes/platform'
 import { Route as ImmigrantFoundersRouteImport } from './routes/immigrant-founders'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as FoundersRouteImport } from './routes/founders'
 import { Route as ForUniversitiesRouteImport } from './routes/for-universities'
 import { Route as ForPartnersRouteImport } from './routes/for-partners'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -92,6 +93,11 @@ const ImmigrantFoundersRoute = ImmigrantFoundersRouteImport.update({
 const HowItWorksRoute = HowItWorksRouteImport.update({
   id: '/how-it-works',
   path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoundersRoute = FoundersRouteImport.update({
+  id: '/founders',
+  path: '/founders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForUniversitiesRoute = ForUniversitiesRouteImport.update({
@@ -297,6 +303,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/for-partners': typeof ForPartnersRoute
   '/for-universities': typeof ForUniversitiesRoute
+  '/founders': typeof FoundersRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
   '/platform': typeof PlatformRouteWithChildren
@@ -342,6 +349,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/for-partners': typeof ForPartnersRoute
   '/for-universities': typeof ForUniversitiesRoute
+  '/founders': typeof FoundersRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
   '/privacy': typeof PrivacyRoute
@@ -388,6 +396,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/for-partners': typeof ForPartnersRoute
   '/for-universities': typeof ForUniversitiesRoute
+  '/founders': typeof FoundersRoute
   '/how-it-works': typeof HowItWorksRoute
   '/immigrant-founders': typeof ImmigrantFoundersRoute
   '/platform': typeof PlatformRouteWithChildren
@@ -435,6 +444,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/for-partners'
     | '/for-universities'
+    | '/founders'
     | '/how-it-works'
     | '/immigrant-founders'
     | '/platform'
@@ -480,6 +490,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/for-partners'
     | '/for-universities'
+    | '/founders'
     | '/how-it-works'
     | '/immigrant-founders'
     | '/privacy'
@@ -525,6 +536,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/for-partners'
     | '/for-universities'
+    | '/founders'
     | '/how-it-works'
     | '/immigrant-founders'
     | '/platform'
@@ -572,6 +584,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   ForPartnersRoute: typeof ForPartnersRoute
   ForUniversitiesRoute: typeof ForUniversitiesRoute
+  FoundersRoute: typeof FoundersRoute
   HowItWorksRoute: typeof HowItWorksRoute
   ImmigrantFoundersRoute: typeof ImmigrantFoundersRoute
   PlatformRoute: typeof PlatformRouteWithChildren
@@ -640,6 +653,13 @@ declare module '@tanstack/react-router' {
       path: '/how-it-works'
       fullPath: '/how-it-works'
       preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/founders': {
+      id: '/founders'
+      path: '/founders'
+      fullPath: '/founders'
+      preLoaderRoute: typeof FoundersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/for-universities': {
@@ -975,6 +995,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   ForPartnersRoute: ForPartnersRoute,
   ForUniversitiesRoute: ForUniversitiesRoute,
+  FoundersRoute: FoundersRoute,
   HowItWorksRoute: HowItWorksRoute,
   ImmigrantFoundersRoute: ImmigrantFoundersRoute,
   PlatformRoute: PlatformRouteWithChildren,
