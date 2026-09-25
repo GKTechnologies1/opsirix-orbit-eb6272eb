@@ -35,5 +35,6 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Fill repo/branch/commit in handoff v2: blocked on owner connecting GitHub; not "synced" until a fresh checkout of that commit builds
 - [x] DevOps handoff v2: staging must use an isolated backend (36 setup steps, storage + email tests, staging vs production variable names)
 - [x] Dual-access TEST account (`test-dual-access@example.test`), workspace switching and permission checks 39/39; Staff search 14/14
+- [x] Auth copy fixes + Opsirix team sign in → /staff; 24/24 role checks
 - [ ] Next phase: remaining founder workflows (requests history detail), then shared company workflows
 
