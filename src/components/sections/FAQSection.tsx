@@ -20,7 +20,11 @@ const FAQS: QA[] = [
   },
 ];
 
-export function FAQSection() {
+export const FAQ_DEFAULT = { heading: "Everything founders ask before getting started.", body: "Common Questions", items: FAQS };
+
+export function FAQSection({ content }: { content?: { heading: string; body: string; items?: QA[] } }) {
+  const c = content?.items?.length ? content : FAQ_DEFAULT;
+  const list = c.items ?? FAQS;
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -28,13 +32,13 @@ export function FAQSection() {
       <div className="faq-container">
         <ScrollReveal>
           <div className="faq-header">
-            <span className="label-pill">Common Questions</span>
-            <h2 className="faq-h2">Everything founders ask before getting started.</h2>
+            <span className="label-pill">{c.body}</span>
+            <h2 className="faq-h2">{c.heading}</h2>
           </div>
         </ScrollReveal>
 
         <div className="faq-list">
-          {FAQS.map((item, i) => {
+          {list.map((item, i) => {
             const isOpen = open === i;
             return (
               <div key={i} className="faq-item">
