@@ -44,6 +44,7 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Partner introductions: private workspace notes, personal read/unread, follow-up flags, search/filter/sort; 33/33 backend boundary checks, 24/24 browser
 - [x] Shared list controls (search, filters, sort, pages, counts, empty states, row numbers) on founder requests, partner introductions, staff requests, OPX search
 - [x] Company history + member list controls (search, filter, sort, pages, counts, row numbers); co-member names/emails only to owners; 16/16 browser + direct checks
+- [x] Company history: date range, kind and who-did-it (names only for owners; others see "A company member"/"Opsirix"); member pages with 12 TEST members (test-company-member-01..12@example.test in "TEST concurrency org 0"); 18/18 + 16/16 regression
 - [ ] Show OPX in staff organization views as they are built (ongoing rule)
 - [x] Renamed OPX-000012 to "TEST – GK Technologies (fictional record)", audit event recorded; no database link to real data
 
