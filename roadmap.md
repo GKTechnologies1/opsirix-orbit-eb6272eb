@@ -7,7 +7,8 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Closed categories hidden from visitor, member, partner (direct checks)
 - [x] /staff overview role tests; platform audit history limited to Admin/CEO
 - [x] Nexus help requests for all six categories (preview form; server requires open category)
-- [ ] Consent-based introductions — draft wording delivered; blocked: owner approval of wording
+- [x] Consent-based introductions built and tested with TEST accounts (preview; backend live)
+- [ ] Publish Nexus help/directory/requests pages — blocked: automatic preview build fails intermittently (Lovable support)
 - [x] University/Banking/Insurance opened for applications and help requests 2026-09-25 17:56-17:58 UTC; no listings published
 - [ ] Shared company workflows, then Flow, Grid, Core, Launch in phases — Launch blocked on OPSIRIX_05
 - [ ] Vault, AI — blocked: privacy architecture + specialist review
