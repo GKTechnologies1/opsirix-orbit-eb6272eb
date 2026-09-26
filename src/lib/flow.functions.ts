@@ -21,6 +21,7 @@ export const getFlow = createServerFn({ method: "GET" })
       sb.rpc("has_staff_role", { _user_id: uid }),
       sb.rpc("has_role", { _user_id: uid, _role: "admin" }),
     ]);
+    const { data: escs } = await sb.from("flow_escalations").select("id,ref,task_id,risk_level,reason,prior_status,raised_at,clearance_note,cleared_at").order("raised_at", { ascending: false });
     const roleOf = new Map((mine ?? []).map((m) => [m.organization_id, m.role]));
     const owned = [...roleOf].filter(([, r]) => r === "owner").map(([id]) => id);
     // Co-member names only for owners (same rule as company history).
@@ -38,7 +39,7 @@ export const getFlow = createServerFn({ method: "GET" })
         editors: role === "owner" ? (editors ?? []).filter((e) => e.organization_id === o.id).map((e) => ppl.find((p) => p.user_id === e.user_id)?.email ?? "member") : [],
         boards: (boards ?? []).filter((b) => b.organization_id === o.id).map((b) => ({
           ...b,
-          tasks: (tasks ?? []).filter((t) => t.board_id === b.id).map((t) => ({ ...t, assignee: label(t.assignee_id), shared: role === "owner" ? shareRows.filter((s) => s.task_id === t.id && !s.revoked_at).length : 0 })),
+          tasks: (tasks ?? []).filter((t) => t.board_id === b.id).map((t) => ({ ...t, assignee: label(t.assignee_id), shared: role === "owner" ? shareRows.filter((s) => s.task_id === t.id && !s.revoked_at).length : 0, escalations: (escs ?? []).filter((e) => e.task_id === t.id), hold: (escs ?? []).find((e) => e.task_id === t.id && !e.cleared_at) ?? null })),
         })),
       };
     });
@@ -79,3 +80,12 @@ export const shareFlowTask = createServerFn({ method: "POST" })
 export const getPartnerFlowTasks = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => ({ tasks: (await context.supabase.rpc("partner_flow_tasks")).data ?? [] }));
+
+export const previewFlowShare = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: unknown) => z.object({ taskId: uuid, email: z.string().trim().email().max(255) }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { data: rows, error } = await context.supabase.rpc("flow_share_preview", { _task: data.taskId, _partner_email: data.email });
+    if (error) return { success: false as const, error: error.message };
+    return { success: true as const, preview: rows?.[0] ?? null };
+  });

@@ -179,6 +179,66 @@ export type Database = {
           },
         ]
       }
+      flow_escalations: {
+        Row: {
+          clearance_note: string | null
+          cleared_at: string | null
+          cleared_by: string | null
+          id: string
+          organization_id: string
+          prior_status: string
+          raised_at: string
+          raised_by: string
+          reason: string
+          ref: string
+          risk_level: string
+          task_id: string
+        }
+        Insert: {
+          clearance_note?: string | null
+          cleared_at?: string | null
+          cleared_by?: string | null
+          id?: string
+          organization_id: string
+          prior_status: string
+          raised_at?: string
+          raised_by: string
+          reason: string
+          ref: string
+          risk_level?: string
+          task_id: string
+        }
+        Update: {
+          clearance_note?: string | null
+          cleared_at?: string | null
+          cleared_by?: string | null
+          id?: string
+          organization_id?: string
+          prior_status?: string
+          raised_at?: string
+          raised_by?: string
+          reason?: string
+          ref?: string
+          risk_level?: string
+          task_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flow_escalations_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flow_escalations_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "flow_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       flow_task_shares: {
         Row: {
           created_at: string
@@ -2105,6 +2165,18 @@ export type Database = {
       flow_set_escalation: {
         Args: { _note: string; _raise: boolean; _task: string }
         Returns: undefined
+      }
+      flow_share_preview: {
+        Args: { _partner_email: string; _task: string }
+        Returns: {
+          already_shared: boolean
+          company: string
+          details: string
+          due_on: string
+          partner_name: string
+          status: string
+          title: string
+        }[]
       }
       flow_share_task: {
         Args: { _enabled: boolean; _partner_email: string; _task: string }
