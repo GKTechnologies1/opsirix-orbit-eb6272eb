@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react
 import { AlertTriangle, Share2 } from "lucide-react";
 import { OperatingShell } from "@/components/workspace/OperatingShell";
 import { Button } from "@/components/ui/button";
-import { createFlowBoard, getFlow, saveFlowTask, setFlowEditor, setFlowEscalation, shareFlowTask } from "@/lib/flow.functions";
+import { createFlowBoard, getFlow, previewFlowShare, saveFlowTask, setFlowEditor, setFlowEscalation, shareFlowTask } from "@/lib/flow.functions";
 
 export const Route = createFileRoute("/_authenticated/flow")({
   head: () => ({ meta: [
@@ -129,7 +129,7 @@ function TaskForm({ company, boardId, task, onDone, onClose }: { company: Compan
       <label className="sm:col-span-2">Details (optional)<textarea name="details" maxLength={2000} defaultValue={task?.details ?? ""} className="w-full" rows={2} /></label>
       <label>Owner<select name="assignee" defaultValue={task?.assignee_id ?? ""} className={input}><option value="">Unassigned</option>{company.members.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}</select></label>
       <label>Due date<input name="due" type="date" defaultValue={task?.due_on ?? ""} className={input} /></label>
-      <label>Status<select name="status" defaultValue={task?.status ?? "todo"} className={input}>{Object.entries(STATUS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></label>
+      <label>Status{task?.hold && <span className="block text-xs text-muted-foreground">On hold ({task.hold.ref}) until Opsirix records written clearance</span>}{task?.hold && <input type="hidden" name="status" value={task.status} />}<select name={task?.hold ? "status_locked" : "status"} disabled={Boolean(task?.hold)} defaultValue={task?.status ?? "todo"} className={input}>{Object.entries(STATUS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></label>
       <div className="flex items-end gap-2"><Button type="submit">{task ? "Save task" : "Add task"}</Button>{onClose && <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>}</div>
     </form>
   );
@@ -139,19 +139,29 @@ function TaskRow({ n, task, company, boardId, onDone }: { n: number; task: Task;
   const [editing, setEditing] = useState(false);
   const escalate = useServerFn(setFlowEscalation);
   const share = useServerFn(shareFlowTask);
+  const preview = useServerFn(previewFlowShare);
+  const [pv, setPv] = useState<{ email: string; data: NonNullable<Extract<Awaited<ReturnType<typeof previewFlowShare>>, { success: true }>["preview"]> } | null>(null);
+  const [pvErr, setPvErr] = useState("");
   const overdue = task.due_on && task.due_on < today && task.status !== "done";
   if (editing) return <li><TaskForm company={company} boardId={boardId} task={task} onDone={onDone} onClose={() => setEditing(false)} /></li>;
   async function esc(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); const f = e.currentTarget; const v = new FormData(f, (e.nativeEvent as SubmitEvent).submitter);
     const raise = v.get("action") === "raise";
     const r = await escalate({ data: { taskId: task.id, note: String(v.get("note") ?? ""), raise } });
-    if (r.success) f.reset(); await onDone(r, raise ? "Task flagged for attention." : "Flag cleared.");
+    if (r.success) f.reset(); await onDone(r, raise ? "Task placed on hold." : "Clearance recorded. The task is released.");
   }
   async function doShare(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); const f = e.currentTarget; const v = new FormData(f, (e.nativeEvent as SubmitEvent).submitter);
-    const on = v.get("action") === "share";
-    const r = await share({ data: { taskId: task.id, email: String(v.get("email")), enabled: on } });
-    if (r.success) f.reset(); await onDone(r, on ? "Task shared with the partner." : "Sharing removed.");
+    const email = String(v.get("email")); const action = v.get("action");
+    if (action === "preview") {
+      setPvErr(""); setPv(null);
+      const r = await preview({ data: { taskId: task.id, email } });
+      if (!r.success || !r.preview) setPvErr(r.success ? "Nothing to preview." : r.error); else setPv({ email, data: r.preview });
+      return;
+    }
+    const on = action === "share";
+    const r = await share({ data: { taskId: task.id, email, enabled: on } });
+    if (r.success) { f.reset(); setPv(null); } await onDone(r, on ? "Task shared with the partner." : "Sharing removed. The partner can no longer see this task.");
   }
   return (
     <li className="rounded-md border border-border p-3 text-sm space-y-2">
@@ -164,24 +174,49 @@ function TaskRow({ n, task, company, boardId, onDone }: { n: number; task: Task;
         {company.isOwner && task.shared > 0 && <span className="inline-flex items-center gap-1"><Share2 className="h-3 w-3" />Shared with {task.shared}</span>}
       </div>
       {task.details && <p className="whitespace-pre-wrap text-muted-foreground">{task.details}</p>}
-      {task.escalated_at && <p className="flex items-start gap-2 rounded border border-border p-2"><AlertTriangle className="h-4 w-4 shrink-0" />Opsirix flagged this: {task.escalation_note}</p>}
+      {task.hold && <p role="note" className="flex items-start gap-2 rounded border border-destructive p-2"><AlertTriangle className="h-4 w-4 shrink-0" /><span><strong>On hold · {task.hold.ref}</strong>. Opsirix raised this on {task.hold.raised_at.slice(0, 10)}: {task.hold.reason}. Status stays Blocked until Opsirix records written clearance.</span></p>}
+      {task.escalations.length > 0 && (
+        <details><summary className="cursor-pointer">Escalation history ({task.escalations.length})</summary>
+          <ol className="mt-1 space-y-1">{task.escalations.map((x) => (
+            <li key={x.id} className="rounded border border-border p-2"><strong>{x.ref}</strong> · raised {x.raised_at.slice(0, 16).replace("T", " ")} UTC · {x.reason}
+              {x.cleared_at ? <span className="block">Cleared {x.cleared_at.slice(0, 16).replace("T", " ")} UTC: {x.clearance_note}</span> : <span className="block font-semibold">Open, awaiting written clearance</span>}</li>
+          ))}</ol>
+        </details>
+      )}
       <div className="flex flex-wrap gap-2">
         {company.canEdit && <Button size="sm" variant="secondary" onClick={() => setEditing(true)}>Edit</Button>}
       </div>
       {company.canEscalate && (
         <form onSubmit={esc} className="flex flex-wrap items-end gap-2">
-          <label className="flex-1 min-w-[10rem]">{task.escalated_at ? "Reason for clearing" : "Reason to flag"}<input name="note" maxLength={500} className={input} /></label>
-          {task.escalated_at ? <Button size="sm" type="submit" name="action" value="clear" variant="secondary">Clear flag</Button> : <Button size="sm" type="submit" name="action" value="raise">Flag for attention</Button>}
+          {task.hold
+            ? <label className="flex-1 min-w-[10rem]">Written clearance (at least 10 characters)<textarea name="note" required minLength={10} maxLength={1000} rows={2} className="w-full" /></label>
+            : <label className="flex-1 min-w-[10rem]">Reason to place on hold<input name="note" required minLength={3} maxLength={500} className={input} /></label>}
+          {task.hold ? <Button size="sm" type="submit" name="action" value="clear" variant="secondary">Record clearance</Button> : <Button size="sm" type="submit" name="action" value="raise">Place on hold</Button>}
         </form>
       )}
       {company.isOwner && (
         <details><summary className="cursor-pointer">Share with a partner</summary>
           <form onSubmit={doShare} className="mt-2 flex flex-wrap items-end gap-2">
             <label className="flex-1 min-w-[10rem]">Partner account email<input name="email" type="email" required className={input} /></label>
-            <Button size="sm" type="submit" name="action" value="share">Share</Button>
+            <Button size="sm" type="submit" name="action" value="preview">Preview what they see</Button>
             <Button size="sm" type="submit" name="action" value="unshare" variant="secondary">Stop sharing</Button>
+            {pv && (
+              <div className="basis-full rounded border border-border p-3" aria-label="Partner preview">
+                <p className="text-muted-foreground">Exactly what {pv.data.partner_name} ({pv.email}) will see under Shared tasks:</p>
+                <div className="mt-2 rounded border border-dashed border-border p-2">
+                  <span className="text-muted-foreground">{pv.data.company}</span>
+                  <p className="text-base font-semibold">{pv.data.title}</p>
+                  <p>{STATUS[pv.data.status] ?? pv.data.status} · {pv.data.due_on ? `Due ${pv.data.due_on}` : "No due date"}</p>
+                  {pv.data.details && <p className="whitespace-pre-wrap text-muted-foreground">{pv.data.details}</p>}
+                </div>
+                <p className="mt-1 text-muted-foreground">Not included: task owner, other tasks, board name, notes, escalations, company members.</p>
+                {pv.data.already_shared ? <p className="mt-2 font-semibold">Already shared with this partner.</p> : (
+                  <div className="mt-2 flex gap-2"><Button size="sm" type="submit" name="action" value="share">Share this task</Button><Button size="sm" type="button" variant="secondary" onClick={() => setPv(null)}>Cancel</Button></div>
+                )}
+              </div>
+            )}
+            {pvErr && <p role="alert" className="basis-full">{pvErr}</p>}
           </form>
-          <p className="mt-1 text-muted-foreground">The partner sees this task's title, details, due date and status only.</p>
         </details>
       )}
     </li>
