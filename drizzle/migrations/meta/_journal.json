@@ -351,6 +351,13 @@
       "when": 1790621962706,
       "tag": "0049_core_admin_metadata_oversight",
       "breakpoints": true
+    },
+    {
+      "idx": 50,
+      "version": "7",
+      "when": 1790624954271,
+      "tag": "0050_core_note_redaction_and_notifications",
+      "breakpoints": true
     }
   ]
 }

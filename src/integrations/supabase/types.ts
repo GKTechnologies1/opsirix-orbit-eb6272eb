@@ -115,6 +115,57 @@ export type Database = {
           },
         ]
       }
+      core_notifications: {
+        Row: {
+          created_at: string
+          dedupe_key: string
+          event: string
+          id: string
+          organization_id: string
+          read_at: string | null
+          recipient_id: string
+          ref: string
+          request_id: string
+        }
+        Insert: {
+          created_at?: string
+          dedupe_key: string
+          event: string
+          id?: string
+          organization_id: string
+          read_at?: string | null
+          recipient_id: string
+          ref: string
+          request_id: string
+        }
+        Update: {
+          created_at?: string
+          dedupe_key?: string
+          event?: string
+          id?: string
+          organization_id?: string
+          read_at?: string | null
+          recipient_id?: string
+          ref?: string
+          request_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "core_notifications_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "core_notifications_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "core_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       core_request_events: {
         Row: {
           actor_id: string
@@ -2498,6 +2549,21 @@ export type Database = {
           _to: string
         }
         Returns: undefined
+      }
+      core_mark_notifications_read: {
+        Args: { _ids: string[] }
+        Returns: number
+      }
+      core_my_notifications: {
+        Args: never
+        Returns: {
+          created_at: string
+          event: string
+          id: string
+          read_at: string
+          ref: string
+          request_id: string
+        }[]
       }
       core_revoke_access: { Args: { _grant: string }; Returns: undefined }
       core_save_task: {
