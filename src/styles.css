@@ -1798,7 +1798,8 @@
   .opsirix-container-wide { padding: 0 24px; }
 
   /* Section padding tightening */
-  section { padding-top: clamp(64px, 9vw, 96px); padding-bottom: clamp(64px, 9vw, 96px); }
+  /* Public page sections only; signed-in workspaces control their own spacing. */
+  section:not(:is(.ops-workspace, .nexus-workspace) section) { padding-top: clamp(64px, 9vw, 96px); padding-bottom: clamp(64px, 9vw, 96px); }
 }
 
 /* ---- Mobile (<= 640px) ---- */

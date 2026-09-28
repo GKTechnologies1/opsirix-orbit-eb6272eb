@@ -2503,6 +2503,10 @@ export type Database = {
           state: string
         }[]
       }
+      core_actor_label: {
+        Args: { _actor: string; _caller: string; _org: string }
+        Returns: string
+      }
       core_admin_oversight: {
         Args: never
         Returns: {
@@ -2540,6 +2544,18 @@ export type Database = {
           _scope: string
         }
         Returns: string
+      }
+      core_history: {
+        Args: { _request: string }
+        Returns: {
+          actor_label: string
+          created_at: string
+          from_status: string
+          id: string
+          note: string
+          note_redacted: boolean
+          to_status: string
+        }[]
       }
       core_is_staff: { Args: { _org: string; _user: string }; Returns: boolean }
       core_log: {
