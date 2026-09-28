@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, FileText, Inbox, KeyRound, LayoutDashboard, ListChecks, LogOut, Repeat, Search, ShieldCheck, UserRound } from "lucide-react";
+import { Building2, FileText, Inbox, KeyRound, LayoutDashboard, ListChecks, LogOut, Menu, Repeat, Search, ShieldCheck, UserRound, X } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,6 +10,7 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(admin);
   const [canOnboard, setCanOnboard] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     let alive = true;
     supabase.auth.getUser().then(async ({ data }) => {
@@ -33,7 +34,8 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
       <a href="#workspace-content" className="nexus-skip">Skip to content</a>
       <aside className="nexus-sidebar">
         <Link to="/" aria-label="Opsirix home"><OpsirixLogo /></Link>
-        <nav aria-label="Workspace">
+        <Button className="workspace-menu-toggle" variant="ghost" size="icon" aria-label={menuOpen ? "Close workspace menu" : "Open workspace menu"} aria-expanded={menuOpen} aria-controls="nexus-workspace-nav" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X /> : <Menu />}</Button>
+        <nav id="nexus-workspace-nav" className={menuOpen ? "is-open" : ""} aria-label="Workspace" onClick={() => setMenuOpen(false)}>
           <Link to="/partner"><LayoutDashboard />Overview</Link>
           <Link to="/partner/apply"><FileText />Application</Link>
           <Link to="/partner/services"><ListChecks />Services</Link>

@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, FileText, History, Inbox, LayoutDashboard, ListChecks, LogOut, Repeat, ShieldCheck } from "lucide-react";
+import { Building2, FileText, History, Inbox, LayoutDashboard, ListChecks, LogOut, Menu, Repeat, ShieldCheck, X } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -11,6 +11,7 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
   const navigate = useNavigate();
   const [staff, setStaff] = useState(false);
   const [admin, setAdmin] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -34,7 +35,8 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
     <aside className="ops-sidebar">
       <Link to="/" aria-label="Opsirix home"><OpsirixLogo /></Link>
       <div className="ops-product-mark">{mode === "staff" ? "Staff Console" : "Opsirix OS"}</div>
-      <nav aria-label={mode === "staff" ? "Staff Console" : "Company workspace"}>
+      <Button className="workspace-menu-toggle" variant="ghost" size="icon" aria-label={menuOpen ? "Close workspace menu" : "Open workspace menu"} aria-expanded={menuOpen} aria-controls="ops-workspace-nav" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X /> : <Menu />}</Button>
+      <nav id="ops-workspace-nav" className={menuOpen ? "is-open" : ""} aria-label={mode === "staff" ? "Staff Console" : "Company workspace"} onClick={() => setMenuOpen(false)}>
         {mode === "company" && <Link to="/os" activeProps={{ "aria-current": "page" }}><LayoutDashboard />Overview</Link>}
         <Link to="/workspace" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}><Building2 />Companies &amp; history</Link>
         <Link to="/flow" activeProps={{ "aria-current": "page" }}><ListChecks />Flow</Link>

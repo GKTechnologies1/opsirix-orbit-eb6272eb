@@ -25,9 +25,9 @@ function StaffHome() {
   useEffect(() => { void getConsole().then(setData); }, [getConsole]);
   return <OperatingShell mode="staff" eyebrow="Internal operations" title="Staff Console">
     {!data ? <p className="ops-muted">Checking access.</p> : !data.allowed ? <section className="ops-empty"><CircleX /><h2>Access restricted</h2><p>Company membership does not grant access to internal Opsirix operations.</p></section> : <>
-      <p className="ops-lead">A separate internal workspace for approved Opsirix roles. Pipeline notes, risk discussions, and pricing negotiations will remain outside founder workspaces.</p>
-      <div className="ops-stat-grid"><article><span>Current role</span><strong>{data.roles.includes("admin") ? "Admin / CEO" : data.roles.includes("operations_lead") ? "Operations Lead" : "Compliance Coordinator"}</strong></article><article><span>Phase 1</span><strong>Access boundaries active</strong></article><article><span>Sensitive records</span><strong>Not collected</strong></article></div>
-      {data.isAdmin ? <AdminOverview /> : <section className="ops-panel"><ShieldCheck /><p className="ops-panel-kicker">Your duties</p><h2>Assigned work only</h2><p>You see Nexus help requests only when Admin/CEO assigns them to you.</p><Link to="/staff/inquiries">Open my assigned requests <ArrowRight /></Link></section>}
+      <p className="ops-lead">A separate internal workspace for approved Opsirix roles. Your permissions determine which operational records and actions appear.</p>
+      <section className="ops-role-strip" aria-label="Current access"><ShieldCheck /><div><span>Signed in as</span><strong>{data.roles.includes("admin") ? "Admin / CEO" : data.roles.includes("operations_lead") ? "Operations Lead" : "Compliance Coordinator"}</strong></div></section>
+      {data.isAdmin ? <AdminOverview /> : <section className="ops-panel"><p className="ops-panel-kicker">Assigned work</p><h2>Requests assigned to you</h2><p>Only help requests assigned by Admin/CEO appear. If none are assigned, your queue will show a clear empty state.</p><Link to="/staff/inquiries">Open my assigned requests <ArrowRight /></Link></section>}
     </>}
   </OperatingShell>;
 }
