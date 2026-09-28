@@ -8,3 +8,4 @@ Core oversight: Admin/CEO receives metadata, status, audit, and grant lists thro
 
 Every authenticated `/nexus/*` page uses signed-in workspace chrome, including the free member directory; public navigation never renders above a protected workspace.
 - Core notifications are in-app only, created by database triggers with a per-recipient unique key; expiry notices are recorded lazily on fetch because expiry has no event.
+- Launch intake review access: Admin/CEO reads and assigns all submitted intakes; an Operations Lead reads/acts only on intakes with an active assignment (launch_can_review); drafts are founder-only. Why: least-privilege triage per owner decision 2026-09-28.

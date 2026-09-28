@@ -96,3 +96,5 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Owner to approve final scope-notice wording before any required checkbox (blocked: owner).
 - [ ] Launch activation/publication (blocked: owner review). Stages 2–5 not approved.
 - [ ] OPSIRIX_04_How_We_Work.docx unreviewed until received.
+- [x] Launch scope notice approved (informational, no checkbox). Assignment scoping migration 0055: 31/31 direct, screen checks per role.
+- [ ] Grid Stage 2 revised criteria awaiting owner approval (/mnt/documents/opsirix-grid-criteria-v2.md); scoring off.
