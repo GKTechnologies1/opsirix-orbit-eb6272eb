@@ -53,6 +53,7 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 
 ## Owner direction received 2026-09-25 (uploaded note)
 - [x] Flow phase 1 (preview /flow, /partner/tasks; 34/34 backend, 8/8 browser): owner-created boards without Launch; tasks (owner, due date, status); owner may delegate create/assign; viewers read-only; staff escalations within assigned work with audited clearing; partner sees only explicitly shared tasks.
+- [x] Flow phase 1 completion: editing member + assigned staff browser checks, escalation hold (OX-ESC refs, Blocked until 10+ char written clearance, prior status restored, audited), owner share preview, share stop ends access; 56/56 (desktop+390, direct backend)
 - [ ] Grid record structure + review screens (scoring disabled until criteria approved)
 - [ ] Core (after Flow): managed operational requests, owner-granted scoped/time-limited staff access with immediate revoke, audited lifecycle; no Vault file access; no "free"/pricing labels.
 - [ ] Grid: draft 25 evidence criteria from OPSIRIX_23 for review; record structure/permissions/draft screens only; scoring disabled.
