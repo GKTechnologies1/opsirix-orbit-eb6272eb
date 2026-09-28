@@ -54,7 +54,9 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 ## Owner direction received 2026-09-25 (uploaded note)
 - [x] Flow phase 1 (preview /flow, /partner/tasks; 34/34 backend, 8/8 browser): owner-created boards without Launch; tasks (owner, due date, status); owner may delegate create/assign; viewers read-only; staff escalations within assigned work with audited clearing; partner sees only explicitly shared tasks.
 - [x] Flow phase 1 completion: editing member + assigned staff browser checks, escalation hold (OX-ESC refs, Blocked until 10+ char written clearance, prior status restored, audited), owner share preview, share stop ends access; 56/56 (desktop+390, direct backend)
-- [ ] Grid record structure + review screens (scoring disabled until criteria approved)
-- [ ] Core (after Flow): managed operational requests, owner-granted scoped/time-limited staff access with immediate revoke, audited lifecycle; no Vault file access; no "free"/pricing labels.
-- [ ] Grid: draft 25 evidence criteria from OPSIRIX_23 for review; record structure/permissions/draft screens only; scoring disabled.
+- [x] Flow hold reviewer rule (2026-09-28): assigned reviewer (not raiser) or explicit audited Admin/CEO override clears; edits during hold logged and shown; 33/33 backend, 20/20 browser. Fixed outsider-edit gap (flow_can_edit null-safe).
+- [x] Grid records + review screens (/grid): separate self-assessment and staff evidence review, drafts private, submitted final, no score field; 22/22 backend, browser checks passed. Scoring OFF.
+- [x] Core phase 1 (/core): request → staff accept (own Flow board) → tasks → ready → owner close/reopen; revoke stops staff immediately; audited; 29/29 backend + partner 12/12, browser passed.
+- [ ] Grid scoring + 25 criteria text: BLOCKED on owner approval of rewritten criteria and specialist review.
+- [ ] Core time-limited scope labels / notifications: not started (no approved notification spec).
 - [x] Member list pagination verified with 12 TEST members (2 pages); history date range + role-filtered details (owners see person/end date; viewers see access/scope only). 25/25 browser+backend checks.
