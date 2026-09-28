@@ -82,3 +82,6 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Journey review continuation: founder/partner/staff loading+error states pass remaining; minor: empty space under Core access panel (cosmetic)
 - [x] Journey review: Core access gap (leaked public spacing), Staff Console load-failure state, Core actor labels (no raw IDs); 191/192 browser (1 test limitation), 9/9 labels, 43/43, 16/16
 - Next ready: none unblocked. Blockers unchanged: Grid scoring, Launch (OPSIRIX_05), pricing, Terms wording, retention period, Vault/AI reviews, GitHub connection, publishing, Core email approval
+
+- [x] Partner overview load-error state + retry (tested 2026-09-28)
+- [x] Institutional categories public presentation accurate; 0 listings (tested 2026-09-28)
