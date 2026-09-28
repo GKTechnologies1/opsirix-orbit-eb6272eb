@@ -63,6 +63,18 @@ function Page() {
 
       <section className="inner-section">
         <div className="inner-wrap">
+          <p className="inner-eyebrow">Opsirix Nexus</p>
+          <h2 className="inner-h2">University programs can apply now.</h2>
+          <p className="inner-lead">University Programs is an open Nexus category. A program can apply to join, and founders can ask Opsirix for help finding a university resource. A program is shown to signed-in members only after Opsirix confirms the representative's authority to act for the institution, records a partnership agreement with Opsirix, and approves the profile and services. Until then, interest stays private.</p>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginTop: 24 }}>
+            <a href="/auth?next=/partner/apply" className="btn-primary">Apply as a university program</a>
+            <a href="/nexus/help" className="btn-secondary">Ask for help finding a program</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="inner-section">
+        <div className="inner-wrap">
           <p className="inner-eyebrow">Scope Boundary</p>
           <h2 className="inner-h2">Important: What Opsirix does not provide.</h2>
           <p className="inner-lead">Opsirix does not provide immigration advice, visa guidance, legal advice, or immigration consulting services of any kind. University partnerships are limited to operational education and coordination resources. All immigration, legal, and compliance matters are referred to independently retained licensed professionals.</p>

@@ -106,6 +106,7 @@ function Page() {
         <div className="inner-wrap">
           <p className="inner-eyebrow">Apply</p>
           <h2 className="inner-h2">Apply to join the Nexus network.</h2>
+          <p className="inner-lead">Applications are open for attorneys, CPAs and accounting firms, software and IT firms, university programs, banking partners, and insurance brokers. Being in an open category does not list you publicly. Your organization appears in the member directory only after Opsirix reviews your application, representative authority, category, profile, and services.</p>
 
           <div style={{ maxWidth: 640, marginTop: 32 }} className="contact-card">
             <h3 className="contact-h3">Tell us what you do best.</h3>
