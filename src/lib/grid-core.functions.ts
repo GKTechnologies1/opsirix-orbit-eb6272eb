@@ -65,9 +65,8 @@ export const getCore = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const sb = context.supabase; const uid = context.userId;
     const { orgs, roleOf, isStaff, isAdmin } = await companiesFor(sb, uid);
-    const [{ data: reqs }, { data: events }, { data: editors }, oversight] = await Promise.all([
+    const [{ data: reqs }, { data: editors }, oversight] = await Promise.all([
       sb.from("core_requests").select("id,ref,organization_id,title,description,status,requested_by,handled_by,board_id,status_note,created_at,updated_at").order("created_at", { ascending: false }),
-      sb.from("core_request_events").select("id,request_id,from_status,to_status,note,actor_id,created_at").order("created_at"),
       sb.from("flow_editors").select("organization_id,user_id").eq("user_id", uid),
       isAdmin ? sb.rpc("core_admin_oversight") : Promise.resolve({ data: [] }),
     ]);
