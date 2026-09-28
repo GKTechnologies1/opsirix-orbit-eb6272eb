@@ -174,3 +174,10 @@ Preview only: Notifications page, menu link with unread count, redaction label, 
 Note redaction, actor labels, notification table, triggers and read/expiry functions (migrations 0050, 0051).
 ### Preview only
 Notifications page and menu badge, Core history display, spacing fix, Staff Console error state. Email delivery is not built.
+
+## Update 2026-09-28 20:45 UTC: partner overview error state and institutional categories
+- /partner overview: a failed application load used to show "Start your partner application" (misleading). It now shows "Your application could not load" with Try again (role=alert). Tested through the real data path (partner_applications request blocked): error appears after built-in retries (~8s), Try again recovers. Desktop + 390px pass. Preview only.
+- University Programs, Banking Partners, Insurance Brokers: open for applications and help requests (shared backend, unchanged this round); 17/14/18 active choices; 0 public listings. No dynamic "planned/not open" wording shown. Added "University programs can apply now" block on /for-universities and an open-categories line on /for-partners (preview only).
+- Directory eligibility (unchanged, live): approved organization application, verified representative authority, university agreement recorded, approved claimed category, approved/published/not suspended profile, approved active service; Insurance needs verified unexpired license per offered service/state/line.
+- Tests: public/help/member directory/partner error 36/36 (desktop + 390); direct backend visitor/member/unrelated partner 24/24.
+- No shared-backend changes this round.
