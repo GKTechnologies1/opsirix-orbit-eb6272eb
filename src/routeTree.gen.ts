@@ -40,6 +40,7 @@ import { Route as PlatformCoreRouteImport } from './routes/platform.core'
 import { Route as PlatformAiRouteImport } from './routes/platform.ai'
 import { Route as NexusHelpRouteImport } from './routes/nexus.help'
 import { Route as JoinCodeRouteImport } from './routes/join.$code'
+import { Route as AuthenticatedOsRouteImport } from './routes/_authenticated.os'
 import { Route as AuthenticatedGridRouteImport } from './routes/_authenticated.grid'
 import { Route as AuthenticatedFlowRouteImport } from './routes/_authenticated.flow'
 import { Route as AuthenticatedCoreRouteImport } from './routes/_authenticated.core'
@@ -217,6 +218,11 @@ const JoinCodeRoute = JoinCodeRouteImport.update({
   path: '/join/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedOsRoute = AuthenticatedOsRouteImport.update({
+  id: '/os',
+  path: '/os',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedGridRoute = AuthenticatedGridRouteImport.update({
   id: '/grid',
   path: '/grid',
@@ -368,6 +374,7 @@ export interface FileRoutesByFullPath {
   '/core': typeof AuthenticatedCoreRoute
   '/flow': typeof AuthenticatedFlowRoute
   '/grid': typeof AuthenticatedGridRoute
+  '/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -421,6 +428,7 @@ export interface FileRoutesByTo {
   '/core': typeof AuthenticatedCoreRoute
   '/flow': typeof AuthenticatedFlowRoute
   '/grid': typeof AuthenticatedGridRoute
+  '/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -477,6 +485,7 @@ export interface FileRoutesById {
   '/_authenticated/core': typeof AuthenticatedCoreRoute
   '/_authenticated/flow': typeof AuthenticatedFlowRoute
   '/_authenticated/grid': typeof AuthenticatedGridRoute
+  '/_authenticated/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -533,6 +542,7 @@ export interface FileRouteTypes {
     | '/core'
     | '/flow'
     | '/grid'
+    | '/os'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -586,6 +596,7 @@ export interface FileRouteTypes {
     | '/core'
     | '/flow'
     | '/grid'
+    | '/os'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -641,6 +652,7 @@ export interface FileRouteTypes {
     | '/_authenticated/core'
     | '/_authenticated/flow'
     | '/_authenticated/grid'
+    | '/_authenticated/os'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -916,6 +928,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JoinCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/os': {
+      id: '/_authenticated/os'
+      path: '/os'
+      fullPath: '/os'
+      preLoaderRoute: typeof AuthenticatedOsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/grid': {
       id: '/_authenticated/grid'
       path: '/grid'
@@ -1078,6 +1097,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCoreRoute: typeof AuthenticatedCoreRoute
   AuthenticatedFlowRoute: typeof AuthenticatedFlowRoute
   AuthenticatedGridRoute: typeof AuthenticatedGridRoute
+  AuthenticatedOsRoute: typeof AuthenticatedOsRoute
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
   AuthenticatedAdminPreviewRoute: typeof AuthenticatedAdminPreviewRoute
   AuthenticatedNexusDirectoryRoute: typeof AuthenticatedNexusDirectoryRoute
@@ -1103,6 +1123,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCoreRoute: AuthenticatedCoreRoute,
   AuthenticatedFlowRoute: AuthenticatedFlowRoute,
   AuthenticatedGridRoute: AuthenticatedGridRoute,
+  AuthenticatedOsRoute: AuthenticatedOsRoute,
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
   AuthenticatedAdminPreviewRoute: AuthenticatedAdminPreviewRoute,
   AuthenticatedNexusDirectoryRoute: AuthenticatedNexusDirectoryRoute,

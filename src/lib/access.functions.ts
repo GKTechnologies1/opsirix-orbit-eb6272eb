@@ -19,7 +19,7 @@ export const getMyAccess = createServerFn({ method: "GET" })
     const areas: AccessArea[] = [];
     if (admin.data) areas.push({ key: "admin", label: "Admin/CEO Staff Console", description: "Oversight, queues, access, content and releases.", to: "/staff" });
     else if (staff.data) areas.push({ key: "staff", label: "Staff Console", description: "Work assigned to you by the Admin/CEO.", to: "/staff" });
-    if ((memberships.data ?? []).length) areas.push({ key: "company", label: "Company workspace", description: "Your companies, members and history.", to: "/workspace" });
+    if ((memberships.data ?? []).length) areas.push({ key: "company", label: "Opsirix OS", description: "Your company overview: Flow, Core, Grid review status and Nexus requests.", to: "/os" });
     if (partnerRole.data || application.data) areas.push({ key: "partner", label: "Partner workspace", description: "Your application, profile and introductions.", to: "/partner" });
     areas.push({ key: "member", label: "Nexus member area", description: "Browse approved profiles and follow your help requests.", to: "/nexus/directory" });
     return { areas };

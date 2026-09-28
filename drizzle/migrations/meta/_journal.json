@@ -330,6 +330,20 @@
       "when": 1790619062424,
       "tag": "0046_flow_can_edit_null_safe",
       "breakpoints": true
+    },
+    {
+      "idx": 47,
+      "version": "7",
+      "when": 1790619967317,
+      "tag": "0047_core_request_scoped_staff_access",
+      "breakpoints": true
+    },
+    {
+      "idx": 48,
+      "version": "7",
+      "when": 1790619987659,
+      "tag": "0048_core_company_label_for_granted_staff",
+      "breakpoints": true
     }
   ]
 }

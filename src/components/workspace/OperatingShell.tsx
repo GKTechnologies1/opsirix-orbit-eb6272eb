@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, FileText, History, Inbox, ListChecks, LogOut, Repeat, ShieldCheck } from "lucide-react";
+import { Building2, FileText, History, Inbox, LayoutDashboard, ListChecks, LogOut, Repeat, ShieldCheck } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -35,12 +35,13 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
       <Link to="/" aria-label="Opsirix home"><OpsirixLogo /></Link>
       <div className="ops-product-mark">{mode === "staff" ? "Staff Console" : "Opsirix OS"}</div>
       <nav aria-label={mode === "staff" ? "Staff Console" : "Company workspace"}>
-        <Link to="/workspace"><Building2 />Companies</Link>
-        {mode === "company" && <Link to="/workspace"><History />History</Link>}
-        <Link to="/flow"><ListChecks />Flow</Link>
-        <Link to="/core"><Inbox />Core</Link>
-        <Link to="/grid"><FileText />Grid</Link>
-        {staff && <Link to="/staff"><ShieldCheck />Staff Console</Link>}
+        {mode === "company" && <Link to="/os" activeProps={{ "aria-current": "page" }}><LayoutDashboard />Overview</Link>}
+        <Link to="/workspace" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}><Building2 />Companies &amp; history</Link>
+        <Link to="/flow" activeProps={{ "aria-current": "page" }}><ListChecks />Flow</Link>
+        <Link to="/core" activeProps={{ "aria-current": "page" }}><Inbox />Core</Link>
+        <Link to="/grid" activeProps={{ "aria-current": "page" }}><FileText />Grid</Link>
+        {mode === "company" && <Link to="/nexus/requests" activeProps={{ "aria-current": "page" }}><Inbox />Nexus requests</Link>}
+        {staff && <Link to="/staff" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}><ShieldCheck />Staff Console</Link>}
         {staff && mode === "staff" && <Link to="/staff/inquiries"><Inbox />Nexus inquiries</Link>}
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
         {admin && mode === "staff" && <Link to="/staff/content"><FileText />Content & Catalog</Link>}

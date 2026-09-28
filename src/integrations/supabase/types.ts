@@ -58,6 +58,63 @@ export type Database = {
           },
         ]
       }
+      core_access_grants: {
+        Row: {
+          created_at: string
+          expires_at: string
+          granted_by: string
+          id: string
+          organization_id: string
+          purpose: string
+          request_id: string
+          revoked_at: string | null
+          revoked_by: string | null
+          scope: string
+          staff_user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          granted_by: string
+          id?: string
+          organization_id: string
+          purpose: string
+          request_id: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+          scope: string
+          staff_user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          granted_by?: string
+          id?: string
+          organization_id?: string
+          purpose?: string
+          request_id?: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+          scope?: string
+          staff_user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "core_access_grants_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "core_access_grants_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "core_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       core_request_events: {
         Row: {
           actor_id: string
@@ -2380,6 +2437,41 @@ export type Database = {
       }
       content_assert_admin: { Args: never; Returns: string }
       content_validate: { Args: { _body: Json }; Returns: undefined }
+      core_access_list: {
+        Args: { _request: string }
+        Returns: {
+          created_at: string
+          expires_at: string
+          id: string
+          purpose: string
+          request_id: string
+          revoked_at: string
+          scope: string
+          staff_label: string
+          staff_user_id: string
+          state: string
+        }[]
+      }
+      core_board_request: { Args: { _board: string }; Returns: string }
+      core_can_handle: {
+        Args: { _request: string; _user: string }
+        Returns: boolean
+      }
+      core_can_read: {
+        Args: { _request: string; _user: string }
+        Returns: boolean
+      }
+      core_company_label: { Args: { _request: string }; Returns: string }
+      core_grant_access: {
+        Args: {
+          _email: string
+          _expires: string
+          _purpose: string
+          _request: string
+          _scope: string
+        }
+        Returns: string
+      }
       core_is_staff: { Args: { _org: string; _user: string }; Returns: boolean }
       core_log: {
         Args: {
@@ -2389,6 +2481,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      core_revoke_access: { Args: { _grant: string }; Returns: undefined }
       core_save_task: {
         Args: {
           _due: string
