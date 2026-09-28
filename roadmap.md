@@ -74,3 +74,5 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Missing second-company board regression: outsiders cannot add tasks; zero rows created (6/6)
 - [x] Post-login review final: founder, partner, staff and Admin at desktop/tablet/390; keyboard menu and reduced motion (88/88); latest automatic preview build OK
 - [x] Expanded signed-in review: directory uses signed-in chrome/navigation; Staff Console duplicate/blank states fixed; 144/144 desktop/390 role checks and expanded Core 16/16 direct checks; evidence and DevOps handoff recorded
+- [x] 2026-09-28 19:45 UTC evidence summary delivered (routes, Core oversight fields, cross-company board, screenshots). Gap: no Compliance Coordinator screenshots were saved (checks were assertion-only) — capture next UI pass
+- [ ] Next ready tasks: none unblocked. Grid scoring (criteria + specialist), Launch (OPSIRIX_05), Core notifications (no approved spec), pricing (schedule), Terms (wording), retention (period), Vault/AI (reviews), GitHub (owner), publishing (build stability)
