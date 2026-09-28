@@ -62,7 +62,7 @@ export const getOsOverview = createServerFn({ method: "GET" })
       companies,
       nexus: {
         total: n.length,
-        open: n.filter((x) => !["closed", "declined", "withdrawn", "spam"].includes(x.status)).length,
+        open: n.filter((x) => !["closed"].includes(x.status)).length,
         needsConsent: n.reduce((s, x) => s + (x.introductions ?? []).filter((i) => ["proposed", "reconsent_required"].includes(i.status)).length, 0),
         latest: n.slice(0, 3).map((x) => ({ id: x.id, category_id: x.category_id, status: x.status, created_at: x.created_at })),
       },
