@@ -91,22 +91,24 @@ export const getCore = createServerFn({ method: "GET" })
     const companies = allOrgs.map((o) => {
       const role = roleOf.get(o.id) ?? null;
       const canEdit = role === "owner" || (role === "member" && (editors ?? []).some((e) => e.organization_id === o.id));
+      const fullRequests = contentRequests.filter((r) => r.organization_id === o.id).map((r) => {
+        const access = grants.find((g) => g.id === r.id)?.rows ?? [];
+        const mine = access.find((a) => a.staff_user_id === uid && a.state === "active");
+        return {
+          ...r, handledByMe: r.handled_by === uid, requestedBy: who(r.requested_by, o.id),
+          oversightOnly: false, canHandle: !role && mine?.scope === "handle", myAccess: mine ? { scope: mine.scope, expires_at: mine.expires_at, purpose: mine.purpose } : null,
+          access: role === "owner" || (!role && isAdmin) ? access : [],
+          tasks: (tasks ?? []).filter((t) => t.board_id === r.board_id).map((t) => ({ ...t, hold: (holds ?? []).find((h) => h.task_id === t.id)?.ref ?? null })),
+          events: (events ?? []).filter((e) => e.request_id === r.id).map((e) => ({ ...e, actor: who(e.actor_id, o.id) })),
+        };
+      });
+      const metadataRequests = oversightRows.filter((r) => r.organization_id === o.id && !contentRequests.some((full) => full.id === r.id)).map((r) => ({
+        ...r, description: "", status_note: null, handledByMe: false, requestedBy: "Company member", oversightOnly: true, canHandle: false, myAccess: null,
+        access: (r.access_grants ?? []).map((a) => ({ ...a, request_id: r.id })), tasks: [], events: (r.events ?? []).map((e) => ({ ...e, request_id: r.id, actor: "Company member or Opsirix" })),
+      }));
       return {
         id: o.id, name: o.name, role, canEdit, isOwner: role === "owner", isStaff: !role && isStaff, isAdmin: !role && isAdmin,
-        requests: contentRequests.filter((r) => r.organization_id === o.id).map((r) => {
-          const access = grants.find((g) => g.id === r.id)?.rows ?? [];
-          const mine = access.find((a) => a.staff_user_id === uid && a.state === "active");
-          return {
-            ...r, handledByMe: r.handled_by === uid, requestedBy: who(r.requested_by, o.id),
-            oversightOnly: false, canHandle: !role && mine?.scope === "handle", myAccess: mine ? { scope: mine.scope, expires_at: mine.expires_at, purpose: mine.purpose } : null,
-            access: role === "owner" || (!role && isAdmin) ? access : [],
-            tasks: (tasks ?? []).filter((t) => t.board_id === r.board_id).map((t) => ({ ...t, hold: (holds ?? []).find((h) => h.task_id === t.id)?.ref ?? null })),
-            events: (events ?? []).filter((e) => e.request_id === r.id).map((e) => ({ ...e, actor: who(e.actor_id, o.id) })),
-          };
-        }).concat(oversightRows.filter((r) => r.organization_id === o.id && !contentRequests.some((full) => full.id === r.id)).map((r) => ({
-          ...r, description: "", status_note: null, handledByMe: false, requestedBy: "Company member", oversightOnly: true, canHandle: false, myAccess: null,
-          access: r.access_grants ?? [], tasks: [], events: (r.events ?? []).map((e) => ({ ...e, request_id: r.id, actor: "Company member or Opsirix" })),
-        }))),
+        requests: [...fullRequests, ...metadataRequests],
       };
     });
     // Staff/Admin without membership only see companies where a request is visible to them.
