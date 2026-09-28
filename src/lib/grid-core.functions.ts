@@ -80,6 +80,7 @@ export const getCore = createServerFn({ method: "GET" })
     const { data: holds } = boardIds.length ? await sb.from("flow_escalations").select("task_id,ref").is("cleared_at", null) : { data: [] as { task_id: string; ref: string }[] };
     // Access grants: owner/Admin see every grant; staff see only their own. Staff-only companies come from request grants.
     const grants = await Promise.all(contentRequests.map(async (r) => ({ id: r.id, rows: (await sb.rpc("core_access_list", { _request: r.id })).data ?? [] })));
+    const history = await Promise.all(contentRequests.map(async (r) => ({ id: r.id, rows: (await sb.rpc("core_history", { _request: r.id })).data ?? [] })));
     const allOrgs = [...orgs];
     for (const r of [...contentRequests, ...oversightRows]) {
       if (!allOrgs.some((o) => o.id === r.organization_id)) {
@@ -99,12 +100,12 @@ export const getCore = createServerFn({ method: "GET" })
           oversightOnly: false, canHandle: !role && mine?.scope === "handle", myAccess: mine ? { scope: mine.scope, expires_at: mine.expires_at, purpose: mine.purpose } : null,
           access: role === "owner" || (!role && isAdmin) ? access : [],
           tasks: (tasks ?? []).filter((t) => t.board_id === r.board_id).map((t) => ({ ...t, hold: (holds ?? []).find((h) => h.task_id === t.id)?.ref ?? null })),
-          events: (events ?? []).filter((e) => e.request_id === r.id).map((e) => ({ ...e, actor: who(e.actor_id, o.id) })),
+          events: (history.find((h) => h.id === r.id)?.rows ?? []).map((e) => ({ id: e.id, request_id: r.id, from_status: e.from_status, to_status: e.to_status, note: e.note, note_redacted: e.note_redacted, created_at: e.created_at, actor: e.actor_label })),
         };
       });
       const metadataRequests = oversightRows.filter((r) => r.organization_id === o.id && !contentRequests.some((full) => full.id === r.id)).map((r) => ({
         ...r, description: "", status_note: null, handledByMe: false, requestedBy: "Company member", oversightOnly: true, canHandle: false, myAccess: null,
-        access: (r.access_grants ?? []).map((a) => ({ ...a, request_id: r.id })), tasks: [], events: (r.events ?? []).map((e) => ({ ...e, note: null, note_redacted: Boolean((e as { note_redacted?: boolean }).note_redacted), request_id: r.id, actor: "Company member or Opsirix" })),
+        access: (r.access_grants ?? []).map((a) => ({ ...a, request_id: r.id })), tasks: [], events: (r.events ?? []).map((e) => { const x = e as unknown as { id: string; from_status: string | null; to_status: string; created_at: string; note_redacted?: boolean; actor_label?: string }; return { id: x.id, request_id: r.id, from_status: x.from_status, to_status: x.to_status, created_at: x.created_at, note: null, note_redacted: Boolean(x.note_redacted), actor: x.actor_label ?? "Opsirix or company" }; }),
       }));
       return {
         id: o.id, name: o.name, role, canEdit, isOwner: role === "owner", isStaff: !role && isStaff, isAdmin: !role && isAdmin,
