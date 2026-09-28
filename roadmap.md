@@ -85,3 +85,8 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 
 - [x] Partner overview load-error state + retry (tested 2026-09-28)
 - [x] Institutional categories public presentation accurate; 0 listings (tested 2026-09-28)
+
+## 2026-09-28 21:00 UTC
+- [x] University Programs, Banking Partners, Insurance Brokers: complete. Applications and help requests open; 0 public listings each; public copy preview-only for DevOps
+- [x] Decision packet v1 prepared (Files: opsirix-decision-packet-v1.md): Launch intake, Grid 25 criteria, Terms, retention, Core email, Vault/AI, pricing. All gates remain off pending owner answers
+- [ ] Staging positive directory-filter test with approved TEST listings: blocked on isolated staging backend (never on shared live)

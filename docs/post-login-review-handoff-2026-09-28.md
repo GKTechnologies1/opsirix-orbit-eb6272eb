@@ -181,3 +181,13 @@ Notifications page and menu badge, Core history display, spacing fix, Staff Cons
 - Directory eligibility (unchanged, live): approved organization application, verified representative authority, university agreement recorded, approved claimed category, approved/published/not suspended profile, approved active service; Insurance needs verified unexpired license per offered service/state/line.
 - Tests: public/help/member directory/partner error 36/36 (desktop + 390); direct backend visitor/member/unrelated partner 24/24.
 - No shared-backend changes this round.
+
+## Update 2026-09-28 21:00 UTC: category copy and staging filter test
+### Preview-only category copy (deploy via DevOps)
+- `/for-universities`: "University programs can apply now" block.
+- `/for-partners`: line listing open categories (Attorney, CPA, Software/IT, University Programs, Banking Partners, Insurance Brokers).
+- `/partner` overview: load-error state with Try again.
+No live category setting, permission rule or record changed. 0 public listings in University, Banking and Insurance.
+
+### Staging test to add (isolated staging backend only)
+Positive directory filter test: seed approved TEST listings per open category in staging; verify member directory category/location/service filters return them; verify suspended, closed-type, expired-license and unpublished-draft listings are excluded. Never seed TEST listings on the shared live backend.
