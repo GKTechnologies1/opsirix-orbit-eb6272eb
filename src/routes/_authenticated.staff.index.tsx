@@ -45,7 +45,7 @@ function AdminOverview() {
   useEffect(() => { load().then(setO).catch(() => setErr(true)); }, [load]);
   if (err) return <p className="ops-muted" role="alert">The overview could not load. Refresh to try again.</p>;
   if (o === undefined) return <p className="ops-muted">Loading overview.</p>;
-  if (!o) return null;
+  if (!o) return <section className="ops-empty"><h2>Admin overview unavailable</h2><p>Your staff access is active, but Admin/CEO oversight data was not returned. Refresh before taking action.</p></section>;
   return <>
     <section className="ops-panel"><h2>Partner review queues</h2><div className="ops-stat-grid">
       <Queue label="Applications waiting" value={o.applications.submitted} to="/admin/applications" note={`${o.applications.changes} awaiting applicant changes, ${o.applications.draft} drafts`} />
@@ -60,7 +60,6 @@ function AdminOverview() {
     <section className="ops-panel"><h2>Content & Catalog</h2><div className="ops-stat-grid">
       <Queue label="Pending content drafts" value={o.content.drafts} to="/staff/content" />
       <Queue label="Published content sections" value={o.content.published} to="/staff/content" />
-      <Queue label="Service suggestions" value={o.suggestionsPending} to="/admin/applications" />
     </div>{o.content.catalogChanges.length > 0 && <ul className="ops-list">{o.content.catalogChanges.map((c) => <li key={c.id}><strong>{c.change_type}</strong> {c.service_id} <span className="ops-muted">{new Date(c.created_at).toISOString().slice(0, 16).replace("T", " ")} UTC</span></li>)}</ul>}<Link to="/staff/content">Open Content & Catalog <ArrowRight /></Link></section>
     <section className="ops-panel"><h2>Help requests</h2><div className="ops-stat-grid">
       <Queue label="Open requests" value={o.inquiriesOpen} to="/staff/inquiries" />

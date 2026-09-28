@@ -1,11 +1,11 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { MapPin, Search } from "lucide-react";
 import { getMemberDirectory } from "@/lib/nexus.functions";
 import { NEXUS_BOUNDARY } from "@/lib/nexus-discovery";
-import { supabase } from "@/integrations/supabase/client";
+import { OperatingShell } from "@/components/workspace/OperatingShell";
 
 export const Route = createFileRoute("/_authenticated/nexus/directory")({
   head: () => ({ meta: [
@@ -22,8 +22,6 @@ export const Route = createFileRoute("/_authenticated/nexus/directory")({
 
 function MemberDirectory() {
   const load = useServerFn(getMemberDirectory);
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
   const { data, isLoading, isError, refetch } = useQuery({ queryKey: ["nexus-member-directory"], queryFn: () => load() });
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("");
@@ -40,18 +38,9 @@ function MemberDirectory() {
     (!location || `${p.city ?? ""} ${p.state_region ?? ""} ${p.service_areas.join(" ")}`.toLowerCase().includes(location.toLowerCase())) &&
     `${p.display_name} ${p.organization_name} ${p.professional_summary} ${p.category_labels.join(" ")}`.toLowerCase().includes(query.toLowerCase())), [data, query, category, location]);
 
-  async function signOut() {
-    await queryClient.cancelQueries();
-    queryClient.clear();
-    await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
-  }
-
   return (
-    <main className="nx-page">
-      <div className="nx-wrap">
-        <div className="nx-topbar"><p className="nexus-kicker">Nexus member directory</p><span style={{ display: "flex", gap: 16, flexWrap: "wrap" }}><Link to="/nexus/requests" className="nx-link">My requests</Link><Link to="/account" className="nx-link">Switch workspace</Link><button type="button" className="nx-link" onClick={signOut}>Sign out</button></span></div>
-        <h1>Approved Nexus profiles</h1>
+    <OperatingShell mode="member" eyebrow="Nexus member directory" title="Approved Nexus profiles">
+      <div className="nx-wrap nx-member-directory">
         <p className="nx-intro">Profiles appear here only after Opsirix review. Professionals work independently under their own engagement terms.</p>
         <div className="nx-filters" role="search">
           <label className="nexus-search"><Search aria-hidden /><span className="sr-only">Search profiles</span><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search by name, organization, or service" /></label>
@@ -70,6 +59,6 @@ function MemberDirectory() {
         </section>
         <p className="nx-boundary">{NEXUS_BOUNDARY}</p>
       </div>
-    </main>
+    </OperatingShell>
   );
 }

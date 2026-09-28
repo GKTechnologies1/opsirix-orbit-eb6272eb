@@ -25,6 +25,17 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
     });
     return () => { alive = false; };
   }, []);
+  useEffect(() => {
+    if (!menuOpen) return;
+    document.querySelector<HTMLAnchorElement>("#nexus-workspace-nav a")?.focus();
+    const close = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      setMenuOpen(false);
+      document.querySelector<HTMLButtonElement>("#nexus-workspace-menu")?.focus();
+    };
+    document.addEventListener("keydown", close);
+    return () => document.removeEventListener("keydown", close);
+  }, [menuOpen]);
   async function signOut() {
     await supabase.auth.signOut();
     await navigate({ to: "/auth", replace: true });
@@ -34,7 +45,7 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
       <a href="#workspace-content" className="nexus-skip">Skip to content</a>
       <aside className="nexus-sidebar">
         <Link to="/" aria-label="Opsirix home"><OpsirixLogo /></Link>
-        <Button className="workspace-menu-toggle" variant="ghost" size="icon" aria-label={menuOpen ? "Close workspace menu" : "Open workspace menu"} aria-expanded={menuOpen} aria-controls="nexus-workspace-nav" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X /> : <Menu />}</Button>
+         <Button id="nexus-workspace-menu" className="workspace-menu-toggle" variant="ghost" aria-label={menuOpen ? "Close workspace menu" : "Open workspace menu"} aria-expanded={menuOpen} aria-controls="nexus-workspace-nav" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X /> : <Menu />}<span>{menuOpen ? "Close" : "Menu"}</span></Button>
         <nav id="nexus-workspace-nav" className={menuOpen ? "is-open" : ""} aria-label="Workspace" onClick={() => setMenuOpen(false)}>
           <Link to="/partner"><LayoutDashboard />Overview</Link>
           <Link to="/partner/apply"><FileText />Application</Link>
@@ -43,7 +54,7 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
           <Link to="/partner/introductions"><Inbox />Introductions</Link>
           <Link to="/partner/tasks"><ListChecks />Shared tasks</Link>
           {canOnboard && <Link to="/partner/onboarding"><Building2 />Institutions and brokerages</Link>}
-          <Link to="/directory"><Search />Directory</Link>
+           <Link to="/nexus/directory"><Search />Directory</Link>
           {isAdmin && <Link to="/admin/applications"><ShieldCheck />Review queue</Link>}
           {isAdmin && <Link to="/admin/preview"><KeyRound />Preview access</Link>}
           <Link to="/account"><Repeat />Switch workspace</Link>
