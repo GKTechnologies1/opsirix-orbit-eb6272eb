@@ -39,7 +39,7 @@ function FlowPage() {
 
   return (
     <OperatingShell mode="company" eyebrow="Opsirix Flow" title="Company tasks">
-      <p className="text-muted-foreground max-w-2xl">Boards hold the work your company is coordinating. Owners and delegated members edit; viewers can read. Opsirix staff with company access can flag a task for attention. Partners see only tasks an owner shares with them.</p>
+      <p className="text-muted-foreground max-w-2xl">Boards hold the work your company is coordinating. Owners and delegated members edit; viewers can read. Opsirix staff with company access can place a task on hold; it stays Blocked until they record written clearance. Partners see only tasks an owner shares with them.</p>
       {message && <p role="status" className="rounded-md border border-border p-3 text-sm">{message}</p>}
       {error && <div role="alert" className="text-sm">{error} <Button size="sm" variant="secondary" onClick={() => void refresh()}>Retry</Button></div>}
       {!data && !error && <p>Loading Flow…</p>}
