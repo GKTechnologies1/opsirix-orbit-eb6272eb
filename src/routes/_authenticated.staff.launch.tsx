@@ -87,9 +87,9 @@ function IntakeCard({ intake: i, onDone, isAdmin, leads }: { intake: Intake; onD
     {i.reviews.length > 0 && <><h4>Review history</h4><ul className="text-sm">{i.reviews.map((r, n) => <li key={n}>{new Date(r.created_at).toLocaleString()} · {r.reviewer} · {r.kind === "outcome" ? LAUNCH_OUTCOMES[r.outcome as Outcome] : "Correction requested"}: {r.reason} <em>(founder saw: {r.founder_message})</em></li>)}</ul></>}
     <h4>Audit</h4><ul className="text-sm text-muted-foreground">{i.events.map((e, n) => <li key={n}>{new Date(e.created_at).toLocaleString()} · {e.actor} · {e.event.replace(/_/g, " ")}</li>)}</ul>
     {i.status === "submitted" && <form className="nexus-form" onSubmit={submit}>
-      <fieldset><legend>Action</legend>
-        <label className="mr-4"><input type="radio" checked={kind === "outcome"} onChange={() => setKind("outcome")} /> Record outcome</label>
-        <label><input type="radio" checked={kind === "changes_requested"} onChange={() => setKind("changes_requested")} /> Ask founder for a correction</label>
+      <fieldset><legend>Action</legend><div className="launch-options">
+        <label className="launch-option"><input type="radio" checked={kind === "outcome"} onChange={() => setKind("outcome")} /> Record outcome</label>
+        <label className="launch-option"><input type="radio" checked={kind === "changes_requested"} onChange={() => setKind("changes_requested")} /> Ask founder for a correction</label></div>
       </fieldset>
       {kind === "outcome" && <label>Outcome (internal)<select value={outcome} onChange={(e) => setOutcome(e.target.value as Outcome)} required>
         <option value="">Choose</option>{(Object.keys(LAUNCH_OUTCOMES) as Outcome[]).map((k) => <option key={k} value={k}>{LAUNCH_OUTCOMES[k]}</option>)}
