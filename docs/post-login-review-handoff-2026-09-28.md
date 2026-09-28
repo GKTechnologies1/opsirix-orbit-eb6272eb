@@ -161,3 +161,16 @@ Tests: direct 37/37, regression 16/16, browser 43/43 desktop and 390. Email deli
 - TEST request OX-CORE-2026-009 in TEST Founder Company, TEST grants to Ops Lead (revoked) and Compliance (expired by test harness), and their notifications.
 - One Features & Releases record.
 Preview only: Notifications page, menu link with unread count, redaction label, notifications page uses workspace chrome.
+
+## Update 2026-09-28 20:10 UTC: journey review, actor labels
+
+- Core access panel gap: public-page phone/tablet section spacing leaked into signed-in pages (72px forced padding). Scoped to public pages only. Verified: no trailing gap at 1280/390.
+- Staff Console stayed on "Checking access." forever if loading failed. It now shows an error with Try again.
+- Core history actor labels (migration 0051, `core_history`, `core_actor_label`): no raw account IDs are returned. Owner sees company member names, "You" and "Opsirix staff"; members/viewers see "You", "Company owner/member/viewer", "Opsirix staff"; Admin/CEO sees staff names plus company role labels, notes withheld. Revoked, expired and unrelated accounts get no history. Direct 9/9.
+- Journey checks 191/192 (18 role/page pairs at 1280 and 390, including Notifications; forced-failure states on 8 pages). The single miss is a test limitation: the partner overview reads its data another way, so the simulated failure did not apply.
+- Regression: notifications/Compliance 43/43, Core and cross-company 16/16.
+
+### Active on the shared backend now
+Note redaction, actor labels, notification table, triggers and read/expiry functions (migrations 0050, 0051).
+### Preview only
+Notifications page and menu badge, Core history display, spacing fix, Staff Console error state. Email delivery is not built.
