@@ -17,7 +17,17 @@ function PartnerDashboard() {
   const [opx, setOpx] = useState<Awaited<ReturnType<typeof getMyOpxReferences>>>();
   useEffect(() => { loadOpx().then(setOpx).catch(() => undefined); }, [loadOpx]);
   const [application, setApplication] = useState<Application | null | undefined>(undefined);
-  useEffect(() => { supabase.auth.getUser().then(async ({ data }) => { if (!data.user) return; const result = await supabase.from("partner_applications").select("*").eq("user_id", data.user.id).maybeSingle(); setApplication(result.data); }); }, []);
+  const [loadFailed, setLoadFailed] = useState(false);
+  const loadApplication = useCallback(async () => {
+    setLoadFailed(false); setApplication(undefined);
+    try {
+      const { data } = await supabase.auth.getUser(); if (!data.user) return;
+      const result = await supabase.from("partner_applications").select("*").eq("user_id", data.user.id).maybeSingle();
+      if (result.error) throw result.error;
+      setApplication(result.data);
+    } catch { setLoadFailed(true); }
+  }, []);
+  useEffect(() => { void loadApplication(); }, [loadApplication]);
   const labels: Record<string, string> = { draft: "Draft", submitted: "Submitted", under_review: "Under review", changes_requested: "Changes requested", approved: "Approved", declined: "Not approved" };
   return <WorkspaceShell eyebrow="Partner workspace" title="Your Nexus profile">
     {application === undefined ? <p className="nexus-muted">Loading your application.</p> : !application ? <div className="nexus-empty"><FileCheck2 /><h2>Start your partner application</h2><p>Tell us about your work and credentials. You can save a draft before submitting.</p><Link to="/partner/apply">Start application <ArrowRight /></Link></div> : <>
