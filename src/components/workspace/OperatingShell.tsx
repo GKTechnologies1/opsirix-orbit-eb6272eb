@@ -38,6 +38,8 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
         <Link to="/workspace"><Building2 />Companies</Link>
         {mode === "company" && <Link to="/workspace"><History />History</Link>}
         <Link to="/flow"><ListChecks />Flow</Link>
+        <Link to="/core"><Inbox />Core</Link>
+        <Link to="/grid"><FileText />Grid</Link>
         {staff && <Link to="/staff"><ShieldCheck />Staff Console</Link>}
         {staff && mode === "staff" && <Link to="/staff/inquiries"><Inbox />Nexus inquiries</Link>}
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
