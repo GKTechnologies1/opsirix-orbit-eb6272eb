@@ -699,6 +699,44 @@ export type Database = {
           },
         ]
       }
+      launch_assignments: {
+        Row: {
+          assigned_by: string
+          assignee_id: string
+          created_at: string
+          id: string
+          intake_id: string
+          revoked_at: string | null
+          revoked_by: string | null
+        }
+        Insert: {
+          assigned_by: string
+          assignee_id: string
+          created_at?: string
+          id?: string
+          intake_id: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+        }
+        Update: {
+          assigned_by?: string
+          assignee_id?: string
+          created_at?: string
+          id?: string
+          intake_id?: string
+          revoked_at?: string | null
+          revoked_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "launch_assignments_intake_id_fkey"
+            columns: ["intake_id"]
+            isOneToOne: false
+            referencedRelation: "launch_intakes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       launch_events: {
         Row: {
           actor_id: string
@@ -2837,6 +2875,14 @@ export type Database = {
             Args: { _service: string; _states: string[]; _user: string }
             Returns: boolean
           }
+      launch_assign: {
+        Args: { _assignee: string; _intake: string }
+        Returns: undefined
+      }
+      launch_can_review: {
+        Args: { _intake: string; _uid: string }
+        Returns: boolean
+      }
       launch_is_reviewer: { Args: { _uid: string }; Returns: boolean }
       launch_record_review: {
         Args: {

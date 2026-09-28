@@ -121,6 +121,7 @@ function LaunchPage() {
         <div><dt>Nexus help</dt><dd>{a.nexus_help ?? "Missing"}</dd></div>
         <div><dt>Immigration attorney introduction</dt><dd>{a.immigration_attorney_intro ?? "Not answered"}</dd></div>
       </dl>
+      <aside className="ops-panel" aria-label="Scope notice"><h2>About Opsirix Launch</h2><p>{LAUNCH_SCOPE_NOTICE}</p></aside>
       {missing.length > 0 && <p role="alert">Still needed: {missing.join(", ")}.</p>}
       {msg && <p role="status" className="nexus-form-message">{msg}</p>}
       <div className="flex flex-wrap gap-3">
