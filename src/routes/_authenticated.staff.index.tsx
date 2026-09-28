@@ -22,9 +22,11 @@ export const Route = createFileRoute("/_authenticated/staff/")({
 function StaffHome() {
   const getConsole = useServerFn(getStaffConsole);
   const [data, setData] = useState<Awaited<ReturnType<typeof getStaffConsole>>>();
-  useEffect(() => { void getConsole().then(setData); }, [getConsole]);
+  const [failed, setFailed] = useState(false);
+  const loadConsole = useCallback(() => { setFailed(false); getConsole().then(setData).catch(() => setFailed(true)); }, [getConsole]);
+  useEffect(() => { loadConsole(); }, [loadConsole]);
   return <OperatingShell mode="staff" eyebrow="Internal operations" title="Staff Console">
-    {!data ? <p className="ops-muted">Checking access.</p> : !data.allowed ? <section className="ops-empty"><CircleX /><h2>Access restricted</h2><p>Company membership does not grant access to internal Opsirix operations.</p></section> : <>
+    {failed ? <section className="ops-empty" role="alert"><CircleX /><h2>Staff Console could not load</h2><p>Your access was not changed. Check your connection and try again.</p><button type="button" className="nx-btn" onClick={loadConsole}>Try again</button></section> : !data ? <p className="ops-muted" aria-live="polite">Checking access.</p> : !data.allowed ? <section className="ops-empty"><CircleX /><h2>Access restricted</h2><p>Company membership does not grant access to internal Opsirix operations.</p></section> : <>
       <p className="ops-lead">A separate internal workspace for approved Opsirix roles. Your permissions determine which operational records and actions appear.</p>
       <section className="ops-role-strip" aria-label="Current access"><ShieldCheck /><div><span>Signed in as</span><strong>{data.roles.includes("admin") ? "Admin / CEO" : data.roles.includes("operations_lead") ? "Operations Lead" : "Compliance Coordinator"}</strong></div></section>
       {data.isAdmin ? <AdminOverview /> : <section className="ops-panel"><p className="ops-panel-kicker">Assigned work</p><h2>Requests assigned to you</h2><p>Only help requests assigned by Admin/CEO appear. If none are assigned, your queue will show a clear empty state.</p><Link to="/staff/inquiries">Open my assigned requests <ArrowRight /></Link></section>}
