@@ -5,3 +5,5 @@ After sign-in everyone lands on `/account`, which reads verified access server-s
 Company history: raw audit rows are readable only by company owners and Admin/CEO; members, viewers and granted staff read through company_history_view, so private fields never leave the database.
 
 Core oversight: Admin/CEO receives metadata, status, audit, and grant lists through core_admin_oversight; full request and linked Flow content requires an active owner grant, preventing silent privileged content access.
+
+Every authenticated `/nexus/*` page uses signed-in workspace chrome, including the free member directory; public navigation never renders above a protected workspace.
