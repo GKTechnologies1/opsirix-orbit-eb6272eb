@@ -40,7 +40,9 @@ import { Route as PlatformCoreRouteImport } from './routes/platform.core'
 import { Route as PlatformAiRouteImport } from './routes/platform.ai'
 import { Route as NexusHelpRouteImport } from './routes/nexus.help'
 import { Route as JoinCodeRouteImport } from './routes/join.$code'
+import { Route as AuthenticatedGridRouteImport } from './routes/_authenticated.grid'
 import { Route as AuthenticatedFlowRouteImport } from './routes/_authenticated.flow'
+import { Route as AuthenticatedCoreRouteImport } from './routes/_authenticated.core'
 import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated.account'
 import { Route as AuthenticatedWorkspaceIndexRouteImport } from './routes/_authenticated.workspace.index'
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated.staff.index'
@@ -215,9 +217,19 @@ const JoinCodeRoute = JoinCodeRouteImport.update({
   path: '/join/$code',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedGridRoute = AuthenticatedGridRouteImport.update({
+  id: '/grid',
+  path: '/grid',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedFlowRoute = AuthenticatedFlowRouteImport.update({
   id: '/flow',
   path: '/flow',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCoreRoute = AuthenticatedCoreRouteImport.update({
+  id: '/core',
+  path: '/core',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
@@ -353,7 +365,9 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/core': typeof AuthenticatedCoreRoute
   '/flow': typeof AuthenticatedFlowRoute
+  '/grid': typeof AuthenticatedGridRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -404,7 +418,9 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/account': typeof AuthenticatedAccountRoute
+  '/core': typeof AuthenticatedCoreRoute
   '/flow': typeof AuthenticatedFlowRoute
+  '/grid': typeof AuthenticatedGridRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -458,7 +474,9 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/_authenticated/account': typeof AuthenticatedAccountRoute
+  '/_authenticated/core': typeof AuthenticatedCoreRoute
   '/_authenticated/flow': typeof AuthenticatedFlowRoute
+  '/_authenticated/grid': typeof AuthenticatedGridRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
   '/platform/ai': typeof PlatformAiRoute
@@ -512,7 +530,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/account'
+    | '/core'
     | '/flow'
+    | '/grid'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -563,7 +583,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/account'
+    | '/core'
     | '/flow'
+    | '/grid'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -616,7 +638,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms'
     | '/_authenticated/account'
+    | '/_authenticated/core'
     | '/_authenticated/flow'
+    | '/_authenticated/grid'
     | '/join/$code'
     | '/nexus/help'
     | '/platform/ai'
@@ -892,11 +916,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JoinCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/grid': {
+      id: '/_authenticated/grid'
+      path: '/grid'
+      fullPath: '/grid'
+      preLoaderRoute: typeof AuthenticatedGridRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/flow': {
       id: '/_authenticated/flow'
       path: '/flow'
       fullPath: '/flow'
       preLoaderRoute: typeof AuthenticatedFlowRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/core': {
+      id: '/_authenticated/core'
+      path: '/core'
+      fullPath: '/core'
+      preLoaderRoute: typeof AuthenticatedCoreRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/account': {
@@ -1037,7 +1075,9 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
+  AuthenticatedCoreRoute: typeof AuthenticatedCoreRoute
   AuthenticatedFlowRoute: typeof AuthenticatedFlowRoute
+  AuthenticatedGridRoute: typeof AuthenticatedGridRoute
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
   AuthenticatedAdminPreviewRoute: typeof AuthenticatedAdminPreviewRoute
   AuthenticatedNexusDirectoryRoute: typeof AuthenticatedNexusDirectoryRoute
@@ -1060,7 +1100,9 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAccountRoute: AuthenticatedAccountRoute,
+  AuthenticatedCoreRoute: AuthenticatedCoreRoute,
   AuthenticatedFlowRoute: AuthenticatedFlowRoute,
+  AuthenticatedGridRoute: AuthenticatedGridRoute,
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
   AuthenticatedAdminPreviewRoute: AuthenticatedAdminPreviewRoute,
   AuthenticatedNexusDirectoryRoute: AuthenticatedNexusDirectoryRoute,

@@ -206,7 +206,7 @@ function TaskRow({ n, task, company, boardId, onDone }: { n: number; task: Task;
       {company.canEscalate && task.hold && (task.hold.iAmReviewer || company.isAdmin) && (
         <form onSubmit={esc} className="flex flex-wrap items-end gap-2">
           <label className="flex-1 min-w-[10rem]">Written clearance (at least 10 characters)<textarea name="note" required minLength={10} maxLength={1000} rows={2} className="w-full" /></label>
-          {!task.hold.iAmReviewer && <label className="flex items-center gap-2 basis-full"><input type="checkbox" name="override" required /> I am overriding the assigned reviewer as Admin/CEO. This is recorded.</label>}
+          {!task.hold.iAmReviewer && <label className="flex items-center gap-2 basis-full"><input type="checkbox" name="override" required className="h-4 w-4" /> I am overriding the assigned reviewer as Admin/CEO. This is recorded.</label>}
           <Button size="sm" type="submit" name="action" value="clear" variant="secondary">{task.hold.iAmReviewer ? "Record clearance" : "Override and clear"}</Button>
         </form>
       )}
