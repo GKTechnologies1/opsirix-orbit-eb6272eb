@@ -138,3 +138,26 @@ CONTACT_TO_EMAIL
 External GitHub repository: not connected. Current working branch and internal preview commit are not a GitHub release reference, so do not deploy from them. After the owner connects GitHub, record the actual repository, branch, and commit, then verify a fresh checkout using an isolated staging backend with migrations in numeric order through 0050.
 
 Role smoke tests after deployment: signed-out redirect; founder owner/viewer; directory-only member; approved partner; Operations Lead; Compliance Coordinator; Admin/CEO metadata-only Core oversight. Confirm expiry/revocation, cross-company Flow denial, and no public listing/pricing/Vault/AI/Grid-scoring change.
+## Update 2026-09-28 19:55 UTC: Core note redaction, Compliance captures, in-app notifications
+
+### Core note redaction (migration 0050_core_note_redaction_and_notifications)
+Admin/CEO oversight event fields are now exactly: `id`, `from_status`, `to_status`, `actor_id`, `created_at`, `note` (always null), `note_redacted` (true when a note exists). The event stays visible; the page shows "Note withheld: requires an active owner grant." Checked on past and current requests (every past event note null) and by direct event-table read (0 rows). Audit summaries contain no note text.
+
+### Compliance Coordinator screenshots
+Saved in Files `post-login-review-2026-09-28/`: `{desktop,mobile}-compliance-inquiries.png`, `-compliance-core.png`, `-compliance-notifications.png`.
+
+### In-app Core notifications (no email)
+Recipients and rules:
+- Submitted, accepted, ready for company review: every company owner, except the person who acted.
+- Reopened: the handling staff member (if still able to handle) and staff with an active handle grant, except the actor.
+- Access revoked: the affected staff member (recorded at revocation).
+- Access expired: the affected staff member (recorded once, when they next load notifications).
+Content: generic title, request reference, event time, link to `/core` (permission re-checked). No description, note or task text. Read state per account; one row per recipient per event (unique key).
+
+Tests: direct 37/37, regression 16/16, browser 43/43 desktop and 390. Email delivery is not built.
+
+### Shared-backend effects (live immediately)
+- Oversight redaction, `core_notifications` table, triggers and RPCs.
+- TEST request OX-CORE-2026-009 in TEST Founder Company, TEST grants to Ops Lead (revoked) and Compliance (expired by test harness), and their notifications.
+- One Features & Releases record.
+Preview only: Notifications page, menu link with unread count, redaction label, notifications page uses workspace chrome.
