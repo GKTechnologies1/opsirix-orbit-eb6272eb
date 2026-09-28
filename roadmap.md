@@ -80,3 +80,5 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Compliance Coordinator desktop/390 screenshots added to handoff
 - [x] Core in-app notifications phase 1 (/notifications; no email); browser 43/43. Email delivery: not built, needs owner approval of recipients/rules
 - [ ] Journey review continuation: founder/partner/staff loading+error states pass remaining; minor: empty space under Core access panel (cosmetic)
+- [x] Journey review: Core access gap (leaked public spacing), Staff Console load-failure state, Core actor labels (no raw IDs); 191/192 browser (1 test limitation), 9/9 labels, 43/43, 16/16
+- Next ready: none unblocked. Blockers unchanged: Grid scoring, Launch (OPSIRIX_05), pricing, Terms wording, retention period, Vault/AI reviews, GitHub connection, publishing, Core email approval

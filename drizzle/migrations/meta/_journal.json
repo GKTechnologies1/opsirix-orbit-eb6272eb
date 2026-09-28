@@ -358,6 +358,13 @@
       "when": 1790624954271,
       "tag": "0050_core_note_redaction_and_notifications",
       "breakpoints": true
+    },
+    {
+      "idx": 51,
+      "version": "7",
+      "when": 1790625593940,
+      "tag": "0051_core_history_actor_labels",
+      "breakpoints": true
     }
   ]
 }
