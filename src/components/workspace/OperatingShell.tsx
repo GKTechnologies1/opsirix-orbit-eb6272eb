@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
-import { Bell, Building2, FileText, History, Inbox, LayoutDashboard, ListChecks, LogOut, Menu, Repeat, Search, ShieldCheck, X } from "lucide-react";
+import { Bell, Building2, FileText, History, Inbox, LayoutDashboard, ListChecks, LogOut, Menu, Repeat, Rocket, Search, ShieldCheck, X } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
@@ -54,11 +54,12 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
        <div className="ops-product-mark">{mode === "staff" ? "Staff Console" : mode === "member" ? "Nexus member area" : "Opsirix OS"}</div>
        <Button id="ops-workspace-menu" className="workspace-menu-toggle" variant="ghost" aria-label={menuOpen ? "Close workspace menu" : "Open workspace menu"} aria-expanded={menuOpen} aria-controls="ops-workspace-nav" onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X /> : <Menu />}<span>{menuOpen ? "Close" : "Menu"}</span></Button>
       <nav id="ops-workspace-nav" className={menuOpen ? "is-open" : ""} aria-label={mode === "staff" ? "Staff Console" : "Company workspace"} onClick={() => setMenuOpen(false)}>
-         {mode === "company" && <><Link to="/os" activeProps={{ "aria-current": "page" }}><LayoutDashboard />Overview</Link><Link to="/workspace" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}><Building2 />Companies &amp; history</Link><Link to="/flow" activeProps={{ "aria-current": "page" }}><ListChecks />Flow</Link><Link to="/core" activeProps={{ "aria-current": "page" }}><Inbox />Core</Link><Link to="/grid" activeProps={{ "aria-current": "page" }}><FileText />Grid</Link><Link to="/nexus/requests" activeProps={{ "aria-current": "page" }}><Inbox />Nexus requests</Link></>}
+         {mode === "company" && <><Link to="/os" activeProps={{ "aria-current": "page" }}><LayoutDashboard />Overview</Link><Link to="/workspace" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}><Building2 />Companies &amp; history</Link><Link to="/flow" activeProps={{ "aria-current": "page" }}><ListChecks />Flow</Link><Link to="/core" activeProps={{ "aria-current": "page" }}><Inbox />Core</Link><Link to="/grid" activeProps={{ "aria-current": "page" }}><FileText />Grid</Link><Link to="/nexus/requests" activeProps={{ "aria-current": "page" }}><Inbox />Nexus requests</Link><Link to="/launch" activeProps={{ "aria-current": "page" }}><Rocket />Launch intake</Link></>}
          {mode === "staff" && <><Link to="/workspace" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}><Building2 />Companies &amp; history</Link><Link to="/flow" activeProps={{ "aria-current": "page" }}><ListChecks />Flow</Link><Link to="/core" activeProps={{ "aria-current": "page" }}><Inbox />Core</Link><Link to="/grid" activeProps={{ "aria-current": "page" }}><FileText />Grid</Link></>}
-         {mode === "member" && <><Link to="/nexus/directory" activeProps={{ "aria-current": "page" }}><Search />Directory</Link><Link to="/nexus/requests" activeProps={{ "aria-current": "page" }}><Inbox />My requests</Link></>}
+         {mode === "member" && <><Link to="/nexus/directory" activeProps={{ "aria-current": "page" }}><Search />Directory</Link><Link to="/launch" activeProps={{ "aria-current": "page" }}><Rocket />Launch intake</Link><Link to="/nexus/requests" activeProps={{ "aria-current": "page" }}><Inbox />My requests</Link></>}
         {staff && <Link to="/staff" activeOptions={{ exact: true }} activeProps={{ "aria-current": "page" }}><ShieldCheck />Staff Console</Link>}
         {staff && mode === "staff" && <Link to="/staff/inquiries"><Inbox />Nexus inquiries</Link>}
+        {staff && mode === "staff" && <Link to="/staff/launch"><Rocket />Launch review</Link>}
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
         {admin && mode === "staff" && <Link to="/staff/content"><FileText />Content & Catalog</Link>}
         {admin && mode === "staff" && <Link to="/staff/features"><History />Features & Releases</Link>}
