@@ -699,6 +699,124 @@ export type Database = {
           },
         ]
       }
+      launch_events: {
+        Row: {
+          actor_id: string
+          created_at: string
+          event: string
+          id: string
+          intake_id: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          event: string
+          id?: string
+          intake_id: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          event?: string
+          id?: string
+          intake_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "launch_events_intake_id_fkey"
+            columns: ["intake_id"]
+            isOneToOne: false
+            referencedRelation: "launch_intakes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      launch_intakes: {
+        Row: {
+          answers: Json
+          created_at: string
+          email_override: string | null
+          founder_message: string | null
+          id: string
+          name_override: string | null
+          ref: string | null
+          scope_notice_version: string | null
+          status: string
+          submitted_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          answers?: Json
+          created_at?: string
+          email_override?: string | null
+          founder_message?: string | null
+          id?: string
+          name_override?: string | null
+          ref?: string | null
+          scope_notice_version?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          answers?: Json
+          created_at?: string
+          email_override?: string | null
+          founder_message?: string | null
+          id?: string
+          name_override?: string | null
+          ref?: string | null
+          scope_notice_version?: string | null
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      launch_reviews: {
+        Row: {
+          created_at: string
+          founder_message: string
+          id: string
+          intake_id: string
+          kind: string
+          outcome: string | null
+          reason: string
+          reviewer_id: string
+        }
+        Insert: {
+          created_at?: string
+          founder_message: string
+          id?: string
+          intake_id: string
+          kind: string
+          outcome?: string | null
+          reason: string
+          reviewer_id: string
+        }
+        Update: {
+          created_at?: string
+          founder_message?: string
+          id?: string
+          intake_id?: string
+          kind?: string
+          outcome?: string | null
+          reason?: string
+          reviewer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "launch_reviews_intake_id_fkey"
+            columns: ["intake_id"]
+            isOneToOne: false
+            referencedRelation: "launch_intakes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nexus_consent_versions: {
         Row: {
           category_lines: Json
@@ -2719,6 +2837,27 @@ export type Database = {
             Args: { _service: string; _states: string[]; _user: string }
             Returns: boolean
           }
+      launch_is_reviewer: { Args: { _uid: string }; Returns: boolean }
+      launch_record_review: {
+        Args: {
+          _founder_message: string
+          _intake: string
+          _kind: string
+          _outcome: string
+          _reason: string
+        }
+        Returns: undefined
+      }
+      launch_save_intake: {
+        Args: {
+          _answers: Json
+          _email: string
+          _name: string
+          _notice_version: string
+          _submit: boolean
+        }
+        Returns: string
+      }
       listing_type_is_public: {
         Args: { _type: string; _user: string }
         Returns: boolean
