@@ -65,20 +65,23 @@ export const getCore = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const sb = context.supabase; const uid = context.userId;
     const { orgs, roleOf, isStaff, isAdmin } = await companiesFor(sb, uid);
-    const [{ data: reqs }, { data: events }, { data: editors }] = await Promise.all([
+    const [{ data: reqs }, { data: events }, { data: editors }, oversight] = await Promise.all([
       sb.from("core_requests").select("id,ref,organization_id,title,description,status,requested_by,handled_by,board_id,status_note,created_at,updated_at").order("created_at", { ascending: false }),
       sb.from("core_request_events").select("id,request_id,from_status,to_status,note,actor_id,created_at").order("created_at"),
       sb.from("flow_editors").select("organization_id,user_id").eq("user_id", uid),
+      isAdmin ? sb.rpc("core_admin_oversight") : Promise.resolve({ data: [] }),
     ]);
-    const boardIds = (reqs ?? []).map((r) => r.board_id).filter(Boolean) as string[];
+    const contentRequests = reqs ?? [];
+    const oversightRows = (oversight.data ?? []) as Array<{ id: string; ref: string; organization_id: string; organization_name: string; title: string; status: string; requested_by: string; handled_by: string | null; board_id: string | null; created_at: string; updated_at: string; events: Array<{ id: string; from_status: string | null; to_status: string; note: string | null; actor_id: string; created_at: string }>; access_grants: Array<{ id: string; staff_user_id: string; staff_label: string; scope: string; purpose: string; expires_at: string; created_at: string; revoked_at: string | null; state: string }> }>;
+    const boardIds = contentRequests.map((r) => r.board_id).filter(Boolean) as string[];
     const { data: tasks } = boardIds.length
       ? await sb.from("flow_tasks").select("id,board_id,title,status,due_on").in("board_id", boardIds).order("created_at")
       : { data: [] as { id: string; board_id: string; title: string; status: string; due_on: string | null }[] };
     const { data: holds } = boardIds.length ? await sb.from("flow_escalations").select("task_id,ref").is("cleared_at", null) : { data: [] as { task_id: string; ref: string }[] };
     // Access grants: owner/Admin see every grant; staff see only their own. Staff-only companies come from request grants.
-    const grants = await Promise.all((reqs ?? []).map(async (r) => ({ id: r.id, rows: (await sb.rpc("core_access_list", { _request: r.id })).data ?? [] })));
+    const grants = await Promise.all(contentRequests.map(async (r) => ({ id: r.id, rows: (await sb.rpc("core_access_list", { _request: r.id })).data ?? [] })));
     const allOrgs = [...orgs];
-    for (const r of reqs ?? []) {
+    for (const r of [...contentRequests, ...oversightRows]) {
       if (!allOrgs.some((o) => o.id === r.organization_id)) {
         const { data: name } = await sb.rpc("core_company_label", { _request: r.id });
         allOrgs.push({ id: r.organization_id, name: (name as string | null) ?? "Company" });
@@ -90,17 +93,20 @@ export const getCore = createServerFn({ method: "GET" })
       const canEdit = role === "owner" || (role === "member" && (editors ?? []).some((e) => e.organization_id === o.id));
       return {
         id: o.id, name: o.name, role, canEdit, isOwner: role === "owner", isStaff: !role && isStaff, isAdmin: !role && isAdmin,
-        requests: (reqs ?? []).filter((r) => r.organization_id === o.id).map((r) => {
+        requests: contentRequests.filter((r) => r.organization_id === o.id).map((r) => {
           const access = grants.find((g) => g.id === r.id)?.rows ?? [];
           const mine = access.find((a) => a.staff_user_id === uid && a.state === "active");
           return {
             ...r, handledByMe: r.handled_by === uid, requestedBy: who(r.requested_by, o.id),
-            canHandle: !role && (isAdmin || mine?.scope === "handle"), myAccess: mine ? { scope: mine.scope, expires_at: mine.expires_at, purpose: mine.purpose } : null,
+            oversightOnly: false, canHandle: !role && mine?.scope === "handle", myAccess: mine ? { scope: mine.scope, expires_at: mine.expires_at, purpose: mine.purpose } : null,
             access: role === "owner" || (!role && isAdmin) ? access : [],
             tasks: (tasks ?? []).filter((t) => t.board_id === r.board_id).map((t) => ({ ...t, hold: (holds ?? []).find((h) => h.task_id === t.id)?.ref ?? null })),
             events: (events ?? []).filter((e) => e.request_id === r.id).map((e) => ({ ...e, actor: who(e.actor_id, o.id) })),
           };
-        }),
+        }).concat(oversightRows.filter((r) => r.organization_id === o.id && !contentRequests.some((full) => full.id === r.id)).map((r) => ({
+          ...r, description: "", status_note: null, handledByMe: false, requestedBy: "Company member", oversightOnly: true, canHandle: false, myAccess: null,
+          access: r.access_grants ?? [], tasks: [], events: (r.events ?? []).map((e) => ({ ...e, request_id: r.id, actor: "Company member or Opsirix" })),
+        }))),
       };
     });
     // Staff/Admin without membership only see companies where a request is visible to them.

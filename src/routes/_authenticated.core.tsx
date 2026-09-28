@@ -105,8 +105,9 @@ function RequestCard({ req, company, onDone }: { req: Req; company: Company; onD
         <span>Submitted {req.created_at.slice(0, 10)}</span>
       </div>
       {req.description && <p className="whitespace-pre-wrap text-muted-foreground">{req.description}</p>}
+      {req.oversightOnly && <p className="rounded border border-border p-2 text-muted-foreground">Admin/CEO oversight shows status, history, and access grants only. The company owner has not granted you access to the request details or its Flow tasks.</p>}
       {req.status_note && <p>Latest note: {req.status_note}</p>}
-      {req.board_id && (
+      {req.board_id && !req.oversightOnly && (
         <div className="rounded border border-border p-2">
           <p className="font-medium">Tasks ({req.tasks.length}) <Link to="/flow" className="ml-2 underline">Open in Flow</Link></p>
           {!req.tasks.length && <p className="text-muted-foreground">No tasks yet.</p>}
@@ -128,7 +129,7 @@ function RequestCard({ req, company, onDone }: { req: Req; company: Company; onD
       )}
       {req.myAccess && <p className="rounded border border-border p-2">Your access: <strong>{req.myAccess.scope === "handle" ? "Work on this request" : "View only"}</strong> until {req.myAccess.expires_at.slice(0, 10)} · Purpose: {req.myAccess.purpose}</p>}
       {(company.isOwner || company.isAdmin) && <AccessPanel req={req} canManage={company.isOwner} onDone={onDone} />}
-      <Actions req={req} company={company} onSubmit={act} />
+      {!req.oversightOnly && <Actions req={req} company={company} onSubmit={act} />}
       <details><summary className="cursor-pointer">Status history ({req.events.length})</summary>
         <ol className="mt-1 space-y-1">{req.events.map((e) => (
           <li key={e.id} className="rounded border border-border p-2">{e.created_at.slice(0, 16).replace("T", " ")} UTC · {e.from_status ? `${STATUS[e.from_status]} → ` : ""}{STATUS[e.to_status]} · {e.actor}{e.note && <span className="block text-muted-foreground">{e.note}</span>}</li>
