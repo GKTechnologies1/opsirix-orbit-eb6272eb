@@ -60,3 +60,11 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] Grid scoring + 25 criteria text: BLOCKED on owner approval of rewritten criteria and specialist review.
 - [ ] Core time-limited scope labels / notifications: not started (no approved notification spec).
 - [x] Member list pagination verified with 12 TEST members (2 pages); history date range + role-filtered details (owners see person/end date; viewers see access/scope only). 25/25 browser+backend checks.
+
+## 2026-09-28
+- [x] Core: owner grants request-scoped staff access (scope, purpose, end date), revoke, audit; applies to Core Flow boards (backend 62/62, browser 8/8)
+- [x] Cross-company creation regression (Flow boards/tasks, Core) + Features & Releases record
+- [x] Opsirix OS founder overview /os (browser 20/20); Staff Console links (18/18)
+- [ ] Notifications for Core access/requests (planned, separate)
+- [ ] Post-login UI/UX review: started; findings pending owner review (public header inside workspaces, hidden mobile side menu items, long empty company cards, staff "Phase 1" filler copy, partner "What happens next" contradicts Approved)
+- [ ] Grid scoring: blocked on 25 criteria + specialist review
