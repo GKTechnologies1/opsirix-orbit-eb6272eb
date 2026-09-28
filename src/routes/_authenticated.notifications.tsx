@@ -57,7 +57,7 @@ function NotificationsPage() {
             <li key={n.id} className="rounded border border-border p-3" data-unread={!n.read_at}>
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <p className="font-semibold">{!n.read_at && <span className="sr-only">Unread: </span>}{!n.read_at && <span aria-hidden className="mr-2 inline-block h-2 w-2 rounded-full bg-primary" />}{n.title}</p>
+                  <p className="font-semibold">{!n.read_at && <span className="sr-only">Unread: </span>}{!n.read_at && <span aria-hidden className="ops-unread-dot" />}{n.title}</p>
                   <p className="text-sm text-muted-foreground">{n.ref} · {new Date(n.created_at).toISOString().slice(0, 16).replace("T", " ")} UTC</p>
                 </div>
                 <div className="flex gap-2">
