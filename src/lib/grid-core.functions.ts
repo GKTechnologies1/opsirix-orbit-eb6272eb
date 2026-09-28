@@ -104,7 +104,7 @@ export const getCore = createServerFn({ method: "GET" })
       });
       const metadataRequests = oversightRows.filter((r) => r.organization_id === o.id && !contentRequests.some((full) => full.id === r.id)).map((r) => ({
         ...r, description: "", status_note: null, handledByMe: false, requestedBy: "Company member", oversightOnly: true, canHandle: false, myAccess: null,
-        access: (r.access_grants ?? []).map((a) => ({ ...a, request_id: r.id })), tasks: [], events: (r.events ?? []).map((e) => ({ ...e, request_id: r.id, actor: "Company member or Opsirix" })),
+        access: (r.access_grants ?? []).map((a) => ({ ...a, request_id: r.id })), tasks: [], events: (r.events ?? []).map((e) => ({ ...e, note: null, note_redacted: Boolean((e as { note_redacted?: boolean }).note_redacted), request_id: r.id, actor: "Company member or Opsirix" })),
       }));
       return {
         id: o.id, name: o.name, role, canEdit, isOwner: role === "owner", isStaff: !role && isStaff, isAdmin: !role && isAdmin,

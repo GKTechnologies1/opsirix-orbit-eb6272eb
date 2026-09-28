@@ -7,3 +7,4 @@ Company history: raw audit rows are readable only by company owners and Admin/CE
 Core oversight: Admin/CEO receives metadata, status, audit, and grant lists through core_admin_oversight; full request and linked Flow content requires an active owner grant, preventing silent privileged content access.
 
 Every authenticated `/nexus/*` page uses signed-in workspace chrome, including the free member directory; public navigation never renders above a protected workspace.
+- Core notifications are in-app only, created by database triggers with a per-recipient unique key; expiry notices are recorded lazily on fetch because expiry has no event.

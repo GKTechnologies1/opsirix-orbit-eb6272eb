@@ -1,9 +1,12 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Building2, FileText, History, Inbox, LayoutDashboard, ListChecks, LogOut, Menu, Repeat, Search, ShieldCheck, X } from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
+import { Bell, Building2, FileText, History, Inbox, LayoutDashboard, ListChecks, LogOut, Menu, Repeat, Search, ShieldCheck, X } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { getMyCoreNotifications } from "@/lib/core-notifications.functions";
 
 type ShellMode = "company" | "staff" | "member";
 
@@ -12,6 +15,9 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
   const [staff, setStaff] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const loadNotices = useServerFn(getMyCoreNotifications);
+  const { data: notices } = useQuery({ queryKey: ["core-notifications"], queryFn: () => loadNotices(), enabled: mode !== "member", staleTime: 30_000 });
+  const unread = (notices ?? []).filter((n) => !n.read_at).length;
 
   useEffect(() => {
     let active = true;
@@ -56,6 +62,7 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
         {staff && mode === "staff" && <Link to="/staff/access"><ShieldCheck />Access</Link>}
         {admin && mode === "staff" && <Link to="/staff/content"><FileText />Content & Catalog</Link>}
         {admin && mode === "staff" && <Link to="/staff/features"><History />Features & Releases</Link>}
+        {mode !== "member" && <Link to="/notifications" activeProps={{ "aria-current": "page" }}><Bell />Notifications{unread > 0 && <span className="ops-nav-count" aria-label={`${unread} unread`}>{unread}</span>}</Link>}
         <Link to="/account"><Repeat />Switch workspace</Link>
       </nav>
        <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>

@@ -97,7 +97,7 @@ function RequestCard({ req, company, onDone }: { req: Req; company: Company; onD
   }
   const staffWorking = req.canHandle && req.status === "accepted";
   return (
-    <li className="ops-panel space-y-2 text-sm" aria-label={`Request ${req.ref}`}>
+    <li id={`core-${req.id}`} className="ops-panel space-y-2 text-sm scroll-mt-24" aria-label={`Request ${req.ref}`}>
       <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <strong className="text-base">{req.title}</strong>
         <span className="text-muted-foreground">{req.ref}</span>
@@ -132,7 +132,7 @@ function RequestCard({ req, company, onDone }: { req: Req; company: Company; onD
       {!req.oversightOnly && <Actions req={req} company={company} onSubmit={act} />}
       <details><summary className="cursor-pointer">Status history ({req.events.length})</summary>
         <ol className="mt-1 space-y-1">{req.events.map((e) => (
-          <li key={e.id} className="rounded border border-border p-2">{e.created_at.slice(0, 16).replace("T", " ")} UTC · {e.from_status ? `${STATUS[e.from_status]} → ` : ""}{STATUS[e.to_status]} · {e.actor}{e.note && <span className="block text-muted-foreground">{e.note}</span>}</li>
+          <li key={e.id} className="rounded border border-border p-2">{e.created_at.slice(0, 16).replace("T", " ")} UTC · {e.from_status ? `${STATUS[e.from_status]} → ` : ""}{STATUS[e.to_status]} · {e.actor}{e.note && <span className="block text-muted-foreground">{e.note}</span>}{"note_redacted" in e && e.note_redacted && <span className="block italic text-muted-foreground">Note withheld: requires an active owner grant.</span>}</li>
         ))}</ol>
       </details>
     </li>

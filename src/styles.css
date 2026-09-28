@@ -2490,3 +2490,5 @@
 .ops-history-details div { display: flex; gap: 4px; }
 .ops-history-details dt { color: var(--muted-foreground); }
 .ops-history-details dd { margin: 0; }
+.ops-nav-count { margin-left: auto; min-width: 20px; padding: 0 6px; border-radius: 999px; background: var(--color-cyan); color: var(--bg-surface); font: 700 11px/20px var(--font-mono); text-align: center; }
+.ops-unread-dot { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 999px; background: var(--color-cyan); vertical-align: middle; }

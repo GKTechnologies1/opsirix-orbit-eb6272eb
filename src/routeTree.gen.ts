@@ -41,6 +41,7 @@ import { Route as PlatformAiRouteImport } from './routes/platform.ai'
 import { Route as NexusHelpRouteImport } from './routes/nexus.help'
 import { Route as JoinCodeRouteImport } from './routes/join.$code'
 import { Route as AuthenticatedOsRouteImport } from './routes/_authenticated.os'
+import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated.notifications'
 import { Route as AuthenticatedGridRouteImport } from './routes/_authenticated.grid'
 import { Route as AuthenticatedFlowRouteImport } from './routes/_authenticated.flow'
 import { Route as AuthenticatedCoreRouteImport } from './routes/_authenticated.core'
@@ -223,6 +224,12 @@ const AuthenticatedOsRoute = AuthenticatedOsRouteImport.update({
   path: '/os',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedNotificationsRoute =
+  AuthenticatedNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedGridRoute = AuthenticatedGridRouteImport.update({
   id: '/grid',
   path: '/grid',
@@ -374,6 +381,7 @@ export interface FileRoutesByFullPath {
   '/core': typeof AuthenticatedCoreRoute
   '/flow': typeof AuthenticatedFlowRoute
   '/grid': typeof AuthenticatedGridRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
   '/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
@@ -428,6 +436,7 @@ export interface FileRoutesByTo {
   '/core': typeof AuthenticatedCoreRoute
   '/flow': typeof AuthenticatedFlowRoute
   '/grid': typeof AuthenticatedGridRoute
+  '/notifications': typeof AuthenticatedNotificationsRoute
   '/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
@@ -485,6 +494,7 @@ export interface FileRoutesById {
   '/_authenticated/core': typeof AuthenticatedCoreRoute
   '/_authenticated/flow': typeof AuthenticatedFlowRoute
   '/_authenticated/grid': typeof AuthenticatedGridRoute
+  '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
   '/nexus/help': typeof NexusHelpRoute
@@ -542,6 +552,7 @@ export interface FileRouteTypes {
     | '/core'
     | '/flow'
     | '/grid'
+    | '/notifications'
     | '/os'
     | '/join/$code'
     | '/nexus/help'
@@ -596,6 +607,7 @@ export interface FileRouteTypes {
     | '/core'
     | '/flow'
     | '/grid'
+    | '/notifications'
     | '/os'
     | '/join/$code'
     | '/nexus/help'
@@ -652,6 +664,7 @@ export interface FileRouteTypes {
     | '/_authenticated/core'
     | '/_authenticated/flow'
     | '/_authenticated/grid'
+    | '/_authenticated/notifications'
     | '/_authenticated/os'
     | '/join/$code'
     | '/nexus/help'
@@ -935,6 +948,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedOsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/notifications': {
+      id: '/_authenticated/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/grid': {
       id: '/_authenticated/grid'
       path: '/grid'
@@ -1097,6 +1117,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCoreRoute: typeof AuthenticatedCoreRoute
   AuthenticatedFlowRoute: typeof AuthenticatedFlowRoute
   AuthenticatedGridRoute: typeof AuthenticatedGridRoute
+  AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedOsRoute: typeof AuthenticatedOsRoute
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
   AuthenticatedAdminPreviewRoute: typeof AuthenticatedAdminPreviewRoute
@@ -1123,6 +1144,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCoreRoute: AuthenticatedCoreRoute,
   AuthenticatedFlowRoute: AuthenticatedFlowRoute,
   AuthenticatedGridRoute: AuthenticatedGridRoute,
+  AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedOsRoute: AuthenticatedOsRoute,
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
   AuthenticatedAdminPreviewRoute: AuthenticatedAdminPreviewRoute,
