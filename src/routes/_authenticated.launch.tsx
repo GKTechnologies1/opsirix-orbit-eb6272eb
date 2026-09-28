@@ -28,7 +28,7 @@ const STATUS: Record<string, string> = { draft: "Draft, not sent", submitted: "S
 
 function Choice<T extends string>({ name, label, value, options, onChange }: { name: string; label: string; value?: T; options: Record<T, string>; onChange: (v: T) => void }) {
   return <fieldset className="nexus-form"><legend>{label}</legend>
-    <div className="flex flex-wrap gap-3">{(Object.keys(options) as T[]).map((k) => <label key={k} className="flex items-center gap-2"><input type="radio" name={name} checked={value === k} onChange={() => onChange(k)} />{options[k]}</label>)}</div>
+    <div className="launch-options">{(Object.keys(options) as T[]).map((k) => <label key={k} className="launch-option"><input type="radio" name={name} checked={value === k} onChange={() => onChange(k)} />{options[k]}</label>)}</div>
   </fieldset>;
 }
 
@@ -85,14 +85,14 @@ function LaunchPage() {
       <Choice name="contact" label="How should we contact you?" value={a.preferred_contact} options={{ email: "Email", phone: "Phone" }} onChange={(v) => set("preferred_contact", v)} />
       <label>Phone (optional unless you choose phone)<input value={a.phone ?? ""} onChange={(e) => set("phone", e.target.value)} maxLength={40} autoComplete="tel" /></label>
       <label>Business name<input value={a.business_name ?? ""} disabled={a.not_formed} onChange={(e) => set("business_name", e.target.value)} maxLength={160} /></label>
-      <label className="flex items-center gap-2"><input type="checkbox" checked={!!a.not_formed} onChange={(e) => set("not_formed", e.target.checked)} />Not formed yet</label>
+      <label className="launch-option"><input type="checkbox" checked={!!a.not_formed} onChange={(e) => set("not_formed", e.target.checked)} />Not formed yet</label>
       <Choice name="stage" label="Stage" value={a.stage} options={STAGE} onChange={(v) => set("stage", v)} />
       <Choice name="reg" label="Is the registration location current or planned?" value={a.registration_status} options={{ current: "Current (already registered)", planned: "Planned" }} onChange={(v) => set("registration_status", v)} />
       <label>Country<input value={a.registration_country ?? ""} onChange={(e) => set("registration_country", e.target.value)} maxLength={80} /></label>
       <label>State or region (optional)<input value={a.registration_region ?? ""} onChange={(e) => set("registration_region", e.target.value)} maxLength={80} /></label>
       <Choice name="team" label="People working in the business" value={a.team_size} options={{ "0": "None yet", "1-5": "1 to 5", "6-20": "6 to 20", "20+": "More than 20" }} onChange={(v) => set("team_size", v)} />
       <fieldset className="nexus-form"><legend>What would you like help with? Choose any.</legend>
-        <div className="flex flex-wrap gap-3">{HELP.map(([k, l]) => <label key={k} className="flex items-center gap-2"><input type="checkbox" checked={a.help_with?.includes(k) ?? false} onChange={(e) => set("help_with", e.target.checked ? [...(a.help_with ?? []), k] : (a.help_with ?? []).filter((x) => x !== k))} />{l}</label>)}</div>
+        <div className="launch-options">{HELP.map(([k, l]) => <label key={k} className="launch-option"><input type="checkbox" checked={a.help_with?.includes(k) ?? false} onChange={(e) => set("help_with", e.target.checked ? [...(a.help_with ?? []), k] : (a.help_with ?? []).filter((x) => x !== k))} />{l}</label>)}</div>
       </fieldset>
       {a.help_with?.includes("other") && <label>Briefly, what else? Please don't include confidential details.<input value={a.help_other ?? ""} onChange={(e) => set("help_other", e.target.value)} maxLength={300} /></label>}
       <Choice name="attorney" label="Are you already working with an attorney for this business matter?" value={a.attorney} options={YN3} onChange={(v) => set("attorney", v)} />
