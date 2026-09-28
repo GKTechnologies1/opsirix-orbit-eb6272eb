@@ -2461,6 +2461,7 @@ export type Database = {
         Args: { _request: string; _user: string }
         Returns: boolean
       }
+      core_company_label: { Args: { _request: string }; Returns: string }
       core_grant_access: {
         Args: {
           _email: string
