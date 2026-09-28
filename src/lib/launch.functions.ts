@@ -91,22 +91,28 @@ export const getLaunchQueue = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const sb = context.supabase;
     const { data: allowed } = await sb.rpc("launch_is_reviewer", { _uid: context.userId });
-    if (!allowed) return { allowed: false as const, intakes: [] };
+    if (!allowed) return { allowed: false as const, isAdmin: false, leads: [] as { id: string; name: string }[], intakes: [] };
+    const { data: isAdmin } = await sb.rpc("has_role", { _user_id: context.userId, _role: "admin" });
+    const { data: assigns } = await sb.from("launch_assignments").select("intake_id,assignee_id,created_at").is("revoked_at", null);
     const [{ data: intakes }, { data: reviews }, { data: events }] = await Promise.all([
       sb.from("launch_intakes").select("id,ref,user_id,status,answers,name_override,email_override,submitted_at,updated_at").neq("status", "draft").order("submitted_at", { ascending: false }),
       sb.from("launch_reviews").select("intake_id,kind,outcome,reason,founder_message,reviewer_id,created_at").order("created_at"),
       sb.from("launch_events").select("intake_id,event,actor_id,created_at").order("created_at"),
     ]);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const people = new Set<string>([...(intakes ?? []).map((i) => i.user_id), ...(reviews ?? []).map((r) => r.reviewer_id), ...(events ?? []).map((e) => e.actor_id)]);
+    const { data: leadRows } = isAdmin ? await supabaseAdmin.from("user_roles").select("user_id").eq("role", "operations_lead") : { data: [] };
+    const people = new Set<string>([...(leadRows ?? []).map((l) => l.user_id), ...(assigns ?? []).map((a) => a.assignee_id), ...(intakes ?? []).map((i) => i.user_id), ...(reviews ?? []).map((r) => r.reviewer_id), ...(events ?? []).map((e) => e.actor_id)]);
     const { data: profiles } = people.size ? await supabaseAdmin.from("profiles").select("id,full_name,email").in("id", [...people]) : { data: [] };
     const who = new Map((profiles ?? []).map((p) => [p.id, p]));
     const label = (id: string, founder: string) => (id === founder ? "Founder" : who.get(id)?.full_name || "Opsirix staff");
     return {
       allowed: true as const,
+      isAdmin: Boolean(isAdmin),
+      leads: (leadRows ?? []).map((l) => ({ id: l.user_id, name: who.get(l.user_id)?.full_name || "Operations Lead" })),
       intakes: (intakes ?? []).map((i) => ({
         id: i.id, ref: i.ref, status: i.status, submitted_at: i.submitted_at, updated_at: i.updated_at,
         answers: i.answers as LaunchAnswers,
+        assignee: (() => { const a = (assigns ?? []).find((x) => x.intake_id === i.id); return a ? { id: a.assignee_id, name: who.get(a.assignee_id)?.full_name || "Operations Lead", since: a.created_at } : null; })(),
         name: i.name_override || who.get(i.user_id)?.full_name || "",
         email: i.email_override || who.get(i.user_id)?.email || "",
         reviews: (reviews ?? []).filter((r) => r.intake_id === i.id).map(({ reviewer_id, ...r }) => ({ ...r, reviewer: label(reviewer_id, i.user_id) })),
@@ -124,5 +130,13 @@ export const recordLaunchReview = createServerFn({ method: "POST" })
   }).refine((d) => (d.kind === "outcome") === !!d.outcome, "Choose an outcome").parse(i))
   .handler(async ({ data, context }) => {
     const { error } = await context.supabase.rpc("launch_record_review", { _intake: data.intakeId, _kind: data.kind, _outcome: data.outcome ?? "", _reason: data.reason, _founder_message: data.founderMessage });
+    return error ? { success: false as const, error: error.message } : { success: true as const };
+  });
+
+export const assignLaunch = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: unknown) => z.object({ intakeId: z.string().uuid(), assigneeId: z.string().uuid().nullable() }).parse(i))
+  .handler(async ({ data, context }) => {
+    const { error } = await context.supabase.rpc("launch_assign", { _intake: data.intakeId, _assignee: data.assigneeId as string });
     return error ? { success: false as const, error: error.message } : { success: true as const };
   });
