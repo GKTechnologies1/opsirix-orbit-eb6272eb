@@ -1807,7 +1807,7 @@
   .opsirix-container,
   .opsirix-container-wide { padding: 0 20px; }
 
-  section,
+  section:not(:is(.ops-workspace, .nexus-workspace) section),
   .os-section,
   .faq-section,
   .journey-section,
@@ -1824,15 +1824,15 @@
 
   /* ---- Hero ---- */
   .hero-mesh-wrap { display: none; }
-  section h1 { font-size: clamp(34px, 9vw, 48px) !important; line-height: 1.08 !important; }
+  section:not(:is(.ops-workspace, .nexus-workspace) section) h1 { font-size: clamp(34px, 9vw, 48px) !important; line-height: 1.08 !important; }
 
   /* CTA buttons full-width stacked on mobile */
-  section .btn-lg { width: 100%; justify-content: center; }
-  section .flex.items-center.gap-3.flex-wrap { flex-direction: column; align-items: stretch; gap: 12px; }
-  section .flex.items-center.gap-3.flex-wrap > a { width: 100%; justify-content: center; }
+  section:not(:is(.ops-workspace, .nexus-workspace) section) .btn-lg { width: 100%; justify-content: center; }
+  section:not(:is(.ops-workspace, .nexus-workspace) section) .flex.items-center.gap-3.flex-wrap { flex-direction: column; align-items: stretch; gap: 12px; }
+  section:not(:is(.ops-workspace, .nexus-workspace) section) .flex.items-center.gap-3.flex-wrap > a { width: 100%; justify-content: center; }
 
   /* Trust indicators stack */
-  section .flex.items-center.flex-wrap { gap: 12px !important; flex-direction: column; align-items: flex-start !important; }
+  section:not(:is(.ops-workspace, .nexus-workspace) section) .flex.items-center.flex-wrap { gap: 12px !important; flex-direction: column; align-items: flex-start !important; }
 
   /* ---- Chaos cards ---- */
   .founder-chaos-grid { grid-template-columns: 1fr !important; gap: 14px; }
