@@ -401,6 +401,88 @@ export type Database = {
           },
         ]
       }
+      grid_review_entries: {
+        Row: {
+          dimension: string
+          evidence: string
+          id: string
+          observation: string
+          review_id: string
+          updated_at: string
+          updated_by: string
+        }
+        Insert: {
+          dimension: string
+          evidence?: string
+          id?: string
+          observation?: string
+          review_id: string
+          updated_at?: string
+          updated_by: string
+        }
+        Update: {
+          dimension?: string
+          evidence?: string
+          id?: string
+          observation?: string
+          review_id?: string
+          updated_at?: string
+          updated_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grid_review_entries_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "grid_reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      grid_reviews: {
+        Row: {
+          created_at: string
+          created_by: string
+          id: string
+          kind: string
+          organization_id: string
+          period: string
+          status: string
+          submitted_at: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          id?: string
+          kind: string
+          organization_id: string
+          period: string
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          id?: string
+          kind?: string
+          organization_id?: string
+          period?: string
+          status?: string
+          submitted_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grid_reviews_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       nexus_consent_versions: {
         Row: {
           category_lines: Json
@@ -2264,6 +2346,26 @@ export type Database = {
         Returns: undefined
       }
       founder_nexus_requests: { Args: never; Returns: Json }
+      grid_can_read: {
+        Args: {
+          _author: string
+          _kind: string
+          _org: string
+          _status: string
+          _user: string
+        }
+        Returns: boolean
+      }
+      grid_save_review: {
+        Args: {
+          _entries: Json
+          _kind: string
+          _org: string
+          _period: string
+          _submit: boolean
+        }
+        Returns: string
+      }
       has_active_staff_grant: {
         Args: { _organization_id: string; _user_id: string }
         Returns: boolean
