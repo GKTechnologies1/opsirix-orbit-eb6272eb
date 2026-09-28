@@ -73,4 +73,4 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Core Admin oversight direct regression: metadata/history/grants visible; descriptions and linked tasks hidden without owner grant (16/16 combined direct checks)
 - [x] Missing second-company board regression: outsiders cannot add tasks; zero rows created (6/6)
 - [x] Post-login review final: founder, partner, staff and Admin at desktop/tablet/390; keyboard menu and reduced motion (88/88); latest automatic preview build OK
-- [ ] Expanded signed-in review: directory shared chrome/navigation, Staff Console empty/action states, detailed responsive/security evidence and DevOps handoff
+- [x] Expanded signed-in review: directory uses signed-in chrome/navigation; Staff Console duplicate/blank states fixed; 144/144 desktop/390 role checks and expanded Core 16/16 direct checks; evidence and DevOps handoff recorded
