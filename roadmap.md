@@ -90,3 +90,9 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] University Programs, Banking Partners, Insurance Brokers: complete. Applications and help requests open; 0 public listings each; public copy preview-only for DevOps
 - [x] Decision packet v1 prepared (Files: opsirix-decision-packet-v1.md): Launch intake, Grid 25 criteria, Terms, retention, Core email, Vault/AI, pricing. All gates remain off pending owner answers
 - [ ] Staging positive directory-filter test with approved TEST listings: blocked on isolated staging backend (never on shared live)
+
+## Launch Stage 1 (owner decision 2026-09-28)
+- [x] Revised intake built in preview (/launch), staff queue (/staff/launch), migrations 0052/0053 live; 29/29 direct checks, browser 1280/390.
+- [ ] Owner to approve final scope-notice wording before any required checkbox (blocked: owner).
+- [ ] Launch activation/publication (blocked: owner review). Stages 2–5 not approved.
+- [ ] OPSIRIX_04_How_We_Work.docx unreviewed until received.
