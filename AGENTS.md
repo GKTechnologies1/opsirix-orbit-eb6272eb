@@ -3,3 +3,5 @@ Public navigation stays sticky in normal document flow, and navbar responsive ru
 After sign-in everyone lands on `/account`, which reads verified access server-side (getMyAccess) and forwards single-workspace users or shows a switcher; staff access is never self-registered.
 
 Company history: raw audit rows are readable only by company owners and Admin/CEO; members, viewers and granted staff read through company_history_view, so private fields never leave the database.
+
+Core oversight: Admin/CEO receives metadata, status, audit, and grant lists through core_admin_oversight; full request and linked Flow content requires an active owner grant, preventing silent privileged content access.

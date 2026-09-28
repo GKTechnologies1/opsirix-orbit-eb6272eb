@@ -66,5 +66,10 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Cross-company creation regression (Flow boards/tasks, Core) + Features & Releases record
 - [x] Opsirix OS founder overview /os (browser 20/20); Staff Console links (18/18)
 - [ ] Notifications for Core access/requests (planned, separate)
-- [ ] Post-login UI/UX review: started; findings pending owner review (public header inside workspaces, hidden mobile side menu items, long empty company cards, staff "Phase 1" filler copy, partner "What happens next" contradicts Approved)
+- [x] Post-login UI/UX fixes: workspace-only chrome, discoverable mobile menus, compact empty companies, action-oriented Staff Console, status-aware partner guidance; desktop/tablet/390 + keyboard/reduced-motion checks
+- [x] Core Admin/CEO oversight is metadata-only unless the owner grants active request-scoped access; unrelated staff receive no Core data
 - [ ] Grid scoring: blocked on 25 criteria + specialist review
+
+- [x] Core Admin oversight direct regression: metadata/history/grants visible; descriptions and linked tasks hidden without owner grant (16/16 combined direct checks)
+- [x] Missing second-company board regression: outsiders cannot add tasks; zero rows created (6/6)
+- [x] Post-login review final: founder, partner, staff and Admin at desktop/tablet/390; keyboard menu and reduced motion (88/88); latest automatic preview build OK

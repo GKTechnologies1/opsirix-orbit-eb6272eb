@@ -22,6 +22,8 @@ const TASK: Record<string, string> = { todo: "To do", in_progress: "In progress"
 const NEXUS: Record<string, string> = { received: "Received", under_review: "Under review", consent_requested: "Your consent requested", introduced: "Introduced", closed: "Closed" };
 const month = (p: string | null) => (p ? new Date(`${p}T00:00:00Z`).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" }) : null);
 const ROLE: Record<string, string> = { owner: "Owner", member: "Member", viewer: "Viewer" };
+const companyIsEmpty = (c: Data["companies"][number]) =>
+  c.flow.open === 0 && c.core.open === 0 && !c.grid.self && !c.grid.staff && !c.grid.selfDraft;
 
 function Stat({ label, value }: { label: string; value: number }) {
   return <div className="rounded border border-border p-2"><div className="text-xl font-semibold">{value}</div><div className="text-xs text-muted-foreground">{label}</div></div>;
@@ -47,8 +49,14 @@ function OsPage() {
         </section>
       )}
       {data?.companies.map((c) => (
-        <section key={c.id} className="ops-panel space-y-3 text-sm" aria-label={`Overview for ${c.name}`}>
+        <section key={c.id} className={`ops-panel space-y-3 text-sm${companyIsEmpty(c) ? " ops-company-compact" : ""}`} aria-label={`Overview for ${c.name}`}>
           <div className="flex flex-wrap items-baseline gap-2"><h2 className="text-lg font-semibold">{c.name}</h2><span className="rounded border border-border px-2">{ROLE[c.role] ?? c.role}</span></div>
+          {companyIsEmpty(c) ? (
+            <div className="ops-compact-empty">
+              <p className="text-muted-foreground">No active Flow tasks, Core requests, or Grid reviews.</p>
+              <div><Link to="/flow" className="underline">Open Flow</Link><Link to="/core" className="underline">Open Core</Link><Link to="/grid" className="underline">Open Grid</Link></div>
+            </div>
+          ) : (
           <div className="grid gap-3 md:grid-cols-3">
             <div className="space-y-2">
               <h3 className="font-medium">Flow tasks</h3>
@@ -78,6 +86,7 @@ function OsPage() {
               <Link to="/grid" className="underline">Open Grid</Link>
             </div>
           </div>
+          )}
         </section>
       ))}
       {data && (

@@ -2452,6 +2452,24 @@ export type Database = {
           state: string
         }[]
       }
+      core_admin_oversight: {
+        Args: never
+        Returns: {
+          access_grants: Json
+          board_id: string
+          created_at: string
+          events: Json
+          handled_by: string
+          id: string
+          organization_id: string
+          organization_name: string
+          ref: string
+          requested_by: string
+          status: string
+          title: string
+          updated_at: string
+        }[]
+      }
       core_board_request: { Args: { _board: string }; Returns: string }
       core_can_handle: {
         Args: { _request: string; _user: string }
