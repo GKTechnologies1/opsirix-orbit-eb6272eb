@@ -22,6 +22,7 @@ type Data = Awaited<ReturnType<typeof getFlow>>;
 type Company = Data["companies"][number];
 type Task = Company["boards"][number]["tasks"][number];
 const STATUS: Record<string, string> = { todo: "To do", in_progress: "In progress", blocked: "Blocked", done: "Done" };
+const FIELD: Record<string, string> = { title: "Task", details: "Details", assignee: "Owner", due_on: "Due date" };
 const today = new Date().toISOString().slice(0, 10);
 
 function FlowPage() {
@@ -39,7 +40,7 @@ function FlowPage() {
 
   return (
     <OperatingShell mode="company" eyebrow="Opsirix Flow" title="Company tasks">
-      <p className="text-muted-foreground max-w-2xl">Boards hold the work your company is coordinating. Owners and delegated members edit; viewers can read. Opsirix staff with company access can place a task on hold; it stays Blocked until they record written clearance. Partners see only tasks an owner shares with them.</p>
+      <p className="text-muted-foreground max-w-2xl">Boards hold the work your company is coordinating. Owners and delegated members edit; viewers can read. Opsirix staff with company access can place a task on hold and name a different reviewer; it stays Blocked until that reviewer (or an audited Admin/CEO override) records written clearance. Partners see only tasks an owner shares with them.</p>
       {message && <p role="status" className="rounded-md border border-border p-3 text-sm">{message}</p>}
       {error && <div role="alert" className="text-sm">{error} <Button size="sm" variant="secondary" onClick={() => void refresh()}>Retry</Button></div>}
       {!data && !error && <p>Loading Flow…</p>}
@@ -129,7 +130,7 @@ function TaskForm({ company, boardId, task, onDone, onClose }: { company: Compan
       <label className="sm:col-span-2">Details (optional)<textarea name="details" maxLength={2000} defaultValue={task?.details ?? ""} className="w-full" rows={2} /></label>
       <label>Owner<select name="assignee" defaultValue={task?.assignee_id ?? ""} className={input}><option value="">Unassigned</option>{company.members.map((m) => <option key={m.id} value={m.id}>{m.label}</option>)}</select></label>
       <label>Due date<input name="due" type="date" defaultValue={task?.due_on ?? ""} className={input} /></label>
-      <label>Status{task?.hold && <span className="block text-xs text-muted-foreground">On hold ({task.hold.ref}) until Opsirix records written clearance</span>}{task?.hold && <input type="hidden" name="status" value={task.status} />}<select name={task?.hold ? "status_locked" : "status"} disabled={Boolean(task?.hold)} defaultValue={task?.status ?? "todo"} className={input}>{Object.entries(STATUS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></label>
+      <label>Status{task?.hold && <span className="block text-xs text-muted-foreground">On hold ({task.hold.ref}) until the assigned reviewer records written clearance</span>}{task?.hold && <input type="hidden" name="status" value={task.status} />}<select name={task?.hold ? "status_locked" : "status"} disabled={Boolean(task?.hold)} defaultValue={task?.status ?? "todo"} className={input}>{Object.entries(STATUS).map(([k, l]) => <option key={k} value={k}>{l}</option>)}</select></label>
       <div className="flex items-end gap-2"><Button type="submit">{task ? "Save task" : "Add task"}</Button>{onClose && <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>}</div>
     </form>
   );
@@ -147,7 +148,7 @@ function TaskRow({ n, task, company, boardId, onDone }: { n: number; task: Task;
   async function esc(e: FormEvent<HTMLFormElement>) {
     e.preventDefault(); const f = e.currentTarget; const v = new FormData(f, (e.nativeEvent as SubmitEvent).submitter);
     const raise = v.get("action") === "raise";
-    const r = await escalate({ data: { taskId: task.id, note: String(v.get("note") ?? ""), raise } });
+    const r = await escalate({ data: { taskId: task.id, note: String(v.get("note") ?? ""), raise, reviewerId: raise ? String(v.get("reviewer") || "") || null : null, override: v.get("override") === "on" } });
     if (r.success) f.reset(); await onDone(r, raise ? "Task placed on hold." : "Clearance recorded. The task is released.");
   }
   async function doShare(e: FormEvent<HTMLFormElement>) {
@@ -174,26 +175,42 @@ function TaskRow({ n, task, company, boardId, onDone }: { n: number; task: Task;
         {company.isOwner && task.shared > 0 && <span className="inline-flex items-center gap-1"><Share2 className="h-3 w-3" />Shared with {task.shared}</span>}
       </div>
       {task.details && <p className="whitespace-pre-wrap text-muted-foreground">{task.details}</p>}
-      {task.hold && <p role="note" className="flex items-start gap-2 rounded border border-destructive p-2"><AlertTriangle className="h-4 w-4 shrink-0" /><span><strong>On hold · {task.hold.ref}</strong>. Opsirix raised this on {task.hold.raised_at.slice(0, 10)}: {task.hold.reason}. Status stays Blocked until Opsirix records written clearance.</span></p>}
+      {task.hold && <p role="note" className="flex items-start gap-2 rounded border border-destructive p-2"><AlertTriangle className="h-4 w-4 shrink-0" /><span><strong>On hold · {task.hold.ref}</strong>. Opsirix raised this on {task.hold.raised_at.slice(0, 10)}: {task.hold.reason}. Clearance reviewer: {task.hold.reviewer}. Status stays Blocked (it was {STATUS[task.hold.prior_status]}) until the reviewer records written clearance. Wording, owner and due date can still be corrected.</span></p>}
+      {task.hold && task.hold.changes.length > 0 && (
+        <div className="rounded border border-border p-2" aria-label="Changes during hold">
+          <strong>Changed during this hold ({task.hold.changes.length})</strong>
+          <ul className="mt-1 space-y-1">{task.hold.changes.map((c) => (
+            <li key={c.id}>{c.changed_at.slice(0, 16).replace("T", " ")} UTC · {FIELD[c.field] ?? c.field}: <s className="text-muted-foreground">{c.old_value || "(empty)"}</s> → {c.new_value || "(empty)"}</li>
+          ))}</ul>
+        </div>
+      )}
       {task.escalations.length > 0 && (
         <details><summary className="cursor-pointer">Escalation history ({task.escalations.length})</summary>
           <ol className="mt-1 space-y-1">{task.escalations.map((x) => (
-            <li key={x.id} className="rounded border border-border p-2"><strong>{x.ref}</strong> · raised {x.raised_at.slice(0, 16).replace("T", " ")} UTC · {x.reason}
-              {x.cleared_at ? <span className="block">Cleared {x.cleared_at.slice(0, 16).replace("T", " ")} UTC: {x.clearance_note}</span> : <span className="block font-semibold">Open, awaiting written clearance</span>}</li>
+            <li key={x.id} className="rounded border border-border p-2"><strong>{x.ref}</strong> · raised {x.raised_at.slice(0, 16).replace("T", " ")} UTC by {x.raisedBy || "Opsirix"} · reviewer {x.reviewer} · {x.reason}{x.changes.length > 0 && ` · ${x.changes.length} change(s) during hold`}
+              {x.cleared_at ? <span className="block">{x.cleared_by_override ? "Admin/CEO override, cleared" : "Cleared by assigned reviewer"} {x.cleared_at.slice(0, 16).replace("T", " ")} UTC: {x.clearance_note}</span> : <span className="block font-semibold">Open, awaiting written clearance</span>}</li>
           ))}</ol>
         </details>
       )}
       <div className="flex flex-wrap gap-2">
         {company.canEdit && <Button size="sm" variant="secondary" onClick={() => setEditing(true)}>Edit</Button>}
       </div>
-      {company.canEscalate && (
+      {company.canEscalate && !task.hold && (
         <form onSubmit={esc} className="flex flex-wrap items-end gap-2">
-          {task.hold
-            ? <label className="flex-1 min-w-[10rem]">Written clearance (at least 10 characters)<textarea name="note" required minLength={10} maxLength={1000} rows={2} className="w-full" /></label>
-            : <label className="flex-1 min-w-[10rem]">Reason to place on hold<input name="note" required minLength={3} maxLength={500} className={input} /></label>}
-          {task.hold ? <Button size="sm" type="submit" name="action" value="clear" variant="secondary">Record clearance</Button> : <Button size="sm" type="submit" name="action" value="raise">Place on hold</Button>}
+          <label className="flex-1 min-w-[10rem]">Reason to place on hold<input name="note" required minLength={3} maxLength={500} className={input} /></label>
+          <label className="min-w-[10rem]">Clearance reviewer<select name="reviewer" required className={input} defaultValue=""><option value="" disabled>Choose someone else</option>{company.reviewers.map((r) => <option key={r.user_id} value={r.user_id}>{r.label}</option>)}</select></label>
+          <Button size="sm" type="submit" name="action" value="raise" disabled={!company.reviewers.length}>Place on hold</Button>
+          {!company.reviewers.length && <p className="basis-full text-muted-foreground">No other authorized reviewer has access to this company yet, so a hold can't be placed.</p>}
         </form>
       )}
+      {company.canEscalate && task.hold && (task.hold.iAmReviewer || company.isAdmin) && (
+        <form onSubmit={esc} className="flex flex-wrap items-end gap-2">
+          <label className="flex-1 min-w-[10rem]">Written clearance (at least 10 characters)<textarea name="note" required minLength={10} maxLength={1000} rows={2} className="w-full" /></label>
+          {!task.hold.iAmReviewer && <label className="flex items-center gap-2 basis-full"><input type="checkbox" name="override" required /> I am overriding the assigned reviewer as Admin/CEO. This is recorded.</label>}
+          <Button size="sm" type="submit" name="action" value="clear" variant="secondary">{task.hold.iAmReviewer ? "Record clearance" : "Override and clear"}</Button>
+        </form>
+      )}
+      {company.canEscalate && task.hold && !task.hold.iAmReviewer && !company.isAdmin && <p className="text-muted-foreground">Only {task.hold.reviewer} or Admin/CEO can clear this hold.</p>}
       {company.isOwner && (
         <details><summary className="cursor-pointer">Share with a partner</summary>
           <form onSubmit={doShare} className="mt-2 flex flex-wrap items-end gap-2">

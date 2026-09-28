@@ -184,6 +184,7 @@ export type Database = {
           clearance_note: string | null
           cleared_at: string | null
           cleared_by: string | null
+          cleared_by_override: boolean
           id: string
           organization_id: string
           prior_status: string
@@ -191,6 +192,7 @@ export type Database = {
           raised_by: string
           reason: string
           ref: string
+          reviewer_id: string | null
           risk_level: string
           task_id: string
         }
@@ -198,6 +200,7 @@ export type Database = {
           clearance_note?: string | null
           cleared_at?: string | null
           cleared_by?: string | null
+          cleared_by_override?: boolean
           id?: string
           organization_id: string
           prior_status: string
@@ -205,6 +208,7 @@ export type Database = {
           raised_by: string
           reason: string
           ref: string
+          reviewer_id?: string | null
           risk_level?: string
           task_id: string
         }
@@ -212,6 +216,7 @@ export type Database = {
           clearance_note?: string | null
           cleared_at?: string | null
           cleared_by?: string | null
+          cleared_by_override?: boolean
           id?: string
           organization_id?: string
           prior_status?: string
@@ -219,6 +224,7 @@ export type Database = {
           raised_by?: string
           reason?: string
           ref?: string
+          reviewer_id?: string | null
           risk_level?: string
           task_id?: string
         }
@@ -232,6 +238,64 @@ export type Database = {
           },
           {
             foreignKeyName: "flow_escalations_task_id_fkey"
+            columns: ["task_id"]
+            isOneToOne: false
+            referencedRelation: "flow_tasks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      flow_hold_changes: {
+        Row: {
+          changed_at: string
+          changed_by: string
+          escalation_id: string
+          field: string
+          id: string
+          new_value: string | null
+          old_value: string | null
+          organization_id: string
+          task_id: string
+        }
+        Insert: {
+          changed_at?: string
+          changed_by: string
+          escalation_id: string
+          field: string
+          id?: string
+          new_value?: string | null
+          old_value?: string | null
+          organization_id: string
+          task_id: string
+        }
+        Update: {
+          changed_at?: string
+          changed_by?: string
+          escalation_id?: string
+          field?: string
+          id?: string
+          new_value?: string | null
+          old_value?: string | null
+          organization_id?: string
+          task_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "flow_hold_changes_escalation_id_fkey"
+            columns: ["escalation_id"]
+            isOneToOne: false
+            referencedRelation: "flow_escalations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flow_hold_changes_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "flow_hold_changes_task_id_fkey"
             columns: ["task_id"]
             isOneToOne: false
             referencedRelation: "flow_tasks"
@@ -2146,6 +2210,17 @@ export type Database = {
         Args: { _name: string; _org: string }
         Returns: string
       }
+      flow_hold_reviewers: {
+        Args: { _org: string }
+        Returns: {
+          label: string
+          user_id: string
+        }[]
+      }
+      flow_is_hold_reviewer: {
+        Args: { _org: string; _user: string }
+        Returns: boolean
+      }
       flow_save_task: {
         Args: {
           _assignee: string
@@ -2163,7 +2238,13 @@ export type Database = {
         Returns: undefined
       }
       flow_set_escalation: {
-        Args: { _note: string; _raise: boolean; _task: string }
+        Args: {
+          _note: string
+          _override?: boolean
+          _raise: boolean
+          _reviewer?: string
+          _task: string
+        }
         Returns: undefined
       }
       flow_share_preview: {

@@ -21,25 +21,38 @@ export const getFlow = createServerFn({ method: "GET" })
       sb.rpc("has_staff_role", { _user_id: uid }),
       sb.rpc("has_role", { _user_id: uid, _role: "admin" }),
     ]);
-    const { data: escs } = await sb.from("flow_escalations").select("id,ref,task_id,risk_level,reason,prior_status,raised_at,clearance_note,cleared_at").order("raised_at", { ascending: false });
+    const { data: escs } = await sb.from("flow_escalations").select("id,ref,task_id,risk_level,reason,prior_status,raised_at,raised_by,reviewer_id,clearance_note,cleared_at,cleared_by,cleared_by_override").order("raised_at", { ascending: false });
+    const { data: changes } = await sb.from("flow_hold_changes").select("id,escalation_id,field,old_value,new_value,changed_at").order("changed_at");
+    const isAdmin = Boolean(admin.data);
     const roleOf = new Map((mine ?? []).map((m) => [m.organization_id, m.role]));
     const owned = [...roleOf].filter(([, r]) => r === "owner").map(([id]) => id);
     // Co-member names only for owners (same rule as company history).
     const people = (await Promise.all(owned.map((id) => sb.rpc("company_member_people", { _organization_id: id })))).map((r, i) => ({ org: owned[i], rows: r.data ?? [] }));
     const shareRows = owned.length ? (await sb.from("flow_task_shares").select("task_id,partner_user_id,revoked_at")).data ?? [] : [];
+    const staffOrgs = (orgs ?? []).filter((o) => !roleOf.get(o.id) && (isAdmin || Boolean(staffRole.data)));
+    const reviewerLists = await Promise.all(staffOrgs.map(async (o) => ({ org: o.id, rows: (await sb.rpc("flow_hold_reviewers", { _org: o.id })).data ?? [] })));
     const companies = (orgs ?? []).map((o) => {
+      const reviewers = reviewerLists.find((r) => r.org === o.id)?.rows ?? [];
+      const who = (id: string | null) => (!id ? "" : id === uid ? "You" : reviewers.find((r) => r.user_id === id)?.label ?? "Opsirix staff");
+      const decorate = (e: NonNullable<typeof escs>[number]) => ({
+        id: e.id, ref: e.ref, reason: e.reason, prior_status: e.prior_status, raised_at: e.raised_at, clearance_note: e.clearance_note, cleared_at: e.cleared_at,
+        cleared_by_override: e.cleared_by_override, raisedBy: who(e.raised_by), reviewer: e.reviewer_id ? who(e.reviewer_id) : "Not assigned (Admin/CEO override only)",
+        iAmReviewer: e.reviewer_id === uid, iRaised: e.raised_by === uid,
+        changes: (changes ?? []).filter((c) => c.escalation_id === e.id).map((c) => ({ ...c, old_value: c.field === "assignee" ? label(c.old_value) : c.old_value, new_value: c.field === "assignee" ? label(c.new_value) : c.new_value })),
+      });
       const role = roleOf.get(o.id) ?? null;
       const canEdit = role === "owner" || (role === "member" && (editors ?? []).some((e) => e.organization_id === o.id && e.user_id === uid));
       const ppl = people.find((p) => p.org === o.id)?.rows ?? [];
-      const label = (id: string | null) => (!id ? "Unassigned" : id === uid ? "You" : ppl.find((p) => p.user_id === id)?.full_name || ppl.find((p) => p.user_id === id)?.email || "A company member");
+      function label(id: string | null) { return labelOf(id); }
+      const labelOf = (id: string | null) => (!id ? "Unassigned" : id === uid ? "You" : ppl.find((p) => p.user_id === id)?.full_name || ppl.find((p) => p.user_id === id)?.email || "A company member");
       return {
         id: o.id, name: o.name, role, canEdit, isOwner: role === "owner",
-        canEscalate: !role && (Boolean(admin.data) || Boolean(staffRole.data)),
+        canEscalate: !role && (isAdmin || Boolean(staffRole.data)), isAdmin: !role && isAdmin, reviewers,
         members: role === "owner" ? ppl.map((p) => ({ id: p.user_id, label: p.full_name || p.email })) : [{ id: uid, label: "You" }].filter(() => canEdit),
         editors: role === "owner" ? (editors ?? []).filter((e) => e.organization_id === o.id).map((e) => ppl.find((p) => p.user_id === e.user_id)?.email ?? "member") : [],
         boards: (boards ?? []).filter((b) => b.organization_id === o.id).map((b) => ({
           ...b,
-          tasks: (tasks ?? []).filter((t) => t.board_id === b.id).map((t) => ({ ...t, assignee: label(t.assignee_id), shared: role === "owner" ? shareRows.filter((s) => s.task_id === t.id && !s.revoked_at).length : 0, escalations: (escs ?? []).filter((e) => e.task_id === t.id), hold: (escs ?? []).find((e) => e.task_id === t.id && !e.cleared_at) ?? null })),
+          tasks: (tasks ?? []).filter((t) => t.board_id === b.id).map((t) => ({ ...t, assignee: label(t.assignee_id), shared: role === "owner" ? shareRows.filter((s) => s.task_id === t.id && !s.revoked_at).length : 0, escalations: (escs ?? []).filter((e) => e.task_id === t.id).map(decorate), hold: (() => { const h = (escs ?? []).find((e) => e.task_id === t.id && !e.cleared_at); return h ? decorate(h) : null; })() })),
         })),
       };
     });
@@ -69,8 +82,8 @@ export const setFlowEditor = createServerFn({ method: "POST" })
 
 export const setFlowEscalation = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((i: unknown) => z.object({ taskId: uuid, note: z.string().trim().max(500), raise: z.boolean() }).parse(i))
-  .handler(async ({ data, context }) => fail((await context.supabase.rpc("flow_set_escalation", { _task: data.taskId, _note: data.note, _raise: data.raise })).error));
+  .inputValidator((i: unknown) => z.object({ taskId: uuid, note: z.string().trim().max(1000), raise: z.boolean(), reviewerId: uuid.nullable().default(null), override: z.boolean().default(false) }).parse(i))
+  .handler(async ({ data, context }) => fail((await context.supabase.rpc("flow_set_escalation", { _task: data.taskId, _note: data.note, _raise: data.raise, _reviewer: data.reviewerId as string, _override: data.override })).error));
 
 export const shareFlowTask = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
