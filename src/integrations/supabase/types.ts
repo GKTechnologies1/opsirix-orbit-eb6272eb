@@ -58,6 +58,114 @@ export type Database = {
           },
         ]
       }
+      core_request_events: {
+        Row: {
+          actor_id: string
+          created_at: string
+          from_status: string | null
+          id: string
+          note: string | null
+          organization_id: string
+          request_id: string
+          to_status: string
+        }
+        Insert: {
+          actor_id: string
+          created_at?: string
+          from_status?: string | null
+          id?: string
+          note?: string | null
+          organization_id: string
+          request_id: string
+          to_status: string
+        }
+        Update: {
+          actor_id?: string
+          created_at?: string
+          from_status?: string | null
+          id?: string
+          note?: string | null
+          organization_id?: string
+          request_id?: string
+          to_status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "core_request_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "core_request_events_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "core_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      core_requests: {
+        Row: {
+          board_id: string | null
+          created_at: string
+          description: string
+          handled_by: string | null
+          id: string
+          organization_id: string
+          ref: string
+          requested_by: string
+          status: string
+          status_note: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          board_id?: string | null
+          created_at?: string
+          description?: string
+          handled_by?: string | null
+          id?: string
+          organization_id: string
+          ref: string
+          requested_by: string
+          status?: string
+          status_note?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          board_id?: string | null
+          created_at?: string
+          description?: string
+          handled_by?: string | null
+          id?: string
+          organization_id?: string
+          ref?: string
+          requested_by?: string
+          status?: string
+          status_note?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "core_requests_board_id_fkey"
+            columns: ["board_id"]
+            isOneToOne: false
+            referencedRelation: "flow_boards"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "core_requests_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       discovery_call_submissions: {
         Row: {
           business_stage: string | null
@@ -2272,6 +2380,33 @@ export type Database = {
       }
       content_assert_admin: { Args: never; Returns: string }
       content_validate: { Args: { _body: Json }; Returns: undefined }
+      core_is_staff: { Args: { _org: string; _user: string }; Returns: boolean }
+      core_log: {
+        Args: {
+          _note: string
+          _req: Database["public"]["Tables"]["core_requests"]["Row"]
+          _to: string
+        }
+        Returns: undefined
+      }
+      core_save_task: {
+        Args: {
+          _due: string
+          _request: string
+          _status: string
+          _task: string
+          _title: string
+        }
+        Returns: string
+      }
+      core_submit_request: {
+        Args: { _description: string; _org: string; _title: string }
+        Returns: string
+      }
+      core_transition: {
+        Args: { _action: string; _note: string; _request: string }
+        Returns: undefined
+      }
       create_company_workspace: { Args: { _name: string }; Returns: string }
       decline_nexus_introduction: {
         Args: { _intro: string }
