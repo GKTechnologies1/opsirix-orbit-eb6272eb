@@ -198,7 +198,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const workspace = pathname === "/auth" || pathname === "/account" || pathname === "/os" || pathname === "/flow" || pathname === "/core" || pathname === "/grid" || pathname === "/notifications" || pathname.startsWith("/nexus/") || pathname.startsWith("/partner") || pathname.startsWith("/admin") || pathname.startsWith("/workspace") || pathname.startsWith("/staff");
+  const workspace = pathname === "/auth" || pathname === "/account" || pathname === "/os" || pathname === "/flow" || pathname === "/core" || pathname === "/grid" || pathname === "/notifications" || pathname === "/launch" || pathname.startsWith("/nexus/") || pathname.startsWith("/partner") || pathname.startsWith("/admin") || pathname.startsWith("/workspace") || pathname.startsWith("/staff");
 
   return (
     <QueryClientProvider client={queryClient}>

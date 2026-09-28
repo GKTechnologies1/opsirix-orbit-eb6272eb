@@ -42,6 +42,7 @@ import { Route as NexusHelpRouteImport } from './routes/nexus.help'
 import { Route as JoinCodeRouteImport } from './routes/join.$code'
 import { Route as AuthenticatedOsRouteImport } from './routes/_authenticated.os'
 import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated.notifications'
+import { Route as AuthenticatedLaunchRouteImport } from './routes/_authenticated.launch'
 import { Route as AuthenticatedGridRouteImport } from './routes/_authenticated.grid'
 import { Route as AuthenticatedFlowRouteImport } from './routes/_authenticated.flow'
 import { Route as AuthenticatedCoreRouteImport } from './routes/_authenticated.core'
@@ -49,6 +50,7 @@ import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedWorkspaceIndexRouteImport } from './routes/_authenticated.workspace.index'
 import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated.staff.index'
 import { Route as AuthenticatedPartnerIndexRouteImport } from './routes/_authenticated.partner.index'
+import { Route as AuthenticatedStaffLaunchRouteImport } from './routes/_authenticated.staff.launch'
 import { Route as AuthenticatedStaffInquiriesRouteImport } from './routes/_authenticated.staff.inquiries'
 import { Route as AuthenticatedStaffFeaturesRouteImport } from './routes/_authenticated.staff.features'
 import { Route as AuthenticatedStaffContentRouteImport } from './routes/_authenticated.staff.content'
@@ -230,6 +232,11 @@ const AuthenticatedNotificationsRoute =
     path: '/notifications',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedLaunchRoute = AuthenticatedLaunchRouteImport.update({
+  id: '/launch',
+  path: '/launch',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedGridRoute = AuthenticatedGridRouteImport.update({
   id: '/grid',
   path: '/grid',
@@ -265,6 +272,12 @@ const AuthenticatedPartnerIndexRoute =
   AuthenticatedPartnerIndexRouteImport.update({
     id: '/partner/',
     path: '/partner/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedStaffLaunchRoute =
+  AuthenticatedStaffLaunchRouteImport.update({
+    id: '/staff/launch',
+    path: '/staff/launch',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedStaffInquiriesRoute =
@@ -381,6 +394,7 @@ export interface FileRoutesByFullPath {
   '/core': typeof AuthenticatedCoreRoute
   '/flow': typeof AuthenticatedFlowRoute
   '/grid': typeof AuthenticatedGridRoute
+  '/launch': typeof AuthenticatedLaunchRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
   '/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
@@ -409,6 +423,7 @@ export interface FileRoutesByFullPath {
   '/staff/content': typeof AuthenticatedStaffContentRoute
   '/staff/features': typeof AuthenticatedStaffFeaturesRoute
   '/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
+  '/staff/launch': typeof AuthenticatedStaffLaunchRoute
   '/partner/': typeof AuthenticatedPartnerIndexRoute
   '/staff/': typeof AuthenticatedStaffIndexRoute
   '/workspace/': typeof AuthenticatedWorkspaceIndexRoute
@@ -436,6 +451,7 @@ export interface FileRoutesByTo {
   '/core': typeof AuthenticatedCoreRoute
   '/flow': typeof AuthenticatedFlowRoute
   '/grid': typeof AuthenticatedGridRoute
+  '/launch': typeof AuthenticatedLaunchRoute
   '/notifications': typeof AuthenticatedNotificationsRoute
   '/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
@@ -464,6 +480,7 @@ export interface FileRoutesByTo {
   '/staff/content': typeof AuthenticatedStaffContentRoute
   '/staff/features': typeof AuthenticatedStaffFeaturesRoute
   '/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
+  '/staff/launch': typeof AuthenticatedStaffLaunchRoute
   '/partner': typeof AuthenticatedPartnerIndexRoute
   '/staff': typeof AuthenticatedStaffIndexRoute
   '/workspace': typeof AuthenticatedWorkspaceIndexRoute
@@ -494,6 +511,7 @@ export interface FileRoutesById {
   '/_authenticated/core': typeof AuthenticatedCoreRoute
   '/_authenticated/flow': typeof AuthenticatedFlowRoute
   '/_authenticated/grid': typeof AuthenticatedGridRoute
+  '/_authenticated/launch': typeof AuthenticatedLaunchRoute
   '/_authenticated/notifications': typeof AuthenticatedNotificationsRoute
   '/_authenticated/os': typeof AuthenticatedOsRoute
   '/join/$code': typeof JoinCodeRoute
@@ -522,6 +540,7 @@ export interface FileRoutesById {
   '/_authenticated/staff/content': typeof AuthenticatedStaffContentRoute
   '/_authenticated/staff/features': typeof AuthenticatedStaffFeaturesRoute
   '/_authenticated/staff/inquiries': typeof AuthenticatedStaffInquiriesRoute
+  '/_authenticated/staff/launch': typeof AuthenticatedStaffLaunchRoute
   '/_authenticated/partner/': typeof AuthenticatedPartnerIndexRoute
   '/_authenticated/staff/': typeof AuthenticatedStaffIndexRoute
   '/_authenticated/workspace/': typeof AuthenticatedWorkspaceIndexRoute
@@ -552,6 +571,7 @@ export interface FileRouteTypes {
     | '/core'
     | '/flow'
     | '/grid'
+    | '/launch'
     | '/notifications'
     | '/os'
     | '/join/$code'
@@ -580,6 +600,7 @@ export interface FileRouteTypes {
     | '/staff/content'
     | '/staff/features'
     | '/staff/inquiries'
+    | '/staff/launch'
     | '/partner/'
     | '/staff/'
     | '/workspace/'
@@ -607,6 +628,7 @@ export interface FileRouteTypes {
     | '/core'
     | '/flow'
     | '/grid'
+    | '/launch'
     | '/notifications'
     | '/os'
     | '/join/$code'
@@ -635,6 +657,7 @@ export interface FileRouteTypes {
     | '/staff/content'
     | '/staff/features'
     | '/staff/inquiries'
+    | '/staff/launch'
     | '/partner'
     | '/staff'
     | '/workspace'
@@ -664,6 +687,7 @@ export interface FileRouteTypes {
     | '/_authenticated/core'
     | '/_authenticated/flow'
     | '/_authenticated/grid'
+    | '/_authenticated/launch'
     | '/_authenticated/notifications'
     | '/_authenticated/os'
     | '/join/$code'
@@ -692,6 +716,7 @@ export interface FileRouteTypes {
     | '/_authenticated/staff/content'
     | '/_authenticated/staff/features'
     | '/_authenticated/staff/inquiries'
+    | '/_authenticated/staff/launch'
     | '/_authenticated/partner/'
     | '/_authenticated/staff/'
     | '/_authenticated/workspace/'
@@ -955,6 +980,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/launch': {
+      id: '/_authenticated/launch'
+      path: '/launch'
+      fullPath: '/launch'
+      preLoaderRoute: typeof AuthenticatedLaunchRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/grid': {
       id: '/_authenticated/grid'
       path: '/grid'
@@ -1002,6 +1034,13 @@ declare module '@tanstack/react-router' {
       path: '/partner'
       fullPath: '/partner/'
       preLoaderRoute: typeof AuthenticatedPartnerIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/staff/launch': {
+      id: '/_authenticated/staff/launch'
+      path: '/staff/launch'
+      fullPath: '/staff/launch'
+      preLoaderRoute: typeof AuthenticatedStaffLaunchRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/staff/inquiries': {
@@ -1117,6 +1156,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedCoreRoute: typeof AuthenticatedCoreRoute
   AuthenticatedFlowRoute: typeof AuthenticatedFlowRoute
   AuthenticatedGridRoute: typeof AuthenticatedGridRoute
+  AuthenticatedLaunchRoute: typeof AuthenticatedLaunchRoute
   AuthenticatedNotificationsRoute: typeof AuthenticatedNotificationsRoute
   AuthenticatedOsRoute: typeof AuthenticatedOsRoute
   AuthenticatedAdminApplicationsRoute: typeof AuthenticatedAdminApplicationsRoute
@@ -1133,6 +1173,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedStaffContentRoute: typeof AuthenticatedStaffContentRoute
   AuthenticatedStaffFeaturesRoute: typeof AuthenticatedStaffFeaturesRoute
   AuthenticatedStaffInquiriesRoute: typeof AuthenticatedStaffInquiriesRoute
+  AuthenticatedStaffLaunchRoute: typeof AuthenticatedStaffLaunchRoute
   AuthenticatedPartnerIndexRoute: typeof AuthenticatedPartnerIndexRoute
   AuthenticatedStaffIndexRoute: typeof AuthenticatedStaffIndexRoute
   AuthenticatedWorkspaceIndexRoute: typeof AuthenticatedWorkspaceIndexRoute
@@ -1144,6 +1185,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedCoreRoute: AuthenticatedCoreRoute,
   AuthenticatedFlowRoute: AuthenticatedFlowRoute,
   AuthenticatedGridRoute: AuthenticatedGridRoute,
+  AuthenticatedLaunchRoute: AuthenticatedLaunchRoute,
   AuthenticatedNotificationsRoute: AuthenticatedNotificationsRoute,
   AuthenticatedOsRoute: AuthenticatedOsRoute,
   AuthenticatedAdminApplicationsRoute: AuthenticatedAdminApplicationsRoute,
@@ -1161,6 +1203,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedStaffContentRoute: AuthenticatedStaffContentRoute,
   AuthenticatedStaffFeaturesRoute: AuthenticatedStaffFeaturesRoute,
   AuthenticatedStaffInquiriesRoute: AuthenticatedStaffInquiriesRoute,
+  AuthenticatedStaffLaunchRoute: AuthenticatedStaffLaunchRoute,
   AuthenticatedPartnerIndexRoute: AuthenticatedPartnerIndexRoute,
   AuthenticatedStaffIndexRoute: AuthenticatedStaffIndexRoute,
   AuthenticatedWorkspaceIndexRoute: AuthenticatedWorkspaceIndexRoute,

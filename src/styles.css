@@ -2493,3 +2493,8 @@
 .ops-history-details dd { margin: 0; }
 .ops-nav-count { margin-left: auto; min-width: 20px; padding: 0 6px; border-radius: 999px; background: var(--color-cyan); color: var(--bg-surface); font: 700 11px/20px var(--font-mono); text-align: center; }
 .ops-unread-dot { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 999px; background: var(--color-cyan); vertical-align: middle; }
+
+/* Launch intake option rows: override stacked form-label inputs */
+.launch-options { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.nexus-form label.launch-option { display: inline-flex; flex-direction: row; align-items: center; gap: 0.5rem; font-weight: 500; }
+.nexus-form label.launch-option input { width: 1.1rem; height: 1.1rem; min-height: 0; padding: 0; margin: 0; flex: none; accent-color: var(--primary); }
