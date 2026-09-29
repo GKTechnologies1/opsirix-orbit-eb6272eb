@@ -11,3 +11,5 @@ Every authenticated `/nexus/*` page uses signed-in workspace chrome, including t
 - Launch intake review access: Admin/CEO reads and assigns all submitted intakes; an Operations Lead reads/acts only on intakes with an active assignment (launch_can_review); drafts are founder-only. Why: least-privilege triage per owner decision 2026-09-28.
 
 - Grid v3 answers live one row per criterion (grid_criterion_answers) and each review stores criteria_version; later wording changes never rewrite submitted history.
+
+- Test scripts must choose a company ID from scripts/test-org-allowlist.json via scripts/test_guard.py and refuse to run otherwise. Why: D-Global test-selection incident 2026-09-29.
