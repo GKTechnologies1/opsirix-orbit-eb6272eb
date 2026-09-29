@@ -107,5 +107,5 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Launch saves are company-scoped (0059): current membership required and an open intake cannot move companies.
 - [x] Guided tours built in preview for directory member, founder owner, editing member, viewer, partner, Operations Lead, Compliance Coordinator and Admin/CEO; dual-role switcher first; progress keyed by account/role/version with access rechecked on save; draftable tour copy remains unpublished.
 - [x] Guided tours all-role, revoked-access, 390px and protected-link checks on shared backend with TEST Staging Co (2026-09-29)
-- [ ] Guided tours tour-wording publish/restore round trip: blocked on owner decision (publish is not TEST-restricted)
+- [x] Guided tours wording round trip (identical built-in text) published 17s then unpublished; first-login Admin/Ops/directory-only and stale revoked-access refusals verified (2026-09-29 21:25)
 - [ ] Guided tours isolated-staging validation: blocked on DevOps isolated backend + GitHub
