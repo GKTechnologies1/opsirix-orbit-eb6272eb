@@ -83,7 +83,7 @@ function GridPage() {
       moduleTag="Readiness Review"
       moduleIcon="📊"
       headline="A monthly review across every area of your operations."
-      subtext="Opsirix Grid reviews your company across ten operational categories each month. The result: a structured record of each check, a written status report, and a clear picture of what needs attention next. Scoring is not yet available, and checks in some specialist areas are held until specialist review."
+      subtext="Opsirix Grid reviews your company across ten operational categories each month. The result: a structured record of each check and a clear picture of what needs attention next. Scoring is not yet available, and checks in some specialist areas are held until specialist review."
     >
       {/* Section 1 — Problem */}
       <div style={{ marginBottom: 64 }}>
