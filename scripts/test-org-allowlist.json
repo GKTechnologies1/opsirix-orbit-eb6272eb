@@ -1,0 +1,17 @@
+{
+  "_note": "Approved TEST organizations. Test scripts must pick an ID from this list and refuse to run otherwise. Owner decision 2026-09-29 after the D-Global test-selection incident. Never add a real company.",
+  "organizations": {
+    "02e9f32a-a1cf-4208-b918-92fc9b5107a3": "TEST Founder Company (invited accounts)",
+    "7c7df304-2ea8-4955-96ec-89515c2c93e5": "TEST Phase1 Browser Co",
+    "e27499f1-3a0e-47e5-8995-e4104eb25ed4": "TEST Dual Access Co",
+    "3e4fb493-6deb-4c20-b749-1914e1852aaf": "TEST - GK Technologies (fictional record)",
+    "f6aab6c9-8e52-4938-8c92-091856d30c20": "TEST concurrency org 0",
+    "b32e9473-e5a3-44dd-89c1-da2b8c9c1123": "TEST concurrency org 1",
+    "8371e195-ecfe-42cf-91e5-d54266a2be56": "TEST concurrency org 2",
+    "461aea22-3f28-43b7-9356-c71b52a944e7": "TEST concurrency org 3",
+    "bdb4a2b4-fdf5-445f-8eb2-728ab8d24648": "TEST concurrency org 4",
+    "659b6e53-2c76-46e9-ba72-faa5c65bb7d5": "TEST concurrency org 5",
+    "2e2b2f39-4105-4f65-aae9-58ef33c9e7df": "TEST concurrency org 6",
+    "85418ff0-dd6c-48a7-baf0-21483030bcb6": "TEST concurrency org 7"
+  }
+}
