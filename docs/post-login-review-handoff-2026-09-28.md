@@ -263,3 +263,9 @@ Positive directory filter test: seed approved TEST listings per open category in
 **Shared-backend history rows this round:** content.draft_saved, content.published, content.unpublished; membership.removed/updated x2 (member restored). Tour-progress rows for TEST Admin/CEO, Operations Lead and the member deleted and re-created. No notifications, no Flow board created.
 
 **Still outstanding:** isolated-staging validation (DevOps isolated backend + GitHub).
+
+## 2026-09-29 21:50 UTC update
+- Guided tours: COMPLETE on the shared backend with labeled TEST accounts and allowlisted "TEST Staging Co" (not isolated staging). Isolated-staging validation remains OUTSTANDING.
+- Correction: the earlier "nothing created" statement about the failed test copy was wrong; the actual TEST company, memberships and tour-progress rows are listed in tracker v6/v7.
+- Tour wording publication history: version 58a96ee6-bd9f-4064-8e6e-14ad635b9913 (exact built-in wording) saved, previewed, published, verified served, unpublished; built-in wording confirmed restored (details and timestamps in tracker v7). Website not republished.
+- Core access-panel spacing regression (preview only, CSS): at 641-1024px a public-site rule added 80px top/bottom padding to every section, including signed-in panels. Scoped to public pages. Verified 0 affected panels on /core, /staff, /staff/launch, /staff/content, /grid, /launch, /notifications, /flow, /os at 390/768/1024/1280; homepage keeps its tablet spacing; no horizontal overflow. Screenshots: Files core-spacing-2026-09-29/.
