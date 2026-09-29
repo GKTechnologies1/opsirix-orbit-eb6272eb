@@ -159,7 +159,7 @@ function Editor({ company, kind, onDone }: { company: Company; kind: Kind; onDon
       if (c.type === "count" && !detail.status) continue;
       if (c.type === "count" && detail.status !== "counted" && detail.status !== "run") { for (const k of Object.keys(counts)) delete counts[k]; }
       if (c.key === "business_account") { out.push({ criterion: c.key, answer: d.answer as Choice, counts: {}, detail: {}, note: "" }); continue; }
-      if (c.key === "doc_locations") detail.labels = String(detail.labelsText ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+      if (c.key === "doc_locations" && detail.labelsText !== undefined) detail.labels = String(detail.labelsText).split(",").map((s) => s.trim()).filter(Boolean);
       delete detail.labelsText;
       out.push({ criterion: c.key, answer: c.type === "choice" ? (d.answer as Choice) : null, counts, detail, note: d.note.trim() });
     }
