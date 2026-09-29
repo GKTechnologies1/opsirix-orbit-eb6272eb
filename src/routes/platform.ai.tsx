@@ -28,9 +28,9 @@ const FEATURES = [
   { t: "Missing document detection", d: "When expected documents are absent, AI surfaces the gap." },
   { t: "Workflow delay alerts", d: "Tasks open longer than expected are flagged for review." },
   { t: "Pattern recognition", d: "Recurring delays or gaps across months identified." },
-  { t: "Next action suggestions", d: "Based on document status, workflow activity, and Grid score." },
+  { t: "Next action suggestions", d: "Planned: based on document status, workflow activity, and Grid review answers." },
   { t: "Meeting preparation summaries", d: "Open items summarized before Grid reviews or partner meetings." },
-  { t: "Status summaries", d: "Founder status summaries generated from Flow, Vault, and Nexus updates." },
+  { t: "Status summaries", d: "Planned: founder status summaries from Flow and Nexus updates, and Vault once available." },
 ];
 
 const NOT_DOES = [
@@ -43,9 +43,9 @@ const NOT_DOES = [
 ];
 
 const CONNECTED = [
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "AI surfaces missing or expiring Vault documents." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned: AI would surface missing or expiring documents once Vault is available." },
   { icon: "⚡", name: "Opsirix Flow", to: "/platform/flow", desc: "AI flags workflow delays and overdue tasks." },
-  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "AI suggests priorities based on Grid score." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Planned: AI would suggest priorities from Grid review answers." },
 ] as const;
 
 function Eyebrow({ children }: { children: React.ReactNode }) {

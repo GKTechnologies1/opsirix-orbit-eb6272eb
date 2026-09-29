@@ -38,8 +38,8 @@ function Page() {
           <h2 className="inner-h2">Coordination, not advice.</h2>
           <p className="inner-lead">
             Founders don't fail from bad ideas. They fail from operational chaos, scattered documents, disconnected
-            professionals, no monthly rhythm. Opsirix runs the operational layer: organizing the Vault, running the
-            weekly Flow, coordinating Nexus partners, and scoring readiness with the monthly Grid.
+            professionals, no monthly rhythm. Opsirix runs the operational layer: organizing documents, running the
+            weekly Flow, coordinating Nexus partners, and reviewing readiness with the monthly Grid.
           </p>
           <p className="inner-lead">
             Every regulated question routes to an independently retained licensed professional through Opsirix Nexus.

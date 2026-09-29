@@ -13,11 +13,11 @@ const BEFORE = [
 ];
 
 const AFTER = [
-  "Critical documents organized in a structured Opsirix Vault and easier to locate when needed",
+  "Critical documents tracked with a clear checklist, with Opsirix Vault planned for structured storage",
   "Attorney, CPA, and partner team coordinated through Opsirix Nexus, right timing, full preparation",
   "Live compliance calendar, every deadline tracked, 90-day advance alerts, nothing missed",
-  "Monthly Opsirix Grid review, priorities set, progress tracked, score improving every quarter",
-  "Grid score of 40 or above means investor-ready operations with a complete evidence trail.",
+  "Monthly Opsirix Grid review, priorities set, progress tracked month over month",
+  "Each monthly Grid record keeps your answers and the Opsirix evidence review side by side.",
   "Operational calmness. Your systems are running. You focus entirely on building.",
 ];
 

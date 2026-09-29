@@ -30,7 +30,7 @@ const FEATURES = [
   { t: "Document follow-up", d: "Missing, expiring, or outdated documents identified and addressed." },
   { t: "Partner coordination support", d: "Attorney, CPA, and partner scheduling handled through Nexus." },
   { t: "Operating checklist management", d: "Formation and ongoing checklists managed and updated." },
-  { t: "Founder Status Report", d: "Written monthly report covering score, activities, and priorities." },
+  { t: "Founder Status Report", d: "Written monthly report covering activities, open requests, and priorities." },
   { t: "Meeting preparation", d: "Documents and context organized before attorney, CPA, or investor meetings." },
   { t: "Communication coordination", d: "Professional correspondence tracked and followed up." },
   { t: "Business process organization", d: "Core processes documented in Flow." },
@@ -45,10 +45,10 @@ const NOT_INCLUDES = [
 ];
 
 const CONNECTED = [
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Document follow-up runs through Vault." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned. Document follow-up runs through Core requests until Vault is available." },
   { icon: "⚡", name: "Opsirix Flow", to: "/platform/flow", desc: "Tasks actively managed in Flow." },
   { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Partner scheduling handled via Nexus." },
-  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Monthly Grid review delivered as part of Core." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Monthly unscored Grid review can be part of Core." },
   { icon: "🖥️", name: "Opsirix OS", to: "/platform/os", desc: "Operations visible in the OS dashboard." },
 ] as const;
 

@@ -48,10 +48,10 @@ const FOUNDER_TYPES = [
 ];
 
 const FEATURES = [
-  { icon: FolderOpen, t: "Documents organized and accessible", d: "Formation papers, banking documents, attorney correspondence, and operating records organized in Opsirix Vault. Available when you need them." },
+  { icon: FolderOpen, t: "Documents organized and accessible", d: "Formation papers, banking documents, attorney correspondence, and operating records tracked with a clear checklist. Opsirix Vault storage is planned." },
   { icon: CalendarClock, t: "Deadlines tracked in advance", d: "Important dates, renewal timelines, filing deadlines, and review schedules maintained as part of your operational calendar, never discovered after the fact." },
   { icon: Link2, t: "Attorneys and CPAs coordinated", d: "Opsirix Nexus coordinates scheduling, document delivery, and communication between founders and their licensed professionals. Opsirix does not provide legal or immigration advice." },
-  { icon: BarChart3, t: "Monthly operational health check", d: "The Opsirix Grid scores your operational readiness across five areas each month. You know exactly where you stand and what needs attention." },
+  { icon: BarChart3, t: "Monthly operational health check", d: "The Opsirix Grid reviews your operational readiness each month, without a score. You know exactly where you stand and what needs attention." },
 ];
 
 const HANDLES = [
@@ -204,7 +204,7 @@ function Page() {
           <p className="inner-lead">
             Any question about immigration status, work authorization, visa eligibility, tax
             obligations, accounting, or legal structure requires a licensed professional. Your
-            documents stay organized in <Link to="/platform/vault" className="inline-link">Opsirix Vault</Link>,
+            documents stay on a clear checklist (<Link to="/platform/vault" className="inline-link">Opsirix Vault</Link> is planned),
             and Opsirix can help coordinate your access to the right professional through{" "}
             <Link to="/platform/nexus" className="inline-link">Opsirix Nexus</Link>, but cannot advise on those matters directly.
           </p>

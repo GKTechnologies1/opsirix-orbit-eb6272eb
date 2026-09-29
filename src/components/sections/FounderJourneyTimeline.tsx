@@ -48,9 +48,9 @@ const STEPS: Step[] = [
   {
     emoji: "⚙️",
     title: "Ops Setup",
-    desc: "Vault, Flow, Nexus all activated",
+    desc: "Flow and Nexus activated; Vault planned",
     details: [
-      "Opsirix Vault created with folder structure",
+      "Document checklist started (Vault planned)",
       "Opsirix Flow project board activated",
       "Nexus partner introductions made",
       "Grid baseline established",
@@ -70,10 +70,10 @@ const STEPS: Step[] = [
   {
     emoji: "📊",
     title: "Monthly Grid Review",
-    desc: "Score tracked, priorities set",
+    desc: "Checks recorded, priorities set",
     details: [
       "45–60 min session each month",
-      "Score calculated across 5 dimensions",
+      "Self-assessment and evidence review recorded, unscored",
       "Priorities set for next month",
       "Status report delivered after every session",
     ],
@@ -83,7 +83,7 @@ const STEPS: Step[] = [
     title: "Growth Systems",
     desc: "Investor-ready. Operational calmness.",
     details: [
-      "Grid score 40+/50 = investor-ready",
+      "Monthly records kept for comparison",
       "Audit-ready documentation",
       "Operational evidence trail complete",
       "Continue or transition to Opsirix Core",

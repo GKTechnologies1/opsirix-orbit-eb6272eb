@@ -51,9 +51,9 @@ const AUDIENCE = [
 ];
 
 const CONNECTED = [
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Document handoffs tracked and linked." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned. Document handoffs will link to Vault once it is available." },
   { icon: "🤝", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Partner coordination visible in Flow." },
-  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Task completion feeds into monthly readiness score." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Grid task checks ask about your Flow board each month." },
 ] as const;
 
 function Eyebrow({ children }: { children: React.ReactNode }) {

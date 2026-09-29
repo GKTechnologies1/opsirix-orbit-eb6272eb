@@ -21,7 +21,7 @@ const PILLARS = [
   { n: "02", t: "Stop-Work Protocol", d: "If any matter approaches a regulated boundary, work pauses until a licensed professional confirms the path forward in writing." },
   { n: "03", t: "Risk Classification", d: "Every workflow is classified as administrative, coordination, or licensed-professional. Each tier has its own routing rule." },
   { n: "04", t: "7-Day SLA", d: "Founder requests receive an action or routing decision within 7 calendar days. The audit log records every step." },
-  { n: "05", t: "Audit Evidence Trail", d: "Each task generates a timestamped record, request, classification, action, professional sign-off, preserved in the Vault." },
+  { n: "05", t: "Audit Evidence Trail", d: "Each task generates a timestamped record, request, classification, action, professional sign-off, preserved in company history." },
   { n: "06", t: "Nexus Independence", d: "Every Nexus partner serves you under their own engagement letter. Opsirix never controls the substance of their advice." },
 ];
 

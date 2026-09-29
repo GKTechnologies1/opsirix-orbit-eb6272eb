@@ -5,11 +5,11 @@ import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 export const Route = createFileRoute("/platform/grid")({
   head: () => ({
     meta: [
-      { title: "Opsirix Grid | Operational Readiness Score for Founders" },
+      { title: "Opsirix Grid | Monthly Operational Readiness Review" },
       {
         name: "description",
         content:
-          "Monthly operational readiness score across ten categories. Know where your company is strong and what needs attention next.",
+          "A monthly operational readiness review with a founder self-assessment and an Opsirix evidence review, kept separate. Scoring is not yet available.",
       },
       { property: "og:title", content: "Opsirix Grid | Operational Readiness Score for Founders" },
       {
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/platform/grid")({
 
 const CATEGORIES = [
   { t: "Entity and company setup", d: "Is the business properly formed, registered, and documented?" },
-  { t: "Documentation readiness", d: "Are key documents organized, current, and accessible in Vault?" },
+  { t: "Documentation readiness", d: "Are key documents organized, current, and stored in company-controlled locations?" },
   { t: "Financial operations", d: "Are bookkeeping, banking, payroll, and financial records in order?" },
   { t: "Partner coordination", d: "Are attorney, CPA, and service partner relationships active and current?" },
   { t: "Workflow discipline", d: "Are tasks tracked, followed up, and completed within reasonable timeframes?" },
@@ -39,24 +39,24 @@ const CATEGORIES = [
 
 const STEPS = [
   { n: "01", t: "Review session (45 to 60 minutes)", d: "Founder and Opsirix team review each category against current documentation, workflows, and activities." },
-  { n: "02", t: "Score calculated", d: "Each category is assessed. Areas of strength and areas needing attention identified." },
-  { n: "03", t: "Founder Status Report delivered", d: "Written summary of the session: score, key findings, and priorities for the coming month." },
+  { n: "02", t: "Checks recorded", d: "Each check is answered, with \"Evidence not shown\" and \"Not yet\" recorded as notes, never as failures. No score is calculated." },
+  { n: "03", t: "Founder Status Report delivered", d: "Written summary of the session: key findings and priorities for the coming month." },
   { n: "04", t: "Action items enter Flow", d: "Improvement actions become tasks in Opsirix Flow with owners and due dates." },
-  { n: "05", t: "Progress tracked month over month", d: "Score history visible in the OS dashboard." },
+  { n: "05", t: "Progress tracked month over month", d: "Each month's submitted records are kept, so you can compare answers over time." },
 ];
 
 const DELIVERABLES = [
-  "Monthly readiness score (total and by category)",
+  "Monthly review record: your self-assessment and the Opsirix evidence review, kept separate",
   "Founder Status Report",
   "Priority list for the coming month",
   "Updated task list in Flow",
-  "Score history in OS dashboard",
+  "History of submitted monthly records"
 ];
 
 const CONNECTED = [
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Documentation score comes from Vault completeness." },
-  { icon: "⚡", name: "Opsirix Flow", to: "/platform/flow", desc: "Task score comes from Flow discipline." },
-  { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Partner coordination score reflects Nexus activity." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned. Vault is not yet available; document checks are answered directly in Grid." },
+  { icon: "⚡", name: "Opsirix Flow", to: "/platform/flow", desc: "Task checks ask about your Flow board: owners, due dates and overdue items." },
+  { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Professional engagement checks can reflect partners you work with through Nexus." },
 ] as const;
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -80,10 +80,10 @@ function GridPage() {
   return (
     <ModulePageLayout
       moduleName="Opsirix Grid"
-      moduleTag="Readiness Scoring"
+      moduleTag="Readiness Review"
       moduleIcon="📊"
-      headline="A monthly score across every area of your operations."
-      subtext="Opsirix Grid reviews your company across ten operational categories each month. The result: a structured readiness score, a written status report, and a clear picture of what needs attention next."
+      headline="A monthly review across every area of your operations."
+      subtext="Opsirix Grid reviews your company across ten operational categories each month. The result: a structured record of each check, a written status report, and a clear picture of what needs attention next. Scoring is not yet available, and checks in some specialist areas are held until specialist review."
     >
       {/* Section 1 — Problem */}
       <div style={{ marginBottom: 64 }}>
@@ -99,7 +99,7 @@ function GridPage() {
       {/* Section 2 — 10 categories */}
       <div style={{ marginBottom: 40 }}>
         <Eyebrow>The Categories</Eyebrow>
-        <h2 className="module-section-h2">What the Grid scores each month.</h2>
+        <h2 className="module-section-h2">What the Grid reviews each month.</h2>
         <div
           style={{
             display: "grid",
@@ -146,7 +146,7 @@ function GridPage() {
         }}
       >
         <p style={{ fontSize: 13.5, color: "#94A3B8", margin: 0, lineHeight: 1.7 }}>
-          The Grid score is an internal operational readiness indicator. It is not a legal
+          A Grid record is an internal operational readiness note. It is not a legal
           compliance certification, a regulatory audit, or a guarantee of compliance with any law
           or regulation. Regulatory and legal compliance matters are handled by licensed
           professionals.

@@ -5,12 +5,12 @@ import { DashboardMockup } from "@/components/ui/DashboardMockup";
 type Feature = { emoji: string; title: string; desc: string };
 
 const FEATURES: Feature[] = [
-  { emoji: "📊", title: "Founder Dashboard", desc: "Real-time Grid score, tasks, and operational status" },
-  { emoji: "🔒", title: "Document Vault", desc: "Structured document organization and retrieval" },
+  { emoji: "📊", title: "Founder Dashboard", desc: "Grid review status, tasks, and operational status" },
+  { emoji: "🔒", title: "Document Vault", desc: "Planned: structured document organization and retrieval" },
   { emoji: "🗺️", title: "Workflow Map", desc: "Visual map of all active tasks and owners" },
   { emoji: "🔗", title: "Partner Hub", desc: "Attorney, CPA, insurance, coordinated" },
-  { emoji: "⭐", title: "Readiness Score", desc: "50-point Grid with investor-exportable history" },
-  { emoji: "🧠", title: "AI Copilot", desc: "Proactive risk surfacing and intelligent routing" },
+  { emoji: "📈", title: "Readiness Review", desc: "Monthly unscored Grid records with history" },
+  { emoji: "🧠", title: "AI Copilot", desc: "Planned: not part of the first release" },
 ];
 
 export function OpsirixOSPreview() {

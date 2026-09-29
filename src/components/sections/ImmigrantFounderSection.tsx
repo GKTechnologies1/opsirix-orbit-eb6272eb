@@ -13,7 +13,7 @@ const POINTS: FeaturePoint[] = [
   {
     icon: "📁",
     title: "Document organization that matters",
-    body: "Your Opsirix Vault organizes visa documents, formation records, attorney letters, and compliance evidence, all current, all accessible, all protected.",
+    body: "Opsirix Vault, planned and under security review, is designed to organize formation records, attorney letters, and compliance evidence. Until then, Opsirix helps you keep a clear document checklist.",
   },
   {
     icon: "🔗",
