@@ -746,6 +746,45 @@ export type Database = {
           },
         ]
       }
+      guided_tour_progress: {
+        Row: {
+          completed_at: string | null
+          current_step: number
+          id: string
+          role_key: string
+          started_at: string
+          status: string
+          tour_key: string
+          tour_version: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          current_step?: number
+          id?: string
+          role_key: string
+          started_at?: string
+          status?: string
+          tour_key: string
+          tour_version: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          current_step?: number
+          id?: string
+          role_key?: string
+          started_at?: string
+          status?: string
+          tour_key?: string
+          tour_version?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       launch_assignments: {
         Row: {
           assigned_by: string
@@ -824,6 +863,7 @@ export type Database = {
           founder_message: string | null
           id: string
           name_override: string | null
+          organization_id: string | null
           ref: string | null
           scope_notice_version: string | null
           status: string
@@ -838,6 +878,7 @@ export type Database = {
           founder_message?: string | null
           id?: string
           name_override?: string | null
+          organization_id?: string | null
           ref?: string | null
           scope_notice_version?: string | null
           status?: string
@@ -852,6 +893,7 @@ export type Database = {
           founder_message?: string | null
           id?: string
           name_override?: string | null
+          organization_id?: string | null
           ref?: string | null
           scope_notice_version?: string | null
           status?: string
@@ -859,7 +901,15 @@ export type Database = {
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "launch_intakes_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       launch_reviews: {
         Row: {
@@ -2965,6 +3015,17 @@ export type Database = {
         }
         Returns: string
       }
+      launch_save_intake_v2: {
+        Args: {
+          _answers: Json
+          _email: string
+          _name: string
+          _notice_version: string
+          _organization_id: string
+          _submit: boolean
+        }
+        Returns: string
+      }
       listing_type_is_public: {
         Args: { _type: string; _user: string }
         Returns: boolean
@@ -3119,6 +3180,16 @@ export type Database = {
         Args: { _body: Json; _key: string; _summary: string }
         Returns: string
       }
+      save_guided_tour_progress: {
+        Args: {
+          _current_step: number
+          _role_key: string
+          _status: string
+          _tour_key: string
+          _tour_version: number
+        }
+        Returns: undefined
+      }
       send_nexus_introduction: {
         Args: { _hash: string; _intro: string }
         Returns: Json
@@ -3184,6 +3255,10 @@ export type Database = {
           _phone: string
         }
         Returns: string
+      }
+      tour_role_allowed: {
+        Args: { _role_key: string; _user_id: string }
+        Returns: boolean
       }
       type_evidence_ok: {
         Args: { _application: string; _type: string }
