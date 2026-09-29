@@ -269,3 +269,8 @@ Positive directory filter test: seed approved TEST listings per open category in
 - Correction: the earlier "nothing created" statement about the failed test copy was wrong; the actual TEST company, memberships and tour-progress rows are listed in tracker v6/v7.
 - Tour wording publication history: version 58a96ee6-bd9f-4064-8e6e-14ad635b9913 (exact built-in wording) saved, previewed, published, verified served, unpublished; built-in wording confirmed restored (details and timestamps in tracker v7). Website not republished.
 - Core access-panel spacing regression (preview only, CSS): at 641-1024px a public-site rule added 80px top/bottom padding to every section, including signed-in panels. Scoped to public pages. Verified 0 affected panels on /core, /staff, /staff/launch, /staff/content, /grid, /launch, /notifications, /flow, /os at 390/768/1024/1280; homepage keeps its tablet spacing; no horizontal overflow. Screenshots: Files core-spacing-2026-09-29/.
+
+## 2026-09-29 22:10 UTC update
+- Owner accepted the Core tablet spacing fix. Guided-tour testing complete on the shared backend; isolated-staging validation outstanding.
+- Wording corrected: "no remaining implementation within the currently approved first-release scope" (Vault and AI unbuilt; Core email and partner organization membership proposed or gated).
+- First-release review package and DevOps handoff v3 (migration inventory; 0050 record-only file is outside the journal) delivered in Files. No app, backend, publish, DNS or gate changes.

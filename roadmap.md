@@ -109,3 +109,9 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Guided tours all-role, revoked-access, 390px and protected-link checks on shared backend with TEST Staging Co (2026-09-29)
 - [x] Guided tours wording round trip (identical built-in text) published 17s then unpublished; first-login Admin/Ops/directory-only and stale revoked-access refusals verified (2026-09-29 21:25)
 - [ ] Guided tours isolated-staging validation: blocked on DevOps isolated backend + GitHub
+
+## 2026-09-29 First-release review package
+- [x] Core spacing fix accepted by owner; tour testing recorded complete on shared backend
+- [x] First-release review package (Files: first-release-review-2026-09-29/) and DevOps handoff v3 with migration inventory; tracker v9
+- [ ] Owner review: Launch screens, Launch link wording, public wording W1-W11 (blocked: owner)
+- [ ] Isolated staging + tour validation, directory filter test, role smoke tests (blocked: DevOps/GitHub)
