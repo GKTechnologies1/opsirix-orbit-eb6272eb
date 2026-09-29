@@ -70,6 +70,7 @@ function IntakeCard({ intake: i, onDone, isAdmin, leads }: { intake: Intake; onD
   }
   return <article className="ops-panel" aria-label={i.ref ?? "Launch intake"}>
     <h3>{i.ref} · {i.name || "Name not given"} · {i.status.replace(/_/g, " ")}</h3>
+    <p className="text-sm"><strong>Company:</strong> {i.organizationName}</p>
     <p className="text-sm">Assigned to: {i.assignee ? i.assignee.name : "Nobody yet"}</p>
     {isAdmin && i.status === "submitted" && <label className="nexus-form">Assign to Operations Lead<select value={i.assignee?.id ?? ""} onChange={(e) => void changeAssignee(e.target.value)}>
       <option value="">Unassigned</option>{leads.map((l) => <option key={l.id} value={l.id}>{l.name}</option>)}

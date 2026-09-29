@@ -53,15 +53,17 @@ export const getMyLaunch = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const sb = context.supabase;
-    const [{ data: intakes }, { data: profile }, { data: claims }] = await Promise.all([
-      sb.from("launch_intakes").select("id,ref,status,answers,name_override,email_override,founder_message,submitted_at,updated_at").eq("user_id", context.userId).order("created_at", { ascending: false }),
+    const [{ data: intakes }, { data: profile }, { data: claims }, { data: memberships }] = await Promise.all([
+      sb.from("launch_intakes").select("id,ref,status,answers,name_override,email_override,founder_message,submitted_at,updated_at,organization_id").eq("user_id", context.userId).order("created_at", { ascending: false }),
       sb.from("profiles").select("full_name,email").eq("id", context.userId).maybeSingle(),
       sb.auth.getUser(),
+      sb.from("organization_members").select("organization_id,role,organizations(name)").eq("user_id", context.userId),
     ]);
     const ids = (intakes ?? []).map((i) => i.id);
     const { data: events } = ids.length ? await sb.from("launch_events").select("intake_id,event,created_at").in("intake_id", ids).order("created_at") : { data: [] };
     return {
       account: { name: profile?.full_name ?? "", email: profile?.email ?? claims.user?.email ?? "" },
+      companies: (memberships ?? []).map((m) => ({ id: m.organization_id, name: (m.organizations as { name?: string } | null)?.name ?? "Company workspace", role: m.role })),
       intakes: (intakes ?? []).map((i) => ({ ...i, answers: i.answers as LaunchAnswers, events: (events ?? []).filter((e) => e.intake_id === i.id) })),
     };
   });
@@ -69,7 +71,7 @@ export const getMyLaunch = createServerFn({ method: "GET" })
 export const saveMyLaunch = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((i: unknown) => z.object({
-    answers: launchAnswersSchema, name: z.string().trim().max(120), email: z.string().trim().max(255), submit: z.boolean(),
+    organizationId: z.string().uuid(), answers: launchAnswersSchema, name: z.string().trim().max(120), email: z.string().trim().max(255), submit: z.boolean(),
   }).parse(i))
   .handler(async ({ data, context }) => {
     const sb = context.supabase;
@@ -82,7 +84,7 @@ export const saveMyLaunch = createServerFn({ method: "POST" })
       const missing = missingForSubmit(data.answers, data.email || profile?.email || "");
       if (missing.length) return { success: false as const, error: `Please complete: ${missing.join(", ")}.` };
     }
-    const { error } = await sb.rpc("launch_save_intake", { _answers: data.answers, _name: name, _email: email, _submit: data.submit, _notice_version: LAUNCH_SCOPE_NOTICE_VERSION });
+    const { error } = await sb.rpc("launch_save_intake_v2", { _organization_id: data.organizationId, _answers: data.answers, _name: name, _email: email, _submit: data.submit, _notice_version: LAUNCH_SCOPE_NOTICE_VERSION });
     return error ? { success: false as const, error: error.message } : { success: true as const };
   });
 
@@ -95,15 +97,20 @@ export const getLaunchQueue = createServerFn({ method: "GET" })
     const { data: isAdmin } = await sb.rpc("has_role", { _user_id: context.userId, _role: "admin" });
     const { data: assigns } = await sb.from("launch_assignments").select("intake_id,assignee_id,created_at").is("revoked_at", null);
     const [{ data: intakes }, { data: reviews }, { data: events }] = await Promise.all([
-      sb.from("launch_intakes").select("id,ref,user_id,status,answers,name_override,email_override,submitted_at,updated_at").neq("status", "draft").order("submitted_at", { ascending: false }),
+      sb.from("launch_intakes").select("id,ref,user_id,organization_id,status,answers,name_override,email_override,submitted_at,updated_at").neq("status", "draft").order("submitted_at", { ascending: false }),
       sb.from("launch_reviews").select("intake_id,kind,outcome,reason,founder_message,reviewer_id,created_at").order("created_at"),
       sb.from("launch_events").select("intake_id,event,actor_id,created_at").order("created_at"),
     ]);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: leadRows } = isAdmin ? await supabaseAdmin.from("user_roles").select("user_id").eq("role", "operations_lead") : { data: [] };
     const people = new Set<string>([...(leadRows ?? []).map((l) => l.user_id), ...(assigns ?? []).map((a) => a.assignee_id), ...(intakes ?? []).map((i) => i.user_id), ...(reviews ?? []).map((r) => r.reviewer_id), ...(events ?? []).map((e) => e.actor_id)]);
-    const { data: profiles } = people.size ? await supabaseAdmin.from("profiles").select("id,full_name,email").in("id", [...people]) : { data: [] };
+    const orgIds = [...new Set((intakes ?? []).map((i) => i.organization_id).filter(Boolean))] as string[];
+    const [{ data: profiles }, { data: organizations }] = await Promise.all([
+      people.size ? supabaseAdmin.from("profiles").select("id,full_name,email").in("id", [...people]) : Promise.resolve({ data: [] }),
+      orgIds.length ? supabaseAdmin.from("organizations").select("id,name").in("id", orgIds) : Promise.resolve({ data: [] }),
+    ]);
     const who = new Map((profiles ?? []).map((p) => [p.id, p]));
+    const company = new Map((organizations ?? []).map((o) => [o.id, o.name]));
     const label = (id: string, founder: string) => (id === founder ? "Founder" : who.get(id)?.full_name || "Opsirix staff");
     return {
       allowed: true as const,
@@ -111,6 +118,7 @@ export const getLaunchQueue = createServerFn({ method: "GET" })
       leads: (leadRows ?? []).map((l) => ({ id: l.user_id, name: who.get(l.user_id)?.full_name || "Operations Lead" })),
       intakes: (intakes ?? []).map((i) => ({
         id: i.id, ref: i.ref, status: i.status, submitted_at: i.submitted_at, updated_at: i.updated_at,
+        organizationId: i.organization_id, organizationName: i.organization_id ? company.get(i.organization_id) ?? "Company workspace" : "Legacy intake (no company recorded)",
         answers: i.answers as LaunchAnswers,
         assignee: (() => { const a = (assigns ?? []).find((x) => x.intake_id === i.id); return a ? { id: a.assignee_id, name: who.get(a.assignee_id)?.full_name || "Operations Lead", since: a.created_at } : null; })(),
         name: i.name_override || who.get(i.user_id)?.full_name || "",

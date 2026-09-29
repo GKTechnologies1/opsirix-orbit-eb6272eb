@@ -28,7 +28,7 @@ export function GuidedTour({ surface, compact = false }: { surface: TourSurface;
     const content = data?.publishedContent as { items?: { q: string; a: string }[] } | null | undefined;
     const replacement = content?.items?.find((item) => item.q === builtIn.label);
     if (!replacement) return builtIn;
-    return { ...builtIn, steps: [{ ...builtIn.steps[0], title: replacement.q, body: replacement.a }] } satisfies TourDefinition;
+    return { ...builtIn, steps: [{ ...builtIn.steps[0], body: replacement.a }, ...builtIn.steps.slice(1)] } satisfies TourDefinition;
   }, [builtIn, data?.publishedContent]);
   const saved = definition ? data?.progress.find((row) => row.role_key === definition.role && row.tour_key === definition.key && row.tour_version === TOUR_VERSION) : null;
   const [open, setOpen] = useState(false);

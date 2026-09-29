@@ -42,6 +42,7 @@ function LaunchPage() {
   const [a, setA] = useState<LaunchAnswers>({});
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [organizationId, setOrganizationId] = useState("");
   const [reviewing, setReviewing] = useState(false);
 
   const refresh = useCallback(async () => {
@@ -49,6 +50,7 @@ function LaunchPage() {
       const d = await load(); setData(d); setError("");
       const open = d.intakes.find((i) => i.status === "draft" || i.status === "changes_requested");
       setA(open?.answers ?? {}); setName(open?.name_override || d.account.name); setEmail(open?.email_override || d.account.email);
+      setOrganizationId(open?.organization_id ?? (d.companies.length === 1 ? d.companies[0].id : ""));
     } catch { setError("Your Launch intake could not load."); }
   }, [load]);
   useEffect(() => { void refresh(); }, [refresh]);
@@ -61,7 +63,8 @@ function LaunchPage() {
   async function persist(submit: boolean) {
     setBusy(true); setMsg("");
     try {
-      const r = await save({ data: { answers: a, name, email, submit } });
+      if (!organizationId) { setMsg("Choose the company workspace for this intake."); setBusy(false); return; }
+      const r = await save({ data: { organizationId, answers: a, name, email, submit } });
       if (!r.success) setMsg(r.error);
       else { setMsg(submit ? "Sent. A person at Opsirix will review your intake." : "Draft saved. You can come back to it any time."); setReviewing(false); await refresh(); }
     } catch { setMsg("That did not save. Check your connection and try again."); }
@@ -79,6 +82,10 @@ function LaunchPage() {
       <ol className="text-sm text-muted-foreground">{latest.events.map((e, i) => <li key={i}>{new Date(e.created_at).toLocaleString()}: {e.event.replace(/_/g, " ")}</li>)}</ol>
     </section>}
     {data && editable && !reviewing && <form className="ops-panel nexus-form" onSubmit={(e) => { e.preventDefault(); setReviewing(true); }}>
+      <label>Company workspace<select value={organizationId} onChange={(e) => setOrganizationId(e.target.value)} required disabled={!!latest?.organization_id}>
+        <option value="">Choose a company</option>{data.companies.map((company) => <option key={company.id} value={company.id}>{company.name}</option>)}
+      </select></label>
+      <p className="text-sm text-muted-foreground">This intake is attached to the selected company. It cannot be moved while it remains open.</p>
       <label>Full name<input value={name} onChange={(e) => setName(e.target.value)} maxLength={120} autoComplete="name" /></label>
       <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} maxLength={255} autoComplete="email" required /></label>
       <p className="text-sm text-muted-foreground">Filled in from your account. Change them only if we should use different details for this intake.</p>
@@ -110,6 +117,7 @@ function LaunchPage() {
       <h2>Check your answers</h2>
       <dl className="grid gap-2">
         <div><dt>Name</dt><dd>{name || "Not given"}</dd></div>
+        <div><dt>Company</dt><dd>{data.companies.find((company) => company.id === organizationId)?.name ?? "Missing"}</dd></div>
         <div><dt>Email</dt><dd>{email || "Missing"}</dd></div>
         <div><dt>Contact by</dt><dd>{a.preferred_contact ?? "Missing"}{a.phone ? `, ${a.phone}` : ""}</dd></div>
         <div><dt>Business</dt><dd>{a.not_formed ? "Not formed yet" : a.business_name || "Missing"}</dd></div>
