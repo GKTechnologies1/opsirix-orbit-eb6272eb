@@ -103,3 +103,7 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [ ] OPSIRIX_04_How_We_Work.docx unreviewed until received.
 - [x] Launch scope notice approved (informational, no checkbox). Assignment scoping migration 0055: 31/31 direct, screen checks per role.
 - [ ] Grid Stage 2 revised criteria awaiting owner approval (/mnt/documents/opsirix-grid-criteria-v2.md); scoring off.
+- [x] Launch owner-review evidence: new allowlisted TEST intake OX-LAUNCH-000004 in TEST Founder Company; draft, resume, review/scope, submit, correction, Admin assignment and assigned/unassigned Operations Lead captured at desktop/390 where applicable. Public Launch remains off.
+- [x] Launch saves are company-scoped (0059): current membership required and an open intake cannot move companies.
+- [x] Guided tours built in preview for directory member, founder owner, editing member, viewer, partner, Operations Lead, Compliance Coordinator and Admin/CEO; dual-role switcher first; progress keyed by account/role/version with access rechecked on save; draftable tour copy remains unpublished.
+- [ ] Guided tours release verification: complete isolated revoked-access and all-role browser matrix after fresh staging build. GitHub remains unconnected.
