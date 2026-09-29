@@ -44,6 +44,7 @@ function LaunchPage() {
   const [email, setEmail] = useState("");
   const [organizationId, setOrganizationId] = useState("");
   const [reviewing, setReviewing] = useState(false);
+  const [startingNew, setStartingNew] = useState(false);
 
   const refresh = useCallback(async () => {
     try {
@@ -57,7 +58,7 @@ function LaunchPage() {
   const set = <K extends keyof LaunchAnswers>(k: K, v: LaunchAnswers[K]) => setA((p) => ({ ...p, [k]: v }));
 
   const latest = data?.intakes[0];
-  const editable = !latest || latest.status === "draft" || latest.status === "changes_requested";
+  const editable = startingNew || !latest || latest.status === "draft" || latest.status === "changes_requested";
   const missing = missingForSubmit(a, email);
 
   async function persist(submit: boolean) {
@@ -80,6 +81,7 @@ function LaunchPage() {
       {latest.founder_message && <p><strong>Message from Opsirix:</strong> {latest.founder_message}</p>}
       {latest.status === "submitted" && <p>You will see a message here once it has been reviewed. You can't edit it while it is waiting.</p>}
       <ol className="text-sm text-muted-foreground">{latest.events.map((e, i) => <li key={i}>{new Date(e.created_at).toLocaleString()}: {e.event.replace(/_/g, " ")}</li>)}</ol>
+      {latest.status === "reviewed" && <Button variant="outline" onClick={() => { setStartingNew(true); setA({}); setOrganizationId(data.companies.length === 1 ? data.companies[0].id : ""); setReviewing(false); }}>Start another intake</Button>}
     </section>}
     {data && editable && !reviewing && <form className="ops-panel nexus-form" onSubmit={(e) => { e.preventDefault(); setReviewing(true); }}>
       <label>Company workspace<select value={organizationId} onChange={(e) => setOrganizationId(e.target.value)} required disabled={!!latest?.organization_id}>
