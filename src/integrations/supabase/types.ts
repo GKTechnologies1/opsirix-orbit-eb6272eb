@@ -617,6 +617,50 @@ export type Database = {
           },
         ]
       }
+      grid_criterion_answers: {
+        Row: {
+          answer: string | null
+          counts: Json
+          criterion: string
+          detail: Json
+          id: string
+          note: string
+          review_id: string
+          updated_at: string
+          updated_by: string
+        }
+        Insert: {
+          answer?: string | null
+          counts?: Json
+          criterion: string
+          detail?: Json
+          id?: string
+          note?: string
+          review_id: string
+          updated_at?: string
+          updated_by: string
+        }
+        Update: {
+          answer?: string | null
+          counts?: Json
+          criterion?: string
+          detail?: Json
+          id?: string
+          note?: string
+          review_id?: string
+          updated_at?: string
+          updated_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grid_criterion_answers_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "grid_reviews"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       grid_review_entries: {
         Row: {
           dimension: string
@@ -659,6 +703,7 @@ export type Database = {
         Row: {
           created_at: string
           created_by: string
+          criteria_version: string
           id: string
           kind: string
           organization_id: string
@@ -670,6 +715,7 @@ export type Database = {
         Insert: {
           created_at?: string
           created_by: string
+          criteria_version?: string
           id?: string
           kind: string
           organization_id: string
@@ -681,6 +727,7 @@ export type Database = {
         Update: {
           created_at?: string
           created_by?: string
+          criteria_version?: string
           id?: string
           kind?: string
           organization_id?: string
@@ -2840,6 +2887,16 @@ export type Database = {
         }
         Returns: boolean
       }
+      grid_save_criteria: {
+        Args: {
+          _answers: Json
+          _kind: string
+          _org: string
+          _period: string
+          _submit: boolean
+        }
+        Returns: string
+      }
       grid_save_review: {
         Args: {
           _entries: Json
@@ -2849,6 +2906,10 @@ export type Database = {
           _submit: boolean
         }
         Returns: string
+      }
+      grid_v3_check: {
+        Args: { _a: Json; _c: string; _kind: string }
+        Returns: undefined
       }
       has_active_staff_grant: {
         Args: { _organization_id: string; _user_id: string }
