@@ -177,10 +177,10 @@ function Editor({ company, kind, onDone }: { company: Company; kind: Kind; onDon
 
   return (
     <details className="ops-panel text-sm" open>
-      <summary className="cursor-pointer font-semibold">Write the {KIND[kind].toLowerCase()}</summary>
+      <summary className="cursor-pointer font-semibold">Write the {kind === "self_assessment" ? "founder self-assessment" : "Opsirix evidence review"}</summary>
       <label className="mt-2 flex max-w-xs flex-col">Month<input type="month" max={thisMonth} value={period} onChange={(e) => setPeriod(e.target.value || thisMonth)} className="w-full" /></label>
       <p className="mt-1 text-xs text-muted-foreground">Criteria version 3. Answer every check (13) to submit.{kind === "staff_evidence_review" ? " The retrieval exercise is optional." : ""}</p>
-      {locked ? <p className="mt-2">This month's {KIND[kind].toLowerCase()} was submitted and is final.</p>
+      {locked ? <p className="mt-2">This month's {kind === "self_assessment" ? "founder self-assessment" : "Opsirix evidence review"} was submitted and is final.</p>
         : oldFormat ? <p className="mt-2">This month already has a record in the earlier Grid format. Choose another month.</p>
         : foreignDraft ? <p className="mt-2">Another Opsirix staff member is drafting this month's evidence review.</p> : (
         <form onSubmit={(e) => e.preventDefault()} className="mt-3 space-y-3">
