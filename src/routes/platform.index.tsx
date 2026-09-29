@@ -9,7 +9,7 @@ export const Route = createFileRoute("/platform/")({
       { title: "Opsirix Platform | Nine Founder Operations Modules" },
       { name: "description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness reviews, and operational support for early-stage and immigrant founders." },
       { property: "og:title", content: "Opsirix Platform | Nine Founder Operations Modules" },
-      { property: "og:description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness scoring, and operational support for early-stage and immigrant founders." },
+      { property: "og:description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness reviews, and operational support for early-stage and immigrant founders." },
       { property: "og:url", content: "https://opsirix.com/platform" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/platform" }],

@@ -42,7 +42,7 @@ const CARDS: Card[] = [
     emoji: "🔄",
     title: "Reactive Execution",
     body:
-      "No monthly review. No readiness score. No operational calendar. Every month starts from zero because nothing was tracked or systematized.",
+      "No monthly review. No readiness review. No operational calendar. Every month starts from zero because nothing was tracked or systematized.",
     bar: "linear-gradient(90deg, #F59E0B, #10B981)",
   },
   {

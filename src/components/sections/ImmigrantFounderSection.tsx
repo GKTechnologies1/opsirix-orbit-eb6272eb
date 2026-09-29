@@ -101,7 +101,7 @@ export function ImmigrantFounderSection() {
               </div>
 
               <div className="immigrant-disclaimer">
-                <span className="immigrant-disclaimer-icon">⚠️</span>
+                <span className="immigrant-disclaimer-icon"><LineIcon glyph="⚠" size={16} /></span>
                 <p className="immigrant-disclaimer-text">
                   Opsirix is an operations platform. It does not provide immigration advice, visa strategy, or work authorization guidance. All immigration matters are handled by independently retained licensed immigration attorneys.
                 </p>

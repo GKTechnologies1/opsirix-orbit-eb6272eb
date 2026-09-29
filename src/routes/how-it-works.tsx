@@ -45,7 +45,7 @@ function Page() {
             {[
               { t: "Documents scattered everywhere", d: "Cap tables in Notion, contracts in Gmail, EIN letter on someone's desktop. When you need it, you can't find it." },
               { t: "Professionals who don't talk to each other", d: "Your attorney, CPA, and bank operate in silos. You become the human integration layer between them." },
-              { t: "No system, no rhythm, no record", d: "There's no monthly review, no readiness score, no audit trail. Just a constant background hum of things slipping." },
+              { t: "No system, no rhythm, no record", d: "There's no monthly review, no readiness check, no audit trail. Just a constant background hum of things slipping." },
             ].map((p) => (
               <div key={p.t} className="inner-card"><h3>{p.t}</h3><p>{p.d}</p></div>
             ))}

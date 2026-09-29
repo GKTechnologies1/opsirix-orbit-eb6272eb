@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 
 const CIRC = 2 * Math.PI * 28; // ~175.93
-const SCORE = 42;
-const MAX = 50;
-const offset = CIRC * (1 - SCORE / MAX);
+const ANSWERED = 11;
+const CHECKS = 14;
+const offset = CIRC * (1 - ANSWERED / CHECKS);
 
 type Module = {
   name: string;
@@ -15,15 +15,15 @@ type Module = {
 };
 
 const MODULES: Module[] = [
-  { name: "VAULT STATUS", status: "Current", dot: "#10B981", pct: 92, from: "#10B981", to: "#34D399" },
+  { name: "LAUNCH INTAKE", status: "Submitted", dot: "#10B981", pct: 92, from: "#10B981", to: "#34D399" },
   { name: "FLOW BOARD", status: "3 Active", dot: "#2F80ED", pct: 68, from: "#0057D9", to: "#2F80ED" },
   { name: "NEXUS STATUS", status: "Coordinated", dot: "#2DD4BF", pct: 95, from: "#0D9E8F", to: "#2DD4BF" },
   { name: "COMPLIANCE", status: "1 Upcoming", dot: "#F59E0B", pct: 80, from: "#F59E0B", to: "#FCD34D" },
 ];
 
 const ACTIVITY = [
-  { text: "Vault: EIN letter filed and verified", dot: "#10B981", blink: false },
-  { text: "Nexus: Attorney intro scheduled for Thursday", dot: "#2F80ED", blink: false },
+  { text: "Launch: intake sent for review", dot: "#10B981", blink: false },
+  { text: "Nexus: attorney introduction consent recorded", dot: "#2F80ED", blink: false },
   { text: "Grid review due in 12 days", dot: "#F59E0B", blink: true },
 ];
 
@@ -70,13 +70,13 @@ export function DashboardMockup() {
                 transform="rotate(-90 32 32)"
               />
             </svg>
-            <span className="dash-ring-num">{SCORE}</span>
+            <span className="dash-ring-num">{ANSWERED}</span>
           </div>
           <div className="dash-score-text">
-            <div className="dash-score-label">OPSIRIX GRID SCORE</div>
-            <div className="dash-score-value">42 / 50 · STRONG</div>
-            <div className="dash-score-delta">↑ +7 points this quarter</div>
-            <div className="dash-score-sub">5 dimensions scored · Next review in 12 days</div>
+            <div className="dash-score-label">OPSIRIX GRID REVIEW</div>
+            <div className="dash-score-value">11 of 14 checks answered</div>
+            <div className="dash-score-delta">Self-assessment draft · unscored</div>
+            <div className="dash-score-sub">Evidence review pending · Next review in 12 days</div>
           </div>
         </div>
 

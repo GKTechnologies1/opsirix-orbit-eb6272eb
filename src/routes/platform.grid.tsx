@@ -11,11 +11,11 @@ export const Route = createFileRoute("/platform/grid")({
         content:
           "A monthly operational readiness review with a founder self-assessment and an Opsirix evidence review, kept separate. Scoring is not yet available.",
       },
-      { property: "og:title", content: "Opsirix Grid | Operational Readiness Score for Founders" },
+      { property: "og:title", content: "Opsirix Grid | Monthly Operational Readiness Review" },
       {
         property: "og:description",
         content:
-          "Monthly operational readiness score across ten categories. Know where your company is strong and what needs attention next.",
+          "A monthly operational readiness review with a founder self-assessment and an Opsirix evidence review, kept separate. Scoring is not yet available.",
       },
       { property: "og:url", content: "https://opsirix.com/platform/grid" },
     ],

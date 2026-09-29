@@ -57,7 +57,7 @@ function Page() {
         pageName="Services"
         label="Platform Services"
         title="Nine modules. One connected platform."
-        subtitle="The Opsirix platform covers the full operational layer of an early-stage company. Documents, workflows, partner coordination, readiness scoring, and intelligent support, organized into nine connected modules."
+        subtitle="The Opsirix platform covers the full operational layer of an early-stage company. Documents, workflows, partner coordination, readiness reviews, and planned intelligent support, organized into nine connected modules."
       />
 
       <section className="inner-section">
