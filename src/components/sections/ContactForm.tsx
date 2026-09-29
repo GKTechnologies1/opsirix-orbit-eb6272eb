@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -81,7 +82,7 @@ export function ContactForm() {
             transition={{ type: "spring", stiffness: 220, damping: 20, duration: 0.4 }}
             className="contact-success"
           >
-            <div className="contact-check">✅</div>
+            <div className="contact-check"><LineIcon glyph="✅" size={36} /></div>
             <h3>Request received!</h3>
             <p>
               Thank you. Your discovery call request has been received. The Opsirix team will contact you shortly.

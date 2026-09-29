@@ -13,3 +13,4 @@ Every authenticated `/nexus/*` page uses signed-in workspace chrome, including t
 - Grid v3 answers live one row per criterion (grid_criterion_answers) and each review stores criteria_version; later wording changes never rewrite submitted history.
 
 - TEST orgs require the allowlist and guard. Tours key state by verified role/version and recheck access on write.
+- Staging database setup runs scripts/staging-setup.sh (base table if absent, then drizzle journal only); release-history SQL lives in docs/release-history, never in drizzle/migrations. Why: repeatable clean setup with no production records.

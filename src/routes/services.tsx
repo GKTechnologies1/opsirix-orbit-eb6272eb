@@ -57,7 +57,7 @@ function Page() {
         pageName="Services"
         label="Platform Services"
         title="Nine modules. One connected platform."
-        subtitle="The Opsirix platform covers the full operational layer of an early-stage company. Documents, workflows, partner coordination, readiness scoring, and intelligent support, organized into nine connected modules."
+        subtitle="The Opsirix platform covers the full operational layer of an early-stage company. Documents, workflows, partner coordination, readiness reviews, and planned intelligent support, organized into nine connected modules."
       />
 
       <section className="inner-section">
@@ -98,9 +98,9 @@ function Page() {
           <p className="inner-eyebrow">Engagement Paths</p>
           <h2 className="inner-h2">Choose your Opsirix path.</h2>
           <p className="inner-lead">
-            Pricing is customized after a discovery call. We review your founder stage,
+            Every engagement is a custom quote. After a discovery call, we review your founder stage,
             documentation needs, operational complexity, and support level, then recommend the
-            right Opsirix path.
+            right Opsirix path and send your quote directly.
           </p>
           <div className="tier-grid" style={{ marginTop: 36 }}>
             {PATHS.map((p) => (
@@ -111,9 +111,9 @@ function Page() {
             ))}
           </div>
           <p className="inner-lead" style={{ marginTop: 36 }}>
-            Pricing depends on your company stage, documentation readiness, existing professional
-            relationships, number of workflows, and support level. Book a discovery call so we can
-            understand your situation.
+            Quotes depend on your company stage, documentation readiness, existing professional
+            relationships, number of workflows, and support level. Opsirix does not publish fixed
+            prices. Book a discovery call so we can understand your situation.
           </p>
           <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 24 }}>
             <Link to="/contact" className="btn-primary">Book a Discovery Call</Link>

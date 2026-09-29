@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
@@ -50,9 +51,9 @@ const AUDIENCE = [
 ];
 
 const CONNECTED = [
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Document handoffs tracked and linked." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned. Document handoffs will link to Vault once it is available." },
   { icon: "🤝", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Partner coordination visible in Flow." },
-  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Task completion feeds into monthly readiness score." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Grid task checks ask about your Flow board each month." },
 ] as const;
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -184,7 +185,7 @@ function FlowPage() {
               style={{ display: "flex", flexDirection: "column", gap: 10, textDecoration: "none" }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <span aria-hidden style={{ fontSize: 20 }}><LineIcon glyph={m.icon} /></span>
                 <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
               <p>{m.desc}</p>

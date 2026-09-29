@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
@@ -34,7 +35,7 @@ const FEATURES = [
 
 const QUALIFY = [
   "Organized company documentation in Vault or equivalent",
-  "Active Grid score of 35 or above, or equivalent operational maturity",
+  "Recent Grid reviews showing operational maturity, or an equivalent record",
   "Clear business model with demonstrated or projected revenue",
   "No open compliance or legal issues requiring resolution first",
   "Serious commitment to venture-level operational discipline",
@@ -49,7 +50,7 @@ const DISCLAIMERS = [
 
 const CONNECTED = [
   { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Deep Grid review anchors Studio qualification." },
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Vault documents power the data room." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned. Vault documents would support the data room once Vault is available." },
   { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Strategic partner introductions via Nexus." },
   { icon: "🖥️", name: "Opsirix OS", to: "/platform/os", desc: "Studio activity surfaced in OS dashboard." },
 ] as const;
@@ -163,7 +164,7 @@ function StudioPage() {
                 lineHeight: 1.65,
               }}
             >
-              <span aria-hidden style={{ color: "#F5B544", fontWeight: 700, marginTop: 1 }}>✓</span>
+              <span aria-hidden style={{ color: "#F5B544", fontWeight: 700, marginTop: 1 }}><LineIcon glyph="✓" size={16} /></span>
               <span>{s}</span>
             </li>
           ))}
@@ -244,7 +245,7 @@ function StudioPage() {
               style={{ display: "flex", flexDirection: "column", gap: 10, textDecoration: "none" }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <span aria-hidden style={{ fontSize: 20 }}><LineIcon glyph={m.icon} /></span>
                 <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
               <p>{m.desc}</p>

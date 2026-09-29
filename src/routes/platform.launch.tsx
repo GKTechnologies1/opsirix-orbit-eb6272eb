@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
@@ -28,7 +29,7 @@ const FEATURES = [
   { t: "Entity setup checklist", d: "Formation steps organized into a tracked checklist. Opsirix coordinates the documentation and professional handoff. It does not provide formation services." },
   { t: "EIN and banking readiness", d: "Checklists for EIN application and business banking setup organized and tracked. Next steps are clear." },
   { t: "Attorney and CPA handoff preparation", d: "Documents prepared for your first attorney and CPA engagement. Opsirix coordinates the introduction through Nexus. Professionals serve you independently." },
-  { t: "Initial document collection", d: "Formation documents, operating agreements, and initial contracts collected and organized in Vault." },
+  { t: "Initial document collection", d: "A checklist of formation documents, operating agreements, and initial contracts to gather. Vault storage is planned and not yet available." },
   { t: "Launch timeline", d: "A structured, jurisdiction-neutral coordination timeline. Each task has a status and an owner in Flow." },
   { t: "Vendor and account setup tracker", d: "Business tools, software, accounts, and service providers tracked as they are set up." },
 ];
@@ -36,16 +37,16 @@ const FEATURES = [
 const STEPS = [
   { n: "01", t: "Complete founder intake" },
   { n: "02", t: "Receive your launch checklist" },
-  { n: "03", t: "Begin document collection in Vault" },
+  { n: "03", t: "Begin your document checklist" },
   { n: "04", t: "Professional introductions via Nexus" },
   { n: "05", t: "Launch timeline activated in Flow" },
-  { n: "06", t: "Baseline Grid score established" },
+  { n: "06", t: "First Grid review can begin (unscored)" },
 ];
 
 const CONNECTED = [
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Launch documents go straight into Vault." },
-  { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Attorney and CPA introductions happen during Launch." },
-  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Grid baseline established at the end of Launch." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned. Launch records stay in your private Launch intake; Vault is not yet available." },
+  { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "When you ask for help, Nexus can introduce approved partners with your consent." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Your first unscored Grid review can follow Launch." },
 ] as const;
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -173,7 +174,7 @@ function LaunchPage() {
               style={{ display: "flex", flexDirection: "column", gap: 10, textDecoration: "none" }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <span aria-hidden style={{ fontSize: 20 }}><LineIcon glyph={m.icon} /></span>
                 <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
               <p>{m.desc}</p>

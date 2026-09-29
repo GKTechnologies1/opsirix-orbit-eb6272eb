@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -68,7 +69,7 @@ function Row({ item }: { item: RowItem }) {
   return (
     <div className="compliance-row">
       <span style={{ fontSize: 18, width: 40, textAlign: "center", flexShrink: 0 }}>
-        {item.icon}
+        <LineIcon glyph={item.icon} />
       </span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div

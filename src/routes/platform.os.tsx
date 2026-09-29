@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
@@ -25,17 +26,17 @@ export const Route = createFileRoute("/platform/os")({
 
 const FEATURES = [
   { t: "Company profile overview", d: "Entity details, founding date, key contacts, and company stage visible from the dashboard." },
-  { t: "Document status summary", d: "Vault readiness at a glance: which documents are current, which need renewal, and what is missing." },
+  { t: "Document status summary", d: "Planned with Vault: which documents are current, which need renewal, and what is missing." },
   { t: "Workflow and task overview", d: "Active tasks, overdue items, and upcoming deadlines from Flow summarized on the dashboard." },
   { t: "Partner coordination view", d: "Scheduled attorney and CPA interactions, pending handoffs, and Nexus activity visible without logging into separate systems." },
   { t: "Compliance calendar", d: "Important dates, filing windows, and renewal reminders organized in one timeline." },
-  { t: "Monthly operating snapshot", d: "Grid score, status report highlights, and top priorities for the current month." },
+  { t: "Monthly operating snapshot", d: "Grid review status, report highlights, and top priorities for the current month." },
 ];
 
 const CONNECTED = [
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Document status feeds into OS." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned. Document status will appear in OS once Vault is available." },
   { icon: "⚡", name: "Opsirix Flow", to: "/platform/flow", desc: "Task activity visible in OS." },
-  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Monthly score shown prominently in OS dashboard." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Monthly Grid records are reachable from your company workspace." },
 ] as const;
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -169,7 +170,7 @@ function OSPage() {
               style={{ display: "flex", flexDirection: "column", gap: 10, textDecoration: "none" }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <span aria-hidden style={{ fontSize: 20 }}><LineIcon glyph={m.icon} /></span>
                 <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
               <p>{m.desc}</p>

@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/")({
   head: () => ({
     meta: [
       { title: "Opsirix Platform | Nine Founder Operations Modules" },
-      { name: "description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness scoring, and operational support for early-stage and immigrant founders." },
+      { name: "description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness reviews, and operational support for early-stage and immigrant founders." },
       { property: "og:title", content: "Opsirix Platform | Nine Founder Operations Modules" },
-      { property: "og:description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness scoring, and operational support for early-stage and immigrant founders." },
+      { property: "og:description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness reviews, and operational support for early-stage and immigrant founders." },
       { property: "og:url", content: "https://opsirix.com/platform" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/platform" }],
@@ -19,24 +19,24 @@ export const Route = createFileRoute("/platform/")({
 
 const PRINCIPLES = [
   { t: "Structured from day one", d: "Opsirix organizes the operational layer before things become messy. Documents, workflows, and partner coordination in one place." },
-  { t: "Connected, not siloed", d: "Every module in the Opsirix platform connects to the others. A document added to Vault appears in Flow. A Grid score improvement shows in the OS dashboard." },
+  { t: "Connected, not siloed", d: "Every module in the Opsirix platform connects to the others. Flow tasks, Nexus introductions, Core requests and Grid reviews share one company workspace. Vault is planned and not yet available." },
   { t: "Coordination, not advice", d: "Opsirix coordinates operations. Licensed professionals handle legal, immigration, tax, and accounting matters independently." },
 ];
 
 const CONNECTIONS = [
   { from: "Launch", to: "OS", note: "company profile appears in dashboard" },
-  { from: "Vault", to: "OS", note: "document status shows in dashboard" },
+  { from: "Vault", to: "OS", note: "planned: document status in dashboard" },
   { from: "Flow", to: "OS", note: "task status shows in dashboard" },
   { from: "Nexus", to: "OS", note: "partner coordination visible in dashboard" },
-  { from: "Grid", to: "OS", note: "readiness score shows in dashboard" },
-  { from: "AI", to: "Flow, Vault, Grid", note: "surfaces patterns across modules" },
+  { from: "Grid", to: "OS", note: "monthly review records reachable from workspace" },
+  { from: "AI", to: "Flow, Vault, Grid", note: "planned: surfaces patterns across modules" },
   { from: "Core", to: "All modules", note: "managed support across the platform" },
   { from: "Studio", to: "Grid, OS, Vault", note: "uses readiness data for venture review" },
 ];
 
 const JOURNEY = [
   "Intake and setup, Opsirix Launch",
-  "Document organization, Opsirix Vault",
+  "Document organization, Opsirix Vault (planned)",
   "Workflow management, Opsirix Flow",
   "Partner coordination, Opsirix Nexus",
   "Monthly readiness review, Opsirix Grid",
@@ -50,7 +50,7 @@ const COORDINATES = [
   "Workflow tracking",
   "Task management",
   "Partner scheduling",
-  "Readiness scoring",
+  "Readiness reviews",
   "Operational review",
   "AI-assisted detection",
   "Managed ops support",

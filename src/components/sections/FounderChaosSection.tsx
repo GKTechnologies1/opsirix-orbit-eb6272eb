@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 
@@ -41,7 +42,7 @@ const CARDS: Card[] = [
     emoji: "🔄",
     title: "Reactive Execution",
     body:
-      "No monthly review. No readiness score. No operational calendar. Every month starts from zero because nothing was tracked or systematized.",
+      "No monthly review. No readiness review. No operational calendar. Every month starts from zero because nothing was tracked or systematized.",
     bar: "linear-gradient(90deg, #F59E0B, #10B981)",
   },
   {
@@ -59,7 +60,7 @@ function ChaosCard({ card, index }: { card: Card; index: number }) {
     <ScrollReveal delay={index * 0.08}>
       <article className="founder-chaos-card group">
         <div className="founder-chaos-card-bar" style={{ background: card.bar }} />
-        <span style={{ display: "block", fontSize: 30, marginBottom: 16 }}>{card.emoji}</span>
+        <span style={{ display: "block", fontSize: 30, marginBottom: 16 }}><LineIcon glyph={card.emoji} size={28} /></span>
         <h4
           style={{
             fontFamily: "var(--font-sora)",

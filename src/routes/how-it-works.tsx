@@ -21,7 +21,7 @@ const PILLARS = [
   { n: "02", t: "Stop-Work Protocol", d: "If any matter approaches a regulated boundary, work pauses until a licensed professional confirms the path forward in writing." },
   { n: "03", t: "Risk Classification", d: "Every workflow is classified as administrative, coordination, or licensed-professional. Each tier has its own routing rule." },
   { n: "04", t: "7-Day SLA", d: "Founder requests receive an action or routing decision within 7 calendar days. The audit log records every step." },
-  { n: "05", t: "Audit Evidence Trail", d: "Each task generates a timestamped record, request, classification, action, professional sign-off, preserved in the Vault." },
+  { n: "05", t: "Audit Evidence Trail", d: "Each task generates a timestamped record, request, classification, action, professional sign-off, preserved in company history." },
   { n: "06", t: "Nexus Independence", d: "Every Nexus partner serves you under their own engagement letter. Opsirix never controls the substance of their advice." },
 ];
 
@@ -45,7 +45,7 @@ function Page() {
             {[
               { t: "Documents scattered everywhere", d: "Cap tables in Notion, contracts in Gmail, EIN letter on someone's desktop. When you need it, you can't find it." },
               { t: "Professionals who don't talk to each other", d: "Your attorney, CPA, and bank operate in silos. You become the human integration layer between them." },
-              { t: "No system, no rhythm, no record", d: "There's no monthly review, no readiness score, no audit trail. Just a constant background hum of things slipping." },
+              { t: "No system, no rhythm, no record", d: "There's no monthly review, no readiness check, no audit trail. Just a constant background hum of things slipping." },
             ].map((p) => (
               <div key={p.t} className="inner-card"><h3>{p.t}</h3><p>{p.d}</p></div>
             ))}

@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -12,7 +13,7 @@ const POINTS: FeaturePoint[] = [
   {
     icon: "📁",
     title: "Document organization that matters",
-    body: "Your Opsirix Vault organizes visa documents, formation records, attorney letters, and compliance evidence, all current, all accessible, all protected.",
+    body: "Opsirix Vault, planned and under security review, is designed to organize formation records, attorney letters, and compliance evidence. Until then, Opsirix helps you keep a clear document checklist.",
   },
   {
     icon: "🔗",
@@ -65,7 +66,7 @@ export function ImmigrantFounderSection() {
               {POINTS.map((p, i) => (
                 <ScrollReveal key={p.title} delay={0.15 + i * 0.07}>
                   <div className="immigrant-point">
-                    <div className="immigrant-point-icon">{p.icon}</div>
+                    <div className="immigrant-point-icon"><LineIcon glyph={p.icon} size={22} /></div>
                     <div>
                       <h5 className="immigrant-point-title">{p.title}</h5>
                       <p className="immigrant-point-body">{p.body}</p>
@@ -100,7 +101,7 @@ export function ImmigrantFounderSection() {
               </div>
 
               <div className="immigrant-disclaimer">
-                <span className="immigrant-disclaimer-icon">⚠️</span>
+                <span className="immigrant-disclaimer-icon"><LineIcon glyph="⚠" size={16} /></span>
                 <p className="immigrant-disclaimer-text">
                   Opsirix is an operations platform. It does not provide immigration advice, visa strategy, or work authorization guidance. All immigration matters are handled by independently retained licensed immigration attorneys.
                 </p>

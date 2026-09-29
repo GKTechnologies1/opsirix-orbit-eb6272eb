@@ -115,3 +115,5 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] First-release review package (Files: first-release-review-2026-09-29/) and DevOps handoff v3 with migration inventory; tracker v9
 - [ ] Owner review: Launch screens, Launch link wording, public wording W1-W11 (blocked: owner)
 - [ ] Isolated staging + tour validation, directory filter test, role smoke tests (blocked: DevOps/GitHub)
+- [x] Public wording corrections (11 groups) and emoji-to-line-icon swap applied in preview only; awaiting owner review
+- [x] Staging setup script + release-history file moved out of setup list; DevOps handoff v4

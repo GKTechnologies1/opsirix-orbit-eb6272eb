@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
@@ -62,13 +63,13 @@ const CAPABILITIES = [
   { t: "Status labels", d: "Document status labels: current, expiring, missing, or under review." },
   { t: "Missing document alerts", d: "Missing document alerts when expected documents are absent from a folder." },
   { t: "Partner-ready packets", d: "Partner-ready document packets organized before professional engagements." },
-  { t: "Audit-readiness tracking", d: "Audit-readiness tracking as part of the monthly Grid review." },
+  { t: "Audit-readiness tracking", d: "Planned link to the monthly Grid review, which today records document checks without Vault." },
 ];
 
 const CONNECTED = [
   { icon: "🔄", name: "Opsirix Flow", to: "/platform/flow", desc: "Tasks and document handoffs tracked together." },
   { icon: "🤝", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Partner packets prepared before professional introductions." },
-  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Documentation readiness scored monthly." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Grid document checks are reviewed monthly, unscored." },
 ] as const;
 
 function SectionWrap({
@@ -108,8 +109,9 @@ function VaultPage() {
       moduleName="Opsirix Vault"
       moduleTag="Document Intelligence"
       moduleIcon="🔒"
+      statusBadge="Planned"
       headline="Stop losing documents across email and random folders."
-      subtext="Opsirix Vault is the document organization layer of the platform. Formation papers, attorney correspondence, financial records, and operational documents: organized, labeled, and ready when you need them."
+      subtext="Opsirix Vault is the planned document organization layer of the platform and is not yet available. Once its security review is complete, it is designed to keep formation papers, attorney correspondence, financial records, and operational documents organized, labeled, and ready when you need them."
     >
       {/* Section 1 — The Problem */}
       <SectionWrap eyebrow="The Problem" title="What most founders experience.">
@@ -216,7 +218,7 @@ function VaultPage() {
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <span aria-hidden style={{ fontSize: 20 }}><LineIcon glyph={m.icon} /></span>
                 <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
               <p>{m.desc}</p>
