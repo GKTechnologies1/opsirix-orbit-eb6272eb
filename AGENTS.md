@@ -12,4 +12,4 @@ Every authenticated `/nexus/*` page uses signed-in workspace chrome, including t
 
 - Grid v3 answers live one row per criterion (grid_criterion_answers) and each review stores criteria_version; later wording changes never rewrite submitted history.
 
-- Test scripts must choose a company ID from scripts/test-org-allowlist.json via scripts/test_guard.py and refuse to run otherwise. Why: D-Global test-selection incident 2026-09-29.
+- TEST orgs require the allowlist and guard. Tours key state by verified role/version and recheck access on write.
