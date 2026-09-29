@@ -104,7 +104,8 @@ export type Answer = {
   criterion: string;
   answer: Choice | null;
   counts: Record<string, number>;
-  detail: Record<string, unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  detail: Record<string, any>;
   note: string;
 };
 

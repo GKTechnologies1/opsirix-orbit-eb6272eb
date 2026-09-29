@@ -46,7 +46,7 @@ export const getGrid = createServerFn({ method: "GET" })
           reviews: (reviews ?? []).filter((r) => r.organization_id === o.id).map((r) => ({
             ...r, mine: r.created_by === uid, entries: (entries ?? []).filter((e) => e.review_id === r.id),
             answers: (answers ?? []).filter((a) => a.review_id === r.id).map((a) => ({
-              criterion: a.criterion, answer: a.answer as Answer["answer"], counts: (a.counts ?? {}) as Record<string, number>, detail: (a.detail ?? {}) as Record<string, unknown>, note: a.note,
+              criterion: a.criterion, answer: a.answer as Answer["answer"], counts: (a.counts ?? {}) as Record<string, number>, detail: (a.detail ?? {}) as Answer["detail"], note: a.note,
             })),
           })),
         };
