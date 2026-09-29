@@ -240,3 +240,13 @@ Positive directory filter test: seed approved TEST listings per open category in
 - Tracker v4 separates technical readiness, release approval and deployment verification. Public copy still needs owner sign-off; the member-directory positive filter test remains isolated-staging only; every deployed module needs a clean staging build and named role smoke tests.
 - Launch remains off publicly. Proposed future placement is under the public Platform navigation and Platform overview, linking to `/platform/launch`; signed-in intake remains `/launch`.
 - Shared backend: no change. Preview source: no change. Nothing published; DNS unchanged.
+
+## Update 2026-09-29 19:35 UTC: Launch evidence and guided tours
+
+- New allowlisted record: `OX-LAUNCH-000004`, owned by `test-company-member-01@example.test` in `TEST Founder Company (invited accounts)`. It is clearly labeled TEST throughout free text. D-Global and real-name companies were not used.
+- Shared-backend records created: one Launch intake; draft-started, submitted, assigned, unassigned and correction-requested events; one revoked Operations Lead assignment; one correction review. No email or public notification was sent.
+- Founder evidence covers draft, saved/resumed, review-before-send, scope notice, submitted and correction states. Staff evidence covers Admin/CEO assignment and Operations Lead assigned/unassigned views. Screenshots are in Files under `launch-owner-review-2026-09-29/`.
+- Migration 0059 is live: every new Launch save requires current membership in the selected company, and an open intake cannot be moved to another company. Legacy rows remain unchanged and visibly labeled as having no recorded company.
+- Guided tours are preview-only for the eight working roles. Shared backend migration 0057 stores progress by verified account, role and tour version and rechecks current access on every save. Migration 0058 adds the unpublished, versioned `app.guided_tours` content block. Saving a draft and publishing are separate actions.
+- Browser evidence passed for member first use, skip, replay, keyboard Escape/focus loop, 390px layout, dual-role switcher-first behavior, the subsequent founder tour, partner first use and direct staff-link denial. Full all-role revoked-access regression remains a clean-staging release check.
+- Latest automatic preview build: OK at 2026-09-29 19:16 UTC. Nothing published; DNS, Terms, deletion, Vault, AI, scoring and Core email remain unchanged/off.
