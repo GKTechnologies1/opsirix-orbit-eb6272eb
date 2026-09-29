@@ -191,3 +191,15 @@ No live category setting, permission rule or record changed. 0 public listings i
 
 ### Staging test to add (isolated staging backend only)
 Positive directory filter test: seed approved TEST listings per open category in staging; verify member directory category/location/service filters return them; verify suspended, closed-type, expired-license and unpublished-draft listings are excluded. Never seed TEST listings on the shared live backend.
+
+## Update 2026-09-29 16:30 UTC: Grid incident review (D-Global Technologies LLC)
+
+**What happened.** 2026-09-29 15:46:08 UTC, during Grid browser testing, the account opsirix+test-owner@gmail.com (63e655d6) saved a founder self-assessment draft (review 40e4beac, period 2026-08, criteria v3) to D-Global Technologies LLC (a73d534c). Action: "Save draft" on /grid, which calls server function `saveGridCriteria` and database operation `grid_save_criteria`. The test script chose the first company in the list instead of the TEST company.
+
+**Why it was accepted.** The account was the sole owner of D-Global at the time. It created that workspace itself on 2026-09-27 18:38 UTC (`workspace.created` audit entry). Memberships at the time: owner of D-Global, TEST Founder Company, and TEST concurrency orgs 0-7. `grid_save_criteria` requires owner/member for self-assessments and admin or staff with an active grant for evidence reviews; the call met that rule. This was a test-selection mistake, not an authorization gap. No server change was made.
+
+**Cleanup state.** Draft and its answers are gone (0 rows). History keeps one unchanged entry: `grid.draft_saved`, "Grid self-assessment draft saved.", metadata {kind self_assessment, period 2026-08-01, criteria_version grid-criteria-v3}. The deletion was a direct data cleanup and has no history entry of its own; this note is the record. D-Global has no other members, so no real person could see the draft or the entry. Grid sends no notifications; none exist for D-Global.
+
+**Cross-company tests (TEST companies only, rolled back): 16/16 passed.** Member creating in a non-member company, viewer updating/submitting another's draft, unrelated account creating founder/staff records, submitting a foreign draft, using the old-format save, staff with revoked grant or no grant creating/submitting evidence reviews, staff writing a founder record: all denied. Foreign drafts, reviews and answers read as 0 rows. Only other caller of the same operation family: `grid_save_review` (old format), also denied. No further tests run against real companies.
+
+**Shared backend (already live):** migration 0056 (from earlier today); D-Global draft deletion. **Preview only:** Grid screens, Features & Releases entry. Nothing published; DNS unchanged.
