@@ -414,6 +414,13 @@
       "when": 1790706611404,
       "tag": "0058_guided_tour_content_block",
       "breakpoints": true
+    },
+    {
+      "idx": 59,
+      "version": "7",
+      "when": 1790706671043,
+      "tag": "0059_launch_intake_company_scope",
+      "breakpoints": true
     }
   ]
 }

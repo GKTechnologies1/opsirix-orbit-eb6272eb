@@ -863,6 +863,7 @@ export type Database = {
           founder_message: string | null
           id: string
           name_override: string | null
+          organization_id: string | null
           ref: string | null
           scope_notice_version: string | null
           status: string
@@ -877,6 +878,7 @@ export type Database = {
           founder_message?: string | null
           id?: string
           name_override?: string | null
+          organization_id?: string | null
           ref?: string | null
           scope_notice_version?: string | null
           status?: string
@@ -891,6 +893,7 @@ export type Database = {
           founder_message?: string | null
           id?: string
           name_override?: string | null
+          organization_id?: string | null
           ref?: string | null
           scope_notice_version?: string | null
           status?: string
@@ -898,7 +901,15 @@ export type Database = {
           updated_at?: string
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "launch_intakes_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       launch_reviews: {
         Row: {
@@ -3000,6 +3011,17 @@ export type Database = {
           _email: string
           _name: string
           _notice_version: string
+          _submit: boolean
+        }
+        Returns: string
+      }
+      launch_save_intake_v2: {
+        Args: {
+          _answers: Json
+          _email: string
+          _name: string
+          _notice_version: string
+          _organization_id: string
           _submit: boolean
         }
         Returns: string
