@@ -1941,7 +1941,8 @@
 
 /* Tablet section padding 80px */
 @media (min-width: 641px) and (max-width: 1024px) {
-  section { padding-top: 80px; padding-bottom: 80px; }
+  /* Public website sections only; signed-in workspaces keep their own spacing. */
+  section:not(.ops-workspace section, .nexus-workspace section, .tour-backdrop section) { padding-top: 80px; padding-bottom: 80px; }
   .dash-card { transform: scale(0.95); transform-origin: top center; }
 }
 
