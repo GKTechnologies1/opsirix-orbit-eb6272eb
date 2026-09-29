@@ -20,7 +20,9 @@ function roleForSurface(surface: TourSurface, roles: TourRole[]): TourRole | nul
 export function GuidedTour({ surface, compact = false }: { surface: TourSurface; compact?: boolean }) {
   const load = useServerFn(getTourContext);
   const save = useServerFn(saveTourProgress);
-  const { data, refetch } = useQuery({ queryKey: ["guided-tour-context"], queryFn: () => load(), staleTime: 0, refetchOnWindowFocus: true });
+  const [open, setOpen] = useState(false);
+  // While a tour is open, recheck access every 10s so revoked roles remove the tour and its links without a reload.
+  const { data, refetch } = useQuery({ queryKey: ["guided-tour-context"], queryFn: () => load(), staleTime: 0, refetchOnWindowFocus: true, refetchInterval: open ? 10_000 : false });
   const role = data ? roleForSurface(surface, data.roles as TourRole[]) : null;
   const builtIn = role ? BUILT_IN_TOURS[role] : null;
   const definition = useMemo(() => {
@@ -32,7 +34,6 @@ export function GuidedTour({ surface, compact = false }: { surface: TourSurface;
     return { ...builtIn, steps: builtIn.steps.map((tourStep, index) => ({ ...tourStep, body: bodies[index] ?? tourStep.body })) } satisfies TourDefinition;
   }, [builtIn, data?.publishedContent]);
   const saved = definition ? data?.progress.find((row) => row.role_key === definition.role && row.tour_key === definition.key && row.tour_version === TOUR_VERSION) : null;
-  const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
   const dialog = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
