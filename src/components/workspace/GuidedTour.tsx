@@ -28,12 +28,14 @@ export function GuidedTour({ surface, compact = false }: { surface: TourSurface;
     const content = data?.publishedContent as { items?: { q: string; a: string }[] } | null | undefined;
     const replacement = content?.items?.find((item) => item.q === builtIn.label);
     if (!replacement) return builtIn;
-    return { ...builtIn, steps: [{ ...builtIn.steps[0], body: replacement.a }, ...builtIn.steps.slice(1)] } satisfies TourDefinition;
+    const bodies = replacement.a.split(/\n\s*\n/).map((body) => body.trim()).filter(Boolean);
+    return { ...builtIn, steps: builtIn.steps.map((tourStep, index) => ({ ...tourStep, body: bodies[index] ?? tourStep.body })) } satisfies TourDefinition;
   }, [builtIn, data?.publishedContent]);
   const saved = definition ? data?.progress.find((row) => row.role_key === definition.role && row.tour_key === definition.key && row.tour_version === TOUR_VERSION) : null;
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
   const dialog = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
   const firstDecisionMade = useRef(false);
 
   useEffect(() => {
@@ -52,6 +54,13 @@ export function GuidedTour({ surface, compact = false }: { surface: TourSurface;
       if (event.key === "Escape") void closeAs("skipped");
       if (event.key === "ArrowLeft") setStep((current) => Math.max(0, current - 1));
       if (event.key === "ArrowRight" && definition) setStep((current) => Math.min(definition.steps.length - 1, current + 1));
+      if (event.key === "Tab" && dialog.current) {
+        const controls = Array.from(dialog.current.querySelectorAll<HTMLElement>('button:not([disabled]), a[href]'));
+        const first = controls[0], last = controls.at(-1);
+        if (!first || !last) return;
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      }
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -61,13 +70,16 @@ export function GuidedTour({ surface, compact = false }: { surface: TourSurface;
   if (!definition || !current) return null;
 
   async function write(nextStep: number, status: "started" | "skipped" | "completed") {
-    if (!definition) return;
-    await save({ data: { role: definition.role, tourKey: definition.key, version: TOUR_VERSION, step: nextStep, status } });
+    if (!definition) return false;
+    const result = await save({ data: { role: definition.role, tourKey: definition.key, version: TOUR_VERSION, step: nextStep, status } });
     await refetch();
+    return result.success;
   }
   async function closeAs(status: "skipped" | "completed") {
-    await write(step, status);
+    const savedNow = await write(step, status);
+    if (!savedNow) return;
     setOpen(false);
+    requestAnimationFrame(() => trigger.current?.focus());
   }
   async function next() {
     if (!definition) return;
@@ -85,7 +97,7 @@ export function GuidedTour({ surface, compact = false }: { surface: TourSurface;
   }
 
   return <>
-    <Button className="tour-trigger" variant="ghost" aria-label={`Take the ${definition.label} tour`} onClick={() => void replay()}><CircleHelp /><span>{compact ? "Tour" : "Take a tour"}</span></Button>
+    <Button ref={trigger} className="tour-trigger" variant="ghost" aria-label={`Take the ${definition.label} tour`} onClick={() => void replay()}><CircleHelp /><span>{compact ? "Tour" : "Take a tour"}</span></Button>
     {open && <div className="tour-backdrop" role="presentation">
       <div ref={dialog} className="tour-dialog" role="dialog" aria-modal="true" aria-labelledby="tour-title" aria-describedby="tour-description" tabIndex={-1}>
         <div className="tour-heading"><p className="ops-panel-kicker">{definition.label} · {step + 1} of {definition.steps.length}</p><Button variant="ghost" size="icon" aria-label="Skip tour" onClick={() => void closeAs("skipped")}><X /></Button></div>

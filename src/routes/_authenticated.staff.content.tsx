@@ -97,7 +97,7 @@ function ContentBlock({ block, versions, run, openTypes }: { block: Data["blocks
       {isStructured && <fieldset className="ops-faq-editor"><legend>{isTour ? "Role tours" : "Questions"} ({items.length} of 12)</legend>
         {items.map((it, n) => <div key={n} className="ops-panel" style={{ padding: 12 }}>
           <label>{isTour ? `Role ${n + 1}` : `Question ${n + 1}`}<input value={it.q} onChange={(e) => setItem(n, { q: e.target.value })} maxLength={200} /></label>
-          <label>{isTour ? "Tour wording" : "Answer"}<textarea rows={isTour ? 6 : 3} value={it.a} onChange={(e) => setItem(n, { a: e.target.value })} maxLength={1200} /></label>
+          <label>{isTour ? "Tour steps (separate each step with a blank line)" : "Answer"}<textarea rows={isTour ? 8 : 3} value={it.a} onChange={(e) => setItem(n, { a: e.target.value })} maxLength={1200} /></label>
           <div className="ops-actions ops-faq-actions">
             <Button size="sm" variant="outline" className="ops-outline" aria-label={`Move question ${n + 1} up`} disabled={n === 0} onClick={() => moveItem(n, -1)}><ArrowUp /></Button>
             <Button size="sm" variant="outline" className="ops-outline" aria-label={`Move question ${n + 1} down`} disabled={n === items.length - 1} onClick={() => moveItem(n, 1)}><ArrowDown /></Button>
