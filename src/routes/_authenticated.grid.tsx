@@ -228,7 +228,7 @@ function CriterionField({ c, d, set, drafts }: { c: Criterion; d: Draft; set: (p
         <div role="radiogroup" aria-label={`${c.title} answer`} className="flex flex-wrap gap-x-4 gap-y-1">
           {c.choices!.map((ch) => (
             <label key={ch} className="inline-flex items-center gap-1" title={CHOICE_HELP[ch]}>
-              <input type="radio" name={`a_${c.key}`} checked={d.answer === ch} onChange={() => set({ answer: ch })} /> {CHOICE_LABEL[ch]}
+              <input type="radio" className="h-4 w-4 shrink-0" name={`a_${c.key}`} checked={d.answer === ch} onChange={() => set({ answer: ch })} /> {CHOICE_LABEL[ch]}
             </label>
           ))}
         </div>
@@ -241,7 +241,7 @@ function CriterionField({ c, d, set, drafts }: { c: Criterion; d: Draft; set: (p
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">{c.counts!.map((f) => <NumberField key={f.key} label={f.label} value={counts(f.key)} onChange={(v) => setCount(f.key, v)} />)}</div>
           <p className="text-xs text-muted-foreground">"Referred to a professional" stays an unresolved overdue item. It does not change or extend any deadline.</p>
           {Number(counts("extended") || 0) > 0 && (
-            <label className="inline-flex items-center gap-2 text-xs"><input type="checkbox" checked={d.detail.extended_dates_recorded === "true"} onChange={(e) => set({ detail: { ...d.detail, extended_dates_recorded: e.target.checked ? "true" : undefined } })} /> A new date is recorded in the calendar for each Extended entry</label>
+            <label className="inline-flex items-center gap-2 text-xs"><input type="checkbox" className="h-4 w-4 shrink-0" checked={d.detail.extended_dates_recorded === "true"} onChange={(e) => set({ detail: { ...d.detail, extended_dates_recorded: e.target.checked ? "true" : undefined } })} /> A new date is recorded in the calendar for each Extended entry</label>
           )}
         </>
       )}
@@ -277,7 +277,7 @@ function CriterionField({ c, d, set, drafts }: { c: Criterion; d: Draft; set: (p
         <>
           <div role="radiogroup" aria-label={`${c.title} result`} className="flex flex-wrap gap-x-4 gap-y-1">
             {(c.key === "tasks_by_due" ? [["counted", "Enter counts"], ["no_tasks_due", "No tasks due"], ["no_data", "No data"]] : [["counted", "Enter count"], ["no_data", "No data"]]).map(([k, l]) => (
-              <label key={k} className="inline-flex items-center gap-1"><input type="radio" name={`s_${c.key}`} checked={status === k} onChange={() => set({ detail: { ...d.detail, status: k } })} /> {l}</label>
+              <label key={k} className="inline-flex items-center gap-1"><input type="radio" className="h-4 w-4 shrink-0" name={`s_${c.key}`} checked={status === k} onChange={() => set({ detail: { ...d.detail, status: k } })} /> {l}</label>
             ))}
           </div>
           {status === "counted" && (
@@ -308,8 +308,8 @@ function Retrieval({ d, set, drafts }: { d: Draft; set: (p: Partial<Draft>) => v
   return (
     <div className="space-y-2">
       <div role="radiogroup" aria-label="Retrieval result" className="flex flex-wrap gap-x-4 gap-y-1">
-        <label className="inline-flex items-center gap-1"><input type="radio" name="s_retrieval" checked={status === "run"} disabled={!eligible.length} onChange={() => set({ detail: { ...d.detail, status: "run" } })} /> Run</label>
-        <label className="inline-flex items-center gap-1"><input type="radio" name="s_retrieval" checked={status === "not_run"} onChange={() => set({ detail: { status: "not_run" }, counts: {} })} /> Not run</label>
+        <label className="inline-flex items-center gap-1"><input type="radio" className="h-4 w-4 shrink-0" name="s_retrieval" checked={status === "run"} disabled={!eligible.length} onChange={() => set({ detail: { ...d.detail, status: "run" } })} /> Run</label>
+        <label className="inline-flex items-center gap-1"><input type="radio" className="h-4 w-4 shrink-0" name="s_retrieval" checked={status === "not_run"} onChange={() => set({ detail: { status: "not_run" }, counts: {} })} /> Not run</label>
         {status && <button type="button" className="text-xs underline" onClick={() => set({ detail: {}, counts: {} })}>Clear</button>}
       </div>
       {!eligible.length && <p className="text-xs text-muted-foreground">No eligible document types yet. Answer checks 1, 6 or 13 (not as Not applicable) to enable. Checks waiting on specialist review are never used.</p>}
@@ -318,7 +318,7 @@ function Retrieval({ d, set, drafts }: { d: Draft; set: (p: Partial<Draft>) => v
           <div className="flex flex-wrap gap-x-4 gap-y-1">
             {eligible.map((t) => (
               <label key={t} className="inline-flex items-center gap-1 text-xs">
-                <input type="checkbox" checked={types.includes(t)} onChange={(e) => set({ detail: { ...d.detail, types: e.target.checked ? [...types, t] : types.filter((x) => x !== t) } })} /> {critByKey(t)?.title}
+                <input type="checkbox" className="h-4 w-4 shrink-0" checked={types.includes(t)} onChange={(e) => set({ detail: { ...d.detail, types: e.target.checked ? [...types, t] : types.filter((x) => x !== t) } })} /> {critByKey(t)?.title}
               </label>
             ))}
           </div>
