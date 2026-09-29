@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Bell, Building2, FileText, History, Inbox, LayoutDashboard, ListChecks, LogOut, Menu, Repeat, Rocket, Search, ShieldCheck, X } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
+import { GuidedTour } from "@/components/workspace/GuidedTour";
 import { supabase } from "@/integrations/supabase/client";
 import { getMyCoreNotifications } from "@/lib/core-notifications.functions";
 
@@ -66,6 +67,7 @@ export function OperatingShell({ mode, title, eyebrow, children }: { mode: Shell
         {mode !== "member" && <Link to="/notifications" activeProps={{ "aria-current": "page" }}><Bell />Notifications{unread > 0 && <span className="ops-nav-count" aria-label={`${unread} unread`}>{unread}</span>}</Link>}
         <Link to="/account"><Repeat />Switch workspace</Link>
       </nav>
+      <div className="workspace-help" aria-label="Help"><span>Help</span><GuidedTour surface={mode} /></div>
        <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>
     </aside>
     <main id="workspace-content" className="ops-workspace-main">

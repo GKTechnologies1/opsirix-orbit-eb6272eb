@@ -11,7 +11,7 @@ export const getTourContext = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const sb = context.supabase;
     const uid = context.userId;
-    const [admin, ops, compliance, partnerRole, application, memberships, progress, tourContent] = await Promise.all([
+    const [admin, ops, compliance, partnerRole, application, memberships, progress, tourBlock] = await Promise.all([
       sb.rpc("has_role", { _user_id: uid, _role: "admin" }),
       sb.rpc("has_staff_role", { _user_id: uid, _roles: ["operations_lead"] }),
       sb.rpc("has_staff_role", { _user_id: uid, _roles: ["compliance_coordinator"] }),
@@ -19,7 +19,7 @@ export const getTourContext = createServerFn({ method: "GET" })
       sb.from("partner_applications").select("id").eq("user_id", uid).maybeSingle(),
       sb.from("organization_members").select("role").eq("user_id", uid),
       sb.from("guided_tour_progress").select("role_key,tour_key,tour_version,current_step,status,updated_at").eq("user_id", uid),
-      sb.from("site_content_blocks").select("published_version_id,site_content_versions!site_content_blocks_published_version_id_fkey(body)").eq("key", "app.guided_tours").maybeSingle(),
+      sb.from("site_content_blocks").select("published_version_id").eq("key", "app.guided_tours").maybeSingle(),
     ]);
     const roles: TourRole[] = ["directory_member"];
     const memberRoles = new Set((memberships.data ?? []).map((row) => row.role));
@@ -31,8 +31,10 @@ export const getTourContext = createServerFn({ method: "GET" })
     if (compliance.data) roles.push("compliance_coordinator");
     if (admin.data) roles.push("admin_ceo");
     if (roles.length > 1) roles.unshift("workspace_switcher");
-    const published = tourContent.data?.published_version_id ? tourContent.data.site_content_versions : null;
-    return { roles, version: TOUR_VERSION, progress: progress.data ?? [], publishedContent: published };
+    const { data: published } = tourBlock.data?.published_version_id
+      ? await sb.from("site_content_versions").select("body").eq("id", tourBlock.data.published_version_id).eq("status", "published").maybeSingle()
+      : { data: null };
+    return { roles, version: TOUR_VERSION, progress: progress.data ?? [], publishedContent: published?.body ?? null };
   });
 
 export const saveTourProgress = createServerFn({ method: "POST" })

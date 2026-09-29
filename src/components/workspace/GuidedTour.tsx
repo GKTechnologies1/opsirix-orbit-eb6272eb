@@ -22,7 +22,14 @@ export function GuidedTour({ surface, compact = false }: { surface: TourSurface;
   const save = useServerFn(saveTourProgress);
   const { data, refetch } = useQuery({ queryKey: ["guided-tour-context"], queryFn: () => load(), staleTime: 0, refetchOnWindowFocus: true });
   const role = data ? roleForSurface(surface, data.roles as TourRole[]) : null;
-  const definition = role ? BUILT_IN_TOURS[role] : null;
+  const builtIn = role ? BUILT_IN_TOURS[role] : null;
+  const definition = useMemo(() => {
+    if (!builtIn) return null;
+    const content = data?.publishedContent as { items?: { q: string; a: string }[] } | null | undefined;
+    const replacement = content?.items?.find((item) => item.q === builtIn.label);
+    if (!replacement) return builtIn;
+    return { ...builtIn, steps: [{ ...builtIn.steps[0], title: replacement.q, body: replacement.a }] } satisfies TourDefinition;
+  }, [builtIn, data?.publishedContent]);
   const saved = definition ? data?.progress.find((row) => row.role_key === definition.role && row.tour_key === definition.key && row.tour_version === TOUR_VERSION) : null;
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
@@ -70,6 +77,8 @@ export function GuidedTour({ surface, compact = false }: { surface: TourSurface;
     await write(nextStep, "started");
   }
   async function replay() {
+    const refreshed = await refetch();
+    if (!refreshed.data || !roleForSurface(surface, refreshed.data.roles as TourRole[])) return;
     setStep(0);
     setOpen(true);
     await write(0, "started");

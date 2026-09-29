@@ -6,6 +6,7 @@ import { OperatingShell } from "@/components/workspace/OperatingShell";
 import { Button } from "@/components/ui/button";
 import { NexusDiscoverySection } from "@/components/sections/NexusDiscoverySection";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { TOUR_CONTENT_BODY } from "@/lib/guided-tours";
 import { FAQSection, FAQ_DEFAULT } from "@/components/sections/FAQSection";
 import {
   addCatalogChoice, getContentAdmin, moveCatalogChoice, publishContentVersion, restoreContentVersion,
@@ -64,9 +65,12 @@ function ContentBlock({ block, versions, run, openTypes }: { block: Data["blocks
   const draft = versions.find((v) => v.status === "draft");
   const isFaq = block.kind === "faq";
   const empty: ContentBody = block.key === "home.faq" ? { ...FAQ_DEFAULT, items: FAQ_DEFAULT.items.map((i) => ({ ...i })) }
+    : block.key === "app.guided_tours" ? { ...TOUR_CONTENT_BODY, items: TOUR_CONTENT_BODY.items.map((i) => ({ ...i })) }
     : isFaq ? { heading: "", body: "Common Questions", items: [{ q: "", a: "" }] }
     : BUILT_IN[block.key] ?? { heading: "", body: "" };
   const isIntro = block.key in BUILT_IN;
+  const isTour = block.kind === "tour";
+  const isStructured = isFaq || isTour;
   const base = draft?.body ?? published?.body ?? empty;
   const [f, setF] = useState<ContentBody>(base);
   const [summary, setSummary] = useState("");
@@ -75,8 +79,8 @@ function ContentBlock({ block, versions, run, openTypes }: { block: Data["blocks
   const errors = [!f.heading.trim() && "Heading is required.", !f.body.trim() && "Body is required.", !summary.trim() && "Add a change summary.",
     !linkOk(f.cta_href ?? "") && "Button link must be a site path like /nexus/help or an https address.",
     Boolean(f.cta_label) !== Boolean(f.cta_href) && "A button needs both a label and a link.",
-    isFaq && !(f.items?.length) && "Add at least one question.",
-    isFaq && (f.items ?? []).some((i) => !i.q.trim() || !i.a.trim()) && "Every question needs a question and an answer.",
+    isStructured && !(f.items?.length) && `Add at least one ${isTour ? "role" : "question"}.`,
+    isStructured && (f.items ?? []).some((i) => !i.q.trim() || !i.a.trim()) && `Every ${isTour ? "role" : "question"} needs a label and wording.`,
   ].filter(Boolean) as string[];
   const items = f.items ?? [];
   const setItem = (n: number, patch: Partial<FaqItem>) => setF({ ...f, items: items.map((it, i) => (i === n ? { ...it, ...patch } : it)) });
@@ -90,31 +94,31 @@ function ContentBlock({ block, versions, run, openTypes }: { block: Data["blocks
       <label>{isFaq ? "Section heading" : isIntro ? "Page title" : "Heading"}<input value={f.heading} onChange={(e) => setF({ ...f, heading: e.target.value })} maxLength={160} /></label>
       {isFaq ? <label>Small label above the heading<input value={f.body} onChange={(e) => setF({ ...f, body: e.target.value })} maxLength={60} /></label>
         : <label>{isIntro ? "Subtitle" : "Body"}<textarea rows={4} value={f.body} onChange={(e) => setF({ ...f, body: e.target.value })} maxLength={2000} /></label>}
-      {isFaq && <fieldset className="ops-faq-editor"><legend>Questions ({items.length} of 12)</legend>
+      {isStructured && <fieldset className="ops-faq-editor"><legend>{isTour ? "Role tours" : "Questions"} ({items.length} of 12)</legend>
         {items.map((it, n) => <div key={n} className="ops-panel" style={{ padding: 12 }}>
-          <label>Question {n + 1}<input value={it.q} onChange={(e) => setItem(n, { q: e.target.value })} maxLength={200} /></label>
-          <label>Answer<textarea rows={3} value={it.a} onChange={(e) => setItem(n, { a: e.target.value })} maxLength={1200} /></label>
+          <label>{isTour ? `Role ${n + 1}` : `Question ${n + 1}`}<input value={it.q} onChange={(e) => setItem(n, { q: e.target.value })} maxLength={200} /></label>
+          <label>{isTour ? "Tour wording" : "Answer"}<textarea rows={isTour ? 6 : 3} value={it.a} onChange={(e) => setItem(n, { a: e.target.value })} maxLength={1200} /></label>
           <div className="ops-actions ops-faq-actions">
             <Button size="sm" variant="outline" className="ops-outline" aria-label={`Move question ${n + 1} up`} disabled={n === 0} onClick={() => moveItem(n, -1)}><ArrowUp /></Button>
             <Button size="sm" variant="outline" className="ops-outline" aria-label={`Move question ${n + 1} down`} disabled={n === items.length - 1} onClick={() => moveItem(n, 1)}><ArrowDown /></Button>
-            <Button size="sm" variant="outline" className="ops-outline" disabled={items.length <= 1} onClick={() => setF({ ...f, items: items.filter((_, i) => i !== n) })}>Remove question</Button>
+            <Button size="sm" variant="outline" className="ops-outline" disabled={items.length <= 1} onClick={() => setF({ ...f, items: items.filter((_, i) => i !== n) })}>Remove {isTour ? "role" : "question"}</Button>
           </div>
         </div>)}
-        <Button variant="outline" className="ops-outline" disabled={items.length >= 12} onClick={() => setF({ ...f, items: [...items, { q: "", a: "" }] })}>Add a question</Button>
+        <Button variant="outline" className="ops-outline" disabled={items.length >= 12} onClick={() => setF({ ...f, items: [...items, { q: "", a: "" }] })}>Add {isTour ? "a role" : "a question"}</Button>
       </fieldset>}
-      {!isFaq && !isIntro && <><label>Button label<input value={f.cta_label ?? ""} onChange={(e) => setF({ ...f, cta_label: e.target.value })} maxLength={60} /></label>
+      {!isStructured && !isIntro && <><label>Button label<input value={f.cta_label ?? ""} onChange={(e) => setF({ ...f, cta_label: e.target.value })} maxLength={60} /></label>
       <label>Button link<input value={f.cta_href ?? ""} onChange={(e) => setF({ ...f, cta_href: e.target.value })} placeholder="/nexus/help" /></label></>}
       <label>Change summary<input value={summary} onChange={(e) => setSummary(e.target.value)} maxLength={300} /></label>
       {errors.length > 0 && <ul className="ops-muted" aria-live="polite">{errors.map((e) => <li key={e}>{e}</li>)}</ul>}
       <div className="ops-actions">
-        <Button disabled={errors.length > 0} onClick={() => run(save({ data: { key: block.key, body: { heading: f.heading, body: f.body, cta_label: f.cta_label || undefined, cta_href: f.cta_href || undefined, items: isFaq ? items : undefined }, summary } }), "Draft saved.").then(() => setSummary(""))}>Save draft</Button>
+        <Button disabled={errors.length > 0} onClick={() => run(save({ data: { key: block.key, body: { heading: f.heading, body: f.body, cta_label: f.cta_label || undefined, cta_href: f.cta_href || undefined, items: isStructured ? items : undefined }, summary } }), "Draft saved.").then(() => setSummary(""))}>Save draft</Button>
         <Button variant="outline" className="ops-outline" onClick={() => setPreview((p) => !p)}>{preview ? "Hide preview" : "Preview"}</Button>
         {draft && !isPricing && <Button onClick={() => run(publish({ data: { id: draft.id } }), `Version ${draft.version} published to ${block.pages.join(", ")}.`)}>Publish draft v{draft.version}</Button>}
         {published && !isPricing && <Button variant="outline" className="ops-outline" onClick={() => run(unpublish({ data: { key: block.key } }), "Unpublished. The built-in text shows again.")}>Unpublish</Button>}
       </div>
     </div>
     {preview && <div className="content-preview" aria-label="Preview"><p className="ops-panel-kicker">Preview (not public)</p>
-      {block.key === "home.nexus" ? <NexusDiscoverySection categories={openTypes} content={f} /> : isFaq ? <FAQSection content={f} /> : isIntro ? <PageHeader pageName={block.key === "founders.intro" ? "Founders" : "For Partners"} label={block.key === "founders.intro" ? "For Founders" : "Nexus Partner Network"} title={f.heading} subtitle={f.body} /> : <article className="ops-panel"><h3>{f.heading}</h3><p>{f.body}</p></article>}</div>}
+      {block.key === "home.nexus" ? <NexusDiscoverySection categories={openTypes} content={f} /> : isFaq ? <FAQSection content={f} /> : isTour ? <article className="tour-content-preview"><h3>{f.heading}</h3><p>{f.body}</p>{items.map((item) => <section key={item.q}><h4>{item.q}</h4><p>{item.a}</p></section>)}</article> : isIntro ? <PageHeader pageName={block.key === "founders.intro" ? "Founders" : "For Partners"} label={block.key === "founders.intro" ? "For Founders" : "Nexus Partner Network"} title={f.heading} subtitle={f.body} /> : <article className="ops-panel"><h3>{f.heading}</h3><p>{f.body}</p></article>}</div>}
     <h3>Version history</h3>
     <div className="ops-table-wrap"><table><thead><tr><th>Version</th><th>Status</th><th>Summary</th><th>Author</th><th>Saved</th><th>Published</th><th /></tr></thead><tbody>
       {versions.map((v) => <tr key={v.id}><td>{v.version}</td><td>{v.status}</td><td>{v.change_summary}</td><td>{v.author}</td><td>{fmt(v.created_at)}</td><td>{v.publisher ? `${v.publisher}, ${fmt(v.published_at)}` : fmt(v.published_at)}</td>

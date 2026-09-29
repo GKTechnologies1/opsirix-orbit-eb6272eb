@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { ArrowRight, LogOut } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
+import { GuidedTour } from "@/components/workspace/GuidedTour";
 import { supabase } from "@/integrations/supabase/client";
 import { getMyAccess } from "@/lib/access.functions";
 
@@ -66,6 +67,7 @@ function AccountHub() {
               </li>
             ))}
           </ul>
+          <div className="account-tour-entry"><GuidedTour surface="account" /></div>
           {data && (
             <p className="nexus-panel-copy">
               {!areas.some((a) => a.key === "company") && <><Link to="/workspace">Set up a company workspace</Link>. </>}

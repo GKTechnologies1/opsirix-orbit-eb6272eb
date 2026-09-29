@@ -3,6 +3,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Building2, FileText, Inbox, KeyRound, LayoutDashboard, ListChecks, LogOut, Menu, Repeat, Search, ShieldCheck, UserRound, X } from "lucide-react";
 import { OpsirixLogo } from "@/components/layout/OpsirixLogo";
 import { Button } from "@/components/ui/button";
+import { GuidedTour } from "@/components/workspace/GuidedTour";
 import { supabase } from "@/integrations/supabase/client";
 import { TRACK_TYPE_IDS } from "@/lib/nexus-tracks";
 
@@ -59,6 +60,7 @@ export function WorkspaceShell({ title, eyebrow, children, admin = false }: { ti
           {isAdmin && <Link to="/admin/preview"><KeyRound />Preview access</Link>}
           <Link to="/account"><Repeat />Switch workspace</Link>
         </nav>
+        <div className="workspace-help" aria-label="Help"><span>Help</span><GuidedTour surface="partner" /></div>
         <Button variant="ghost" onClick={signOut}><LogOut />Sign out</Button>
       </aside>
       <main id="workspace-content" className="nexus-workspace-main">
