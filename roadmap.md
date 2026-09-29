@@ -86,6 +86,11 @@ Full tracker: /mnt/documents/opsirix-delivery-tracker.md. Do not publish until r
 - [x] Partner overview load-error state + retry (tested 2026-09-28)
 - [x] Institutional categories public presentation accurate; 0 listings (tested 2026-09-28)
 
+## 2026-09-29 Stage 5 and Launch review
+- [x] Stage 5 v5 records owner approval for every outside-professional device, old-device handling, lost/compromised revocation, and revised sharing/expiry/Drive-link wording; Vault and AI remain unbuilt pending review.
+- [x] Tracker v4 separates technical readiness, release approval and deployment verification.
+- [ ] Launch owner review: founder and staff desktop/390 screenshots supplied; public wording, retention treatment and all seven release checks still require approval.
+
 ## 2026-09-28 21:00 UTC
 - [x] University Programs, Banking Partners, Insurance Brokers: complete. Applications and help requests open; 0 public listings each; public copy preview-only for DevOps
 - [x] Decision packet v1 prepared (Files: opsirix-decision-packet-v1.md): Launch intake, Grid 25 criteria, Terms, retention, Core email, Vault/AI, pricing. All gates remain off pending owner answers

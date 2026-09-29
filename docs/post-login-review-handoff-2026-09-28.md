@@ -233,3 +233,10 @@ Positive directory filter test: seed approved TEST listings per open category in
 - Stage 5 v4 (design only): every Admin/CEO metadata support action needs an owner approval naming purpose and scope, max 24 hours, no self-approval, no extension, owner-revocable, owner-visible audit. Outside-professional device change: fresh device authorization, pending device, owner device wraps only that document's key, owner sees and can revoke; no emailed file or key.
 - Tracker v3: "Ready for DevOps" means technically complete; GitHub connection listed as a separate deployment dependency for all modules.
 - Shared backend, preview: no change. Nothing published; DNS unchanged.
+
+## Update 2026-09-29 17:53 UTC: Stage 5 v5, tracker v4, Launch review evidence
+- Stage 5 v5 (design only): every new outside-professional device requires owner approval. Routine additions retain an old device only while it remains authorized and expose immediate revocation; a reported lost or compromised device is revoked within the same change flow. This remains pending security review.
+- Sharing wording now states that downloaded copies may remain after sharing stops without implying ownership or rights. Recipient expiry is shown in local time with UTC for reference. Drive-link wording says Opsirix sees the stored link and label, while provider settings control file access; Opsirix does not verify those settings or apply Vault protection.
+- Tracker v4 separates technical readiness, release approval and deployment verification. Public copy still needs owner sign-off; the member-directory positive filter test remains isolated-staging only; every deployed module needs a clean staging build and named role smoke tests.
+- Launch remains off publicly. Proposed future placement is under the public Platform navigation and Platform overview, linking to `/platform/launch`; signed-in intake remains `/launch`.
+- Shared backend: no change. Preview source: no change. Nothing published; DNS unchanged.
