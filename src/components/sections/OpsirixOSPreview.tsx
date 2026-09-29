@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { DashboardMockup } from "@/components/ui/DashboardMockup";
 
@@ -33,7 +34,7 @@ export function OpsirixOSPreview() {
                 {FEATURES.map((f, i) => (
                   <ScrollReveal key={f.title} delay={0.05 + i * 0.04}>
                     <div className="os-feature">
-                      <div className="os-feature-emoji">{f.emoji}</div>
+                      <div className="os-feature-emoji"><LineIcon glyph={f.emoji} /></div>
                       <div className="os-feature-title">{f.title}</div>
                       <div className="os-feature-desc">{f.desc}</div>
                     </div>

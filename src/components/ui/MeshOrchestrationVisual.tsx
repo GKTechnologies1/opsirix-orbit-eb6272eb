@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -198,7 +199,7 @@ export function MeshOrchestrationVisual() {
                   transition: "all 280ms cubic-bezier(0.4, 0, 0.2, 1)",
                 }}
               >
-                {n.emoji}
+                <LineIcon glyph={n.emoji} size={18} />
               </div>
               <div
                 className="mesh-node-label"

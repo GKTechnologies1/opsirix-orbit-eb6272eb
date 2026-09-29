@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { createFileRoute } from "@tanstack/react-router";
 import { ContactForm } from "@/components/sections/ContactForm";
 
@@ -42,7 +43,7 @@ function ContactPage() {
 
           {INFO_ROWS.map((row) => (
             <div key={row.label} className="contact-info-row">
-              <div className="contact-info-icon">{row.icon}</div>
+              <div className="contact-info-icon"><LineIcon glyph={row.icon} /></div>
               <div>
                 <div className="contact-info-label">{row.label}</div>
                 <div className="contact-info-value">{row.value}</div>

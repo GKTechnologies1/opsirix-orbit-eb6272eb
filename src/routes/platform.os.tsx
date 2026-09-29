@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 
@@ -169,7 +170,7 @@ function OSPage() {
               style={{ display: "flex", flexDirection: "column", gap: 10, textDecoration: "none" }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span aria-hidden style={{ fontSize: 20 }}>{m.icon}</span>
+                <span aria-hidden style={{ fontSize: 20 }}><LineIcon glyph={m.icon} /></span>
                 <h3 style={{ margin: 0 }}>{m.name}</h3>
               </div>
               <p>{m.desc}</p>

@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { Link } from "@tanstack/react-router";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -251,7 +252,7 @@ function StackVisual() {
                 flexShrink: 0,
               }}
             >
-              {row.icon}
+              <LineIcon glyph={row.icon} />
             </span>
             <span
               style={{

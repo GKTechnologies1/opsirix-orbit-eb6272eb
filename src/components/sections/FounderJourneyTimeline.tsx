@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -122,7 +123,7 @@ export function FounderJourneyTimeline() {
                     aria-expanded={isActive}
                     aria-label={`Step ${i + 1}: ${s.title}`}
                   >
-                    <span className="journey-emoji">{s.emoji}</span>
+                    <span className="journey-emoji"><LineIcon glyph={s.emoji} /></span>
                     <span className="journey-num">{i + 1}</span>
                   </button>
                   <div className="journey-text">

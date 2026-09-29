@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -65,7 +66,7 @@ export function ImmigrantFounderSection() {
               {POINTS.map((p, i) => (
                 <ScrollReveal key={p.title} delay={0.15 + i * 0.07}>
                   <div className="immigrant-point">
-                    <div className="immigrant-point-icon">{p.icon}</div>
+                    <div className="immigrant-point-icon"><LineIcon glyph={p.icon} size={22} /></div>
                     <div>
                       <h5 className="immigrant-point-title">{p.title}</h5>
                       <p className="immigrant-point-body">{p.body}</p>

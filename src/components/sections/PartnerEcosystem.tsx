@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -70,7 +71,7 @@ export function PartnerEcosystem() {
           {PARTNERS.map((p, i) => (
             <ScrollReveal key={p.title} delay={0.05 + i * 0.06}>
               <div className="partner-card">
-                <span className="partner-emoji">{p.icon}</span>
+                <span className="partner-emoji"><LineIcon glyph={p.icon} size={22} /></span>
                 <h4 className="partner-card-title">{p.title}</h4>
                 <p className="partner-card-body">{p.body}</p>
                 <Link

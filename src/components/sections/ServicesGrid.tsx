@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { Link } from "@tanstack/react-router";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
@@ -38,7 +39,7 @@ function ServiceCard({ s }: { s: Service }) {
         } as React.CSSProperties
       }
     >
-      <div className="service-icon">{s.icon}</div>
+      <div className="service-icon"><LineIcon glyph={s.icon} size={24} /></div>
       <h4
         style={{
           fontFamily: "var(--font-sora)",

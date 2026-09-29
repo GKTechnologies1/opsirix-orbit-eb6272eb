@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, ArrowRight } from "lucide-react";
@@ -44,7 +45,7 @@ export function ModulePageLayout({
           {/* Tag pill */}
           <div className="module-tag-row">
             <span className="module-tag">
-              <span aria-hidden style={{ marginRight: 6 }}>{moduleIcon}</span>
+              <span aria-hidden style={{ marginRight: 6 }}><LineIcon glyph={moduleIcon} size={16} /></span>
               {moduleTag}
             </span>
             {statusBadge && (
