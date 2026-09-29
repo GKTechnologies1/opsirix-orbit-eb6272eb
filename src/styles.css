@@ -2345,6 +2345,8 @@
 .ops-create-form h2 { margin-bottom: 0; }
 .ops-panel label { display: grid; gap: 8px; color: var(--color-ice); font-size: 13px; font-weight: 600; }
 .ops-panel input, .ops-panel select { width: 100%; min-height: 46px; padding: 10px 12px; border: 1px solid var(--border-subtle); background: var(--bg-primary); color: var(--color-ice); }
+.ops-panel input[type="radio"], .ops-panel input[type="checkbox"] { width: 18px; height: 18px; min-height: 0; padding: 0; flex-shrink: 0; accent-color: var(--color-cyan); }
+.ops-panel label:has(> input[type="radio"]), .ops-panel label:has(> input[type="checkbox"]) { display: inline-flex; flex-direction: row; align-items: center; gap: 6px; }
 .ops-panel input:focus, .ops-panel select:focus { outline: 2px solid var(--color-cyan); outline-offset: 2px; }
 .ops-feedback { color: var(--nexus-success); margin: 16px 0; }
 .ops-company-list { display: grid; gap: 18px; margin-top: 22px; }
