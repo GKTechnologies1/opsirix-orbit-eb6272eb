@@ -157,7 +157,7 @@ export function MeshOrchestrationVisual() {
             position: "relative",
           }}
         >
-          🏗️
+          <LineIcon glyph="🏗" size={28} />
         </motion.div>
       </div>
 

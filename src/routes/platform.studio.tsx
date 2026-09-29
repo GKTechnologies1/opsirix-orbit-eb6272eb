@@ -164,7 +164,7 @@ function StudioPage() {
                 lineHeight: 1.65,
               }}
             >
-              <span aria-hidden style={{ color: "#F5B544", fontWeight: 700, marginTop: 1 }}>✓</span>
+              <span aria-hidden style={{ color: "#F5B544", fontWeight: 700, marginTop: 1 }}><LineIcon glyph="✓" size={16} /></span>
               <span>{s}</span>
             </li>
           ))}

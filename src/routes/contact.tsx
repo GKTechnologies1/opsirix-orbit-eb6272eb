@@ -52,7 +52,7 @@ function ContactPage() {
           ))}
 
           <div className="contact-legal">
-            ⚠️ Note: Completing this form does not create a platform agreement or initiate services. Opsirix is not a law firm, immigration consultancy, or CPA firm. Nothing submitted constitutes legal, immigration, or tax advice.
+            <LineIcon glyph="⚠" size={16} /> Note: Completing this form does not create a platform agreement or initiate services. Opsirix is not a law firm, immigration consultancy, or CPA firm. Nothing submitted constitutes legal, immigration, or tax advice.
           </div>
         </div>
 
