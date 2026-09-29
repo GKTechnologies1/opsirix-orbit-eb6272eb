@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { GRID_CRITERIA, type Answer } from "@/lib/grid-criteria";
 
 const uuid = z.string().uuid();
 const fail = (e: { message: string } | null) => (e ? { success: false as const, error: e.message } : { success: true as const });
@@ -30,9 +31,10 @@ export const getGrid = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const sb = context.supabase; const uid = context.userId;
     const { orgs, roleOf, isStaff } = await companiesFor(sb, uid);
-    const [{ data: reviews }, { data: entries }] = await Promise.all([
-      sb.from("grid_reviews").select("id,organization_id,period,kind,status,created_by,submitted_at,updated_at").order("period", { ascending: false }),
+    const [{ data: reviews }, { data: entries }, { data: answers }] = await Promise.all([
+      sb.from("grid_reviews").select("id,organization_id,period,kind,status,created_by,submitted_at,updated_at,criteria_version").order("period", { ascending: false }),
       sb.from("grid_review_entries").select("review_id,dimension,observation,evidence,updated_at"),
+      sb.from("grid_criterion_answers").select("review_id,criterion,answer,counts,detail,note"),
     ]);
     return {
       companies: orgs.map((o) => {
@@ -43,6 +45,9 @@ export const getGrid = createServerFn({ method: "GET" })
           canStaff: !role && isStaff,
           reviews: (reviews ?? []).filter((r) => r.organization_id === o.id).map((r) => ({
             ...r, mine: r.created_by === uid, entries: (entries ?? []).filter((e) => e.review_id === r.id),
+            answers: (answers ?? []).filter((a) => a.review_id === r.id).map((a) => ({
+              criterion: a.criterion, answer: a.answer as Answer["answer"], counts: (a.counts ?? {}) as Record<string, number>, detail: (a.detail ?? {}) as Record<string, unknown>, note: a.note,
+            })),
           })),
         };
       }),
@@ -57,6 +62,23 @@ export const saveGridReview = createServerFn({ method: "POST" })
   }).parse(i))
   .handler(async ({ data, context }) => fail((await context.supabase.rpc("grid_save_review", {
     _org: data.organizationId, _period: `${data.period}-01`, _kind: data.kind, _entries: data.entries, _submit: data.submit,
+  })).error));
+
+/** Criteria v3: one unscored answer per active check. The database re-validates every rule. */
+export const saveGridCriteria = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((i: unknown) => z.object({
+    organizationId: uuid, period: z.string().regex(/^\d{4}-\d{2}$/), kind: z.enum(["self_assessment", "staff_evidence_review"]), submit: z.boolean(),
+    answers: z.array(z.object({
+      criterion: z.enum(GRID_CRITERIA.map((c) => c.key) as [string, ...string[]]),
+      answer: z.enum(["in_place", "partly", "not_yet", "evidence_not_shown", "not_applicable"]).nullable(),
+      counts: z.record(z.string(), z.number().int().min(0).max(10000)),
+      detail: z.record(z.string(), z.unknown()),
+      note: z.string().max(300),
+    })).max(14),
+  }).parse(i))
+  .handler(async ({ data, context }) => fail((await context.supabase.rpc("grid_save_criteria", {
+    _org: data.organizationId, _period: `${data.period}-01`, _kind: data.kind, _answers: data.answers as never, _submit: data.submit,
   })).error));
 
 /** Core requests with their Flow board tasks and status history. */
