@@ -228,3 +228,8 @@ Positive directory filter test: seed approved TEST listings per open category in
 - Stage 5 v3 (design only): member visibility limited to owner-granted scope; Admin/CEO aggregate status only, with a separate audited, time-limited support action for per-file size/date/uploader; outside professionals have accounts and a device key but no device-list screen; recovery envelope and metadata specified; share scope/expiry/revocation explicit, downloaded copies cannot be recalled. Incident times and leads open.
 - Tracker v2 separates built in preview / active on shared backend / tested / ready for DevOps. No module is deployable until GitHub is connected. Directory positive filter test has not run; 0 real listings. Launch off publicly with 7 remaining checks.
 - Shared backend: no change. Preview: no change. Nothing published; DNS unchanged.
+
+## Update 2026-09-29 17:20 UTC: Stage 5 v4, tracker v3
+- Stage 5 v4 (design only): every Admin/CEO metadata support action needs an owner approval naming purpose and scope, max 24 hours, no self-approval, no extension, owner-revocable, owner-visible audit. Outside-professional device change: fresh device authorization, pending device, owner device wraps only that document's key, owner sees and can revoke; no emailed file or key.
+- Tracker v3: "Ready for DevOps" means technically complete; GitHub connection listed as a separate deployment dependency for all modules.
+- Shared backend, preview: no change. Nothing published; DNS unchanged.
