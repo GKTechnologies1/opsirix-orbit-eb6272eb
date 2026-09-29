@@ -400,6 +400,13 @@
       "when": 1790693720635,
       "tag": "0056_grid_criteria_v3",
       "breakpoints": true
+    },
+    {
+      "idx": 57,
+      "version": "7",
+      "when": 1790706450267,
+      "tag": "0057_guided_tour_progress",
+      "breakpoints": true
     }
   ]
 }

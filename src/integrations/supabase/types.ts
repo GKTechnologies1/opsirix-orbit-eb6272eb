@@ -746,6 +746,45 @@ export type Database = {
           },
         ]
       }
+      guided_tour_progress: {
+        Row: {
+          completed_at: string | null
+          current_step: number
+          id: string
+          role_key: string
+          started_at: string
+          status: string
+          tour_key: string
+          tour_version: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          current_step?: number
+          id?: string
+          role_key: string
+          started_at?: string
+          status?: string
+          tour_key: string
+          tour_version: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          current_step?: number
+          id?: string
+          role_key?: string
+          started_at?: string
+          status?: string
+          tour_key?: string
+          tour_version?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       launch_assignments: {
         Row: {
           assigned_by: string
@@ -3119,6 +3158,16 @@ export type Database = {
         Args: { _body: Json; _key: string; _summary: string }
         Returns: string
       }
+      save_guided_tour_progress: {
+        Args: {
+          _current_step: number
+          _role_key: string
+          _status: string
+          _tour_key: string
+          _tour_version: number
+        }
+        Returns: undefined
+      }
       send_nexus_introduction: {
         Args: { _hash: string; _intro: string }
         Returns: Json
@@ -3184,6 +3233,10 @@ export type Database = {
           _phone: string
         }
         Returns: string
+      }
+      tour_role_allowed: {
+        Args: { _role_key: string; _user_id: string }
+        Returns: boolean
       }
       type_evidence_ok: {
         Args: { _application: string; _type: string }
