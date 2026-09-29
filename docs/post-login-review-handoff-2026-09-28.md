@@ -203,3 +203,11 @@ Positive directory filter test: seed approved TEST listings per open category in
 **Cross-company tests (TEST companies only, rolled back): 16/16 passed.** Member creating in a non-member company, viewer updating/submitting another's draft, unrelated account creating founder/staff records, submitting a foreign draft, using the old-format save, staff with revoked grant or no grant creating/submitting evidence reviews, staff writing a founder record: all denied. Foreign drafts, reviews and answers read as 0 rows. Only other caller of the same operation family: `grid_save_review` (old format), also denied. No further tests run against real companies.
 
 **Shared backend (already live):** migration 0056 (from earlier today); D-Global draft deletion. **Preview only:** Grid screens, Features & Releases entry. Nothing published; DNS unchanged.
+
+## Update 2026-09-29 16:45 UTC: owner decisions on incident and Stage 3
+
+- Incident accepted as closed (test-selection error). Incident history unchanged.
+- Test scripts now use `scripts/test-org-allowlist.json` via `scripts/test_guard.py`; a non-TEST company ID stops the script before anything runs (verified: D-Global refused).
+- **Backups (verified, Lovable Cloud docs):** daily database backup, kept about 14 days; restore is to a daily snapshot only and replaces the whole database. A restore would bring back records deleted after that snapshot. Proposed: a deletion ledger replayed after any restore. **To confirm by DevOps:** whether uploaded storage files are covered by backups.
+- Stage 3 revised to v3 (not approved; no Terms gate, no deletion, no dry run built). Stage 4 Core email design drafted; sending off.
+- Shared backend: no changes in this update. Preview only: none. Nothing published; DNS unchanged.
