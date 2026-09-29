@@ -211,3 +211,15 @@ Positive directory filter test: seed approved TEST listings per open category in
 - **Backups (verified, Lovable Cloud docs):** daily database backup, kept about 14 days; restore is to a daily snapshot only and replaces the whole database. A restore would bring back records deleted after that snapshot. Proposed: a deletion ledger replayed after any restore. **To confirm by DevOps:** whether uploaded storage files are covered by backups.
 - Stage 3 revised to v3 (not approved; no Terms gate, no deletion, no dry run built). Stage 4 Core email design drafted; sending off.
 - Shared backend: no changes in this update. Preview only: none. Nothing published; DNS unchanged.
+
+## Update 2026-09-29 16:40 UTC: backups, D-Global classification, staging plan
+
+**Backup facts and source.** Source: Lovable documentation (docs search "Lovable Cloud database backups", retrieved 2026-09-29 16:35 UTC): daily database backup, retained approximately 14 days; restore only to a daily snapshot; restore replaces schema and data and loses later changes. Not independently verified. **DevOps must verify** database backup coverage and whether uploaded files (storage) are backed up, before anyone relies on these figures.
+
+**Staging plan additions (isolated staging backend only, not built):**
+1. Restore test: restore a staging snapshot, confirm schema, auth, storage and app routes; record time taken.
+2. Deletion-replay test (design only, no deletion implemented): seed staging records, record a mock deletion ledger, restore an earlier snapshot, replay ledger, confirm the records are gone again and nothing else changed.
+
+**D-Global Technologies LLC:** classified "real-name record, TEST-owned, provenance unverified". OPX-000021; created 2026-09-27 18:38 UTC by opsirix+test-owner@gmail.com via Create company workspace; 1 member (that account, owner); no boards, tasks, Core requests, Grid records, grants or notifications; 2 history entries. Excluded from TEST cleanup, tests and real-client workflows. Not renamed or deleted.
+
+**Core email:** sending off; proposed preferences now off by default. Shared backend: no change. Preview only: Features & Releases entries. Nothing published; DNS unchanged.
