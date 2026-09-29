@@ -1,3 +1,4 @@
+import { LineIcon } from "@/components/ui/LineIcon";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
@@ -168,7 +169,7 @@ export function BeforeAfterSection() {
                         fontWeight: 700,
                       }}
                     >
-                      ✕
+                      <LineIcon glyph="✕" size={12} />
                     </span>
                   }
                 />
