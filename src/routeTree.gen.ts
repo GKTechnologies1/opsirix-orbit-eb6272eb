@@ -9,146 +9,67 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as DirectoryRouteImport } from './routes/directory'
-import { Route as EarlyStageFoundersRouteImport } from './routes/early-stage-founders'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as ForPartnersRouteImport } from './routes/for-partners'
-import { Route as ForUniversitiesRouteImport } from './routes/for-universities'
-import { Route as FoundersRouteImport } from './routes/founders'
-import { Route as HowItWorksRouteImport } from './routes/how-it-works'
-import { Route as ImmigrantFoundersRouteImport } from './routes/immigrant-founders'
-import { Route as PlatformRouteImport } from './routes/platform'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as ServicesRouteImport } from './routes/services'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
-import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated.account'
-import { Route as AuthenticatedCoreRouteImport } from './routes/_authenticated.core'
-import { Route as AuthenticatedFlowRouteImport } from './routes/_authenticated.flow'
-import { Route as AuthenticatedGridRouteImport } from './routes/_authenticated.grid'
-import { Route as AuthenticatedLaunchRouteImport } from './routes/_authenticated.launch'
-import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated.notifications'
-import { Route as AuthenticatedOsRouteImport } from './routes/_authenticated.os'
-import { Route as JoinCodeRouteImport } from './routes/join.$code'
-import { Route as NexusHelpRouteImport } from './routes/nexus.help'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PlatformRouteImport } from './routes/platform'
+import { Route as ImmigrantFoundersRouteImport } from './routes/immigrant-founders'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as FoundersRouteImport } from './routes/founders'
+import { Route as ForUniversitiesRouteImport } from './routes/for-universities'
+import { Route as ForPartnersRouteImport } from './routes/for-partners'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as EarlyStageFoundersRouteImport } from './routes/early-stage-founders'
+import { Route as DirectoryRouteImport } from './routes/directory'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlatformIndexRouteImport } from './routes/platform.index'
-import { Route as PlatformAiRouteImport } from './routes/platform.ai'
-import { Route as PlatformCoreRouteImport } from './routes/platform.core'
-import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
-import { Route as PlatformGridRouteImport } from './routes/platform.grid'
-import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
-import { Route as PlatformNexusRouteImport } from './routes/platform.nexus'
-import { Route as PlatformOsRouteImport } from './routes/platform.os'
-import { Route as PlatformStudioRouteImport } from './routes/platform.studio'
 import { Route as PlatformVaultRouteImport } from './routes/platform.vault'
-import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_authenticated.admin.applications'
-import { Route as AuthenticatedAdminPreviewRouteImport } from './routes/_authenticated.admin.preview'
-import { Route as AuthenticatedNexusDirectoryRouteImport } from './routes/_authenticated.nexus.directory'
-import { Route as AuthenticatedNexusRequestsRouteImport } from './routes/_authenticated.nexus.requests'
-import { Route as AuthenticatedPartnerIndexRouteImport } from './routes/_authenticated.partner.index'
-import { Route as AuthenticatedPartnerApplyRouteImport } from './routes/_authenticated.partner.apply'
-import { Route as AuthenticatedPartnerIntroductionsRouteImport } from './routes/_authenticated.partner.introductions'
-import { Route as AuthenticatedPartnerOnboardingRouteImport } from './routes/_authenticated.partner.onboarding'
-import { Route as AuthenticatedPartnerProfileRouteImport } from './routes/_authenticated.partner.profile'
-import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_authenticated.partner.services'
-import { Route as AuthenticatedPartnerTasksRouteImport } from './routes/_authenticated.partner.tasks'
-import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated.staff.index'
-import { Route as AuthenticatedStaffAccessRouteImport } from './routes/_authenticated.staff.access'
-import { Route as AuthenticatedStaffContentRouteImport } from './routes/_authenticated.staff.content'
-import { Route as AuthenticatedStaffFeaturesRouteImport } from './routes/_authenticated.staff.features'
-import { Route as AuthenticatedStaffInquiriesRouteImport } from './routes/_authenticated.staff.inquiries'
-import { Route as AuthenticatedStaffLaunchRouteImport } from './routes/_authenticated.staff.launch'
+import { Route as PlatformStudioRouteImport } from './routes/platform.studio'
+import { Route as PlatformOsRouteImport } from './routes/platform.os'
+import { Route as PlatformNexusRouteImport } from './routes/platform.nexus'
+import { Route as PlatformLaunchRouteImport } from './routes/platform.launch'
+import { Route as PlatformGridRouteImport } from './routes/platform.grid'
+import { Route as PlatformFlowRouteImport } from './routes/platform.flow'
+import { Route as PlatformCoreRouteImport } from './routes/platform.core'
+import { Route as PlatformAiRouteImport } from './routes/platform.ai'
+import { Route as NexusHelpRouteImport } from './routes/nexus.help'
+import { Route as JoinCodeRouteImport } from './routes/join.$code'
+import { Route as AuthenticatedOsRouteImport } from './routes/_authenticated.os'
+import { Route as AuthenticatedNotificationsRouteImport } from './routes/_authenticated.notifications'
+import { Route as AuthenticatedLaunchRouteImport } from './routes/_authenticated.launch'
+import { Route as AuthenticatedGridRouteImport } from './routes/_authenticated.grid'
+import { Route as AuthenticatedFlowRouteImport } from './routes/_authenticated.flow'
+import { Route as AuthenticatedCoreRouteImport } from './routes/_authenticated.core'
+import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated.account'
 import { Route as AuthenticatedWorkspaceIndexRouteImport } from './routes/_authenticated.workspace.index'
+import { Route as AuthenticatedStaffIndexRouteImport } from './routes/_authenticated.staff.index'
+import { Route as AuthenticatedPartnerIndexRouteImport } from './routes/_authenticated.partner.index'
+import { Route as AuthenticatedStaffLaunchRouteImport } from './routes/_authenticated.staff.launch'
+import { Route as AuthenticatedStaffInquiriesRouteImport } from './routes/_authenticated.staff.inquiries'
+import { Route as AuthenticatedStaffFeaturesRouteImport } from './routes/_authenticated.staff.features'
+import { Route as AuthenticatedStaffContentRouteImport } from './routes/_authenticated.staff.content'
+import { Route as AuthenticatedStaffAccessRouteImport } from './routes/_authenticated.staff.access'
+import { Route as AuthenticatedPartnerTasksRouteImport } from './routes/_authenticated.partner.tasks'
+import { Route as AuthenticatedPartnerServicesRouteImport } from './routes/_authenticated.partner.services'
+import { Route as AuthenticatedPartnerProfileRouteImport } from './routes/_authenticated.partner.profile'
+import { Route as AuthenticatedPartnerOnboardingRouteImport } from './routes/_authenticated.partner.onboarding'
+import { Route as AuthenticatedPartnerIntroductionsRouteImport } from './routes/_authenticated.partner.introductions'
+import { Route as AuthenticatedPartnerApplyRouteImport } from './routes/_authenticated.partner.apply'
+import { Route as AuthenticatedNexusRequestsRouteImport } from './routes/_authenticated.nexus.requests'
+import { Route as AuthenticatedNexusDirectoryRouteImport } from './routes/_authenticated.nexus.directory'
+import { Route as AuthenticatedAdminPreviewRouteImport } from './routes/_authenticated.admin.preview'
+import { Route as AuthenticatedAdminApplicationsRouteImport } from './routes/_authenticated.admin.applications'
 import { Route as AuthenticatedAdminReviewIdRouteImport } from './routes/_authenticated.admin.review.$id'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DirectoryRoute = DirectoryRouteImport.update({
-  id: '/directory',
-  path: '/directory',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EarlyStageFoundersRoute = EarlyStageFoundersRouteImport.update({
-  id: '/early-stage-founders',
-  path: '/early-stage-founders',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForPartnersRoute = ForPartnersRouteImport.update({
-  id: '/for-partners',
-  path: '/for-partners',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForUniversitiesRoute = ForUniversitiesRouteImport.update({
-  id: '/for-universities',
-  path: '/for-universities',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FoundersRoute = FoundersRouteImport.update({
-  id: '/founders',
-  path: '/founders',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HowItWorksRoute = HowItWorksRouteImport.update({
-  id: '/how-it-works',
-  path: '/how-it-works',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ImmigrantFoundersRoute = ImmigrantFoundersRouteImport.update({
-  id: '/immigrant-founders',
-  path: '/immigrant-founders',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlatformRoute = PlatformRouteImport.update({
-  id: '/platform',
-  path: '/platform',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -156,34 +77,153 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
-  id: '/account',
-  path: '/account',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedCoreRoute = AuthenticatedCoreRouteImport.update({
-  id: '/core',
-  path: '/core',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedFlowRoute = AuthenticatedFlowRouteImport.update({
-  id: '/flow',
-  path: '/flow',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const PlatformRoute = PlatformRouteImport.update({
+  id: '/platform',
+  path: '/platform',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedGridRoute = AuthenticatedGridRouteImport.update({
-  id: '/grid',
-  path: '/grid',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const ImmigrantFoundersRoute = ImmigrantFoundersRouteImport.update({
+  id: '/immigrant-founders',
+  path: '/immigrant-founders',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedLaunchRoute = AuthenticatedLaunchRouteImport.update({
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoundersRoute = FoundersRouteImport.update({
+  id: '/founders',
+  path: '/founders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForUniversitiesRoute = ForUniversitiesRouteImport.update({
+  id: '/for-universities',
+  path: '/for-universities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForPartnersRoute = ForPartnersRouteImport.update({
+  id: '/for-partners',
+  path: '/for-partners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EarlyStageFoundersRoute = EarlyStageFoundersRouteImport.update({
+  id: '/early-stage-founders',
+  path: '/early-stage-founders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DirectoryRoute = DirectoryRouteImport.update({
+  id: '/directory',
+  path: '/directory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlatformIndexRoute = PlatformIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformVaultRoute = PlatformVaultRouteImport.update({
+  id: '/vault',
+  path: '/vault',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformStudioRoute = PlatformStudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformOsRoute = PlatformOsRouteImport.update({
+  id: '/os',
+  path: '/os',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformNexusRoute = PlatformNexusRouteImport.update({
+  id: '/nexus',
+  path: '/nexus',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformLaunchRoute = PlatformLaunchRouteImport.update({
   id: '/launch',
   path: '/launch',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformGridRoute = PlatformGridRouteImport.update({
+  id: '/grid',
+  path: '/grid',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformFlowRoute = PlatformFlowRouteImport.update({
+  id: '/flow',
+  path: '/flow',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformCoreRoute = PlatformCoreRouteImport.update({
+  id: '/core',
+  path: '/core',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const PlatformAiRoute = PlatformAiRouteImport.update({
+  id: '/ai',
+  path: '/ai',
+  getParentRoute: () => PlatformRoute,
+} as any)
+const NexusHelpRoute = NexusHelpRouteImport.update({
+  id: '/nexus/help',
+  path: '/nexus/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JoinCodeRoute = JoinCodeRouteImport.update({
+  id: '/join/$code',
+  path: '/join/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedOsRoute = AuthenticatedOsRouteImport.update({
+  id: '/os',
+  path: '/os',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedNotificationsRoute =
@@ -192,135 +232,35 @@ const AuthenticatedNotificationsRoute =
     path: '/notifications',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedOsRoute = AuthenticatedOsRouteImport.update({
-  id: '/os',
-  path: '/os',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const JoinCodeRoute = JoinCodeRouteImport.update({
-  id: '/join/$code',
-  path: '/join/$code',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NexusHelpRoute = NexusHelpRouteImport.update({
-  id: '/nexus/help',
-  path: '/nexus/help',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PlatformIndexRoute = PlatformIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => PlatformRoute,
-} as any)
-const PlatformAiRoute = PlatformAiRouteImport.update({
-  id: '/ai',
-  path: '/ai',
-  getParentRoute: () => PlatformRoute,
-} as any)
-const PlatformCoreRoute = PlatformCoreRouteImport.update({
-  id: '/core',
-  path: '/core',
-  getParentRoute: () => PlatformRoute,
-} as any)
-const PlatformFlowRoute = PlatformFlowRouteImport.update({
-  id: '/flow',
-  path: '/flow',
-  getParentRoute: () => PlatformRoute,
-} as any)
-const PlatformGridRoute = PlatformGridRouteImport.update({
-  id: '/grid',
-  path: '/grid',
-  getParentRoute: () => PlatformRoute,
-} as any)
-const PlatformLaunchRoute = PlatformLaunchRouteImport.update({
+const AuthenticatedLaunchRoute = AuthenticatedLaunchRouteImport.update({
   id: '/launch',
   path: '/launch',
-  getParentRoute: () => PlatformRoute,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const PlatformNexusRoute = PlatformNexusRouteImport.update({
-  id: '/nexus',
-  path: '/nexus',
-  getParentRoute: () => PlatformRoute,
+const AuthenticatedGridRoute = AuthenticatedGridRouteImport.update({
+  id: '/grid',
+  path: '/grid',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const PlatformOsRoute = PlatformOsRouteImport.update({
-  id: '/os',
-  path: '/os',
-  getParentRoute: () => PlatformRoute,
+const AuthenticatedFlowRoute = AuthenticatedFlowRouteImport.update({
+  id: '/flow',
+  path: '/flow',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const PlatformStudioRoute = PlatformStudioRouteImport.update({
-  id: '/studio',
-  path: '/studio',
-  getParentRoute: () => PlatformRoute,
+const AuthenticatedCoreRoute = AuthenticatedCoreRouteImport.update({
+  id: '/core',
+  path: '/core',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const PlatformVaultRoute = PlatformVaultRouteImport.update({
-  id: '/vault',
-  path: '/vault',
-  getParentRoute: () => PlatformRoute,
+const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedAdminApplicationsRoute =
-  AuthenticatedAdminApplicationsRouteImport.update({
-    id: '/admin/applications',
-    path: '/admin/applications',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedAdminPreviewRoute =
-  AuthenticatedAdminPreviewRouteImport.update({
-    id: '/admin/preview',
-    path: '/admin/preview',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedNexusDirectoryRoute =
-  AuthenticatedNexusDirectoryRouteImport.update({
-    id: '/nexus/directory',
-    path: '/nexus/directory',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedNexusRequestsRoute =
-  AuthenticatedNexusRequestsRouteImport.update({
-    id: '/nexus/requests',
-    path: '/nexus/requests',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPartnerIndexRoute =
-  AuthenticatedPartnerIndexRouteImport.update({
-    id: '/partner/',
-    path: '/partner/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPartnerApplyRoute =
-  AuthenticatedPartnerApplyRouteImport.update({
-    id: '/partner/apply',
-    path: '/partner/apply',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPartnerIntroductionsRoute =
-  AuthenticatedPartnerIntroductionsRouteImport.update({
-    id: '/partner/introductions',
-    path: '/partner/introductions',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPartnerOnboardingRoute =
-  AuthenticatedPartnerOnboardingRouteImport.update({
-    id: '/partner/onboarding',
-    path: '/partner/onboarding',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPartnerProfileRoute =
-  AuthenticatedPartnerProfileRouteImport.update({
-    id: '/partner/profile',
-    path: '/partner/profile',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPartnerServicesRoute =
-  AuthenticatedPartnerServicesRouteImport.update({
-    id: '/partner/services',
-    path: '/partner/services',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedPartnerTasksRoute =
-  AuthenticatedPartnerTasksRouteImport.update({
-    id: '/partner/tasks',
-    path: '/partner/tasks',
+const AuthenticatedWorkspaceIndexRoute =
+  AuthenticatedWorkspaceIndexRouteImport.update({
+    id: '/workspace/',
+    path: '/workspace/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedStaffIndexRoute = AuthenticatedStaffIndexRouteImport.update({
@@ -328,28 +268,10 @@ const AuthenticatedStaffIndexRoute = AuthenticatedStaffIndexRouteImport.update({
   path: '/staff/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedStaffAccessRoute =
-  AuthenticatedStaffAccessRouteImport.update({
-    id: '/staff/access',
-    path: '/staff/access',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedStaffContentRoute =
-  AuthenticatedStaffContentRouteImport.update({
-    id: '/staff/content',
-    path: '/staff/content',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedStaffFeaturesRoute =
-  AuthenticatedStaffFeaturesRouteImport.update({
-    id: '/staff/features',
-    path: '/staff/features',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedStaffInquiriesRoute =
-  AuthenticatedStaffInquiriesRouteImport.update({
-    id: '/staff/inquiries',
-    path: '/staff/inquiries',
+const AuthenticatedPartnerIndexRoute =
+  AuthenticatedPartnerIndexRouteImport.update({
+    id: '/partner/',
+    path: '/partner/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedStaffLaunchRoute =
@@ -358,10 +280,88 @@ const AuthenticatedStaffLaunchRoute =
     path: '/staff/launch',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedWorkspaceIndexRoute =
-  AuthenticatedWorkspaceIndexRouteImport.update({
-    id: '/workspace/',
-    path: '/workspace/',
+const AuthenticatedStaffInquiriesRoute =
+  AuthenticatedStaffInquiriesRouteImport.update({
+    id: '/staff/inquiries',
+    path: '/staff/inquiries',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedStaffFeaturesRoute =
+  AuthenticatedStaffFeaturesRouteImport.update({
+    id: '/staff/features',
+    path: '/staff/features',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedStaffContentRoute =
+  AuthenticatedStaffContentRouteImport.update({
+    id: '/staff/content',
+    path: '/staff/content',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedStaffAccessRoute =
+  AuthenticatedStaffAccessRouteImport.update({
+    id: '/staff/access',
+    path: '/staff/access',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPartnerTasksRoute =
+  AuthenticatedPartnerTasksRouteImport.update({
+    id: '/partner/tasks',
+    path: '/partner/tasks',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPartnerServicesRoute =
+  AuthenticatedPartnerServicesRouteImport.update({
+    id: '/partner/services',
+    path: '/partner/services',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPartnerProfileRoute =
+  AuthenticatedPartnerProfileRouteImport.update({
+    id: '/partner/profile',
+    path: '/partner/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPartnerOnboardingRoute =
+  AuthenticatedPartnerOnboardingRouteImport.update({
+    id: '/partner/onboarding',
+    path: '/partner/onboarding',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPartnerIntroductionsRoute =
+  AuthenticatedPartnerIntroductionsRouteImport.update({
+    id: '/partner/introductions',
+    path: '/partner/introductions',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedPartnerApplyRoute =
+  AuthenticatedPartnerApplyRouteImport.update({
+    id: '/partner/apply',
+    path: '/partner/apply',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedNexusRequestsRoute =
+  AuthenticatedNexusRequestsRouteImport.update({
+    id: '/nexus/requests',
+    path: '/nexus/requests',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedNexusDirectoryRoute =
+  AuthenticatedNexusDirectoryRouteImport.update({
+    id: '/nexus/directory',
+    path: '/nexus/directory',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminPreviewRoute =
+  AuthenticatedAdminPreviewRouteImport.update({
+    id: '/admin/preview',
+    path: '/admin/preview',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminApplicationsRoute =
+  AuthenticatedAdminApplicationsRouteImport.update({
+    id: '/admin/applications',
+    path: '/admin/applications',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedAdminReviewIdRoute =
@@ -749,123 +749,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/directory': {
-      id: '/directory'
-      path: '/directory'
-      fullPath: '/directory'
-      preLoaderRoute: typeof DirectoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/early-stage-founders': {
-      id: '/early-stage-founders'
-      path: '/early-stage-founders'
-      fullPath: '/early-stage-founders'
-      preLoaderRoute: typeof EarlyStageFoundersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/for-partners': {
-      id: '/for-partners'
-      path: '/for-partners'
-      fullPath: '/for-partners'
-      preLoaderRoute: typeof ForPartnersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/for-universities': {
-      id: '/for-universities'
-      path: '/for-universities'
-      fullPath: '/for-universities'
-      preLoaderRoute: typeof ForUniversitiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/founders': {
-      id: '/founders'
-      path: '/founders'
-      fullPath: '/founders'
-      preLoaderRoute: typeof FoundersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-it-works': {
-      id: '/how-it-works'
-      path: '/how-it-works'
-      fullPath: '/how-it-works'
-      preLoaderRoute: typeof HowItWorksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/immigrant-founders': {
-      id: '/immigrant-founders'
-      path: '/immigrant-founders'
-      fullPath: '/immigrant-founders'
-      preLoaderRoute: typeof ImmigrantFoundersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/platform': {
-      id: '/platform'
-      path: '/platform'
-      fullPath: '/platform'
-      preLoaderRoute: typeof PlatformRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -875,74 +763,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/account': {
-      id: '/_authenticated/account'
-      path: '/account'
-      fullPath: '/account'
-      preLoaderRoute: typeof AuthenticatedAccountRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/core': {
-      id: '/_authenticated/core'
-      path: '/core'
-      fullPath: '/core'
-      preLoaderRoute: typeof AuthenticatedCoreRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/flow': {
-      id: '/_authenticated/flow'
-      path: '/flow'
-      fullPath: '/flow'
-      preLoaderRoute: typeof AuthenticatedFlowRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/grid': {
-      id: '/_authenticated/grid'
-      path: '/grid'
-      fullPath: '/grid'
-      preLoaderRoute: typeof AuthenticatedGridRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/launch': {
-      id: '/_authenticated/launch'
-      path: '/launch'
-      fullPath: '/launch'
-      preLoaderRoute: typeof AuthenticatedLaunchRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/notifications': {
-      id: '/_authenticated/notifications'
-      path: '/notifications'
-      fullPath: '/notifications'
-      preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/os': {
-      id: '/_authenticated/os'
-      path: '/os'
-      fullPath: '/os'
-      preLoaderRoute: typeof AuthenticatedOsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/join/$code': {
-      id: '/join/$code'
-      path: '/join/$code'
-      fullPath: '/join/$code'
-      preLoaderRoute: typeof JoinCodeRouteImport
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/nexus/help': {
-      id: '/nexus/help'
-      path: '/nexus/help'
-      fullPath: '/nexus/help'
-      preLoaderRoute: typeof NexusHelpRouteImport
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/platform': {
+      id: '/platform'
+      path: '/platform'
+      fullPath: '/platform'
+      preLoaderRoute: typeof PlatformRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/immigrant-founders': {
+      id: '/immigrant-founders'
+      path: '/immigrant-founders'
+      fullPath: '/immigrant-founders'
+      preLoaderRoute: typeof ImmigrantFoundersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/founders': {
+      id: '/founders'
+      path: '/founders'
+      fullPath: '/founders'
+      preLoaderRoute: typeof FoundersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-universities': {
+      id: '/for-universities'
+      path: '/for-universities'
+      fullPath: '/for-universities'
+      preLoaderRoute: typeof ForUniversitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/for-partners': {
+      id: '/for-partners'
+      path: '/for-partners'
+      fullPath: '/for-partners'
+      preLoaderRoute: typeof ForPartnersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/early-stage-founders': {
+      id: '/early-stage-founders'
+      path: '/early-stage-founders'
+      fullPath: '/early-stage-founders'
+      preLoaderRoute: typeof EarlyStageFoundersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/directory': {
+      id: '/directory'
+      path: '/directory'
+      fullPath: '/directory'
+      preLoaderRoute: typeof DirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/platform/': {
@@ -952,53 +889,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformIndexRouteImport
       parentRoute: typeof PlatformRoute
     }
-    '/platform/ai': {
-      id: '/platform/ai'
-      path: '/ai'
-      fullPath: '/platform/ai'
-      preLoaderRoute: typeof PlatformAiRouteImport
-      parentRoute: typeof PlatformRoute
-    }
-    '/platform/core': {
-      id: '/platform/core'
-      path: '/core'
-      fullPath: '/platform/core'
-      preLoaderRoute: typeof PlatformCoreRouteImport
-      parentRoute: typeof PlatformRoute
-    }
-    '/platform/flow': {
-      id: '/platform/flow'
-      path: '/flow'
-      fullPath: '/platform/flow'
-      preLoaderRoute: typeof PlatformFlowRouteImport
-      parentRoute: typeof PlatformRoute
-    }
-    '/platform/grid': {
-      id: '/platform/grid'
-      path: '/grid'
-      fullPath: '/platform/grid'
-      preLoaderRoute: typeof PlatformGridRouteImport
-      parentRoute: typeof PlatformRoute
-    }
-    '/platform/launch': {
-      id: '/platform/launch'
-      path: '/launch'
-      fullPath: '/platform/launch'
-      preLoaderRoute: typeof PlatformLaunchRouteImport
-      parentRoute: typeof PlatformRoute
-    }
-    '/platform/nexus': {
-      id: '/platform/nexus'
-      path: '/nexus'
-      fullPath: '/platform/nexus'
-      preLoaderRoute: typeof PlatformNexusRouteImport
-      parentRoute: typeof PlatformRoute
-    }
-    '/platform/os': {
-      id: '/platform/os'
-      path: '/os'
-      fullPath: '/platform/os'
-      preLoaderRoute: typeof PlatformOsRouteImport
+    '/platform/vault': {
+      id: '/platform/vault'
+      path: '/vault'
+      fullPath: '/platform/vault'
+      preLoaderRoute: typeof PlatformVaultRouteImport
       parentRoute: typeof PlatformRoute
     }
     '/platform/studio': {
@@ -1008,88 +903,123 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PlatformStudioRouteImport
       parentRoute: typeof PlatformRoute
     }
-    '/platform/vault': {
-      id: '/platform/vault'
-      path: '/vault'
-      fullPath: '/platform/vault'
-      preLoaderRoute: typeof PlatformVaultRouteImport
+    '/platform/os': {
+      id: '/platform/os'
+      path: '/os'
+      fullPath: '/platform/os'
+      preLoaderRoute: typeof PlatformOsRouteImport
       parentRoute: typeof PlatformRoute
     }
-    '/_authenticated/admin/applications': {
-      id: '/_authenticated/admin/applications'
-      path: '/admin/applications'
-      fullPath: '/admin/applications'
-      preLoaderRoute: typeof AuthenticatedAdminApplicationsRouteImport
+    '/platform/nexus': {
+      id: '/platform/nexus'
+      path: '/nexus'
+      fullPath: '/platform/nexus'
+      preLoaderRoute: typeof PlatformNexusRouteImport
+      parentRoute: typeof PlatformRoute
+    }
+    '/platform/launch': {
+      id: '/platform/launch'
+      path: '/launch'
+      fullPath: '/platform/launch'
+      preLoaderRoute: typeof PlatformLaunchRouteImport
+      parentRoute: typeof PlatformRoute
+    }
+    '/platform/grid': {
+      id: '/platform/grid'
+      path: '/grid'
+      fullPath: '/platform/grid'
+      preLoaderRoute: typeof PlatformGridRouteImport
+      parentRoute: typeof PlatformRoute
+    }
+    '/platform/flow': {
+      id: '/platform/flow'
+      path: '/flow'
+      fullPath: '/platform/flow'
+      preLoaderRoute: typeof PlatformFlowRouteImport
+      parentRoute: typeof PlatformRoute
+    }
+    '/platform/core': {
+      id: '/platform/core'
+      path: '/core'
+      fullPath: '/platform/core'
+      preLoaderRoute: typeof PlatformCoreRouteImport
+      parentRoute: typeof PlatformRoute
+    }
+    '/platform/ai': {
+      id: '/platform/ai'
+      path: '/ai'
+      fullPath: '/platform/ai'
+      preLoaderRoute: typeof PlatformAiRouteImport
+      parentRoute: typeof PlatformRoute
+    }
+    '/nexus/help': {
+      id: '/nexus/help'
+      path: '/nexus/help'
+      fullPath: '/nexus/help'
+      preLoaderRoute: typeof NexusHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/join/$code': {
+      id: '/join/$code'
+      path: '/join/$code'
+      fullPath: '/join/$code'
+      preLoaderRoute: typeof JoinCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/os': {
+      id: '/_authenticated/os'
+      path: '/os'
+      fullPath: '/os'
+      preLoaderRoute: typeof AuthenticatedOsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/admin/preview': {
-      id: '/_authenticated/admin/preview'
-      path: '/admin/preview'
-      fullPath: '/admin/preview'
-      preLoaderRoute: typeof AuthenticatedAdminPreviewRouteImport
+    '/_authenticated/notifications': {
+      id: '/_authenticated/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthenticatedNotificationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/nexus/directory': {
-      id: '/_authenticated/nexus/directory'
-      path: '/nexus/directory'
-      fullPath: '/nexus/directory'
-      preLoaderRoute: typeof AuthenticatedNexusDirectoryRouteImport
+    '/_authenticated/launch': {
+      id: '/_authenticated/launch'
+      path: '/launch'
+      fullPath: '/launch'
+      preLoaderRoute: typeof AuthenticatedLaunchRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/nexus/requests': {
-      id: '/_authenticated/nexus/requests'
-      path: '/nexus/requests'
-      fullPath: '/nexus/requests'
-      preLoaderRoute: typeof AuthenticatedNexusRequestsRouteImport
+    '/_authenticated/grid': {
+      id: '/_authenticated/grid'
+      path: '/grid'
+      fullPath: '/grid'
+      preLoaderRoute: typeof AuthenticatedGridRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/partner/': {
-      id: '/_authenticated/partner/'
-      path: '/partner'
-      fullPath: '/partner/'
-      preLoaderRoute: typeof AuthenticatedPartnerIndexRouteImport
+    '/_authenticated/flow': {
+      id: '/_authenticated/flow'
+      path: '/flow'
+      fullPath: '/flow'
+      preLoaderRoute: typeof AuthenticatedFlowRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/partner/apply': {
-      id: '/_authenticated/partner/apply'
-      path: '/partner/apply'
-      fullPath: '/partner/apply'
-      preLoaderRoute: typeof AuthenticatedPartnerApplyRouteImport
+    '/_authenticated/core': {
+      id: '/_authenticated/core'
+      path: '/core'
+      fullPath: '/core'
+      preLoaderRoute: typeof AuthenticatedCoreRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/partner/introductions': {
-      id: '/_authenticated/partner/introductions'
-      path: '/partner/introductions'
-      fullPath: '/partner/introductions'
-      preLoaderRoute: typeof AuthenticatedPartnerIntroductionsRouteImport
+    '/_authenticated/account': {
+      id: '/_authenticated/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AuthenticatedAccountRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/partner/onboarding': {
-      id: '/_authenticated/partner/onboarding'
-      path: '/partner/onboarding'
-      fullPath: '/partner/onboarding'
-      preLoaderRoute: typeof AuthenticatedPartnerOnboardingRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/partner/profile': {
-      id: '/_authenticated/partner/profile'
-      path: '/partner/profile'
-      fullPath: '/partner/profile'
-      preLoaderRoute: typeof AuthenticatedPartnerProfileRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/partner/services': {
-      id: '/_authenticated/partner/services'
-      path: '/partner/services'
-      fullPath: '/partner/services'
-      preLoaderRoute: typeof AuthenticatedPartnerServicesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/partner/tasks': {
-      id: '/_authenticated/partner/tasks'
-      path: '/partner/tasks'
-      fullPath: '/partner/tasks'
-      preLoaderRoute: typeof AuthenticatedPartnerTasksRouteImport
+    '/_authenticated/workspace/': {
+      id: '/_authenticated/workspace/'
+      path: '/workspace'
+      fullPath: '/workspace/'
+      preLoaderRoute: typeof AuthenticatedWorkspaceIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/staff/': {
@@ -1099,32 +1029,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStaffIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/staff/access': {
-      id: '/_authenticated/staff/access'
-      path: '/staff/access'
-      fullPath: '/staff/access'
-      preLoaderRoute: typeof AuthenticatedStaffAccessRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/staff/content': {
-      id: '/_authenticated/staff/content'
-      path: '/staff/content'
-      fullPath: '/staff/content'
-      preLoaderRoute: typeof AuthenticatedStaffContentRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/staff/features': {
-      id: '/_authenticated/staff/features'
-      path: '/staff/features'
-      fullPath: '/staff/features'
-      preLoaderRoute: typeof AuthenticatedStaffFeaturesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/staff/inquiries': {
-      id: '/_authenticated/staff/inquiries'
-      path: '/staff/inquiries'
-      fullPath: '/staff/inquiries'
-      preLoaderRoute: typeof AuthenticatedStaffInquiriesRouteImport
+    '/_authenticated/partner/': {
+      id: '/_authenticated/partner/'
+      path: '/partner'
+      fullPath: '/partner/'
+      preLoaderRoute: typeof AuthenticatedPartnerIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/staff/launch': {
@@ -1134,11 +1043,102 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedStaffLaunchRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/workspace/': {
-      id: '/_authenticated/workspace/'
-      path: '/workspace'
-      fullPath: '/workspace/'
-      preLoaderRoute: typeof AuthenticatedWorkspaceIndexRouteImport
+    '/_authenticated/staff/inquiries': {
+      id: '/_authenticated/staff/inquiries'
+      path: '/staff/inquiries'
+      fullPath: '/staff/inquiries'
+      preLoaderRoute: typeof AuthenticatedStaffInquiriesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/staff/features': {
+      id: '/_authenticated/staff/features'
+      path: '/staff/features'
+      fullPath: '/staff/features'
+      preLoaderRoute: typeof AuthenticatedStaffFeaturesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/staff/content': {
+      id: '/_authenticated/staff/content'
+      path: '/staff/content'
+      fullPath: '/staff/content'
+      preLoaderRoute: typeof AuthenticatedStaffContentRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/staff/access': {
+      id: '/_authenticated/staff/access'
+      path: '/staff/access'
+      fullPath: '/staff/access'
+      preLoaderRoute: typeof AuthenticatedStaffAccessRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner/tasks': {
+      id: '/_authenticated/partner/tasks'
+      path: '/partner/tasks'
+      fullPath: '/partner/tasks'
+      preLoaderRoute: typeof AuthenticatedPartnerTasksRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner/services': {
+      id: '/_authenticated/partner/services'
+      path: '/partner/services'
+      fullPath: '/partner/services'
+      preLoaderRoute: typeof AuthenticatedPartnerServicesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner/profile': {
+      id: '/_authenticated/partner/profile'
+      path: '/partner/profile'
+      fullPath: '/partner/profile'
+      preLoaderRoute: typeof AuthenticatedPartnerProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner/onboarding': {
+      id: '/_authenticated/partner/onboarding'
+      path: '/partner/onboarding'
+      fullPath: '/partner/onboarding'
+      preLoaderRoute: typeof AuthenticatedPartnerOnboardingRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner/introductions': {
+      id: '/_authenticated/partner/introductions'
+      path: '/partner/introductions'
+      fullPath: '/partner/introductions'
+      preLoaderRoute: typeof AuthenticatedPartnerIntroductionsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner/apply': {
+      id: '/_authenticated/partner/apply'
+      path: '/partner/apply'
+      fullPath: '/partner/apply'
+      preLoaderRoute: typeof AuthenticatedPartnerApplyRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/nexus/requests': {
+      id: '/_authenticated/nexus/requests'
+      path: '/nexus/requests'
+      fullPath: '/nexus/requests'
+      preLoaderRoute: typeof AuthenticatedNexusRequestsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/nexus/directory': {
+      id: '/_authenticated/nexus/directory'
+      path: '/nexus/directory'
+      fullPath: '/nexus/directory'
+      preLoaderRoute: typeof AuthenticatedNexusDirectoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/preview': {
+      id: '/_authenticated/admin/preview'
+      path: '/admin/preview'
+      fullPath: '/admin/preview'
+      preLoaderRoute: typeof AuthenticatedAdminPreviewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/applications': {
+      id: '/_authenticated/admin/applications'
+      path: '/admin/applications'
+      fullPath: '/admin/applications'
+      preLoaderRoute: typeof AuthenticatedAdminApplicationsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/review/$id': {
