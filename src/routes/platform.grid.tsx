@@ -146,7 +146,7 @@ function GridPage() {
         }}
       >
         <p style={{ fontSize: 13.5, color: "#94A3B8", margin: 0, lineHeight: 1.7 }}>
-          A Grid record is an internal operational readiness note. It is not a legal
+          A Grid record is an internal operational review note. It is not a legal
           compliance certification, a regulatory audit, or a guarantee of compliance with any law
           or regulation. Regulatory and legal compliance matters are handled by licensed
           professionals.
