@@ -1,3 +1,10 @@
+-- HISTORICAL EVIDENCE ONLY. INVALID. EXCLUDED FROM EXECUTION.
+-- Original: drizzle/migrations/0050_record_core_oversight_and_post_login_review.sql (never listed in the drizzle journal).
+-- Fails as written: the flow-null-authorization-regression row supplies 8 values for 9 columns.
+-- Not idempotent: a repeat run would duplicate rows.
+-- Shared backend: the three release_records rows exist, all inserted at 2026-09-28 19:06:09 UTC in one statement,
+-- so they came from a corrected run, not from this file as written. Do not run this file anywhere.
+
 INSERT INTO public.release_records (
   feature_key, title, authorized_by, activated_by, activated_at, test_result,
   effect_preview, effect_live_site, effect_backend
