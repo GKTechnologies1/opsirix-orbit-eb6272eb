@@ -85,7 +85,7 @@ const ROWS: Row[] = [
 
 const FEATURES = [
   "Coordinates your attorney, CPA, and professional team through Opsirix Nexus without replacing them",
-  "Will organize your documents in Opsirix Vault once it is available. Vault is planned and under security review.",
+  "Opsirix Vault is planned and not yet available. It needs to be built, pass security review and receive release approval first.",
   "Runs your operational rhythm through Opsirix Flow: weekly boards, task tracking, and scheduled reviews.",
   "Reviews your operational health monthly with Opsirix Grid: your self-assessment and our evidence review, unscored.",
   "Never gives legal, immigration, or tax advice, all regulated matters route to licensed professionals immediately",

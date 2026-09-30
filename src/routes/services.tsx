@@ -7,9 +7,9 @@ export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
       { title: "Opsirix Platform Services | Founder Operations Overview" },
-      { name: "description", content: "The Opsirix platform gives founders nine connected modules for documents, workflows, partner coordination, and operational readiness. No pricing on this page." },
+      { name: "description", content: "The Opsirix platform gives founders nine connected modules for documents, workflows, partner coordination, and monthly operational reviews. No pricing on this page." },
       { property: "og:title", content: "Opsirix Platform Services | Founder Operations Overview" },
-      { property: "og:description", content: "The Opsirix platform gives founders nine connected modules for documents, workflows, partner coordination, and operational readiness. No pricing on this page." },
+      { property: "og:description", content: "The Opsirix platform gives founders nine connected modules for documents, workflows, partner coordination, and monthly operational reviews. No pricing on this page." },
       { property: "og:url", content: "https://opsirix.com/services" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/services" }],
@@ -39,13 +39,13 @@ const ROUTED = [
 const PATHS: { name: string; d: string }[] = [
   { name: "Launch Support", d: "For founders setting up their first company. Formation coordination, document organization, professional introductions, and operational baseline." },
   { name: "Managed Operations", d: "For active companies that need ongoing operational structure, monthly reviews, workflow management, and partner coordination running continuously." },
-  { name: "Venture Readiness", d: "For founders preparing for investment. Data room support, operational audit, investor documentation, and readiness reviews." },
+  { name: "Venture Readiness", d: "For founders preparing for investment. Data room support, investor documentation, and structured operational review." },
   { name: "University and Partner Programs", d: "For campus entrepreneurship programs, accelerators, and professional partners joining the Opsirix Nexus network." },
 ];
 
 const FAQS = [
   { q: "Is Opsirix a service or a software platform?", a: "Both. The platform (Vault, Flow, Grid, Dashboard) is the system. The service is the human coordination layer that runs Nexus, monthly Grid reviews, and the operational rhythm." },
-  { q: "Do all engagements include Nexus coordination?", a: "Yes. Nexus coordination is the core of the platform. Engagements differ in coordination volume, monthly cadence, and depth of readiness work." },
+  { q: "Do all engagements include Nexus coordination?", a: "Yes. Nexus coordination is the core of the platform. Engagements differ in coordination volume, monthly cadence, and depth of review work." },
   { q: "Do I need to bring my own attorney and CPA?", a: "If you have them, Opsirix coordinates with them. If you don't, Opsirix Nexus introduces you to vetted licensed professionals who engage you under their own engagement letters." },
   { q: "Is anything in Opsirix legal, immigration, or tax advice?", a: "No. Nothing in any module or report constitutes legal, immigration, or tax advice. Every regulated question is routed to a licensed professional through Nexus." },
 ];
@@ -57,7 +57,7 @@ function Page() {
         pageName="Services"
         label="Platform Services"
         title="Nine modules. One connected platform."
-        subtitle="The Opsirix platform covers the full operational layer of an early-stage company. Documents, workflows, partner coordination, readiness reviews, and planned intelligent support, organized into nine connected modules."
+        subtitle="The Opsirix platform covers the full operational layer of an early-stage company. Documents, workflows, partner coordination, monthly operational reviews, and planned intelligent support, organized into nine connected modules."
       />
 
       <section className="inner-section">

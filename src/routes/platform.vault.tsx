@@ -111,7 +111,7 @@ function VaultPage() {
       moduleIcon="🔒"
       statusBadge="Planned"
       headline="Stop losing documents across email and random folders."
-      subtext="Opsirix Vault is the planned document organization layer of the platform and is not yet available. Once its security review is complete, it is designed to keep formation papers, attorney correspondence, financial records, and operational documents organized, labeled, and ready when you need them."
+      subtext="Opsirix Vault is the planned document organization layer of the platform and is not yet available. It will become available only after it is built, passes security review and receives release approval. It is designed to keep formation papers, attorney correspondence, financial records, and operational documents organized, labeled, and ready when you need them."
     >
       {/* Section 1 — The Problem */}
       <SectionWrap eyebrow="The Problem" title="What most founders experience.">

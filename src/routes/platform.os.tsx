@@ -30,7 +30,7 @@ const FEATURES = [
   { t: "Workflow and task overview", d: "Active tasks, overdue items, and upcoming deadlines from Flow summarized on the dashboard." },
   { t: "Partner coordination view", d: "Scheduled attorney and CPA interactions, pending handoffs, and Nexus activity visible without logging into separate systems." },
   { t: "Compliance calendar", d: "Important dates, filing windows, and renewal reminders organized in one timeline." },
-  { t: "Monthly operating snapshot", d: "Grid review status, report highlights, and top priorities for the current month." },
+  { t: "Monthly operating snapshot", d: "Grid review status and open tasks for the current month. Report highlights are planned." },
 ];
 
 const CONNECTED = [

@@ -39,7 +39,7 @@ function Page() {
           <p className="inner-lead">
             From the day you incorporate, Opsirix organizes your formation documents, runs your weekly project board,
             coordinates the administrative logistics with your independently retained attorney and CPA, and reviews your
-            operational readiness every month, so you stop being the human integration layer between disconnected tools
+            your operational checks every month, so you stop being the human integration layer between disconnected tools
             and people.
           </p>
         </div>

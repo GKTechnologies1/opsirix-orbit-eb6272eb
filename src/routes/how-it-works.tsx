@@ -6,9 +6,9 @@ export const Route = createFileRoute("/how-it-works")({
   head: () => ({
     meta: [
       { title: "How Opsirix Works | Founder Operations Platform" },
-      { name: "description", content: "See how Opsirix coordinates documents, workflows, and professional partners for early-stage founders. From intake to operational readiness." },
+      { name: "description", content: "See how Opsirix coordinates documents, workflows, and professional partners for early-stage founders. From intake to monthly operational review." },
       { property: "og:title", content: "How Opsirix Works | Founder Operations Platform" },
-      { property: "og:description", content: "See how Opsirix coordinates documents, workflows, and professional partners for early-stage founders. From intake to operational readiness." },
+      { property: "og:description", content: "See how Opsirix coordinates documents, workflows, and professional partners for early-stage founders. From intake to monthly operational review." },
       { property: "og:url", content: "https://opsirix.com/how-it-works" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/how-it-works" }],
@@ -118,13 +118,13 @@ function Page() {
           <p className="inner-eyebrow">Monthly Rhythm</p>
           <h2 className="inner-h2">Every month, the same seven-part Grid review.</h2>
           <ul className="inner-list">
-            <li>Documentation completeness, what's in the <Link to="/platform/vault" className="inline-link">Vault</Link>, what's missing.</li>
+            <li>Documentation checks, planned with the <Link to="/platform/vault" className="inline-link">Vault</Link>, what's missing.</li>
             <li>Compliance status, every recurring deadline, filing window, and renewal.</li>
             <li>Financial coordination, bookkeeping cadence, CPA touchpoints, payroll status.</li>
             <li>Operational workflow, <Link to="/platform/flow" className="inline-link">Flow</Link> board health, blockers, owner accountability.</li>
             <li><Link to="/platform/nexus" className="inline-link">Nexus</Link> coordination, open threads with your attorney, CPA, banker, insurer.</li>
-            <li>Startup readiness, investor-grade documentation and data-room status.</li>
-            <li>Founder Status Report, a written summary delivered to you within 48 hours of the <Link to="/platform/grid" className="inline-link">Grid</Link> review.</li>
+            <li>Investor documentation and data-room status, recorded as answers, not a judgment.</li>
+            <li>Your submitted <Link to="/platform/grid" className="inline-link">Grid</Link> records stay viewable in your workspace. A written Founder Status Report is planned and not yet available.</li>
           </ul>
         </div>
       </section>

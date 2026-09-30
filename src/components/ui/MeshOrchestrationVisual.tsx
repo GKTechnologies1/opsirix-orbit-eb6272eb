@@ -17,10 +17,10 @@ const NODES: Node[] = [
   { angle: 135, emoji: "⚖️", label: "Attorney", description: "Coordinated access to immigration & corporate counsel.", delay: 0.5 },
   { angle: 180, emoji: "📊", label: "CPA", description: "Tax, bookkeeping & filings routed to vetted CPAs.", delay: 1.0 },
   { angle: 225, emoji: "💳", label: "Banking", description: "Founder-ready banking & treasury onboarding.", delay: 1.5 },
-  { angle: 270, emoji: "📁", label: "Documents", description: "Versioned document vault with intelligent indexing.", delay: 2.0 },
+  { angle: 270, emoji: "📁", label: "Documents", description: "Planned document organization (Vault, not yet available).", delay: 2.0 },
   { angle: 315, emoji: "💼", label: "Payroll", description: "Compliant payroll across founders, employees & contractors.", delay: 2.5 },
   { angle: 0, emoji: "🔒", label: "Compliance", description: "Compliance-first architecture across every workstream.", delay: 3.0 },
-  { angle: 45, emoji: "💡", label: "Execution", description: "Operational readiness from idea to incorporation.", delay: 3.5 },
+  { angle: 45, emoji: "💡", label: "Execution", description: "Operational coordination from idea to incorporation.", delay: 3.5 },
 ];
 
 function polar(angleDeg: number, r = RADIUS) {

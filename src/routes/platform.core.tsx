@@ -30,7 +30,7 @@ const FEATURES = [
   { t: "Document follow-up", d: "Missing, expiring, or outdated documents identified and addressed." },
   { t: "Partner coordination support", d: "Attorney, CPA, and partner scheduling handled through Nexus." },
   { t: "Operating checklist management", d: "Formation and ongoing checklists managed and updated." },
-  { t: "Founder Status Report", d: "Written monthly report covering activities, open requests, and priorities." },
+  { t: "Founder Status Report (planned)", d: "A written monthly report is planned and not yet available. Open Core requests and their status are visible in your workspace today." },
   { t: "Meeting preparation", d: "Documents and context organized before attorney, CPA, or investor meetings." },
   { t: "Communication coordination", d: "Professional correspondence tracked and followed up." },
   { t: "Business process organization", d: "Core processes documented in Flow." },
@@ -76,7 +76,7 @@ function CorePage() {
       moduleTag="Managed Operations"
       moduleIcon="⚙️"
       headline="Operational support that runs alongside your startup."
-      subtext="Opsirix Core is the managed operations layer. Instead of tools to manage yourself, you get a dedicated operational support structure: task follow-up, document coordination, partner management, and monthly reporting actively handled."
+      subtext="Opsirix Core is the managed operations layer. Instead of tools to manage yourself, you get a dedicated operational support structure: task follow-up, document coordination, and partner management actively handled. Monthly written reporting is planned."
     >
       <div style={{ marginBottom: 64 }}>
         <Eyebrow>The Problem</Eyebrow>

@@ -5,17 +5,17 @@ import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 export const Route = createFileRoute("/platform/studio")({
   head: () => ({
     meta: [
-      { title: "Opsirix Studio | Venture Readiness Layer for Founders" },
+      { title: "Opsirix Studio | Venture Preparation Layer for Founders" },
       {
         name: "description",
         content:
-          "Selective venture readiness support for operationally mature founders. Investor documentation, strategic coordination, and growth preparation.",
+          "Selective venture preparation support for founders. Investor documentation, strategic coordination, and growth preparation.",
       },
-      { property: "og:title", content: "Opsirix Studio | Venture Readiness Layer for Founders" },
+      { property: "og:title", content: "Opsirix Studio | Venture Preparation Layer for Founders" },
       {
         property: "og:description",
         content:
-          "Selective venture readiness support for operationally mature founders. Investor documentation, strategic coordination, and growth preparation.",
+          "Selective venture preparation support for founders. Investor documentation, strategic coordination, and growth preparation.",
       },
       { property: "og:url", content: "https://opsirix.com/platform/studio" },
     ],
@@ -25,17 +25,16 @@ export const Route = createFileRoute("/platform/studio")({
 });
 
 const FEATURES = [
-  { t: "Venture readiness review", d: "Structured review of operational, financial, and business maturity." },
+  { t: "Venture preparation review", d: "Structured conversation about your operations, financial records and business model." },
   { t: "Investor documentation preparation", d: "Data room organization and investor-ready document prep." },
   { t: "Business model review", d: "Structured review with the Opsirix team and relevant advisors." },
   { t: "Strategic partner coordination", d: "Introductions and coordination through Nexus." },
-  { t: "Operational maturity review", d: "Deep Grid review for venture-readiness gaps." },
+  { t: "Operational review", d: "Your recorded Grid answers can inform the conversation. Grid records answers only, not a judgment." },
   { t: "Growth roadmap support", d: "Structured growth planning aligned to operational capacity." },
 ];
 
 const QUALIFY = [
-  "Organized company documentation in Vault or equivalent",
-  "Recent Grid reviews showing operational maturity, or an equivalent record",
+  "Organized company documentation you can share",
   "Clear business model with demonstrated or projected revenue",
   "No open compliance or legal issues requiring resolution first",
   "Serious commitment to venture-level operational discipline",
@@ -49,8 +48,8 @@ const DISCLAIMERS = [
 ];
 
 const CONNECTED = [
-  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Deep Grid review anchors Studio qualification." },
-  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned. Vault documents would support the data room once Vault is available." },
+  { icon: "📊", name: "Opsirix Grid", to: "/platform/grid", desc: "Grid records may be referenced during a Studio conversation." },
+  { icon: "🔒", name: "Opsirix Vault", to: "/platform/vault", desc: "Planned and not yet available." },
   { icon: "🔗", name: "Opsirix Nexus", to: "/platform/nexus", desc: "Strategic partner introductions via Nexus." },
   { icon: "🖥️", name: "Opsirix OS", to: "/platform/os", desc: "Studio activity surfaced in OS dashboard." },
 ] as const;

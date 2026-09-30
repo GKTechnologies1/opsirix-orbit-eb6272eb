@@ -146,7 +146,7 @@ export function Footer() {
               }}
             >
               The Founder Infrastructure Platform. Workflow orchestration, document intelligence,
-              partner coordination, and operational readiness for founders building properly from Day 1.
+              partner coordination, and monthly operational reviews for founders building properly from Day 1.
             </p>
             <div className="flex items-center gap-4" style={{ marginTop: 24 }}>
               <a

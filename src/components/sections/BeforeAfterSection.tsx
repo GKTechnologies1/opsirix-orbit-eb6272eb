@@ -9,7 +9,7 @@ const BEFORE = [
   "Attorney, CPA, and payroll operating in disconnected silos with zero coordination",
   "No compliance calendar. Deadlines discovered only when they are missed.",
   "Reactive execution: every week starts from zero because nothing was tracked.",
-  "No operational readiness review. No way to know what investors or auditors will find.",
+  "No monthly operational review. No way to know what investors or auditors will find.",
   "Constant background anxiety about whether everything is structured correctly",
 ];
 
