@@ -17,14 +17,14 @@ type Module = {
 const MODULES: Module[] = [
   { name: "LAUNCH INTAKE", status: "Submitted", dot: "#10B981", pct: 92, from: "#10B981", to: "#34D399" },
   { name: "FLOW BOARD", status: "3 Active", dot: "#2F80ED", pct: 68, from: "#0057D9", to: "#2F80ED" },
-  { name: "NEXUS STATUS", status: "Coordinated", dot: "#2DD4BF", pct: 95, from: "#0D9E8F", to: "#2DD4BF" },
+  { name: "NEXUS STATUS", status: "Example", dot: "#2DD4BF", pct: 95, from: "#0D9E8F", to: "#2DD4BF" },
   { name: "COMPLIANCE", status: "1 Upcoming", dot: "#F59E0B", pct: 80, from: "#F59E0B", to: "#FCD34D" },
 ];
 
 const ACTIVITY = [
-  { text: "Launch: intake sent for review", dot: "#10B981", blink: false },
-  { text: "Nexus: attorney introduction consent recorded", dot: "#2F80ED", blink: false },
-  { text: "Grid review due in 12 days", dot: "#F59E0B", blink: true },
+  { text: "Example: Launch intake sent for review", dot: "#10B981", blink: false },
+  { text: "Example: Nexus request awaiting consent", dot: "#2F80ED", blink: false },
+  { text: "Example: Grid review due", dot: "#F59E0B", blink: true },
 ];
 
 export function DashboardMockup() {
@@ -40,10 +40,11 @@ export function DashboardMockup() {
         <span className="dash-dot" style={{ background: "#EF4444" }} />
         <span className="dash-dot" style={{ background: "#F59E0B" }} />
         <span className="dash-dot" style={{ background: "#10B981" }} />
-        <span className="dash-url">opsirix.com / dashboard</span>
+        <span className="dash-url">Illustrative example · not live data</span>
       </div>
 
-      <div className="dash-body">
+      <div className="dash-body" aria-label="Illustrative example, not live data">
+        <p style={{ margin: "0 0 10px", fontSize: 11, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-muted, #94A3B8)" }}>Illustrative example</p>
         <div className="dash-score-row">
           <div className="dash-ring-wrap">
             <svg width="64" height="64" viewBox="0 0 64 64">
@@ -74,9 +75,9 @@ export function DashboardMockup() {
           </div>
           <div className="dash-score-text">
             <div className="dash-score-label">OPSIRIX GRID REVIEW</div>
-            <div className="dash-score-value">11 of 14 checks answered</div>
+            <div className="dash-score-value">Example: 11 of 14 checks answered</div>
             <div className="dash-score-delta">Self-assessment draft · unscored</div>
-            <div className="dash-score-sub">Evidence review pending · Next review in 12 days</div>
+            <div className="dash-score-sub">Sample figures, not a real company</div>
           </div>
         </div>
 

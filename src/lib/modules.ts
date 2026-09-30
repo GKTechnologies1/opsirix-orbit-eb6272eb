@@ -14,10 +14,10 @@ export const MODULES: ModuleEntry[] = [
   { slug: "flow", name: "Opsirix Flow", to: "/platform/flow", short: "Workflow engine for tasks and handoffs.", audience: "Active founders managing ongoing tasks", icon: "Workflow" },
   { slug: "vault", name: "Opsirix Vault", to: "/platform/vault", short: "Document organization built for founders.", audience: "Founders who need organized records", icon: "LockKeyhole" },
   { slug: "nexus", name: "Opsirix Nexus", to: "/platform/nexus", short: "Coordinated access to vetted professional partners.", audience: "Founders working with professional advisers", icon: "Network" },
-  { slug: "grid", name: "Opsirix Grid", to: "/platform/grid", short: "Monthly operational readiness score.", audience: "Founders seeking operational visibility", icon: "ChartNoAxesCombined" },
+  { slug: "grid", name: "Opsirix Grid", to: "/platform/grid", short: "Monthly operational review, unscored.", audience: "Founders seeking operational visibility", icon: "ChartNoAxesCombined" },
   { slug: "ai", name: "Opsirix AI", to: "/platform/ai", short: "Operational intelligence and surfaced patterns.", audience: "Founders who need workflow visibility", icon: "BrainCircuit", soon: true },
   { slug: "core", name: "Opsirix Core", to: "/platform/core", short: "Managed operations layer for active founders.", audience: "Founders who need managed support", icon: "Settings2" },
-  { slug: "studio", name: "Opsirix Studio", to: "/platform/studio", short: "Selective venture readiness for mature founders.", audience: "Operationally mature founders", icon: "Landmark" },
+  { slug: "studio", name: "Opsirix Studio", to: "/platform/studio", short: "Selective venture preparation engagement.", audience: "Founders preparing for investment", icon: "Landmark" },
 ];
 
 export function getRelatedModules(currentSlug: string, count = 3): ModuleEntry[] {

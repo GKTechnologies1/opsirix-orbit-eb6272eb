@@ -13,7 +13,7 @@ const POINTS: FeaturePoint[] = [
   {
     icon: "📁",
     title: "Document organization that matters",
-    body: "Opsirix Vault, planned and under security review, is designed to organize formation records, attorney letters, and compliance evidence. Until then, Opsirix helps you keep a clear document checklist.",
+    body: "Opsirix Vault is planned and not yet available. It is designed to organize formation records, attorney letters, and compliance evidence. Until it is built and approved for release, Opsirix helps you track which documents to gather on your Flow board.",
   },
   {
     icon: "🔗",

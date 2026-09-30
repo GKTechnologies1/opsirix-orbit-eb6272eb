@@ -7,9 +7,9 @@ export const Route = createFileRoute("/platform/")({
   head: () => ({
     meta: [
       { title: "Opsirix Platform | Nine Founder Operations Modules" },
-      { name: "description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness reviews, and operational support for early-stage and immigrant founders." },
+      { name: "description", content: "Nine connected modules covering documents, workflows, partner coordination, monthly operational reviews, and operational support for early-stage and immigrant founders." },
       { property: "og:title", content: "Opsirix Platform | Nine Founder Operations Modules" },
-      { property: "og:description", content: "Nine connected modules covering documents, workflows, partner coordination, readiness reviews, and operational support for early-stage and immigrant founders." },
+      { property: "og:description", content: "Nine connected modules covering documents, workflows, partner coordination, monthly operational reviews, and operational support for early-stage and immigrant founders." },
       { property: "og:url", content: "https://opsirix.com/platform" },
     ],
     links: [{ rel: "canonical", href: "https://opsirix.com/platform" }],
@@ -31,7 +31,7 @@ const CONNECTIONS = [
   { from: "Grid", to: "OS", note: "monthly review records reachable from workspace" },
   { from: "AI", to: "Flow, Vault, Grid", note: "planned: surfaces patterns across modules" },
   { from: "Core", to: "All modules", note: "managed support across the platform" },
-  { from: "Studio", to: "Grid, OS, Vault", note: "uses readiness data for venture review" },
+  { from: "Studio", to: "Grid, OS, Vault", note: "may refer to your Grid records during review" },
 ];
 
 const JOURNEY = [
@@ -39,10 +39,10 @@ const JOURNEY = [
   "Document organization, Opsirix Vault (planned)",
   "Workflow management, Opsirix Flow",
   "Partner coordination, Opsirix Nexus",
-  "Monthly readiness review, Opsirix Grid",
+  "Monthly operational review, Opsirix Grid",
   "Operational dashboard, Opsirix OS",
   "Managed support if needed, Opsirix Core",
-  "Venture readiness when ready, Opsirix Studio",
+  "Venture preparation, Opsirix Studio",
 ];
 
 const COORDINATES = [
@@ -50,7 +50,7 @@ const COORDINATES = [
   "Workflow tracking",
   "Task management",
   "Partner scheduling",
-  "Readiness reviews",
+  "Monthly operational reviews",
   "Operational review",
   "AI-assisted detection",
   "Managed ops support",
@@ -73,7 +73,7 @@ function Page() {
         pageName="Platform"
         label="The Opsirix Platform"
         title="The Opsirix Platform"
-        subtitle="Nine connected modules that help founders organize documents, workflows, partners, compliance timelines, and operational readiness from one structured system."
+        subtitle="Nine connected modules that help founders organize documents, workflows, partners, compliance timelines, and monthly operational reviews from one structured system."
       />
 
       <section className="inner-section">

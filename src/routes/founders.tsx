@@ -51,14 +51,14 @@ const FEATURES = [
   { icon: FolderOpen, t: "Documents organized and accessible", d: "Formation papers, banking documents, attorney correspondence, and operating records tracked with a clear checklist. Opsirix Vault storage is planned." },
   { icon: CalendarClock, t: "Deadlines tracked in advance", d: "Important dates, renewal timelines, filing deadlines, and review schedules maintained as part of your operational calendar, never discovered after the fact." },
   { icon: Link2, t: "Attorneys and CPAs coordinated", d: "Opsirix Nexus coordinates scheduling, document delivery, and communication between founders and their licensed professionals. Opsirix does not provide legal or immigration advice." },
-  { icon: BarChart3, t: "Monthly operational health check", d: "The Opsirix Grid reviews your operational readiness each month, without a score. You know exactly where you stand and what needs attention." },
+  { icon: BarChart3, t: "Monthly operational health check", d: "Each month Opsirix Grid records your answers to 14 operational checks, with your self-assessment and the Opsirix evidence review kept separate and unscored." },
 ];
 
 const HANDLES = [
   "Operational document organization",
   "Workflow and task coordination",
   "Partner scheduling and logistics",
-  "Business readiness checklists",
+  "Monthly operational review records",
   "Monthly operational reviews",
   "Founder status reports",
   "Calendar and deadline tracking",
@@ -107,7 +107,7 @@ function Page() {
           <ul className="inner-list" style={{ marginTop: 20 }}>
             {PROBLEMS.map((p) => <li key={p}>{p}</li>)}
           </ul>
-          <p className="inner-lead" style={{ marginTop: 20 }}>Opsirix handles the operational layer: documents, workflows, coordination, and readiness. Legal, tax, immigration, and other regulated matters stay with licensed professionals you choose.</p>
+          <p className="inner-lead" style={{ marginTop: 20 }}>Opsirix handles the operational layer: documents, workflows, coordination, and monthly review. Legal, tax, immigration, and other regulated matters stay with licensed professionals you choose.</p>
         </div>
       </section>
 
@@ -137,7 +137,7 @@ function Page() {
           <h2 className="inner-h2">Why immigrant founders face a different operational reality.</h2>
           <p className="inner-lead">Running a startup means managing entity formation, banking, bookkeeping, payroll, contracts, and partner relationships. Every founder faces this. Immigrant founders face all of this plus documentation requirements, professional coordination timelines, and the discipline of keeping organized records for multiple purposes.</p>
           <p className="inner-lead">This creates operational pressure that compounds. When documents are disorganized and professionals are uncoordinated, small gaps become bigger problems. Opsirix exists to close those gaps on the operational side.</p>
-          <p className="inner-lead">Opsirix does not provide immigration advice, visa strategy, or legal guidance. Those matters belong with licensed attorneys. Opsirix handles the operational layer, documents, workflows, coordination, and readiness.</p>
+          <p className="inner-lead">Opsirix does not provide immigration advice, visa strategy, or legal guidance. Those matters belong with licensed attorneys. Opsirix handles the operational layer, documents, workflows, coordination, and monthly review.</p>
         </div>
       </section>
 

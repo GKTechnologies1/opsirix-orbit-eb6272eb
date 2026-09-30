@@ -5,17 +5,17 @@ import { ModulePageLayout } from "@/components/platform/ModulePageLayout";
 export const Route = createFileRoute("/platform/grid")({
   head: () => ({
     meta: [
-      { title: "Opsirix Grid | Monthly Operational Readiness Review" },
+      { title: "Opsirix Grid | Monthly Operational Review" },
       {
         name: "description",
         content:
-          "A monthly operational readiness review with a founder self-assessment and an Opsirix evidence review, kept separate. Scoring is not yet available.",
+          "A monthly operational review with a founder self-assessment and an Opsirix evidence review, kept separate. Scoring is not yet available.",
       },
-      { property: "og:title", content: "Opsirix Grid | Monthly Operational Readiness Review" },
+      { property: "og:title", content: "Opsirix Grid | Monthly Operational Review" },
       {
         property: "og:description",
         content:
-          "A monthly operational readiness review with a founder self-assessment and an Opsirix evidence review, kept separate. Scoring is not yet available.",
+          "A monthly operational review with a founder self-assessment and an Opsirix evidence review, kept separate. Scoring is not yet available.",
       },
       { property: "og:url", content: "https://opsirix.com/platform/grid" },
     ],
@@ -40,14 +40,14 @@ const CATEGORIES = [
 const STEPS = [
   { n: "01", t: "Review session (45 to 60 minutes)", d: "Founder and Opsirix team review each category against current documentation, workflows, and activities." },
   { n: "02", t: "Checks recorded", d: "Each check is answered, with \"Evidence not shown\" and \"Not yet\" recorded as notes, never as failures. No score is calculated." },
-  { n: "03", t: "Founder Status Report delivered", d: "Written summary of the session: key findings and priorities for the coming month." },
-  { n: "04", t: "Action items enter Flow", d: "Improvement actions become tasks in Opsirix Flow with owners and due dates." },
-  { n: "05", t: "Progress tracked month over month", d: "Each month's submitted records are kept, so you can compare answers over time." },
+  { n: "03", t: "Founder Status Report (planned)", d: "A written session summary is planned and not yet available. Today, notes are kept on the submitted record." },
+  { n: "04", t: "Action items added to Flow", d: "Members who can edit your workspace add follow-up tasks to Opsirix Flow separately. Grid does not create tasks automatically." },
+  { n: "05", t: "Progress tracked month over month", d: "Each month's submitted records are kept and can be opened month by month. A side-by-side comparison view is not yet available." },
 ];
 
 const DELIVERABLES = [
   "Monthly review record: your self-assessment and the Opsirix evidence review, kept separate",
-  "Founder Status Report",
+  "Founder Status Report (planned, not yet available)",
   "Priority list for the coming month",
   "Updated task list in Flow",
   "History of submitted monthly records"
@@ -146,7 +146,7 @@ function GridPage() {
         }}
       >
         <p style={{ fontSize: 13.5, color: "#94A3B8", margin: 0, lineHeight: 1.7 }}>
-          A Grid record is an internal operational readiness note. It is not a legal
+          A Grid record is an internal operational review note. It is not a legal
           compliance certification, a regulatory audit, or a guarantee of compliance with any law
           or regulation. Regulatory and legal compliance matters are handled by licensed
           professionals.

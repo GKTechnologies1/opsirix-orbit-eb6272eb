@@ -155,7 +155,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
               applicationCategory: "BusinessApplication",
               operatingSystem: "Web",
               description:
-                "Founder Operations OS for startup workflow orchestration, document management, and operational readiness reviews.",
+                "Founder Operations OS for startup workflow orchestration, document management, and monthly operational reviews.",
             },
             {
               "@type": "WebSite",

@@ -39,7 +39,7 @@ function Page() {
           <p className="inner-lead">
             Founders don't fail from bad ideas. They fail from operational chaos, scattered documents, disconnected
             professionals, no monthly rhythm. Opsirix runs the operational layer: organizing documents, running the
-            weekly Flow, coordinating Nexus partners, and reviewing readiness with the monthly Grid.
+            weekly Flow, coordinating Nexus partners, and recording the monthly Grid review.
           </p>
           <p className="inner-lead">
             Every regulated question routes to an independently retained licensed professional through Opsirix Nexus.
